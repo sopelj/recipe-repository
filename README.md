@@ -1,6 +1,9 @@
 # Recipe Repo
 
-This is an attempt to rebuild my recipe site and make it open source all whilst testing out some new technologies in the process, [intertia](https://github.com/inertiajs/inertia) in this case.
+This is an attempt to rebuild my recipe site and make it open source all whilst testing out some new technologies in the process, [inertia](https://github.com/inertiajs/inertia) in this case.
+
+> [!WARNING]
+> This is **very** WIP and is just for fun.
 
 ## Development
 
