@@ -11,9 +11,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-from environ import Env
 
 from django.utils.translation import gettext_lazy as _
+from environ import Env
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 APPS_DIR = BASE_DIR / "recipe_repo"
@@ -33,15 +33,23 @@ ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["localhost"])
 
 
 # Application definition
-
 INSTALLED_APPS = [
+    # Must be before admin inclusion
+    "admin_interface",
+    "modeltranslation",
+    # Core
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # 3rd Party
+    "cachalot",
+    "easy_thumbnails",
     "django_breeze",
+    "colorfield",
+    # Local apps
     "recipe_repo.users",
     "recipe_repo.recipes",
 ]
@@ -53,6 +61,7 @@ MIDDLEWARE = [
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
+    "recipe_repo.inertia.middleware.inertia_share",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
@@ -106,17 +115,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Frontend integration
-# DJANGO_VITE = {
-#   "default": {
-#     "dev_mode": True,
-#     "dev_server_port": "5173",
-#   }
-# }
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 STATIC_URL = "static/"
+
+MEDIA_ROOT = str(BASE_DIR / "uploads")
+MEDIA_URL = "/uploads/"
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -132,11 +136,22 @@ LANGUAGES = (
 LOCALE_PATHS = [
     str(APPS_DIR / "locales"),
 ]
+MODELTRANSLATION_FALLBACK_LANGUAGES = ("en", "fr")
+MODELTRANSLATION_CUSTOM_FIELDS = ("ArrayField",)
 
 TIME_ZONE = "America/Montreal"
 USE_TZ = True
 
 # Default primary key field type
-# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Thumbnail Generation
+THUMBNAIL_HIGH_RESOLUTION = True
+THUMBNAIL_ALIASES = {
+    "": {
+        "profile": {"size": (80, 80), "crop": True},
+        "admin": {"size": (100, 100), "crop": True},
+        "thumbnail": {"size": (250, 250), "crop": True},
+        "photo": {"size": (500, 500), "crop": True},
+    },
+}

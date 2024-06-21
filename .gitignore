@@ -30,5 +30,6 @@ env/
 
 # Project
 /static/
+/uploads/
 .env
 db.sqlite3
