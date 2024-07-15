@@ -43,13 +43,21 @@ cp example.env .env
     ```
 3. Install dependencies
     ```shell
-    pip install -r requirements.txt
+    pip install .
     ```
 4. Run migrations
     ```shell
     ./manage.py migrate
     ```
-5. Run server
+5. Create a super user
+    ```shell
+    ./manage.py createsuperuser
+    ```
+6. Load default data
+    ```shell
+    ./manage.py loaddata default-units
+    ```
+7. Run server
     ```shell
     ./manage.py runserver
     ```
