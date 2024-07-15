@@ -1,19 +1,24 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from easy_thumbnails.fields import ThumbnailerImageField
+from easy_thumbnails.files import get_thumbnailer
 from treebeard.mp_tree import MP_Node
 
+from ..common.models import NamedPluralModel
 
-class Category(MP_Node):
+
+class Category(MP_Node, NamedPluralModel):
     """Categories for organizing recipes."""
 
-    name = models.CharField(_("Name"), max_length=150, unique=True, help_text=_("Maximum 150 characters"))
-    name_plural = models.CharField(max_length=150, null=True, blank=True)
     slug = models.SlugField(_("Slug"), unique=True, help_text=_("Automatically generated from the name"))
     image = ThumbnailerImageField(_("Thumbnail"), upload_to="images/categories/", null=True, blank=True)
 
-    def __str__(self) -> str:
-        return self.name_plural or self.name
+    @property
+    def thumbnail_image_url(self) -> str | None:
+        """Resolve URL of the user's profile image."""
+        if not self.image:
+            return None
+        return get_thumbnailer(self.image)["thumbnail"].url
 
     class Meta:
         verbose_name = _("Category")

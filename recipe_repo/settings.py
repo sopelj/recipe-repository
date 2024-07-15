@@ -51,7 +51,9 @@ INSTALLED_APPS = [
     "treebeard",
     "colorfield",
     # Local apps
+    "recipe_repo.food",
     "recipe_repo.users",
+    "recipe_repo.units",
     "recipe_repo.recipes",
 ]
 

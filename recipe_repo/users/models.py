@@ -40,6 +40,6 @@ class User(AbstractUser):
 
     def serialize(self) -> dict[str, Any]:
         """Serialize the user to a dictionary including extra attributes."""
-        return model_to_dict(self, exclude=("password", "photo")) | {
+        return model_to_dict(self, exclude=("password", "groups", "photo")) | {
             "profile_image_url": self.profile_image_url,
         }
