@@ -24,9 +24,7 @@ class User(AbstractUser):
     @property
     def profile_image_url(self) -> str | None:
         """Resolve URL of the user's profile image."""
-        if not self.photo:
-            return None
-        return get_thumbnailer(self.photo)["profile"].url
+        return get_thumbnailer(self.photo)["profile"].url if self.photo else None
 
     @property
     def full_name(self) -> str:
@@ -43,3 +41,7 @@ class User(AbstractUser):
         return model_to_dict(self, exclude=("password", "groups", "photo")) | {
             "profile_image_url": self.profile_image_url,
         }
+
+    class Meta:
+        verbose_name = _("User")
+        verbose_name_plural = _("Users")

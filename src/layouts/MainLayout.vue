@@ -10,7 +10,7 @@ defineProps<{ user?: User }>()
 
 <template>
   <main>
-    <header>
+    <header class="container mx-auto my-4">
       <Toolbar>
         <template #start>
           <div class="flex items-center gap-2">

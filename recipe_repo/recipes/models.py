@@ -16,9 +16,7 @@ class Category(MP_Node, NamedPluralModel):
     @property
     def thumbnail_image_url(self) -> str | None:
         """Resolve URL of the user's profile image."""
-        if not self.image:
-            return None
-        return get_thumbnailer(self.image)["thumbnail"].url
+        return get_thumbnailer(self.image)["thumbnail"].url if self.image else None
 
     class Meta:
         verbose_name = _("Category")

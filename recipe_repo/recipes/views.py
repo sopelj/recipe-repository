@@ -1,16 +1,21 @@
-from django.db.models import QuerySet
-from django.http import HttpRequest
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
 from inertia import inertia, render
 
 from .models import Category
 
+if TYPE_CHECKING:
+    from django.http import HttpRequest, HttpResponse
 
-@inertia("index")
-def categories(request: HttpRequest) -> dict[str, QuerySet]:
+
+@inertia("category-list")
+def category_list(request: HttpRequest) -> HttpResponse:
     """List all available categories."""
     return render(
         request,
-        "index",
+        "CategoryList",
         {
             "categories": [
                 {

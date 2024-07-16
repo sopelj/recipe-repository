@@ -1,9 +1,9 @@
 from django.urls import path
 
-from . import views
+from .views import category_list
 
 app_name = "recipes"
 
 urlpatterns = [
-    path("", views.categories, name="category-list"),
+    path("", category_list, name="category-list"),
 ]
