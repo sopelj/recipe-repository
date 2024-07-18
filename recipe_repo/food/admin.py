@@ -6,4 +6,4 @@ from .models import Food
 
 @admin.register(Food)
 class FoodAdmin(TranslationAdmin):
-    pass
+    search_fields = ("name",)

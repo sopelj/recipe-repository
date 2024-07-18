@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # 3rd Party
+    "adminsortable2",
     "cachalot",
     "easy_thumbnails",
     "django_breeze",
@@ -142,6 +143,29 @@ LOCALE_PATHS = [
 ]
 MODELTRANSLATION_FALLBACK_LANGUAGES = ("en", "fr")
 MODELTRANSLATION_CUSTOM_FIELDS = ("ArrayField",)
+
+CKEDITOR_CONFIGS = {
+    "default": {
+        "toolbar": "Custom",
+        "toolbar_Custom": [
+            ["Bold", "Italic", "Underline"],
+            [
+                "NumberedList",
+                "BulletedList",
+                "-",
+                "Outdent",
+                "Indent",
+                "-",
+                "JustifyLeft",
+                "JustifyCenter",
+                "JustifyRight",
+                "JustifyBlock",
+            ],
+            ["Link", "Unlink"],
+            ["RemoveFormat", "Source"],
+        ],
+    },
+}
 
 TIME_ZONE = "America/Montreal"
 USE_TZ = True

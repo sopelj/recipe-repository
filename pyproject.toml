@@ -10,6 +10,7 @@ dependencies = [
     "django",
     "django-stubs[compatible-mypy]",
     "django-admin-interface",
+    "django-admin-sortable2",
     "django-colorfield",
     "django-breeze",
     "django-environ",
@@ -52,7 +53,7 @@ target-version = "py312"
 extend-exclude = ["**migrations"]
 
 [tool.ruff.lint]
-ignore = ["D100", "D101", "D104", "D105", "D106", "D203", "D212", "PLR2004"]
+ignore = ["D100", "D101", "D104", "D105", "D106", "D203", "D212", "PLR2004", "RUF012"]
 select = [
     "A",
     "ASYNC",
