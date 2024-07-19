@@ -1,6 +1,6 @@
 from modeltranslation.translator import TranslationOptions, register
 
-from .models import Category, Ingredient, Preparation, Recipe, Step
+from .models import Category, Ingredient, IngredientQualifier, Recipe, Step, YieldUnit
 
 
 @register(Category)
@@ -8,8 +8,13 @@ class CategoryTranslationOptions(TranslationOptions):
     fields = ("name", "name_plural", "slug")
 
 
-@register(Preparation)
-class PreparationTranslationOptions(TranslationOptions):
+@register(YieldUnit)
+class YieldUnitTranslationOptions(TranslationOptions):
+    fields = ("name", "name_plural")
+
+
+@register(IngredientQualifier)
+class IngredientQualifierTranslationOptions(TranslationOptions):
     fields = ("title",)
 
 
