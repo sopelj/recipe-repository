@@ -22,6 +22,10 @@ from .models import Ingredient, Recipe, Source, SourceTypes, Step, YieldUnit
 
 logger = logging.getLogger(__name__)
 
+YIELD_REGEX = re.compile(r"^([0-9]+)\s?(.+)")
+NUMERIC_STRING_REGEX = re.compile(r"(([0-9]*\s?)?(([0-9]+/[0-9]+)|([\u2150-\u215E\u00BC-\u00BE])))|([0-9]+)")
+INGREDIENT_LINE_REGEX = re.compile(r"^([\u2150-\u215E\u00BC-\u00BE\d\s/-]+) (([\w.]*).+?)$")
+
 
 def get_or_create_source(host: str) -> Source:
     """Get or create a Source based on hostname."""
@@ -48,7 +52,7 @@ def add_image_to_recipe(recipe: Recipe, image_url: str) -> None:
 def parse_yield_values(yields: str | None) -> tuple[int | None, str | None, int | None]:
     """Attempt to parse yields values from text."""
     yield_value, yield_unit, servings = None, None, None
-    if yields and (match := re.match(r"^([0-9]+)(.+)", yields)):
+    if yields and (match := YIELD_REGEX.match(yields)):
         value, unit = match.groups()
         with contextlib.suppress(ValueError):
             yield_value = int(value.strip())
@@ -62,7 +66,7 @@ def parse_yield_values(yields: str | None) -> tuple[int | None, str | None, int 
 
 def parse_numeric_string(value: str) -> Decimal:
     """Attempt to parse a string that could be an int or fraction into a decimal."""
-    match = re.match(r"(([0-9]*\s?)?(([0-9]+/[0-9]+)|([\u2150-\u215E\u00BC-\u00BE])))|([0-9]+)", value.strip(" "))
+    match = NUMERIC_STRING_REGEX.match(value.strip(" "))
     whole, __, fraction, fake_fraction, only_num = match.groups()[1:]
     amount = int(num) if (num := only_num or whole) else 0
     if fraction and (f := Fraction(fraction)):
@@ -87,13 +91,14 @@ def extract_notes(text: str) -> tuple[str, str]:
     parts = re.split(r" (f?or) ", remainder, maxsplit=1)
     if len(parts) > 1:
         new_remainder = parts[0]
-        return new_remainder, notes + remainder.replace(new_remainder, "")
-    return remainder, notes
+        notes += remainder.replace(new_remainder, "")
+        remainder = new_remainder
+    return remainder, notes.strip()
 
 
 def parse_ingredient(recipe: Recipe, ingredient_text: str, order: int) -> None:
     """Attempt to parse the ingredient line into and Ingredient object."""
-    if not (match := re.match(r"^([\u2150-\u215E\u00BC-\u00BE\d\s/-]+) (([\w.]*).+?)$", ingredient_text.strip())):
+    if not (match := INGREDIENT_LINE_REGEX.match(ingredient_text.strip())):
         logger.warning("Unable to parse ingredient text. Might be title.")
         return
 

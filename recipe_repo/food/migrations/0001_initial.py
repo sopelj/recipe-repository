@@ -11,21 +11,21 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Food',
+            name="Food",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=150, unique=True, verbose_name='Name')),
-                ('name_en', models.CharField(max_length=150, null=True, unique=True, verbose_name='Name')),
-                ('name_fr', models.CharField(max_length=150, null=True, unique=True, verbose_name='Name')),
-                ('name_ja', models.CharField(max_length=150, null=True, unique=True, verbose_name='Name')),
-                ('name_plural', models.CharField(blank=True, max_length=150, null=True, verbose_name='Plural Name')),
-                ('name_plural_en', models.CharField(blank=True, max_length=150, null=True, verbose_name='Plural Name')),
-                ('name_plural_fr', models.CharField(blank=True, max_length=150, null=True, verbose_name='Plural Name')),
-                ('name_plural_ja', models.CharField(blank=True, max_length=150, null=True, verbose_name='Plural Name')),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("name", models.CharField(max_length=150, unique=True, verbose_name="Name")),
+                ("name_en", models.CharField(max_length=150, null=True, unique=True, verbose_name="Name")),
+                ("name_fr", models.CharField(max_length=150, null=True, unique=True, verbose_name="Name")),
+                ("name_ja", models.CharField(max_length=150, null=True, unique=True, verbose_name="Name")),
+                ("name_plural", models.CharField(blank=True, max_length=150, null=True, verbose_name="Plural Name")),
+                ("name_plural_en", models.CharField(blank=True, max_length=150, null=True, verbose_name="Plural Name")),
+                ("name_plural_fr", models.CharField(blank=True, max_length=150, null=True, verbose_name="Plural Name")),
+                ("name_plural_ja", models.CharField(blank=True, max_length=150, null=True, verbose_name="Plural Name")),
             ],
             options={
-                'verbose_name': 'Food',
-                'verbose_name_plural': 'Food',
+                "verbose_name": "Food",
+                "verbose_name_plural": "Food",
             },
         ),
     ]

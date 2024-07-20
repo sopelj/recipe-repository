@@ -8,8 +8,8 @@ from django.utils import translation
 from django.utils.translation import gettext_lazy as _
 from recipe_scrapers import AbstractScraper, NoSchemaFoundInWildMode, WebsiteNotImplementedError, scrape_me
 
-from .import_recipe import create_recipe_from_scraper
 from .models import Recipe
+from .recipe_importing import create_recipe_from_scraper
 
 
 class RecipeImportForm(forms.ModelForm):

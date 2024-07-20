@@ -128,10 +128,6 @@ MEDIA_ROOT = str(BASE_DIR / "uploads")
 MEDIA_URL = "/uploads/"
 
 # Internationalization
-# https://docs.djangoproject.com/en/4.2/topics/i18n/
-USE_I18N = True
-USE_L10N = True
-
 LANGUAGE_CODE = "en"
 LANGUAGES = (
     ("en", _("English")),

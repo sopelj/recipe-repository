@@ -6,12 +6,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('units', '0001_initial'),
+        ("units", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='unit',
-            options={'ordering': ('-system', 'type', 'name'), 'verbose_name': 'Unit', 'verbose_name_plural': 'Units'},
+            name="unit",
+            options={"ordering": ("-system", "type", "name"), "verbose_name": "Unit", "verbose_name_plural": "Units"},
         ),
     ]

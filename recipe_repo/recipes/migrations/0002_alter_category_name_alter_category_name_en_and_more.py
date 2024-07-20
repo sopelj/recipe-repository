@@ -6,48 +6,48 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('recipes', '0001_initial'),
+        ("recipes", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='category',
-            name='name',
-            field=models.CharField(max_length=150, unique=True, verbose_name='Name'),
+            model_name="category",
+            name="name",
+            field=models.CharField(max_length=150, unique=True, verbose_name="Name"),
         ),
         migrations.AlterField(
-            model_name='category',
-            name='name_en',
-            field=models.CharField(max_length=150, null=True, unique=True, verbose_name='Name'),
+            model_name="category",
+            name="name_en",
+            field=models.CharField(max_length=150, null=True, unique=True, verbose_name="Name"),
         ),
         migrations.AlterField(
-            model_name='category',
-            name='name_fr',
-            field=models.CharField(max_length=150, null=True, unique=True, verbose_name='Name'),
+            model_name="category",
+            name="name_fr",
+            field=models.CharField(max_length=150, null=True, unique=True, verbose_name="Name"),
         ),
         migrations.AlterField(
-            model_name='category',
-            name='name_ja',
-            field=models.CharField(max_length=150, null=True, unique=True, verbose_name='Name'),
+            model_name="category",
+            name="name_ja",
+            field=models.CharField(max_length=150, null=True, unique=True, verbose_name="Name"),
         ),
         migrations.AlterField(
-            model_name='category',
-            name='name_plural',
-            field=models.CharField(blank=True, max_length=150, null=True, verbose_name='Plural Name'),
+            model_name="category",
+            name="name_plural",
+            field=models.CharField(blank=True, max_length=150, null=True, verbose_name="Plural Name"),
         ),
         migrations.AlterField(
-            model_name='category',
-            name='name_plural_en',
-            field=models.CharField(blank=True, max_length=150, null=True, verbose_name='Plural Name'),
+            model_name="category",
+            name="name_plural_en",
+            field=models.CharField(blank=True, max_length=150, null=True, verbose_name="Plural Name"),
         ),
         migrations.AlterField(
-            model_name='category',
-            name='name_plural_fr',
-            field=models.CharField(blank=True, max_length=150, null=True, verbose_name='Plural Name'),
+            model_name="category",
+            name="name_plural_fr",
+            field=models.CharField(blank=True, max_length=150, null=True, verbose_name="Plural Name"),
         ),
         migrations.AlterField(
-            model_name='category',
-            name='name_plural_ja',
-            field=models.CharField(blank=True, max_length=150, null=True, verbose_name='Plural Name'),
+            model_name="category",
+            name="name_plural_ja",
+            field=models.CharField(blank=True, max_length=150, null=True, verbose_name="Plural Name"),
         ),
     ]

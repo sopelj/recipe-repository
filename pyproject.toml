@@ -1,11 +1,20 @@
 [project]
 name = "django-recipe-repo"
 readme = "README.md"
-version = "0.1.0"
+description = "Simple recipe app built with Django and VueJS"
 authors = [
     { name = "Jesse Sopel", email = "jesse.sopel@gmail.com" },
 ]
+license = { file = "LICENSE" }
+version = "0.1.0"
 requires-python = ">=3.12"
+classifiers=[
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+]
 dependencies = [
     "django",
     "django-stubs[compatible-mypy]",
@@ -23,13 +32,24 @@ dependencies = [
     "recipe-scrapers",
 ]
 
+[project.optional-dependencies]
+test = [
+    "pytest>=7.2.1",
+    "pytest-cov",
+    "pytest-asyncio",
+    "pytest-django",
+]
+
+[project.urls]
+"Source code" = "https://github.com/sopelj/recipe-repository/"
+"Bug Tracker" = "https://github.com/sopelj/recipe-repository/issues"
+
 [tool.mypy]
 plugins = ["mypy_django_plugin.main"]
 
 [tool.black]
 line-length = 120
-skip-string-normalization = true
-target-version = ['py312']
+target-version = ["py312"]
 include = '\.pyi?$'
 exclude = '''
 /(
@@ -46,6 +66,23 @@ exclude = '''
 
 [tool.django-stubs]
 django_settings_module = "recipe_repo.settings"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "recipe_repo.settings"
+python_files = ["test_*.py"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "pragma: no cover",
+  "def __repr__",
+  "def __str__",
+  "def main",
+  "raise AssertionError",
+  "raise NotImplementedError",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+  "if typing.TYPE_CHECKING:"
+]
 
 [tool.ruff]
 fix = true
@@ -87,7 +124,7 @@ select = [
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"tests/**/*.py" = [
+"**/tests/**.py" = [
     "D103",  # No docstrings in tests needed
     "S101",  # We needs asserts in tests
     "SLF001",
