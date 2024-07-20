@@ -23,7 +23,9 @@ def test_parse_numeric_string(numeric: str, number: float) -> None:
 @pytest.mark.parametrize(
     ("text", "expected"),
     [
+        ("potatoes", ("potatoes", "")),
         ("2 eggs or 1 banana ", ("2 eggs", "or 1 banana")),
+        ("neutral oil (for cooking)", ("neutral oil", "for cooking")),
     ],
 )
 def test_extract_notes(text: str, expected: tuple[str, str]) -> None:

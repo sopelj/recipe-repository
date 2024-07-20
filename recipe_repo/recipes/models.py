@@ -42,7 +42,7 @@ class Category(MP_Node, NamedPluralModel):
 
 
 class UserRating(models.Model):
-    rating = models.PositiveIntegerField(_("Rating"), choices=RATING_CHOICES, null=True, blank=True)
+    rating = models.PositiveIntegerField(_("Rating"), choices=RATING_CHOICES)
     recipe = models.ForeignKey("Recipe", related_name="ratings", on_delete=models.CASCADE)
     user = models.ForeignKey("users.User", related_name="ratings", on_delete=models.CASCADE)
 
@@ -157,6 +157,39 @@ class IngredientQualifier(models.Model):
         verbose_name_plural = _("Ingredient Qualifiers")
 
 
+class IngredientGroup(NamedModel):
+    recipe = models.ForeignKey(
+        Recipe,
+        verbose_name=_("Recipe"),
+        on_delete=models.CASCADE,
+        related_name="ingredient_groups",
+    )
+
+    class Meta:
+        verbose_name = _("Ingredient")
+        verbose_name_plural = _("Ingredients")
+
+
+class NutritionInformation(models.Model):
+    calories = models.PositiveIntegerField(_("Calories"), help_text=_("in kilo-calories"))
+    serving_size = models.PositiveIntegerField(_("Serving Size"), help_text=_("number of servings this corresponds to"))
+    carbohydrate = models.PositiveIntegerField(_("Carbohydrates"), help_text=_("in grams"), null=True, blank=True)
+    protein = models.PositiveIntegerField(_("Protein"), help_text=_("in grams"), null=True, blank=True)
+    fat = models.PositiveIntegerField(_("Fat"), help_text=_("in grams"), null=True, blank=True)
+    saturated_fat = models.PositiveIntegerField(_("Saturated Fat"), help_text=_("in grams"), null=True, blank=True)
+    trans_fat = models.PositiveIntegerField(_("Trans Fat"), help_text=_("in grams"), null=True, blank=True)
+    unsaturated_fat = models.PositiveIntegerField(_("Unsaturated Fat"), help_text=_("in grams"), null=True, blank=True)
+    cholesterol = models.PositiveIntegerField(_("Cholesterol"), help_text=_("in grams"), null=True, blank=True)
+    sodium = models.PositiveIntegerField(_("Sodium"), help_text=_("in grams"), null=True, blank=True)
+    fiber = models.PositiveIntegerField(_("Fiber"), help_text=_("in grams"), null=True, blank=True)
+    sugar = models.PositiveIntegerField(_("Sugar"), help_text=_("in grams"), null=True, blank=True)
+    recipe = models.ForeignKey(Recipe, verbose_name=_("Recipe"), on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = _("Nutritional Information")
+        verbose_name_plural = _("Nutritional Information")
+
+
 class Ingredient(models.Model):
     order = models.PositiveIntegerField(_("Order"), blank=True, null=True)
     amount = models.DecimalField(_("Amount"), null=True, blank=True, max_digits=10, decimal_places=4)
@@ -172,6 +205,15 @@ class Ingredient(models.Model):
         verbose_name=_("Qualifier"),
         null=True,
         blank=True,
+        related_name="+",
+        on_delete=models.SET_NULL,
+    )
+    group = models.ForeignKey(
+        IngredientGroup,
+        verbose_name=_("Group"),
+        null=True,
+        blank=True,
+        related_name="ingredients",
         on_delete=models.SET_NULL,
     )
 

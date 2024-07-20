@@ -1,6 +1,7 @@
 import contextlib
 import logging
 import re
+from datetime import timedelta
 from decimal import Decimal
 from fractions import Fraction
 from pathlib import Path
@@ -16,9 +17,22 @@ from django.db.models import Q
 from recipe_scrapers import AbstractScraper
 from slugify import slugify
 
+from ..common.utils import to_snake_case
 from ..food.models import Food
+from ..units.consts import ureg
 from ..units.models import Unit
-from .models import Ingredient, Recipe, Source, SourceTypes, Step, YieldUnit
+from .models import (
+    Category,
+    Ingredient,
+    IngredientGroup,
+    IngredientQualifier,
+    NutritionInformation,
+    Recipe,
+    Source,
+    SourceTypes,
+    Step,
+    YieldUnit,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -27,13 +41,16 @@ NUMERIC_STRING_REGEX = re.compile(r"(([0-9]*\s?)?(([0-9]+/[0-9]+)|([\u2150-\u215
 INGREDIENT_LINE_REGEX = re.compile(r"^([\u2150-\u215E\u00BC-\u00BE\d\s/-]+) (([\w.]*).+?)$")
 
 
-def get_or_create_source(host: str) -> Source:
+def get_or_create_source(host: str, site_name: str | None) -> Source:
     """Get or create a Source based on hostname."""
-    return Source.objects.get_or_create(
-        value__icontains=host.replace("www.", ""),
+    host = host.replace("www.", "")
+    source = Source.objects.filter(
+        Q(value__icontains=host) | Q(name__iexact=site_name or ""),
         type=SourceTypes.URL,
-        defaults={"name": host.capitalize(), "value": f"https://{host}"},
-    )[0]
+    ).first()
+    if not source:
+        return Source.objects.create(name=site_name or host, value=host, type=SourceTypes.URL)
+    return source
 
 
 def add_image_to_recipe(recipe: Recipe, image_url: str) -> None:
@@ -96,7 +113,7 @@ def extract_notes(text: str) -> tuple[str, str]:
     return remainder, notes.strip()
 
 
-def parse_ingredient(recipe: Recipe, ingredient_text: str, order: int) -> None:
+def parse_ingredient(recipe: Recipe, group: IngredientGroup, ingredient_text: str, order: int) -> None:
     """Attempt to parse the ingredient line into and Ingredient object."""
     if not (match := INGREDIENT_LINE_REGEX.match(ingredient_text.strip())):
         logger.warning("Unable to parse ingredient text. Might be title.")
@@ -118,6 +135,12 @@ def parse_ingredient(recipe: Recipe, ingredient_text: str, order: int) -> None:
     ).first()
     if unit_instance:
         remainder = remainder.replace(unit, "").strip()  # remove unit
+
+    # Check next word for qualifier. e.g. softened, cooked, chopped, etc.
+    possible_qualifier = remainder.split(" ", maxsplit=1)[0]
+    qualifier = IngredientQualifier.objects.filter(title__iexact=possible_qualifier).first()
+    if qualifier:
+        remainder = remainder.replace(possible_qualifier, "").strip()
 
     # Handle optional
     if match := re.search(r"\(?\s?optional(ly)?\s?\)?", remainder, re.IGNORECASE):
@@ -143,6 +166,7 @@ def parse_ingredient(recipe: Recipe, ingredient_text: str, order: int) -> None:
         amount_max=amount_max,
         unit=unit_instance,
         food=food,
+        group=group,
         optional=optional,
         recipe=recipe,
         note=notes or None,
@@ -150,11 +174,36 @@ def parse_ingredient(recipe: Recipe, ingredient_text: str, order: int) -> None:
     )
 
 
+def create_nutrition_information(recipe: Recipe, nutrition: dict[str, str]) -> None:
+    """Create Nutrition information from schema data."""
+    NutritionInformation.objects.create(
+        recipe=recipe,
+        calories=(
+            parse_numeric_string(calories.split(" ")[0]) if (calories := nutrition.pop("calories", None)) else None
+        ),
+        serving_size=(
+            parse_numeric_string(servings.split(" ")[0]) if (servings := nutrition.pop("servingSize", None)) else 1
+        ),
+        **{
+            to_snake_case(name.replace("Content", "")): ureg(value).to("g").magnitude
+            for name, value in nutrition.items()
+        },
+    )
+
+
 def create_recipe_from_scraper(scraper: AbstractScraper, url: str) -> Recipe | None:
     """Take a scraper and try to create a recipe from it."""
     title = scraper.title()
     host = scraper.host() or urlsplit(url).hostname
-    recipe = Recipe(name=title, slug=slugify(title), source_value=url, source=get_or_create_source(host))
+    recipe = Recipe(
+        name=title,
+        slug=slugify(title),
+        source_value=url,
+        cook_time=timedelta(minutes=cook_time) if (cook_time := scraper.cook_time()) else None,
+        prep_time=timedelta(minutes=pre_time) if (pre_time := scraper.prep_time()) else None,
+        source=get_or_create_source(host, scraper.site_name()),
+        description=scraper.description(),
+    )
     try:
         recipe.save()
     except IntegrityError:
@@ -170,14 +219,32 @@ def create_recipe_from_scraper(scraper: AbstractScraper, url: str) -> Recipe | N
     Step.objects.bulk_create(
         [
             Step(text=instruction.strip(), recipe=recipe, order=i + 1)
-            for i, instruction in enumerate(scraper.instructions().split("\n"))
+            for i, instruction in enumerate(scraper.instructions_list())
             if instruction.strip()
         ],
     )
 
     # Parse all ingredients
-    for i, line in enumerate(scraper.ingredients()):
-        parse_ingredient(recipe, line, i + 1)
+    ingredient_order = 0
+    for group in scraper.ingredient_groups():
+        ingredient_group = None
+        if group.purpose:
+            ingredient_group = IngredientGroup.objects.create(recipe=recipe, text=group.purpose, order=ingredient_order)
+            ingredient_order += 1
+        for ingredient_line in group.ingredients:
+            parse_ingredient(recipe, ingredient_group, ingredient_line, ingredient_order)
+            ingredient_order += 1
+
+    if nutrients := scraper.nutrients():
+        create_nutrition_information(recipe, nutrients)
+
+    # Try and match to existing categories
+    if categories := (scraper.category() or "").split(","):
+        filters = Q()
+        for category_name in categories:
+            filters |= Q(name__iexact=category_name)
+        if matching_categories := Category.objects.filter(filters).all():
+            recipe.categories.add(matching_categories)
 
     recipe.save()
     return recipe

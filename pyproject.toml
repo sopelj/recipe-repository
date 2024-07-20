@@ -44,6 +44,18 @@ test = [
 "Source code" = "https://github.com/sopelj/recipe-repository/"
 "Bug Tracker" = "https://github.com/sopelj/recipe-repository/issues"
 
+[tool.hatch]
+
+[tool.hatch.envs.default]
+python = "3.12"
+
+[tool.hatch.envs.test]
+features = ["test"]
+
+[tool.hatch.envs.test.scripts]
+cov = "pytest -vvv --asyncio-mode=auto --cov=recipe_repo --cov-branch --cov-report=xml --cov-report=term-missing"
+no-cov = "cov --no-cov"
+
 [tool.mypy]
 plugins = ["mypy_django_plugin.main"]
 
@@ -83,6 +95,7 @@ exclude_lines = [
   "if TYPE_CHECKING:",
   "if typing.TYPE_CHECKING:"
 ]
+omit = ["**/migrations/**"]
 
 [tool.ruff]
 fix = true

@@ -28,6 +28,8 @@ dist-ssr
 __pycache__/
 env/
 *.egg-info/
+.coverage
+coverage.xml
 
 # Project
 /static/

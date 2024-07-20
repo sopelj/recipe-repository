@@ -5,6 +5,25 @@ This is an attempt to rebuild my recipe site and make it open source all whilst 
 > [!WARNING]
 > This is **very** WIP and is just for fun.
 
+## Features
+- Create and add recipes using the Django Admin interface
+- Import recipes automatically using [recipe-scrapers](https://github.com/hhursev/recipe-scrapers)
+- Explore/Search recipes in Vue #TODO
+- Scale and display recipes in the most appropriate units #TODO
+- Convert between Metric and Imperial Units #TODO
+
+## Why another recipe manager site?
+
+A lot of other projects already exist that fulfill most needs.
+
+I really hesitated about using one of them, but there were a few things I really wanted, mainly:
+   - Share any recipe without expiration dates
+   - Scaling units dynamically and switching to the most appropriate units
+   - Switching between metric and imperial on any recipe
+   - Multilingual recipes
+
+I wasn't able to find one project that did all of that currently, but, really, mainly I just wanted to work on a project for fun, and if it can be useful to others all the better.
+
 ## Development
 
 ### Dependencies
@@ -20,46 +39,60 @@ Notably, change the `DJANGO_SECRET`.
 cp example.env .env
 ```
 
-## Frontend
+### Frontend
 
 1. Install packages
-    ```shell
+    ```bash
     yarn
     ```
 2. Start dev server
-    ```shell
+    ```bash
     yarn dev
     ```
 
-## Backend
+### Backend
 
-1. Create virtualenv
-    ```shell
+1. Create virtual env
+    ```bash
     python3 -m venv env
     ```
 2. Activate
-    ```shell
+    ```bash
     . env/bin/activate
     ```
 3. Install dependencies
-    ```shell
+    ```bash
     pip install .
     ```
 4. Run migrations
-    ```shell
+    ```bash
     ./manage.py migrate
     ```
-5. Create a super user
-    ```shell
+5. Create a superuser
+    ```bash
     ./manage.py createsuperuser
     ```
 6. Load default data
-    ```shell
+    ```bash
     ./manage.py loaddata default-units
     ```
 7. Run server
-    ```shell
+    ```bash
     ./manage.py runserver
     ```
+
+### Tests
+
+#### Backend
+
+```bash
+hatch run test:cov
+```
+
+## Linting
+
+```shell
+pre-commit run --all-files
+```
 
 Should be running on: <http://localhost:8000/>
