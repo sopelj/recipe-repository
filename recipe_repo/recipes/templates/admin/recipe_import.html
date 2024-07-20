@@ -1,0 +1,37 @@
+{% extends "admin/change_form.html" %}
+{% load i18n %}
+
+{% block breadcrumbs %}
+    <div class="breadcrumbs">
+    <a href="{% url 'admin:index' %}">{% translate 'Home' %}</a>&rsaquo;
+    <a href="{% url 'admin:app_list' app_label='recipes' %}">{% translate 'Recipes' %}</a>&rsaquo;
+    <a href="{% url 'admin:recipes_recipe_changelist' %}">{% translate 'Recipes' %}</a>&rsaquo;
+    Import recipe
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="content-main">
+    <form method="post">
+        {% csrf_token %}
+        <fieldset class="module">
+            <legend>{% trans "Attempt to scrape URL and import the recipe" %}</legend>
+            {% for field in form %}
+            <div class="form-row field-{{ field.name }}">
+                <div>
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.help_text %}
+                        <div class="help">{{ field.help_text }}</div>
+                    {% endif %}
+                    {{ field.errors }}
+                </div>
+            </div>
+            {% endfor %}
+        </fieldset>
+        <div class="submit-row">
+            <input class="default" type="submit" value="Save"/>
+        </div>
+    </form>
+</div>
+{% endblock %}

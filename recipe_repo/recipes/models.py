@@ -6,7 +6,7 @@ from functools import reduce
 from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
 from django.db import models
-from django.utils.safestring import mark_safe
+from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 from easy_thumbnails.fields import ThumbnailerImageField
 from easy_thumbnails.files import get_thumbnailer
@@ -83,9 +83,9 @@ class Source(NamedModel):
     def get_value_display(self) -> str:
         """Format certain types of sources with useful links instead of static values."""
         if self.type == SourceTypes.URL.value:
-            return mark_safe(f'<a href="{self.value}">{self.name}</a>')  # noqa: S308
+            return format_html('<a href="{}">{}</a>', self.value, self.name)
         if self.type == SourceTypes.BOOK.value:
-            return mark_safe(f'<a href="https://isbnsearch.org/search?s={self.value}">{self.name}</a>')  # noqa: S308
+            return format_html('<a href="https://isbnsearch.org/search?s={}">{}</a>', self.value, self.name)
         return f"{self.name}: {self.value}" if self.value else self.name
 
     class Meta:

@@ -20,6 +20,7 @@ dependencies = [
     "easy-thumbnails",
     "pillow",
     "pint",
+    "recipe-scrapers",
 ]
 
 [tool.mypy]
@@ -44,7 +45,7 @@ exclude = '''
 '''
 
 [tool.django-stubs]
-django_settings_module = "myproject.settings"
+django_settings_module = "recipe_repo.settings"
 
 [tool.ruff]
 fix = true
