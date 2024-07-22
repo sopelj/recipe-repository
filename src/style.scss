@@ -1,0 +1,7 @@
+@layer primevue, tailwind, theme;
+
+@import 'tailwindcss/base.css' layer(tailwind);
+@import 'tailwindcss/components.css' layer(tailwind);
+@import 'tailwindcss/utilities.css' layer(tailwind);
+
+@import 'primeicons/primeicons.css' layer(theme);

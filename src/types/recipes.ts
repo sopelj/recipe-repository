@@ -3,10 +3,55 @@ import type { Category } from "./categories.ts";
 export interface RecipeItem {
     name: string;
     slug: string;
-    thumbnail_url: string | null;
+    thumbnail_image_url: string | null;
     num_ratings: number;
     avg_rating: number | null;
     categories: Category[];
 }
 
-export interface Recipe extends RecipeItem {}
+interface Step {
+    order: number;
+    text: string;
+}
+
+interface NutritionInformation {
+    calories: number;
+    serving_size: number;
+    carbohydrate?: number;
+    protein?: number;
+    fat?: number;
+    saturated_fat?: number;
+    trans_fat?: number;
+    unsaturated_fat?: number;
+    cholesterol?: number;
+    sodium?: number;
+    fiber?: number;
+    sugar?: number;
+}
+
+interface Ingredient {
+    amount: string;
+    unit: string;
+    food: string;
+    optional: boolean;
+    qualifier: string;
+    note: string;
+}
+
+interface Source {
+    name: string;
+    type: 1 | 2 | 3 | 4;
+    value?: string;
+}
+
+export interface Recipe extends RecipeItem {
+    description: string;
+    servings?: number;
+    yield_unit?: string;
+    yield_amount?: number;
+    source?: Source;
+    source_value?: string;
+    nutrition?: NutritionInformation;
+    ingredients: Ingredient[];
+    steps: Step[];
+}

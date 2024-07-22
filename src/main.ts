@@ -1,13 +1,15 @@
 import { createApp, h } from "vue";
 import { createInertiaApp } from "@inertiajs/vue3";
-import "./style.css";
+
 import PrimeVue from "primevue/config";
+import Tooltip from 'primevue/tooltip';
 import Aura from "@primevue/themes/aura";
-import "primeicons/primeicons.css";
 import MainLayout from "./layouts/MainLayout.vue";
 
+import "./style.scss";
 
-createInertiaApp({
+
+await createInertiaApp({
   resolve: name => {
     const pages = import.meta.glob('./pages/**/*.vue', { eager: true });
     const page = pages[`./pages/${name}.vue`];
@@ -28,6 +30,8 @@ createInertiaApp({
         }
       }
     });
+
+    app.directive('tooltip', Tooltip);
     app.mount(el);
   },
 })
