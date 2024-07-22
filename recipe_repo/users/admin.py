@@ -9,9 +9,12 @@ from .models import User
 
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
+    list_display = ("email", "first_name", "last_name", "is_staff")
+    search_fields = ("first_name", "last_name", "email")
+    ordering = ("email",)
     fieldsets = (
-        (None, {"fields": ("username", "password")}),
-        (_("Personal info"), {"fields": ("first_name", "last_name", "email", "photo")}),
+        (None, {"fields": ("email", "password")}),
+        (_("Personal info"), {"fields": ("first_name", "last_name", "photo")}),
         (
             _("Permissions"),
             {

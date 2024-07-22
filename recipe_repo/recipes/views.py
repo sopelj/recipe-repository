@@ -3,11 +3,10 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from django.db.models import Avg, Count
-from django.forms import model_to_dict
-from easy_thumbnails.files import get_thumbnailer
 from inertia import inertia, render
 
 from .models import Category, Recipe
+from .serializers import CategoryListSerializer, RecipeListSerializer, RecipeSerializer
 
 if TYPE_CHECKING:
     from django.http import HttpRequest, HttpResponse
@@ -19,41 +18,23 @@ def category_list(request: HttpRequest) -> HttpResponse:
     return render(
         request,
         "CategoryList",
-        {
-            "categories": [
-                {
-                    "name": category.name,
-                    "name_plural": category.name_plural,
-                    "slug": category.slug,
-                    "thumbnail_image_url": category.thumbnail_image_url,
-                }
-                for category in Category.objects.all()
-            ],
-        },
+        {"categories": CategoryListSerializer(Category.objects.all(), many=True).data},
     )
 
 
 @inertia("recipe-list")
 def recipe_list(request: HttpRequest) -> HttpResponse:
     """List all available recipes."""
+    recipe_queryset = Recipe.objects.prefetch_related("categories").annotate(
+        avg_rating=Avg("ratings__rating"),
+        num_ratings=Count("ratings"),
+    )
+
     return render(
         request,
         "RecipeList",
         {
-            "recipes": [
-                recipe
-                | {
-                    "thumbnail_url": (
-                        get_thumbnailer(image_url)["thumbnail"].url if (image_url := recipe["image"]) else None
-                    ),
-                }
-                for recipe in Recipe.objects.prefetch_related("categories")
-                .annotate(
-                    avg_rating=Avg("ratings__rating"),
-                    num_ratings=Count("ratings"),
-                )
-                .values("name", "slug", "image", "categories", "avg_rating", "num_ratings")
-            ],
+            "recipes": RecipeListSerializer(recipe_queryset, many=True).data,
         },
     )
 
@@ -72,5 +53,5 @@ def recipe_detail(request: HttpRequest, slug: str) -> HttpResponse:
     return render(
         request,
         "RecipeDetail",
-        {"recipe": model_to_dict(recipe, exclude="image")},
+        {"recipe": RecipeSerializer(recipe).data},
     )

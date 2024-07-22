@@ -73,7 +73,7 @@ def parse_yield_values(yields: str | None) -> tuple[int | None, str | None, int 
         value, unit = match.groups()
         with contextlib.suppress(ValueError):
             yield_value = int(value.strip())
-        if yield_unit == "servings":
+        if unit and unit.lower().rstrip("s") == "serving":
             return None, None, yield_value
         yield_unit = YieldUnit.objects.filter(
             Q(name__iexact=unit.rstrip("s")) | Q(name_plural__istartswith=unit),
@@ -243,8 +243,8 @@ def create_recipe_from_scraper(scraper: AbstractScraper, url: str) -> Recipe | N
         filters = Q()
         for category_name in categories:
             filters |= Q(name__iexact=category_name)
-        if matching_categories := Category.objects.filter(filters).all():
-            recipe.categories.add(matching_categories)
+        if matching_categories := Category.objects.filter(filters).values_list("pk", flat=True):
+            recipe.categories.set(matching_categories)
 
     recipe.save()
     return recipe

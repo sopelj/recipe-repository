@@ -183,7 +183,7 @@ class NutritionInformation(models.Model):
     sodium = models.PositiveIntegerField(_("Sodium"), help_text=_("in grams"), null=True, blank=True)
     fiber = models.PositiveIntegerField(_("Fiber"), help_text=_("in grams"), null=True, blank=True)
     sugar = models.PositiveIntegerField(_("Sugar"), help_text=_("in grams"), null=True, blank=True)
-    recipe = models.ForeignKey(Recipe, verbose_name=_("Recipe"), on_delete=models.CASCADE)
+    recipe = models.OneToOneField(Recipe, related_name="nutrition", verbose_name=_("Recipe"), on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = _("Nutritional Information")
