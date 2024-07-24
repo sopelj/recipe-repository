@@ -5,7 +5,7 @@ export interface RecipeItem {
     slug: string;
     thumbnail_image_url: string | null;
     num_ratings: number;
-    avg_rating: number | null;
+    avg_rating?: number;
     categories: Category[];
 }
 
@@ -49,6 +49,9 @@ export interface Recipe extends RecipeItem {
     servings?: number;
     yield_unit?: string;
     yield_amount?: number;
+    cook_time?: string;
+    prep_time?: string;
+    total_time?: string;
     source?: Source;
     source_value?: string;
     nutrition?: NutritionInformation;

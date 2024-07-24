@@ -8,4 +8,5 @@ urlpatterns = [
     path("", recipe_list, name="recipe-list"),
     path("recipes/<slug:slug>/", recipe_detail, name="recipe-detail"),
     path("categories/", category_list, name="category-list"),
+    path("categories/<slug:category_slug>/", recipe_list, name="category-detail"),
 ]

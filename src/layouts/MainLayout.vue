@@ -1,17 +1,19 @@
 <script setup lang="ts">
-import { Link } from "@inertiajs/vue3"
-import Toolbar from "primevue/toolbar";
-import Avatar from "primevue/avatar";
-import Menu from "primevue/menu";
+import type { User } from "../types/users.ts";
 
-import { User } from "../types/users.ts";
-import {ref, type ComponentInstance, computed} from "vue";
+import { Link as ILink } from "@inertiajs/vue3"
+import PToolbar from "primevue/toolbar";
+import PAvatar from "primevue/avatar";
+import PMenu from "primevue/menu";
+import PImage from "primevue/image";
+
+import { ref, type ComponentInstance, computed } from "vue";
 
 const props = defineProps<{ user?: User }>();
 
-const userMenu = ref<ComponentInstance<typeof Menu>>();
+const userMenu = ref<ComponentInstance<typeof PMenu>>();
 const toggleMenu = (event: Event) => {
-  userMenu.value.toggle(event);
+  userMenu.value?.toggle(event);
 }
 const userMenuItems = computed(() => {
   const items = [{ label: 'Logout', icon: 'pi pi-sign-out', url: '/en/admin/logout/'}];
@@ -25,32 +27,25 @@ const userMenuItems = computed(() => {
 <template>
   <main>
     <header class="container mx-auto my-2 mb-4">
-      <Toolbar class="py-1">
+      <p-toolbar class="py-1">
         <template #start>
-          <div class="flex items-center gap-2">
-            <Link href="/en/">
-              <Image src="/static/images/recipe-logo.svg" alt="" :width="50" />
-              <span class="flex">Recipes</span>
-            </Link>
+          <div class="flex items-center">
+            <i-link href="/en/" class="flex flex-row py-2 items-center">
+              <p-image src="/static/images/recipe-logo.svg" alt="" :width="50" />
+              <div class="cursive text-3xl pl-2">Recipe Repo<span>sitory</span></div>
+            </i-link>
           </div>
         </template>
         <template #end>
           <div class="flex items-center gap-2">
-            <Link v-if="!user" href="/admin/login/">Login</Link>
+            <i-link v-if="!user" href="/admin/login/">Login</i-link>
             <div v-else class="card flex justify-center">
-              <Avatar  :image="user.profile_image_url" size="large" shape="circle" @click="toggleMenu" aria-haspopup="true" aria-controls="user_menu" />
-              <Menu ref="userMenu" :model="userMenuItems" id="user_menu" :popup="true" class="items-end">
-                <template #item="{ item, props }">
-                  <Link :href="item.url" v-bind="props.action">
-                    <span :class="item.icon" />
-                    <span class="ml-2">{{ item.label }}</span>
-                  </Link>
-                </template>
-              </Menu>
+              <p-avatar :image="user.profile_image_url || ''" size="large" shape="circle" aria-haspopup="true" aria-controls="user_menu"  @click="toggleMenu"/>
+              <p-menu id="user_menu" ref="userMenu" :model="userMenuItems"  :popup="true" class="items-end" />
             </div>
           </div>
         </template>
-      </Toolbar>
+      </p-toolbar>
     </header>
     <article>
       <slot />
