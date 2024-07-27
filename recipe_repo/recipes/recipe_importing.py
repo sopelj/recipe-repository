@@ -19,7 +19,7 @@ from slugify import slugify
 
 from ..common.utils import to_snake_case
 from ..food.models import Food
-from ..units.consts import ureg
+from ..units import ureg
 from ..units.models import Unit
 from .models import (
     Category,

@@ -52,33 +52,25 @@ cp example.env .env
 
 ### Backend
 
-1. Create virtual env
+> [!NOTE]
+> These examples all use [`hatch`](https://hatch.pypa.io/latest/),
+> but you can also create your on venv, install dependencies, and run ./manage.py directly
+
+1. Run migrations
     ```bash
-    python3 -m venv env
+    hatch run ./manage.py migrate
     ```
-2. Activate
+2. Create a superuser
     ```bash
-    . env/bin/activate
+    hatch run ./manage.py createsuperuser
     ```
-3. Install dependencies
+3. Load default data
     ```bash
-    pip install .
+    hatch run ./manage.py loaddata default-units
     ```
-4. Run migrations
+4. Run server
     ```bash
-    ./manage.py migrate
-    ```
-5. Create a superuser
-    ```bash
-    ./manage.py createsuperuser
-    ```
-6. Load default data
-    ```bash
-    ./manage.py loaddata default-units
-    ```
-7. Run server
-    ```bash
-    ./manage.py runserver
+    hatch run ./manage.py runserver
     ```
 
 ### Tests
