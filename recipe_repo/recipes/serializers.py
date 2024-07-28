@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Category, Ingredient, NutritionInformation, Recipe, Source, Step
+from .models import Category, Ingredient, NutritionInformation, Recipe, Source
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -21,12 +21,6 @@ class NutritionSerializer(serializers.ModelSerializer):
         exclude = ("recipe",)
 
 
-class StepSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Step
-        fields = ("text", "order")
-
-
 class SourceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Source
@@ -35,6 +29,8 @@ class SourceSerializer(serializers.ModelSerializer):
 
 class IngredientSerializer(serializers.ModelSerializer):
     amount_display = serializers.SerializerMethodField()
+    qualifier = serializers.SlugRelatedField(read_only=True, slug_field="title")
+    group_id = serializers.IntegerField()
 
     def get_amount_display(self, obj: Ingredient) -> str:
         """Get formatted amount for display."""
@@ -42,7 +38,7 @@ class IngredientSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Ingredient
-        fields = ("id", "amount_display", "optional", "note")
+        fields = ("id", "amount_display", "optional", "note", "qualifier", "group_id")
 
 
 class RecipeListSerializer(serializers.ModelSerializer):
@@ -56,10 +52,9 @@ class RecipeListSerializer(serializers.ModelSerializer):
 
 
 class RecipeSerializer(RecipeListSerializer):
-    steps = StepSerializer(many=True, read_only=True)
+    steps = serializers.SlugRelatedField(many=True, read_only=True, slug_field="text")
     source = SourceSerializer(read_only=True)
     nutrition = NutritionSerializer(read_only=True)
-    ingredients = IngredientSerializer(many=True, read_only=True)
 
     class Meta:
         model = Recipe
@@ -75,7 +70,6 @@ class RecipeSerializer(RecipeListSerializer):
             "nutrition",
             "num_ratings",
             "avg_ratings",
-            "ingredients",
             "steps",
             "source",
             "source_value",

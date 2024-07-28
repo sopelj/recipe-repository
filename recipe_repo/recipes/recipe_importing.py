@@ -75,6 +75,8 @@ def parse_yield_values(yields: str | None) -> tuple[int | None, str | None, int 
             yield_value = int(value.strip())
         if unit and unit.lower().rstrip("s") == "serving":
             return None, None, yield_value
+        if yield_value and unit and unit.lower() == "dozen":
+            return None, None, yield_value * 12
         yield_unit = YieldUnit.objects.filter(
             Q(name__iexact=unit.rstrip("s")) | Q(name_plural__istartswith=unit),
         ).get_or_create(defaults={"name": unit.capitalize().rstrip("s"), "name_plural": unit.capitalize()})[0]

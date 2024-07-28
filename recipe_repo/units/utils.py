@@ -14,11 +14,14 @@ type FracTuple = tuple[int, int]
 type Fractions = tuple[FracTuple, ...]
 type SplitFractions = tuple[Decimal, FracTuple | None, Decimal]
 
+TSP_FRACTIONS = ((1, 2), (1, 4), (1, 8))
+TBSP_FRACTIONS = ((1, 2),)
+CUP_FRACTIONS = ((1, 2), (1, 3), (2, 3), (1, 4), (3, 4))
 
 FRACTIONS_PER_IMPERIAL_UNIT: dict[str, Fractions] = {
-    "cup": ((1, 2), (1, 3), (2, 3), (1, 4), (3, 4)),
-    "tbsp": ((1, 2),),
-    "tsp": ((1, 2), (1, 4), (1, 8)),
+    "cup": CUP_FRACTIONS,
+    "tbsp": TBSP_FRACTIONS,
+    "tsp": TSP_FRACTIONS,
 }
 
 
@@ -44,16 +47,16 @@ def format_decimal_as_fraction(amount: Decimal) -> str:
     return str(whole)
 
 
-def decimal_to_fraction(amount: Decimal, limit: int = 1_000) -> tuple[Decimal, Fraction | None]:
+def decimal_to_fraction(amount: Decimal, limit: int = 100) -> tuple[Decimal, Fraction | None]:
     """Split decimal into whole number and fraction."""
-    whole = amount.to_integral()
+    whole = Decimal(int(amount))
     frac = Fraction(remainder).limit_denominator(limit) if (remainder := amount - whole) else None
     return whole, frac
 
 
 def is_nice_fraction(amount: Decimal, allowed_fractions: Fractions) -> bool:
     """Check if a given amount is a nice fraction."""
-    base, fraction = decimal_to_fraction(amount)
+    fraction = decimal_to_fraction(amount)[1]
     return fraction and fraction.as_integer_ratio() in allowed_fractions
 
 

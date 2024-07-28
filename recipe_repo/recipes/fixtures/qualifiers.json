@@ -1,0 +1,212 @@
+[
+{
+    "model": "recipes.ingredientqualifier",
+    "pk": 1,
+    "fields": {
+        "title": "melted",
+        "title_en": "melted",
+        "title_fr": "fondu",
+        "title_ja": "溶かした"
+    }
+},
+{
+    "model": "recipes.ingredientqualifier",
+    "pk": 2,
+    "fields": {
+        "title": "softened",
+        "title_en": "softened",
+        "title_fr": "ramolli",
+        "title_ja": "柔らかくした"
+    }
+},
+{
+    "model": "recipes.ingredientqualifier",
+    "pk": 3,
+    "fields": {
+        "title": "chopped",
+        "title_en": "chopped",
+        "title_fr": "haché",
+        "title_ja": "切り"
+    }
+},
+{
+    "model": "recipes.ingredientqualifier",
+    "pk": 4,
+    "fields": {
+        "title": "cooked",
+        "title_en": "cooked",
+        "title_fr": "cuit",
+        "title_ja": "料理した"
+    }
+},
+{
+    "model": "recipes.ingredientqualifier",
+    "pk": 5,
+    "fields": {
+        "title": "diced",
+        "title_en": "diced",
+        "title_fr": "en dés",
+        "title_ja": "さいの目に切った"
+    }
+},
+{
+    "model": "recipes.ingredientqualifier",
+    "pk": 6,
+    "fields": {
+        "title": "sliced",
+        "title_en": "sliced",
+        "title_fr": "en tranche",
+        "title_ja": "スライスされた"
+    }
+},
+{
+    "model": "recipes.ingredientqualifier",
+    "pk": 7,
+    "fields": {
+        "title": "to taste",
+        "title_en": "to taste",
+        "title_fr": "au goût",
+        "title_ja": "少々"
+    }
+},
+{
+    "model": "recipes.ingredientqualifier",
+    "pk": 8,
+    "fields": {
+        "title": "warm",
+        "title_en": "warm",
+        "title_fr": "réchauffé",
+        "title_ja": "温められた"
+    }
+},
+{
+    "model": "recipes.ingredientqualifier",
+    "pk": 9,
+    "fields": {
+        "title": "shredded",
+        "title_en": "shredded",
+        "title_fr": "déchiquetée",
+        "title_ja": "刻み"
+    }
+},
+{
+    "model": "recipes.ingredientqualifier",
+    "pk": 10,
+    "fields": {
+        "title": "packed",
+        "title_en": "packed",
+        "title_fr": "enfoncé",
+        "title_ja": "押し下げられた"
+    }
+},
+{
+    "model": "recipes.ingredientqualifier",
+    "pk": 11,
+    "fields": {
+        "title": "mashed",
+        "title_en": "mashed",
+        "title_fr": "en purée",
+        "title_ja": "潰した"
+    }
+},
+{
+    "model": "recipes.ingredientqualifier",
+    "pk": 12,
+    "fields": {
+        "title": "grated",
+        "title_en": "grated",
+        "title_fr": "râpé",
+        "title_ja": "すりおろし"
+    }
+},
+{
+    "model": "recipes.ingredientqualifier",
+    "pk": 13,
+    "fields": {
+        "title": "finely crushed",
+        "title_en": "finely crushed",
+        "title_fr": "finement écrasé",
+        "title_ja": "細かく砕いた"
+    }
+},
+{
+    "model": "recipes.ingredientqualifier",
+    "pk": 14,
+    "fields": {
+        "title": "crushed",
+        "title_en": "crushed",
+        "title_fr": "écrasé",
+        "title_ja": "挫け"
+    }
+},
+{
+    "model": "recipes.ingredientqualifier",
+    "pk": 15,
+    "fields": {
+        "title": "finely chopped",
+        "title_en": "finely chopped",
+        "title_fr": "haché finement",
+        "title_ja": "微塵切り"
+    }
+},
+{
+    "model": "recipes.ingredientqualifier",
+    "pk": 16,
+    "fields": {
+        "title": "as needed",
+        "title_en": "as needed",
+        "title_fr": "comme requis",
+        "title_ja": "必要に応じて"
+    }
+},
+{
+    "model": "recipes.ingredientqualifier",
+    "pk": 17,
+    "fields": {
+        "title": "beaten",
+        "title_en": "beaten",
+        "title_fr": "battu",
+        "title_ja": "溶き"
+    }
+},
+{
+    "model": "recipes.ingredientqualifier",
+    "pk": 18,
+    "fields": {
+        "title": "cut into cubes",
+        "title_en": "cut into cubes",
+        "title_fr": "coupé en cubes",
+        "title_ja": "角切りにする"
+    }
+},
+{
+    "model": "recipes.ingredientqualifier",
+    "pk": 19,
+    "fields": {
+        "title": "cut into strips",
+        "title_en": "cut into strips",
+        "title_fr": "couper en lanières",
+        "title_ja": "細長く切る"
+    }
+},
+{
+    "model": "recipes.ingredientqualifier",
+    "pk": 20,
+    "fields": {
+        "title": "ground",
+        "title_en": "ground",
+        "title_fr": "moulu",
+        "title_ja": "挽いた"
+    }
+},
+{
+    "model": "recipes.ingredientqualifier",
+    "pk": 21,
+    "fields": {
+        "title": "halved",
+        "title_en": "halved",
+        "title_fr": "divisé en deux",
+        "title_ja": "半分になった"
+    }
+}
+]

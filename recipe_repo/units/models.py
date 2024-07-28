@@ -34,7 +34,7 @@ class Unit(NamedPluralModel):
         """Return unit registry for this custom Unit."""
         if self.system:
             with translation.override("en"):
-                return unit_registry(self.name)
+                return unit_registry(self.abbreviation or self.name)
         return None
 
     def format_amounts(self, amount: Decimal, max_amount: Decimal | None) -> tuple[str, Decimal]:

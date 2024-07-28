@@ -7,8 +7,14 @@ from django.shortcuts import get_object_or_404
 from inertia import inertia, render
 from modeltranslation.utils import get_language
 
-from .models import Category, Recipe
-from .serializers import CategoryListSerializer, CategorySerializer, RecipeListSerializer, RecipeSerializer
+from .models import Category, Ingredient, Recipe
+from .serializers import (
+    CategoryListSerializer,
+    CategorySerializer,
+    IngredientSerializer,
+    RecipeListSerializer,
+    RecipeSerializer,
+)
 
 if TYPE_CHECKING:
     from django.http import HttpRequest, HttpResponse
@@ -52,16 +58,22 @@ def recipe_list(request: HttpRequest, category_slug: str | None = None) -> HttpR
 @inertia("recipe-detail")
 def recipe_detail(request: HttpRequest, slug: str) -> HttpResponse:
     """Get a specific recipe by slug."""
+    slug_query = Q(**{f"slug_{get_language()}": slug}) | Q(slug_en=slug)
     recipe = (
-        Recipe.objects.prefetch_related("categories")
+        Recipe.objects.prefetch_related("categories", "ingredient_groups", "steps")
+        .select_related("source", "nutrition", "yield_unit")
         .annotate(
             avg_rating=Avg("ratings__rating"),
             num_ratings=Count("ratings"),
         )
-        .get(Q(**{f"slug_{get_language()}": slug}) | Q(slug_en=slug))
+        .get(slug_query)
     )
+    ingredients = Ingredient.objects.filter(recipe_id=recipe.pk).select_related("unit", "food", "qualifier")
     return render(
         request,
         "RecipeDetail",
-        {"recipe": RecipeSerializer(recipe).data},
+        {
+            "recipe": RecipeSerializer(recipe).data,
+            "ingredients": IngredientSerializer(ingredients, many=True).data,
+        },
     )

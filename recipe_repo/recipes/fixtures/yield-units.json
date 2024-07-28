@@ -1,0 +1,44 @@
+[
+{
+    "model": "recipes.yieldunit",
+    "pk": 1,
+    "fields": {
+        "name": "Cake",
+        "name_en": "Cake",
+        "name_fr": null,
+        "name_ja": null,
+        "name_plural": "Cakes",
+        "name_plural_en": "Cakes",
+        "name_plural_fr": null,
+        "name_plural_ja": null
+    }
+},
+{
+    "model": "recipes.yieldunit",
+    "pk": 2,
+    "fields": {
+        "name": "Loaf",
+        "name_en": "Loaf",
+        "name_fr": "Miche de pain",
+        "name_ja": "パン",
+        "name_plural": "Loaves",
+        "name_plural_en": "Loaves",
+        "name_plural_fr": "Miches de pains",
+        "name_plural_ja": "パン"
+    }
+},
+{
+    "model": "recipes.yieldunit",
+    "pk": 3,
+    "fields": {
+        "name": "Cookie",
+        "name_en": "Cookie",
+        "name_fr": "Biscuit",
+        "name_ja": "クッキー",
+        "name_plural": "Cookies",
+        "name_plural_en": "Cookies",
+        "name_plural_fr": "Biscuits",
+        "name_plural_ja": "クッキー"
+    }
+}
+]

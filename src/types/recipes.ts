@@ -9,12 +9,7 @@ export interface RecipeItem {
     categories: Category[];
 }
 
-interface Step {
-    order: number;
-    text: string;
-}
-
-interface NutritionInformation {
+export interface NutritionInformation {
     calories: number;
     serving_size: number;
     carbohydrate?: number;
@@ -29,7 +24,7 @@ interface NutritionInformation {
     sugar?: number;
 }
 
-interface Ingredient {
+export interface Ingredient {
     id: number;
     amount_display: string;
     optional: boolean;
@@ -37,7 +32,7 @@ interface Ingredient {
     note: string;
 }
 
-interface Source {
+export interface Source {
     name: string;
     type: 1 | 2 | 3 | 4;
     value?: string;
@@ -54,6 +49,5 @@ export interface Recipe extends RecipeItem {
     source?: Source;
     source_value?: string;
     nutrition?: NutritionInformation;
-    ingredients: Ingredient[];
-    steps: Step[];
+    steps: string[];
 }

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { Recipe } from "../types/recipes";
+import { Recipe, Ingredient } from "../types/recipes";
 import PButton from "primevue/button";
 
-defineProps<{ recipe: Recipe }>();
+defineProps<{ recipe: Recipe, ingredients: Ingredient[] }>();
 
 const formatDuration = (duration: string) => {
   const [h, m, s] = duration.split(":");
@@ -72,8 +72,9 @@ const formatIsoDuration = (duration: string): string => `PT${formatDuration(dura
           <Card>
             <template #content>
               <ul>
-                <li v-for="ingredient in recipe.ingredients" :key="ingredient.id">
+                <li v-for="ingredient in ingredients" :key="ingredient.id">
                   <span>{{ ingredient.amount_display }}</span>
+                  <span v-if="ingredient.qualifier" class="qualifier">, {{ ingredient.qualifier }}</span>
                   <span v-if="ingredient.optional" class="optional">*Optional</span>
                   <span v-if="ingredient.note">&nbsp;({{ ingredient.note }})</span>
                 </li>
@@ -87,8 +88,8 @@ const formatIsoDuration = (duration: string): string => `PT${formatDuration(dura
       </div>
       <div class="col-span-12">
         <h2 class="text-xl mb-2">Directions</h2>
-        <Panel v-for="step in recipe.steps" :key="step.order" toggleable class="mb-2" :header="`Step ${step.order}`" itemprop="recipeInstructions">
-          {{ step.text }}
+        <Panel v-for="(step, i) in recipe.steps" :key="i" toggleable class="mb-2" :header="`Step ${i + 1}`" itemprop="recipeInstructions">
+          {{ step }}
         </Panel>
       </div>
     </div>
