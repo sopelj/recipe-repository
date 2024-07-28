@@ -34,9 +34,15 @@ class SourceSerializer(serializers.ModelSerializer):
 
 
 class IngredientSerializer(serializers.ModelSerializer):
+    amount_display = serializers.SerializerMethodField()
+
+    def get_amount_display(self, obj: Ingredient) -> str:
+        """Get formatted amount for display."""
+        return obj.amount_display
+
     class Meta:
         model = Ingredient
-        fields = ("amount", "amount_max", "unit", "food", "optional")
+        fields = ("id", "amount_display", "optional", "note")
 
 
 class RecipeListSerializer(serializers.ModelSerializer):

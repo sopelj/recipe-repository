@@ -1,0 +1,453 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Jesse Sopel, 2024.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-07-27 22:06-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: recipe_repo/common/models.py:6
+msgid "Name"
+msgstr ""
+
+#: recipe_repo/common/models.py:16
+msgid "Plural Name"
+msgstr ""
+
+#: recipe_repo/food/apps.py:9 recipe_repo/food/models.py:8
+#: recipe_repo/food/models.py:9 recipe_repo/recipes/models.py:203
+msgid "Food"
+msgstr ""
+
+#: recipe_repo/recipes/admin.py:74
+msgid "Failed to create a recipe from the provided URL"
+msgstr ""
+
+#: recipe_repo/recipes/admin.py:106 recipe_repo/recipes/models.py:32
+msgid "Thumbnail"
+msgstr ""
+
+#: recipe_repo/recipes/admin.py:111
+msgid "No thumbnail"
+msgstr ""
+
+#: recipe_repo/recipes/admin.py:113 recipe_repo/recipes/models.py:41
+#: recipe_repo/recipes/models.py:110
+msgid "Categories"
+msgstr ""
+
+#: recipe_repo/recipes/admin.py:116
+msgid "No categories"
+msgstr ""
+
+#: recipe_repo/recipes/apps.py:11 recipe_repo/recipes/models.py:146
+#: recipe_repo/recipes/templates/admin/recipe_import.html:7
+#: recipe_repo/recipes/templates/admin/recipe_import.html:8
+msgid "Recipes"
+msgstr ""
+
+#: recipe_repo/recipes/forms.py:25
+msgid "Recipe URL"
+msgstr ""
+
+#: recipe_repo/recipes/forms.py:26
+msgid "Full URL to the desired recipe"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:31 recipe_repo/recipes/models.py:98
+msgid "Slug"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:31 recipe_repo/recipes/models.py:98
+msgid "Automatically generated from the name"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:40
+msgid "Category"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:46
+msgid "Rating"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:51
+msgid "User Rating"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:52
+msgid "User Ratings"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:57
+msgid "Yield Unit"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:58
+msgid "Yield Units"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:62
+msgid "URL"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:63
+msgid "Book"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:64
+msgid "Person"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:65 recipe_repo/units/consts.py:15
+msgid "Other"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:69 recipe_repo/units/models.py:29
+msgid "Type"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:70
+msgid "Value"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:93 recipe_repo/recipes/models.py:107
+msgid "Source"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:94
+msgid "Sources"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:99
+msgid "Image"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:100
+msgid "Description"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:101
+msgid "Prep time"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:102
+msgid "Cook time"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:103
+msgid "Max cook time"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:104
+msgid "Servings"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:105
+msgid "Yield"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:108
+msgid "Source Value"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:116
+msgid "Parent recipes"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:123
+msgid "Added by"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:130
+msgid "Rated by"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:145 recipe_repo/recipes/models.py:164
+#: recipe_repo/recipes/models.py:187 recipe_repo/recipes/models.py:201
+#: recipe_repo/recipes/models.py:238
+msgid "Recipe"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:151
+msgid "Title"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:157
+msgid "Ingredient Qualifier"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:158
+msgid "Ingredient Qualifiers"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:170 recipe_repo/recipes/models.py:231
+msgid "Ingredient"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:171 recipe_repo/recipes/models.py:232
+msgid "Ingredients"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:175
+msgid "Calories"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:175
+msgid "in kilo-calories"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:176
+msgid "Serving Size"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:176
+msgid "number of servings this corresponds to"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:177
+msgid "Carbohydrates"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:177 recipe_repo/recipes/models.py:178
+#: recipe_repo/recipes/models.py:179 recipe_repo/recipes/models.py:180
+#: recipe_repo/recipes/models.py:181 recipe_repo/recipes/models.py:182
+#: recipe_repo/recipes/models.py:183 recipe_repo/recipes/models.py:184
+#: recipe_repo/recipes/models.py:185 recipe_repo/recipes/models.py:186
+msgid "in grams"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:178
+msgid "Protein"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:179
+msgid "Fat"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:180
+msgid "Saturated Fat"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:181
+msgid "Trans Fat"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:182
+msgid "Unsaturated Fat"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:183
+msgid "Cholesterol"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:184
+msgid "Sodium"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:185
+msgid "Fiber"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:186
+msgid "Sugar"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:190 recipe_repo/recipes/models.py:191
+msgid "Nutritional Information"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:195 recipe_repo/recipes/models.py:237
+msgid "Order"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:196
+msgid "Amount"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:197
+msgid "Max Amount"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:198
+msgid "Note"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:199
+msgid "Optional"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:206
+msgid "Qualifier"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:214
+msgid "Group"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:225
+#, python-brace-format
+msgid "{amount} {food}"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:239
+msgid "Text"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:246
+msgid "Step"
+msgstr ""
+
+#: recipe_repo/recipes/models.py:247
+msgid "Steps"
+msgstr ""
+
+#: recipe_repo/recipes/templates/admin/recipe_import.html:6
+msgid "Home"
+msgstr ""
+
+#: recipe_repo/recipes/templates/admin/recipe_import.html:18
+msgid "Attempt to scrape URL and import the recipe"
+msgstr ""
+
+#: recipe_repo/recipes/templates/admin/recipes/recipe/change_list.html:7
+msgid "Import recipe"
+msgstr ""
+
+#: recipe_repo/settings.py:138
+msgid "English"
+msgstr ""
+
+#: recipe_repo/settings.py:139
+msgid "French"
+msgstr ""
+
+#: recipe_repo/settings.py:140
+msgid "Japanese"
+msgstr ""
+
+#: recipe_repo/units/apps.py:9 recipe_repo/units/models.py:49
+msgid "Units"
+msgstr ""
+
+#: recipe_repo/units/consts.py:8
+msgid "Metric"
+msgstr ""
+
+#: recipe_repo/units/consts.py:9
+msgid "Imperial"
+msgstr ""
+
+#: recipe_repo/units/consts.py:13
+msgid "Volume"
+msgstr ""
+
+#: recipe_repo/units/consts.py:14
+msgid "Weight"
+msgstr ""
+
+#: recipe_repo/units/models.py:23
+msgid "Abbreviation"
+msgstr ""
+
+#: recipe_repo/units/models.py:24
+msgid "Abbreviation for unit. e.g tsp"
+msgstr ""
+
+#: recipe_repo/units/models.py:30
+msgid "System"
+msgstr ""
+
+#: recipe_repo/units/models.py:48
+msgid "Unit"
+msgstr ""
+
+#: recipe_repo/units/utils.py:28
+#, python-brace-format
+msgid "{whole} {numerator}⁄{denominator}"
+msgstr ""
+
+#: recipe_repo/units/utils.py:33
+#, python-brace-format
+msgid "{numerator}⁄{denominator}"
+msgstr ""
+
+#: recipe_repo/units/utils.py:64 recipe_repo/units/utils.py:81
+#, python-brace-format
+msgid "{amount} to {max_amount}"
+msgstr ""
+
+#: recipe_repo/units/utils.py:77
+msgid "a pinch"
+msgstr ""
+
+#: recipe_repo/users/admin.py:17
+msgid "Personal info"
+msgstr ""
+
+#: recipe_repo/users/admin.py:19
+msgid "Permissions"
+msgstr ""
+
+#: recipe_repo/users/admin.py:24
+msgid "Important dates"
+msgstr ""
+
+#: recipe_repo/users/apps.py:11 recipe_repo/users/models.py:97
+msgid "Users"
+msgstr ""
+
+#: recipe_repo/users/models.py:54
+msgid "First name"
+msgstr ""
+
+#: recipe_repo/users/models.py:55
+msgid "Last name"
+msgstr ""
+
+#: recipe_repo/users/models.py:56
+msgid "Email address"
+msgstr ""
+
+#: recipe_repo/users/models.py:57
+msgid "Photo"
+msgstr ""
+
+#: recipe_repo/users/models.py:59
+msgid "Language"
+msgstr ""
+
+#: recipe_repo/users/models.py:65
+msgid "Staff status"
+msgstr ""
+
+#: recipe_repo/users/models.py:67
+msgid "Designates whether the user can log into this admin site."
+msgstr ""
+
+#: recipe_repo/users/models.py:70
+msgid "Active"
+msgstr ""
+
+#: recipe_repo/users/models.py:73
+msgid ""
+"Designates whether this user should be treated as active. Unselect this "
+"instead of deleting accounts."
+msgstr ""
+
+#: recipe_repo/users/models.py:76
+msgid "Date joined"
+msgstr ""
+
+#: recipe_repo/users/models.py:96
+msgid "User"
+msgstr ""

@@ -2,9 +2,10 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from django.db.models import Avg, Count, QuerySet
+from django.db.models import Avg, Count, Q, QuerySet
 from django.shortcuts import get_object_or_404
 from inertia import inertia, render
+from modeltranslation.utils import get_language
 
 from .models import Category, Recipe
 from .serializers import CategoryListSerializer, CategorySerializer, RecipeListSerializer, RecipeSerializer
@@ -57,7 +58,7 @@ def recipe_detail(request: HttpRequest, slug: str) -> HttpResponse:
             avg_rating=Avg("ratings__rating"),
             num_ratings=Count("ratings"),
         )
-        .get(slug=slug)
+        .get(Q(**{f"slug_{get_language()}": slug}) | Q(slug_en=slug))
     )
     return render(
         request,

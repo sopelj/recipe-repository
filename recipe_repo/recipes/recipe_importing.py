@@ -19,7 +19,7 @@ from slugify import slugify
 
 from ..common.utils import to_snake_case
 from ..food.models import Food
-from ..units import ureg
+from ..units import unit_registry
 from ..units.models import Unit
 from .models import (
     Category,
@@ -185,7 +185,7 @@ def create_nutrition_information(recipe: Recipe, nutrition: dict[str, str]) -> N
             parse_numeric_string(servings.split(" ")[0]) if (servings := nutrition.pop("servingSize", None)) else 1
         ),
         **{
-            to_snake_case(name.replace("Content", "")): ureg(value).to("g").magnitude
+            to_snake_case(name.replace("Content", "")): unit_registry(value).to("g").magnitude
             for name, value in nutrition.items()
         },
     )

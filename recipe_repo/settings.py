@@ -132,6 +132,7 @@ MEDIA_ROOT = str(BASE_DIR / "uploads")
 MEDIA_URL = "/uploads/"
 
 # Internationalization
+USE_I18N = True
 LANGUAGE_CODE = "en"
 LANGUAGES = (
     ("en", _("English")),
@@ -143,29 +144,6 @@ LOCALE_PATHS = [
 ]
 MODELTRANSLATION_FALLBACK_LANGUAGES = ("en", "fr")
 MODELTRANSLATION_CUSTOM_FIELDS = ("ArrayField",)
-
-CKEDITOR_CONFIGS = {
-    "default": {
-        "toolbar": "Custom",
-        "toolbar_Custom": [
-            ["Bold", "Italic", "Underline"],
-            [
-                "NumberedList",
-                "BulletedList",
-                "-",
-                "Outdent",
-                "Indent",
-                "-",
-                "JustifyLeft",
-                "JustifyCenter",
-                "JustifyRight",
-                "JustifyBlock",
-            ],
-            ["Link", "Unlink"],
-            ["RemoveFormat", "Source"],
-        ],
-    },
-}
 
 TIME_ZONE = "America/Montreal"
 USE_TZ = True

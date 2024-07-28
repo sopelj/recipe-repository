@@ -71,7 +71,13 @@ const formatIsoDuration = (duration: string): string => `PT${formatDuration(dura
           </div>
           <Card>
             <template #content>
-              {{ recipe.ingredients }}
+              <ul>
+                <li v-for="ingredient in recipe.ingredients" :key="ingredient.id">
+                  <span>{{ ingredient.amount_display }}</span>
+                  <span v-if="ingredient.optional" class="optional">*Optional</span>
+                  <span v-if="ingredient.note">&nbsp;({{ ingredient.note }})</span>
+                </li>
+              </ul>
             </template>
           </Card>
         </div>

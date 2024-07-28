@@ -1,29 +1,21 @@
 from __future__ import annotations
 
-from decimal import Decimal
 from functools import cached_property
 from typing import TYPE_CHECKING
 
 from django.db import models
-from django.db.models import TextChoices
+from django.utils import translation
 from django.utils.translation import gettext_lazy as _
 
 from ..common.models import NamedPluralModel
-from . import ureg
+from . import unit_registry
+from .consts import System, UnitType
+from .utils import format_fraction_amounts, format_metric_amounts
 
 if TYPE_CHECKING:
+    from decimal import Decimal
+
     from pint import Unit as PintUnit
-
-
-class System(TextChoices):
-    METRIC = ("M", _("Metric"))
-    IMPERIAL = ("I", _("Imperial"))
-
-
-class UnitType(TextChoices):
-    VOLUME = ("V", _("Volume"))
-    WEIGHT = ("W", _("Weight"))
-    OTHER = ("O", _("Other"))
 
 
 class Unit(NamedPluralModel):
@@ -40,16 +32,17 @@ class Unit(NamedPluralModel):
     @cached_property
     def unit(self) -> PintUnit | None:
         """Return unit registry for this custom Unit."""
-        return ureg(self.name) if self.system else None
+        if self.system:
+            with translation.override("en"):
+                return unit_registry(self.name)
+        return None
 
-    def format_amount(self, amount: Decimal) -> tuple[Decimal, PintUnit]:
-        """Format amount based on this unit."""
+    def format_amounts(self, amount: Decimal, max_amount: Decimal | None) -> tuple[str, Decimal]:
+        """Format amounts based on this unit."""
         if self.system == System.METRIC:
-            out = (amount * self.unit).to_compact()
-            return out.magnitude, out.unit
-        if self.system == System.IMPERIAL:
-            out = (amount * self.unit).to_compact()
-        return Decimal(0), self.unit
+            return format_metric_amounts(amount, max_amount, self.unit)
+        # TODO: Imperial
+        return format_fraction_amounts(amount, max_amount)
 
     class Meta:
         verbose_name = _("Unit")

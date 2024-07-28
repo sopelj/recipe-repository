@@ -30,9 +30,8 @@ interface NutritionInformation {
 }
 
 interface Ingredient {
-    amount: string;
-    unit: string;
-    food: string;
+    id: number;
+    amount_display: string;
     optional: boolean;
     qualifier: string;
     note: string;

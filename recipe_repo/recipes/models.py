@@ -7,12 +7,15 @@ from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
 from django.db import models
 from django.utils.html import format_html
+from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
 from easy_thumbnails.fields import ThumbnailerImageField
 from easy_thumbnails.files import get_thumbnailer
 from treebeard.mp_tree import MP_Node
 
 from ..common.models import NamedModel, NamedPluralModel
+from ..common.utils import pluralize
+from ..units.utils import format_fraction_amounts
 
 RATING_CHOICES = (
     (0, "☆☆☆☆☆"),
@@ -216,6 +219,18 @@ class Ingredient(models.Model):
         related_name="ingredients",
         on_delete=models.SET_NULL,
     )
+
+    @property
+    def amount_display(self) -> str | None:
+        """Nicely format amount(s) and food for display."""
+        if self.unit:
+            formatted_amount, number = self.unit.format_amounts(self.amount, self.amount_max)
+        else:
+            formatted_amount, number = format_fraction_amounts(self.amount, self.amount_max)
+        return gettext("{amount} {food}").format(
+            amount=formatted_amount,
+            food=pluralize(self.food.name, self.food.name_plural, number),
+        )
 
     class Meta:
         verbose_name = _("Ingredient")

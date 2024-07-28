@@ -33,6 +33,7 @@ dependencies = [
     "pillow",
     "pint",
     "recipe-scrapers",
+    "werkzeug",
 ]
 
 [project.optional-dependencies]
@@ -51,6 +52,8 @@ test = [
 
 [tool.hatch.envs.default]
 python = "3.12"
+type = "virtual"
+path = ".venv"
 
 [tool.hatch.envs.test]
 features = ["test"]
@@ -107,7 +110,7 @@ target-version = "py312"
 extend-exclude = ["**migrations"]
 
 [tool.ruff.lint]
-ignore = ["D100", "D101", "D104", "D105", "D106", "D203", "D212", "PLR2004", "RUF012"]
+ignore = ["D100", "D101", "D104", "D105", "D106", "D203", "D212", "PLR2004", "RUF012", "TD002", "TD003"]
 select = [
     "A",
     "ASYNC",
