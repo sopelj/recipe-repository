@@ -18,7 +18,7 @@ class CategoryListSerializer(serializers.ModelSerializer):
 class NutritionSerializer(serializers.ModelSerializer):
     class Meta:
         model = NutritionInformation
-        exclude = ("recipe",)
+        exclude = ("recipe", "id")
 
 
 class SourceSerializer(serializers.ModelSerializer):
@@ -28,17 +28,12 @@ class SourceSerializer(serializers.ModelSerializer):
 
 
 class IngredientSerializer(serializers.ModelSerializer):
-    amount_display = serializers.SerializerMethodField()
     qualifier = serializers.SlugRelatedField(read_only=True, slug_field="title")
     group_id = serializers.IntegerField()
 
-    def get_amount_display(self, obj: Ingredient) -> str:
-        """Get formatted amount for display."""
-        return obj.amount_display
-
     class Meta:
         model = Ingredient
-        fields = ("id", "amount_display", "optional", "note", "qualifier", "group_id")
+        fields = ("id", "amount_display", "food_display", "optional", "note", "qualifier", "group_id")
 
 
 class RecipeListSerializer(serializers.ModelSerializer):
@@ -52,6 +47,8 @@ class RecipeListSerializer(serializers.ModelSerializer):
 
 
 class RecipeSerializer(RecipeListSerializer):
+    total_time = serializers.DurationField()
+    yield_unit = serializers.SlugRelatedField(read_only=True, slug_field="name")
     steps = serializers.SlugRelatedField(many=True, read_only=True, slug_field="text")
     source = SourceSerializer(read_only=True)
     nutrition = NutritionSerializer(read_only=True)

@@ -26,7 +26,8 @@ export interface NutritionInformation {
 
 export interface Ingredient {
     id: number;
-    amount_display: string;
+    amount_display?: string;
+    food_display: string;
     optional: boolean;
     qualifier: string;
     note: string;

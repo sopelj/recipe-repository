@@ -1,13 +1,13 @@
-import operator
+from __future__ import annotations
+
 import re
-from datetime import timedelta
-from functools import reduce
+from functools import cached_property
+from typing import TYPE_CHECKING
 
 from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
 from django.db import models
 from django.utils.html import format_html
-from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
 from easy_thumbnails.fields import ThumbnailerImageField
 from easy_thumbnails.files import get_thumbnailer
@@ -16,6 +16,11 @@ from treebeard.mp_tree import MP_Node
 from ..common.models import NamedModel, NamedPluralModel
 from ..common.utils import pluralize
 from ..units.utils import format_fraction_amounts
+
+if TYPE_CHECKING:
+    from datetime import timedelta
+    from decimal import Decimal
+
 
 RATING_CHOICES = (
     (0, "☆☆☆☆☆"),
@@ -135,8 +140,9 @@ class Recipe(NamedModel):
     @property
     def total_time(self) -> timedelta:
         """Return total time combining prep and cook times."""
-        times = [t for t in [self.prep_time, (self.cook_time_max or self.cook_time)] if t]
-        return reduce(operator.add, times) if times else timedelta()
+        if self.prep_time and self.cook_time:
+            return self.prep_time + self.cook_time
+        return self.prep_time or self.cook_time
 
     @property
     def thumbnail_image_url(self) -> str | None:
@@ -176,16 +182,17 @@ class IngredientGroup(NamedModel):
 class NutritionInformation(models.Model):
     calories = models.PositiveIntegerField(_("Calories"), help_text=_("in kilo-calories"))
     serving_size = models.PositiveIntegerField(_("Serving Size"), help_text=_("number of servings this corresponds to"))
-    carbohydrate = models.PositiveIntegerField(_("Carbohydrates"), help_text=_("in grams"), null=True, blank=True)
-    protein = models.PositiveIntegerField(_("Protein"), help_text=_("in grams"), null=True, blank=True)
     fat = models.PositiveIntegerField(_("Fat"), help_text=_("in grams"), null=True, blank=True)
     saturated_fat = models.PositiveIntegerField(_("Saturated Fat"), help_text=_("in grams"), null=True, blank=True)
     trans_fat = models.PositiveIntegerField(_("Trans Fat"), help_text=_("in grams"), null=True, blank=True)
     unsaturated_fat = models.PositiveIntegerField(_("Unsaturated Fat"), help_text=_("in grams"), null=True, blank=True)
-    cholesterol = models.PositiveIntegerField(_("Cholesterol"), help_text=_("in grams"), null=True, blank=True)
-    sodium = models.PositiveIntegerField(_("Sodium"), help_text=_("in grams"), null=True, blank=True)
+    cholesterol = models.PositiveIntegerField(_("Cholesterol"), help_text=_("in milligrams"), null=True, blank=True)
+    sodium = models.PositiveIntegerField(_("Sodium"), help_text=_("in milligrams"), null=True, blank=True)
+    potassium = models.PositiveIntegerField(_("Potassium"), help_text=_("in milligrams"), null=True, blank=True)
+    carbohydrate = models.PositiveIntegerField(_("Carbohydrates"), help_text=_("in grams"), null=True, blank=True)
     fiber = models.PositiveIntegerField(_("Fiber"), help_text=_("in grams"), null=True, blank=True)
     sugar = models.PositiveIntegerField(_("Sugar"), help_text=_("in grams"), null=True, blank=True)
+    protein = models.PositiveIntegerField(_("Protein"), help_text=_("in grams"), null=True, blank=True)
     recipe = models.OneToOneField(Recipe, related_name="nutrition", verbose_name=_("Recipe"), on_delete=models.CASCADE)
 
     class Meta:
@@ -220,17 +227,22 @@ class Ingredient(models.Model):
         on_delete=models.SET_NULL,
     )
 
-    @property
-    def amount_display(self) -> str | None:
-        """Nicely format amount(s) and food for display."""
+    @cached_property
+    def formatted_amounts(self) -> tuple[str, Decimal]:
+        """Return the formatted amount and the count for pluralising."""
         if self.unit:
-            formatted_amount, number = self.unit.format_amounts(self.amount, self.amount_max)
-        else:
-            formatted_amount, number = format_fraction_amounts(self.amount, self.amount_max)
-        return gettext("{amount} {food}").format(
-            amount=formatted_amount,
-            food=pluralize(self.food.name, self.food.name_plural, number),
-        )
+            return self.unit.format_amounts(self.amount, self.amount_max)
+        return format_fraction_amounts(self.amount, self.amount_max)
+
+    @cached_property
+    def amount_display(self) -> str:
+        """Nicely format amount(s) and food for display."""
+        return self.formatted_amounts[0]
+
+    @cached_property
+    def food_display(self) -> str:
+        """Return Food pluralised based on formatted amounts."""
+        return pluralize(self.food.name, self.food.name_plural, self.formatted_amounts[1])
 
     class Meta:
         verbose_name = _("Ingredient")

@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { Recipe, Ingredient } from "../types/recipes";
+import type { Recipe, Ingredient } from "../types/recipes";
 import PButton from "primevue/button";
+import NutritionalInformation from "../components/NutritionalInformation.vue";
 
 defineProps<{ recipe: Recipe, ingredients: Ingredient[] }>();
 
@@ -42,7 +43,6 @@ const formatIsoDuration = (duration: string): string => `PT${formatDuration(dura
             Cook time: <meta itemprop="cookTime" :content="formatIsoDuration(recipe.cook_time)">{{ formatDuration(recipe.cook_time) }}
           </div>
           <div v-if="recipe.total_time">
-            {{ recipe.total_time }}
             Total time: <meta itemprop="totalTime" :content="formatIsoDuration(recipe.total_time)">{{ formatDuration(recipe.total_time) }}
           </div>
           <div v-if="recipe.source" itemprop="isBasedOn" itemscope itemtype="https://schema.org/CreativeWork">
@@ -51,9 +51,7 @@ const formatIsoDuration = (duration: string): string => `PT${formatDuration(dura
               From: <a :href="recipe.source_value" itemprop="publisher" target="_blank">{{ recipe.source.name }}</a>
             </div>
           </div>
-          <Panel v-if="recipe.nutrition" header="Nutritional Information" toggleable>
-            {{ recipe.nutrition }}
-          </Panel>
+          <nutritional-information v-if="recipe.nutrition" :nutrition="recipe.nutrition" />
           <Divider />
           <div class="mt-2" itemprop="description">{{ recipe.description }}</div>
           <Divider />
@@ -73,7 +71,7 @@ const formatIsoDuration = (duration: string): string => `PT${formatDuration(dura
             <template #content>
               <ul>
                 <li v-for="ingredient in ingredients" :key="ingredient.id">
-                  <span>{{ ingredient.amount_display }}</span>
+                  <span>{{ ingredient.amount_display }}<strong>&nbsp;{{ ingredient.food_display }}</strong></span>
                   <span v-if="ingredient.qualifier" class="qualifier">, {{ ingredient.qualifier }}</span>
                   <span v-if="ingredient.optional" class="optional">*Optional</span>
                   <span v-if="ingredient.note">&nbsp;({{ ingredient.note }})</span>

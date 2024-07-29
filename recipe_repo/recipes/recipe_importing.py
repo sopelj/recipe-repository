@@ -176,6 +176,13 @@ def parse_ingredient(recipe: Recipe, group: IngredientGroup, ingredient_text: st
     )
 
 
+def get_nutrition_unit_value(name: str, value: str) -> float:
+    """Get recommended unit based on value."""
+    mg_values = ("potassiumContent", "sodiumContent", "cholesterolContent")
+    unit = "mg" if name in mg_values else "g"
+    return unit_registry(value).to(unit).magnitude
+
+
 def create_nutrition_information(recipe: Recipe, nutrition: dict[str, str]) -> None:
     """Create Nutrition information from schema data."""
     NutritionInformation.objects.create(
@@ -187,8 +194,9 @@ def create_nutrition_information(recipe: Recipe, nutrition: dict[str, str]) -> N
             parse_numeric_string(servings.split(" ")[0]) if (servings := nutrition.pop("servingSize", None)) else 1
         ),
         **{
-            to_snake_case(name.replace("Content", "")): unit_registry(value).to("g").magnitude
+            to_snake_case(name.replace("Content", "")): get_nutrition_unit_value(name, value)
             for name, value in nutrition.items()
+            if value
         },
     )
 
