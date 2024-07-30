@@ -5,30 +5,17 @@ import { computed } from "vue";
 const props = defineProps<{ nutrition: NutritionInformation }>()
 
 const snakeToCamel = (value: string) => value.replace(/(_\w)/g, (g: string) => g[1].toUpperCase());
-const getUnit = (name: string): string => {
-  if (["calories", "servingSize"].includes(name)) {
-    return ""
-  }
-  if (["potassiumContent", "sodiumContent", "cholesterolContent"].includes(name)) {
-    return "mg";
-  }
-  return "g";
-};
+const getUnit = (name: string): string => ["potassiumContent", "sodiumContent", "cholesterolContent"].includes(name) ? "mg" : "g";
 
-const nutritionalInformation = computed((): Record<string, number> | undefined => (
-    props.nutrition ? Object.entries(props.nutrition).reduce((acc, [key, value]) => {
-      if (typeof value === "number") {
-        const name = ["calories", "serving_size"].includes(key) ? key : `${key}_content`;
-        acc[snakeToCamel(name)] = value;
-      }
-      return acc;
-    }, {} as Record<string, number>) : undefined
+const nutrients = computed(
+    (): Partial<Omit<NutritionInformation, "calories" | "serving_size">> => Object.fromEntries(
+        Object.entries(props.nutrition).filter(([key, value]) => !["calories", "serving_size"].includes(key) && typeof value === "number"
+    )
 ));
 </script>
 
 <template>
   <Panel
-      v-if="nutritionalInformation"
       header="Nutritional Information"
       toggleable
       :collapsed="true"
@@ -36,8 +23,19 @@ const nutritionalInformation = computed((): Record<string, number> | undefined =
       itemscope
       itemtype="https://schema.org/NutritionInformation"
   >
-    <div v-for="[key, value] in Object.entries(nutritionalInformation)" :itemprop="key" :key="key">
-      {{ key }}: {{ value }}{{ getUnit(key) }}
-    </div>
+    <table class="w-full text-left">
+      <thead>
+        <tr><th colspan="2" class="text-xs">Amount per {{ nutrition.serving_size }} serving</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th class="text-2xl">Calories</th>
+          <td class="text-2xl text-right font-bold">{{ nutrition.calories }}</td>
+        </tr>
+        <tr v-for="[nutrient, value] in Object.entries(nutrients)" :key="nutrient" :itemprop="`${snakeToCamel(nutrient)}Content`">
+          <th class="capitalize">{{ nutrient.replace("_", " ") }}</th><td class="text-right">{{ value }}{{ getUnit(nutrient) }}</td>
+        </tr>
+      </tbody>
+    </table>
   </Panel>
 </template>

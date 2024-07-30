@@ -2,8 +2,9 @@
 import type { Recipe, Ingredient } from "../types/recipes";
 import PButton from "primevue/button";
 import NutritionalInformation from "../components/NutritionalInformation.vue";
+import {ref} from "vue";
 
-defineProps<{ recipe: Recipe, ingredients: Ingredient[] }>();
+const props = defineProps<{ recipe: Recipe, ingredients: Ingredient[] }>();
 
 const formatDuration = (duration: string) => {
   const [h, m, s] = duration.split(":");
@@ -14,60 +15,70 @@ const formatDuration = (duration: string) => {
 }
 
 const formatIsoDuration = (duration: string): string => `PT${formatDuration(duration).replace(" ", "").toUpperCase()}`;
+const servings = ref<number>(props.recipe.servings || 1);
 </script>
 
 <template>
   <div class="container mx-auto" itemscope itemtype="https://schema.org/Recipe">
     <div class="grid grid-cols-12 gap-4">
       <div class="col-span-12 sm:col-span-10 md:col-span-8">
-        <h1 class="text-2xl mb-2" itemprop="name">{{ recipe.name }}</h1>
-        <div class="info">
-          <Rating
-              v-tooltip="`${recipe.num_ratings} ratings`"
-              :model-value="recipe.avg_rating"
-              :readonly="true"
+        <div class="flex">
+          <h1 class="text-4xl mb-4 cursive flex-grow" itemprop="name">{{ recipe.name }}</h1>
+          <rating
+            v-tooltip="`${recipe.num_ratings} ratings`"
+            :model-value="recipe.avg_rating"
+            :readonly="true"
           />
-          <div class="mt-2">
-            <Tag v-for="c in recipe.categories" :key="c.slug" :value="c.name" severity="secondary" />
+        </div>
+        <div v-if="recipe.categories" class="flex align-items-center py-3">
+          <div class="w-1/4 text-500 font-medium">Categories:</div>
+          <div class="w-3/4">
+            <tag v-for="c in recipe.categories" :key="c.slug" :value="c.name" severity="secondary" />
           </div>
-          <div v-if="recipe.yield_unit">
-            Yields: <span itemprop="recipeYield">{{ recipe.yield_amount }} {{ recipe.yield_unit }}</span>
+        </div>
+        <div class="flex align-items-center py-3">
+          <div class="w-1/4 text-500 font-medium">Yields:</div>
+          <div class="w-3/4">
+            <span v-if="recipe.yield_unit" itemprop="recipeYield">{{ recipe.yield_amount }} {{ recipe.yield_unit }} ({{ servings }} servings)</span>
+            <span v-else>{{ servings }} servings</span>
           </div>
-          <div v-if="recipe.servings">
-            Servings: {{ recipe.servings }}
-          </div>
-          <div v-if="recipe.prep_time">
-            Prep time: <meta itemprop="prepTime" :content="formatIsoDuration(recipe.prep_time)">{{ formatDuration(recipe.prep_time) }}
-          </div>
-          <div v-if="recipe.cook_time">
-            Cook time: <meta itemprop="cookTime" :content="formatIsoDuration(recipe.cook_time)">{{ formatDuration(recipe.cook_time) }}
-          </div>
-          <div v-if="recipe.total_time">
-            Total time: <meta itemprop="totalTime" :content="formatIsoDuration(recipe.total_time)">{{ formatDuration(recipe.total_time) }}
-          </div>
-          <div v-if="recipe.source" itemprop="isBasedOn" itemscope itemtype="https://schema.org/CreativeWork">
+        </div>
+        <div v-if="recipe.source" class="flex align-items-center py-3">
+          <div class="w-1/4 text-500 font-medium">From:</div>
+          <div class="w-3/4" itemprop="isBasedOn" itemscope itemtype="https://schema.org/CreativeWork">
             <div v-if="recipe.source.type === 1">
               <link itemprop="url" :href="recipe.source_value"/>
-              From: <a :href="recipe.source_value" itemprop="publisher" target="_blank">{{ recipe.source.name }}</a>
+              <a :href="recipe.source_value" itemprop="publisher" target="_blank" class="underline">{{ recipe.source.name }}</a>
             </div>
           </div>
-          <nutritional-information v-if="recipe.nutrition" :nutrition="recipe.nutrition" />
-          <Divider />
-          <div class="mt-2" itemprop="description">{{ recipe.description }}</div>
-          <Divider />
         </div>
+        <divider v-if="recipe.description" />
+        <div class="my-2" itemprop="description">{{ recipe.description }}</div>
+        <splitter v-if="recipe.total_time" class="mb-5">
+            <splitter-panel v-if="recipe.prep_time" class="flex items-center justify-center">
+              Prep time: <meta itemprop="prepTime" :content="formatIsoDuration(recipe.prep_time)">{{ formatDuration(recipe.prep_time) }}
+            </splitter-panel>
+            <splitter-panel v-if="recipe.cook_time" class="flex items-center justify-center">
+              Cook time: <meta itemprop="prepTime" :content="formatIsoDuration(recipe.cook_time)">{{ formatDuration(recipe.cook_time) }}
+            </splitter-panel>
+            <splitter-panel v-if="recipe.total_time" class="flex items-center justify-center">
+              Total time: <meta itemprop="prepTime" :content="formatIsoDuration(recipe.total_time)">{{ formatDuration(recipe.total_time) }}
+            </splitter-panel>
+        </splitter>
         <div class="ingredients">
-          <div class="flex flex-row items-center">
-            <h2 class="text-xl grow w-100">Ingredients</h2>
-            <div class="grow-0">
-              <input-group class="grow-0">
-                <p-button icon="pi pi-plus" :disabled="!!recipe.servings" />
-                <input-number placeholder="Price" :model-value="recipe.servings" :min="0" input-class="w-[3rem]" :fluid="true"/>
-                <p-button icon="pi pi-minus" :disabled="!!recipe.servings" />
-              </input-group>
-            </div>
-          </div>
-          <Card>
+          <card>
+            <template #title>
+              <div class="flex flex-row items-center">
+                <h2 class="text-xl grow w-100">Ingredients</h2>
+                <div class="grow-0">
+                  <input-group class="grow-0">
+                    <p-button :disabled="servings <= 0.125" @click="servings /= 2">½</p-button>
+                    <input-number v-model="servings" placeholder="servings" :min="0.125" :max="100" input-class="text-center pa-0" :fluid="true"/>
+                    <p-button :disabled="servings >= 100" @click="servings *= 2">x2</p-button>
+                  </input-group>
+                </div>
+              </div>
+            </template>
             <template #content>
               <ul>
                 <li v-for="ingredient in ingredients" :key="ingredient.id">
@@ -78,13 +89,16 @@ const formatIsoDuration = (duration: string): string => `PT${formatDuration(dura
                 </li>
               </ul>
             </template>
-          </Card>
+          </card>
         </div>
       </div>
-      <div v-if="recipe.thumbnail_image_url" class="col-span-12 sm:col-span-2 md:col-span-4">
-        <img :src="recipe.thumbnail_image_url" alt="" class="w-full border-gray-700 border-2 rounded-md" />
+      <div class="col-span-12 sm:col-span-2 md:col-span-4">
+        <div v-if="recipe.thumbnail_image_url" class="overflow-clip p-card">
+            <img :src="recipe.thumbnail_image_url" :alt="recipe.name" class="w-full" />
+        </div>
+        <nutritional-information v-if="recipe.nutrition" :nutrition="recipe.nutrition" :servings="servings" class="mt-4" />
       </div>
-      <div class="col-span-12">
+      <div class="col-span-8">
         <h2 class="text-xl mb-2">Directions</h2>
         <Panel v-for="(step, i) in recipe.steps" :key="i" toggleable class="mb-2" :header="`Step ${i + 1}`" itemprop="recipeInstructions">
           {{ step }}
