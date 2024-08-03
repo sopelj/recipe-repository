@@ -8,10 +8,9 @@ import MainLayout from "./layouts/MainLayout.vue";
 
 import "./style.scss";
 
-
 await createInertiaApp({
-  resolve: name => {
-    const pages = import.meta.glob<ComponentInstance<Component>>('./pages/**/*.vue', { eager: true });
+  resolve: (name) => {
+    const pages = import.meta.glob<ComponentInstance<Component>>("./pages/**/*.vue", { eager: true });
     const page = pages[`./pages/${name}.vue`];
     page.default.layout = page.default.layout || MainLayout;
     return page;
@@ -23,4 +22,4 @@ await createInertiaApp({
     setupPrimeVue(app);
     app.mount(el);
   },
-})
+});

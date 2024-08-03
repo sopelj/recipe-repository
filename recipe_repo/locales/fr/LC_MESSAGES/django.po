@@ -27,7 +27,7 @@ msgstr "Nom pluriel"
 #: recipe_repo/food/apps.py:9 recipe_repo/food/models.py:8
 #: recipe_repo/food/models.py:9 recipe_repo/recipes/models.py:225
 msgid "Food"
-msgstr ""
+msgstr "Nourriture"
 
 #: recipe_repo/recipes/admin.py:74
 msgid "Failed to create a recipe from the provided URL"
