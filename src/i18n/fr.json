@@ -1,1 +1,44 @@
-{}
+{
+  "users": {
+    "me": "Moi"
+  },
+  "global": {
+    "title": "Répertoire de recettes",
+    "login": "Connexion",
+    "logout": "Se déconnecter",
+    "admin": "Admin"
+  },
+  "routes": {
+    "recipe_list": "/fr/",
+    "recipe_details": "/fr/recettes/{slug}/",
+    "recipe_category": "/fr/categories/{slug}/",
+    "admin": "/fr/admin/",
+    "login": "/fr/admin/login/",
+    "logout": "/fr/admin/logout/"
+  },
+  "search": {
+    "search": "Recherche",
+    "select_category": "Catégories",
+    "no_recipes_match": "Aucune recette ne correspond aux critères donnés."
+  },
+  "categories": {
+    "all_categories": "Toutes catégories",
+    "title": "Catégories"
+  },
+  "recipe": {
+    "all_recipes": "Toutes les recettes",
+    "added_by": "Ajouté par :",
+    "categories": "Categories :",
+    "from": "De :",
+    "ingredients": "Ingrédients",
+    "directions": "Instructions",
+    "ratings": "Pas de notes | {n} note | {n} notes",
+    "servings": "{n} portion | {n} portions",
+    "yields": "Donne :"
+  },
+  "times": {
+    "prep": "Temps de préparation :",
+    "cook": "Temps de cuisson :",
+    "total": "Temps total :"
+  }
+}

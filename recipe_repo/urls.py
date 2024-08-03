@@ -4,6 +4,7 @@ from django.conf import settings
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.urls import include, path
+from django.utils.translation import gettext_lazy as _
 from django.views.generic import RedirectView
 
 urlpatterns = [
@@ -21,6 +22,6 @@ if settings.DEBUG:
 
 urlpatterns += i18n_patterns(
     path("", include("recipe_repo.recipes.urls")),
-    path("admin/", admin.site.urls),
+    path(_("admin/"), admin.site.urls),
     prefix_default_language=True,
 )

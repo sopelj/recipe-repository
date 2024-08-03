@@ -18,9 +18,9 @@ await createInertiaApp({
   },
   setup({ el, App, props, plugin }) {
     const app = createApp({ render: () => h(App, props) });
+    app.use(i18n);
     app.use(plugin);
     setupPrimeVue(app);
-    app.use(i18n);
     app.mount(el);
   },
 })

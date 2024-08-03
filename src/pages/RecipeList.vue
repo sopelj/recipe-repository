@@ -5,13 +5,21 @@ import type { Category } from "../types/categories.ts";
 import { computed, ref } from "vue";
 import { Link as ILink } from "@inertiajs/vue3"
 import HeadSection from "../layouts/HeadSection.vue";
+import { useI18n } from "vue-i18n";
 
-const props = defineProps<{ recipes: RecipeItem[], "category"?: Category, "parentCategories"?: Category[] }>();
+const { t } = useI18n();
+const props = defineProps<{ recipes: RecipeItem[], "category"?: Category, "categories": Category[] }>();
 const search = ref<string>("");
 const filteredRecipes = computed((): RecipeItem[] => (
-    search.value ? props.recipes.filter((r) => !r.name.toLocaleLowerCase().search(search.value.toLocaleLowerCase())) : props.recipes)
+    props.recipes.filter((r: RecipeItem) =>
+      (!search.value || !r.name.toLocaleLowerCase().search(search.value.toLocaleLowerCase()))
+      && (!selectedCategories.value?.length || r.categories?.some((c: Category) => selectedCategories.value.includes(c.slug)))
+    )
+  )
 );
-const title = computed((): string => props.category?.name_plural || props.category?.name || "All recipes");
+const categoryOptions = computed(() => props.categories.map((c) => ({ label: c.name_plural || c.name, value: c.slug })));
+const selectedCategories = ref<string[]>([]);
+const title = computed((): string => props.category?.name_plural || props.category?.name || t("recipe.all_recipes"));
 </script>
 
 <template>
@@ -20,11 +28,23 @@ const title = computed((): string => props.category?.name_plural || props.catego
     <h1 class="text-4xl pt-2 pb-4">{{ title }}</h1>
     <data-view layout="grid" :value="filteredRecipes" data-key="slug">
       <template #header>
-        <div class="flex justify-end">
-          <icon-field>
-            <input-icon class="pi pi-search" />
-            <input-text v-model="search" placeholder="Search" />
-          </icon-field>
+        <div class="flex flex-wrap items-center justify-between">
+          <div>
+            <icon-field>
+              <input-icon class="pi pi-search" />
+              <input-text v-model="search" :placeholder="t('search.search')" />
+            </icon-field>
+          </div>
+          <div>
+            <multi-select
+              v-model="selectedCategories"
+              :options="categoryOptions"
+              :placeholder="t('search.select_category')"
+              option-value="value"
+              option-label="label"
+              display="chip"
+            />
+          </div>
         </div>
       </template>
       <template #grid="{ items }">
@@ -32,7 +52,7 @@ const title = computed((): string => props.category?.name_plural || props.catego
           <i-link
               v-for="recipe in items"
               :key="recipe.slug"
-              :href="`/recipes/${recipe.slug}/`"
+              :href="t('routes.recipe_details', { slug: recipe.slug })"
               class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-2 p-2"
           >
             <card class="text-center overflow-clip transition-all border dark:border-slate-600 dark:hover:border-violet-700 hover:scale-105 w-100">
@@ -42,14 +62,19 @@ const title = computed((): string => props.category?.name_plural || props.catego
               </template>
               <template #subtitle>
                 <div class="flex items-center flex-col">
-                  <Rating v-model="recipe.avg_rating" v-tooltip="`${recipe.num_ratings} ratings`" :readonly="true"/>
+                  <Rating v-model="recipe.avg_rating" v-tooltip="t('recipe.ratings', recipe.num_ratings)" :readonly="true"/>
                   <div class="mt-2">
-                    <Tag v-for="c in recipe.categories" :key="c.slug" :value="c.name" severity="secondary" />
+                    <tag v-for="c in recipe.categories" :key="c.slug" :value="c.name" severity="secondary" />
                   </div>
                 </div>
               </template>
             </card>
           </i-link>
+        </div>
+      </template>
+      <template #empty>
+        <div class="flex items-center">
+          <div class="p-4 w-full text-center">{{ t('search.no_recipes_match') }}</div>
         </div>
       </template>
     </data-view>

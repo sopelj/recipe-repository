@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from django.db.models import DecimalField, Q, QuerySet, Value
+from django.db.models import DecimalField, Q, Value
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from inertia import inertia, render
@@ -36,12 +36,13 @@ def category_list(request: HttpRequest) -> HttpResponse:
 def recipe_list(request: HttpRequest, category_slug: str | None = None) -> HttpResponse:
     """List all available recipes."""
     category: Category | None = None
-    parent_categories: QuerySet[Category] | None = None
     recipe_queryset = Recipe.objects.with_ratings().prefetch_related("categories")
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         recipe_queryset = recipe_queryset.filter(categories__in=[category])
-        parent_categories = category.get_ancestors()
+        categories = category.get_descendants()
+    else:
+        categories = Category.objects.filter()
 
     return render(
         request,
@@ -49,7 +50,7 @@ def recipe_list(request: HttpRequest, category_slug: str | None = None) -> HttpR
         {
             "recipes": RecipeListSerializer(recipe_queryset, many=True).data,
             "category": CategorySerializer(category).data if category else None,
-            "parentCategories": CategorySerializer(parent_categories, many=True).data if parent_categories else None,
+            "categories": CategorySerializer(categories, many=True).data,
         },
     )
 

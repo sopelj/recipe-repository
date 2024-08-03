@@ -1,9 +1,9 @@
-import { createI18n } from 'petite-vue-i18n'
+import { createI18n } from "vue-i18n";
 
-import { languages, defaultLocale } from "../i18n";
-const messages = Object.assign(languages);
+import { messages, defaultLocale } from "../i18n";
 
 export const i18n = createI18n({
+  legacy: false,
   locale: defaultLocale,
   fallbackLocale: defaultLocale,
   messages,

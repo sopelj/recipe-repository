@@ -1,1 +1,44 @@
-{}
+{
+  "users": {
+    "me": "私"
+  },
+  "global": {
+    "title": "レシピリポジトリ",
+    "login": "ログイン",
+    "logout": "ログアウト",
+    "admin": "管理"
+  },
+  "routes": {
+    "recipe_list": "/ja/",
+    "recipe_details": "/ja/reshipi/{slug}/",
+    "recipe_category": "/ja/kategori/{slug}/",
+    "admin": "/ja/kanri/",
+    "login": "/ja/kanri/login/",
+    "logout": "/ja/kanri/logout/"
+  },
+  "search": {
+    "search": "サーチ",
+    "select_category": "カテゴリ",
+    "no_recipes_match": "指定された条件に一致するレシピはありません"
+  },
+  "categories": {
+    "all_categories": "すべてのカテゴリ",
+    "title": "カテゴリ"
+  },
+  "recipe": {
+    "all_recipes": "すべてのレシピ",
+    "added_by": "によって追加",
+    "categories": "カテゴリ",
+    "from": "から",
+    "ingredients": "材料",
+    "directions": "手順",
+    "ratings": "評価なし | {n}件の評価 | {n}件の評価",
+    "servings": "{n}食分",
+    "yields": "収穫量"
+  },
+  "times": {
+    "prep": "準備時間",
+    "cook": "調理時間",
+    "total": "合計時間"
+  }
+}

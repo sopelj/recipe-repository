@@ -7,7 +7,9 @@ import DataView from "primevue/dataview";
 import { computed, ref } from "vue";
 import { Link as ILink } from "@inertiajs/vue3";
 import HeadSection from "../layouts/HeadSection.vue";
+import { useI18n } from "vue-i18n";
 
+const { t } = useI18n();
 const props = defineProps<{ parentCategories?: Category[], categories: Category[] }>();
 const search = ref<string>("");
 const filteredCategories = computed((): Category[] => (
@@ -18,13 +20,13 @@ const filteredCategories = computed((): Category[] => (
 <template>
   <head-section title="categories" />
   <div class="container mx-auto">
-    <h1 class="sr-only">Categories</h1>
+    <h1 class="sr-only">{{ t("categories.title") }}</h1>
     <data-view layout="grid" :value="filteredCategories" data-key="slug">
       <template #header>
         <div class="flex justify-end">
           <icon-field>
             <input-icon class="pi pi-search" />
-            <input-text v-model="search" placeholder="Search" />
+            <input-text v-model="search" :placeholder="t('search.search')" />
           </icon-field>
         </div>
       </template>
@@ -33,7 +35,7 @@ const filteredCategories = computed((): Category[] => (
           <i-link
               v-for="category in items"
               :key="category.slug"
-              :href="`/categories/${category.slug}/`"
+              :href="t('routes.recipe_category', { slug: category.slug })"
               class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-2 p-2"
           >
             <p-card class="text-center overflow-clip transition-all border dark:border-slate-600 dark:hover:border-violet-700 hover:scale-105 w-100">

@@ -1,1 +1,44 @@
-{}
+{
+  "users": {
+    "me": "Me"
+  },
+  "global": {
+    "title": "Recipe Repository",
+    "login": "Login",
+    "logout": "Logout",
+    "admin": "Admin"
+  },
+  "routes": {
+    "recipe_list": "/en/",
+    "recipe_details": "/en/recipes/{slug}/",
+    "recipe_category": "/en/categories/{slug}/",
+    "admin": "/en/admin/",
+    "login": "/en/admin/login/",
+    "logout": "/en/admin/logout/"
+  },
+  "search": {
+    "search": "Search",
+    "select_category": "Categories",
+    "no_recipes_match": "No recipes match the given criteria"
+  },
+  "categories": {
+    "all_categories": "All categories",
+    "title": "Categories"
+  },
+  "recipe": {
+    "all_recipes": "All recipes",
+    "added_by": "Added by:",
+    "categories": "Categories:",
+    "from": "From:",
+    "ingredients": "Ingredients",
+    "directions": "Directions",
+    "ratings": "No ratings | {n} rating | {n} ratings",
+    "servings": "{n} serving | {n} servings",
+    "yields": "Yields:"
+  },
+  "times": {
+    "prep": "Prep time:",
+    "cook": "Cook time:",
+    "total": "Total time:"
+  }
+}
