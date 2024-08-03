@@ -1,10 +1,17 @@
 <script setup lang="ts">
+import type { User } from "../types/users";
 import type { Recipe, Ingredient } from "../types/recipes";
+
+import { ref } from "vue";
+import { router } from "@inertiajs/vue3";
+
 import PButton from "primevue/button";
 import NutritionalInformation from "../components/NutritionalInformation.vue";
-import {ref} from "vue";
+import HeadSection from "../layouts/HeadSection.vue";
 
-const props = defineProps<{ recipe: Recipe, ingredients: Ingredient[] }>();
+interface FormErrors { servings?: string[] }
+
+const props = defineProps<{ recipe: Recipe, ingredients: Ingredient[], servings: number, errors: FormErrors | null, user: User }>();
 
 const formatDuration = (duration: string) => {
   const [h, m, s] = duration.split(":");
@@ -15,10 +22,30 @@ const formatDuration = (duration: string) => {
 }
 
 const formatIsoDuration = (duration: string): string => `PT${formatDuration(duration).replace(" ", "").toUpperCase()}`;
-const servings = ref<number>(props.recipe.servings || 1);
+const servingAmount = ref<number>(props.servings || 1);
+const formError = ref<string | undefined>();
+
+const updateServings = (multiplier: number) => {
+  if (!servingAmount.value) {
+    servingAmount.value = props.servings;
+    return;
+  }
+  const newValue = servingAmount.value * multiplier;
+  if (newValue > 100 || newValue < 0.125) {
+    formError.value = "Serving value must be between 0.125 and 100";
+    servingAmount.value = props.servings;
+    return;
+  }
+  // TODO: use `useForm` when django-inertia supports it.
+  router.visit(
+    `${window.location.pathname}?servings=${newValue}`,
+    { only: ["ingredients", "servings", "errors"] }
+  )
+}
 </script>
 
 <template>
+  <head-section :title="recipe.name" />
   <div class="container mx-auto" itemscope itemtype="https://schema.org/Recipe">
     <div class="grid grid-cols-12 gap-4">
       <div class="col-span-12 sm:col-span-10 md:col-span-8">
@@ -43,6 +70,13 @@ const servings = ref<number>(props.recipe.servings || 1);
             <span v-else>{{ servings }} servings</span>
           </div>
         </div>
+        <div class="flex align-items-center py-3">
+          <div class="w-1/4 text-500 font-medium">Added by:</div>
+          <div class="w-3/4 flex items-center">
+            <avatar :image="recipe.added_by.profile_image_url || ''" shape="circle" />
+            <span class="pl-2">{{ recipe.added_by.email === user.email ? " Me" : ` ${recipe.added_by.first_name} ${recipe.added_by.last_name}`}}</span>
+          </div>
+        </div>
         <div v-if="recipe.source" class="flex align-items-center py-3">
           <div class="w-1/4 text-500 font-medium">From:</div>
           <div class="w-3/4" itemprop="isBasedOn" itemscope itemtype="https://schema.org/CreativeWork">
@@ -53,7 +87,9 @@ const servings = ref<number>(props.recipe.servings || 1);
           </div>
         </div>
         <divider v-if="recipe.description" />
-        <div class="my-2" itemprop="description">{{ recipe.description }}</div>
+        <div class="mt-2 pb-5" itemprop="description">
+          {{ recipe.description }}
+        </div>
         <splitter v-if="recipe.total_time" class="mb-5">
             <splitter-panel v-if="recipe.prep_time" class="flex items-center justify-center">
               Prep time: <meta itemprop="prepTime" :content="formatIsoDuration(recipe.prep_time)">{{ formatDuration(recipe.prep_time) }}
@@ -72,10 +108,19 @@ const servings = ref<number>(props.recipe.servings || 1);
                 <h2 class="text-xl grow w-100">Ingredients</h2>
                 <div class="grow-0">
                   <input-group class="grow-0">
-                    <p-button :disabled="servings <= 0.125" @click="servings /= 2">½</p-button>
-                    <input-number v-model="servings" placeholder="servings" :min="0.125" :max="100" input-class="text-center pa-0" :fluid="true"/>
-                    <p-button :disabled="servings >= 100" @click="servings *= 2">x2</p-button>
+                    <p-button :disabled="!servingAmount || (servingAmount / 2) <= 0.125" @click="updateServings(0.5)">½</p-button>
+                    <input-number
+                      v-model="servingAmount"
+                      placeholder="servings"
+                      :min="0.125"
+                      :max="100"
+                      input-class="text-center pa-0"
+                      :fluid="true"
+                      @update="updateServings(1)"
+                    />
+                    <p-button :disabled="(servingAmount * 2) >= 100" @click="updateServings(2)">x2</p-button>
                   </input-group>
+                  <p v-if="errors?.servings?.length" class="text-xs text-red-600">{{ errors.servings[0] }}</p>
                 </div>
               </div>
             </template>

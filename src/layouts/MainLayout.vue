@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { User } from "../types/users.ts";
 
-import { Link as ILink } from "@inertiajs/vue3"
+import { Link as ILink, Head as IHead } from "@inertiajs/vue3"
 import PMenu from "primevue/menu";
 
 import { ref, type ComponentInstance, computed } from "vue";

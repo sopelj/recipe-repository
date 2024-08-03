@@ -14,12 +14,13 @@ def pluralize(singular: str, plural: str | None, count: Decimal | float) -> str:
     if not plural:  # no point checking
         return singular
     match get_language():
-        case "en":
-            return singular if count == 1 else plural
+        case "ja":
+            return singular  # no plurals
         case "fr":
-            return plural if count > 1 else (plural or singular)
+            return plural if count > 1 else plural
         case _:
-            return singular
+            # Fallback to English pluralisation as that's the fallback language
+            return singular if 0 < count <= 1 else plural
 
 
 def to_camel_case(snake: str) -> str:

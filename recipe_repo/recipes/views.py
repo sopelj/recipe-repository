@@ -2,11 +2,13 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from django.db.models import Avg, Count, Q, QuerySet
+from django.db.models import DecimalField, Q, QuerySet, Value
+from django.http import Http404
 from django.shortcuts import get_object_or_404
 from inertia import inertia, render
 from modeltranslation.utils import get_language
 
+from .forms import ServingsForm
 from .models import Category, Ingredient, Recipe
 from .serializers import (
     CategoryListSerializer,
@@ -35,10 +37,7 @@ def recipe_list(request: HttpRequest, category_slug: str | None = None) -> HttpR
     """List all available recipes."""
     category: Category | None = None
     parent_categories: QuerySet[Category] | None = None
-    recipe_queryset = Recipe.objects.prefetch_related("categories").annotate(
-        avg_rating=Avg("ratings__rating"),
-        num_ratings=Count("ratings"),
-    )
+    recipe_queryset = Recipe.objects.with_ratings().prefetch_related("categories")
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         recipe_queryset = recipe_queryset.filter(categories__in=[category])
@@ -55,25 +54,40 @@ def recipe_list(request: HttpRequest, category_slug: str | None = None) -> HttpR
     )
 
 
+def get_full_recipe(recipe_id: int) -> Recipe:
+    """Ger the recipe with all necessary relationships."""
+    return (
+        Recipe.objects.with_ratings().select_related("source", "nutrition", "yield_unit", "added_by").get(pk=recipe_id)
+    )
+
+
 @inertia("recipe-detail")
 def recipe_detail(request: HttpRequest, slug: str) -> HttpResponse:
     """Get a specific recipe by slug."""
-    slug_query = Q(**{f"slug_{get_language()}": slug}) | Q(slug_en=slug)
-    recipe = (
-        Recipe.objects.prefetch_related("categories", "ingredient_groups", "steps")
-        .select_related("source", "nutrition", "yield_unit")
-        .annotate(
-            avg_rating=Avg("ratings__rating"),
-            num_ratings=Count("ratings"),
+    try:
+        recipe_id, servings = Recipe.objects.values_list("pk", "servings").get(
+            Q(**{f"slug_{get_language()}": slug}) | Q(slug_en=slug),
         )
-        .get(slug_query)
+    except Recipe.DoesNotExist as e:
+        raise Http404("Recipe does not exist.") from e
+
+    form = ServingsForm(request.GET, initial={"servings": servings})
+    errors = None if form.is_valid() else form.errors
+
+    scale = (form.cleaned_data.get("servings") or servings) / servings
+    ingredients = (
+        Ingredient.objects.filter(recipe_id=recipe_id)
+        .annotate(scale=Value(scale or 1, output_field=DecimalField()))
+        .select_related("unit", "food", "qualifier")
     )
-    ingredients = Ingredient.objects.filter(recipe_id=recipe.pk).select_related("unit", "food", "qualifier")
+
     return render(
         request,
         "RecipeDetail",
         {
-            "recipe": RecipeSerializer(recipe).data,
-            "ingredients": IngredientSerializer(ingredients, many=True).data,
+            "recipe": lambda: RecipeSerializer(get_full_recipe(recipe_id)).data,
+            "servings": float((servings or 1) * scale),
+            "ingredients": lambda: IngredientSerializer(ingredients, many=True).data,
+            "errors": errors,
         },
     )

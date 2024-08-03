@@ -23,7 +23,7 @@ export default defineConfig({
     },
   },
   resolve: {
-    extensions: [".vue", ".js", ".json"],
+    extensions: [".vue", ".ts",  ".js", ".json"],
     alias: [
       { find: '@', replacement: fileURLToPath(new URL("./src", import.meta.url)) },
     ]
@@ -33,10 +33,10 @@ export default defineConfig({
     assetsDir: "",
     manifest: true,
     emptyOutDir: true,
-    target: "es2020",
+    target: "es2022",
     rollupOptions: {
       input: {
-        main: resolve("./src/main.tsx"),
+        main: resolve("./src/main.ts"),
       },
       output: {
         chunkFileNames: undefined,

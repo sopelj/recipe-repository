@@ -1,4 +1,5 @@
-import type { Category } from "./categories.ts";
+import type { Category } from "./categories";
+import type { User } from "./users";
 
 export interface RecipeItem {
     name: string;
@@ -51,4 +52,5 @@ export interface Recipe extends RecipeItem {
     source_value?: string;
     nutrition?: NutritionInformation;
     steps: string[];
+    added_by: User;
 }

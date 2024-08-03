@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from ..users.serializers import UserSerializer
 from .models import Category, Ingredient, NutritionInformation, Recipe, Source
 
 
@@ -52,6 +53,7 @@ class RecipeSerializer(RecipeListSerializer):
     steps = serializers.SlugRelatedField(many=True, read_only=True, slug_field="text")
     source = SourceSerializer(read_only=True)
     nutrition = NutritionSerializer(read_only=True)
+    added_by = UserSerializer(read_only=True)
 
     class Meta:
         model = Recipe
@@ -73,4 +75,5 @@ class RecipeSerializer(RecipeListSerializer):
             "servings",
             "yield_unit",
             "yield_amount",
+            "added_by",
         )

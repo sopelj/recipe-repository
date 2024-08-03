@@ -7,10 +7,12 @@ from typing import TYPE_CHECKING
 from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
 from django.db import models
+from django.db.models.aggregates import Avg, Count
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 from easy_thumbnails.fields import ThumbnailerImageField
 from easy_thumbnails.files import get_thumbnailer
+from modeltranslation.manager import MultilingualQuerySet
 from treebeard.mp_tree import MP_Node
 
 from ..common.models import NamedModel, NamedPluralModel
@@ -101,6 +103,12 @@ class Source(NamedModel):
         verbose_name_plural = _("Sources")
 
 
+class RecipeQuerySet(MultilingualQuerySet):
+    def with_ratings(self) -> RecipeQuerySet[Recipe]:
+        """Return Queryset with rating annotations."""
+        return self.annotate(avg_rating=Avg("ratings__rating"), num_ratings=Count("ratings"))
+
+
 class Recipe(NamedModel):
     slug = models.SlugField(_("Slug"), unique=True, help_text=_("Automatically generated from the name"))
     image = ThumbnailerImageField(_("Image"), upload_to="images/recipes/", null=True, blank=True)
@@ -136,6 +144,8 @@ class Recipe(NamedModel):
         through=UserRating,
         verbose_name=_("Rated by"),
     )
+
+    objects = RecipeQuerySet.as_manager()
 
     @property
     def total_time(self) -> timedelta:
@@ -201,6 +211,9 @@ class NutritionInformation(models.Model):
 
 
 class Ingredient(models.Model):
+    # Scale that can be overwritten
+    scale: int = 1
+
     order = models.PositiveIntegerField(_("Order"), blank=True, null=True)
     amount = models.DecimalField(_("Amount"), null=True, blank=True, max_digits=10, decimal_places=4)
     amount_max = models.DecimalField(_("Max Amount"), null=True, blank=True, max_digits=10, decimal_places=4)
@@ -228,11 +241,21 @@ class Ingredient(models.Model):
     )
 
     @cached_property
+    def scaled_amount(self) -> Decimal:
+        """Amount scaled."""
+        return self.amount * self.scale
+
+    @cached_property
+    def scaled_amount_max(self) -> Decimal | None:
+        """Max amount scaled."""
+        return (self.amount_max * self.scale) if self.amount_max else None
+
+    @cached_property
     def formatted_amounts(self) -> tuple[str, Decimal]:
         """Return the formatted amount and the count for pluralising."""
         if self.unit:
-            return self.unit.format_amounts(self.amount, self.amount_max)
-        return format_fraction_amounts(self.amount, self.amount_max)
+            return self.unit.format_amounts(self.scaled_amount, self.scaled_amount_max)
+        return format_fraction_amounts(self.scaled_amount, self.scaled_amount_max)
 
     @cached_property
     def amount_display(self) -> str:

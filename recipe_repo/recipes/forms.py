@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from decimal import Decimal
 from urllib.parse import urlsplit, urlunsplit
 
 from django import forms
@@ -10,6 +11,16 @@ from recipe_scrapers import AbstractScraper, NoSchemaFoundInWildMode, WebsiteNot
 
 from .models import Recipe
 from .recipe_importing import create_recipe_from_scraper
+
+
+class ServingsForm(forms.Form):
+    servings = forms.DecimalField(
+        decimal_places=10,
+        min_value=Decimal(0.125),
+        max_value=Decimal(100),
+        required=False,
+        initial=Decimal(1),
+    )
 
 
 class RecipeImportForm(forms.ModelForm):

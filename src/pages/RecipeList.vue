@@ -4,6 +4,7 @@ import type { Category } from "../types/categories.ts";
 
 import { computed, ref } from "vue";
 import { Link as ILink } from "@inertiajs/vue3"
+import HeadSection from "../layouts/HeadSection.vue";
 
 const props = defineProps<{ recipes: RecipeItem[], "category"?: Category, "parentCategories"?: Category[] }>();
 const search = ref<string>("");
@@ -14,8 +15,9 @@ const title = computed((): string => props.category?.name_plural || props.catego
 </script>
 
 <template>
+  <head-section :title="title" />
   <div class="container mx-auto">
-    <h1 class="text-3xl py-2">{{ title }}</h1>
+    <h1 class="text-4xl pt-2 pb-4">{{ title }}</h1>
     <data-view layout="grid" :value="filteredRecipes" data-key="slug">
       <template #header>
         <div class="flex justify-end">
@@ -33,8 +35,8 @@ const title = computed((): string => props.category?.name_plural || props.catego
               :href="`/recipes/${recipe.slug}/`"
               class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-2 p-2"
           >
-            <Card class="text-center rounded-md overflow-clip border-solid border-2 dark:border-gray-700 w-100">
-              <template #title>{{ recipe.name }}</template>
+            <card class="text-center overflow-clip transition-all border dark:border-slate-600 dark:hover:border-violet-700 hover:scale-105 w-100">
+              <template #title><h2>{{ recipe.name }}</h2></template>
               <template #header>
                 <img :src="recipe.thumbnail_image_url" alt="" class="object-cover object-center w-full" />
               </template>
@@ -46,7 +48,7 @@ const title = computed((): string => props.category?.name_plural || props.catego
                   </div>
                 </div>
               </template>
-            </Card>
+            </card>
           </i-link>
         </div>
       </template>

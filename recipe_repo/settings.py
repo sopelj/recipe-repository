@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     "easy_thumbnails",
     "django_breeze",
     "django_extensions",
+    "query_inspector",
     "treebeard",
     "colorfield",
     # Local apps
@@ -73,6 +74,9 @@ MIDDLEWARE = [
     "recipe_repo.inertia.middleware.inertia_share",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+if DEBUG or env.bool("DEBUG_QUERIES", default=False):
+    MIDDLEWARE.append("query_inspector.middleware.QueryCountMiddleware")
 
 ROOT_URLCONF = "recipe_repo.urls"
 
@@ -160,4 +164,22 @@ THUMBNAIL_ALIASES = {
         "thumbnail": {"size": (250, 250), "crop": True},
         "photo": {"size": (500, 500), "crop": True},
     },
+}
+
+# Debugging
+QUERYCOUNT = {
+    "IGNORE_ALL_REQUESTS": False,
+    "IGNORE_REQUEST_PATTERNS": [],
+    "IGNORE_SQL_PATTERNS": [],
+    "THRESHOLDS": {
+        "MEDIUM": 50,
+        "HIGH": 200,
+        "MIN_TIME_TO_LOG": 0,
+        "MIN_QUERY_COUNT_TO_LOG": 0,
+    },
+    "DISPLAY_ALL": True,
+    "DISPLAY_PRETTIFIED": True,
+    "COLOR_FORMATTER_STYLE": "monokai",
+    "RESPONSE_HEADER": "X-DjangoQueryCount-Count",
+    "DISPLAY_DUPLICATES": 0,
 }

@@ -27,6 +27,7 @@ dependencies = [
     "django-cachalot",
     "django-treebeard",
     "django-modeltranslation",
+    "django-query-inspector",
     "djangorestframework",
     "easy-thumbnails",
     "ipython",

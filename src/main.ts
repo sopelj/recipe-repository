@@ -1,7 +1,8 @@
 import { type ComponentInstance, type Component, createApp, h } from "vue";
 import { createInertiaApp } from "@inertiajs/vue3";
 
-import { setupPrimeVue } from "./plugins/primevue.ts";
+import { setupPrimeVue } from "./plugins/primevue";
+import { i18n } from "./plugins/i18n";
 
 import MainLayout from "./layouts/MainLayout.vue";
 
@@ -19,6 +20,7 @@ await createInertiaApp({
     const app = createApp({ render: () => h(App, props) });
     app.use(plugin);
     setupPrimeVue(app);
+    app.use(i18n);
     app.mount(el);
   },
 })
