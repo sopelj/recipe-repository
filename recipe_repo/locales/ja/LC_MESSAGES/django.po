@@ -31,15 +31,15 @@ msgstr "食べ物"
 
 #: recipe_repo/recipes/admin.py:74
 msgid "Failed to create a recipe from the provided URL"
-msgstr ""
+msgstr "レシピの作成に失敗しました"
 
 #: recipe_repo/recipes/admin.py:106 recipe_repo/recipes/models.py:41
 msgid "Thumbnail"
-msgstr ""
+msgstr "サムネイル"
 
 #: recipe_repo/recipes/admin.py:111
 msgid "No thumbnail"
-msgstr ""
+msgstr "サムネイルなし"
 
 #: recipe_repo/recipes/admin.py:113 recipe_repo/recipes/models.py:50
 #: recipe_repo/recipes/models.py:125
@@ -62,39 +62,39 @@ msgstr "レシピのURL"
 
 #: recipe_repo/recipes/forms.py:37
 msgid "Full URL to the desired recipe"
-msgstr ""
+msgstr "レシピの完全なURL"
 
 #: recipe_repo/recipes/models.py:40 recipe_repo/recipes/models.py:113
 msgid "Slug"
-msgstr ""
+msgstr "スラッグ"
 
 #: recipe_repo/recipes/models.py:40 recipe_repo/recipes/models.py:113
 msgid "Automatically generated from the name"
-msgstr ""
+msgstr "名前から生成"
 
 #: recipe_repo/recipes/models.py:49
 msgid "Category"
-msgstr ""
+msgstr "カテゴリー"
 
 #: recipe_repo/recipes/models.py:55
 msgid "Rating"
-msgstr ""
+msgstr "評価"
 
 #: recipe_repo/recipes/models.py:60
 msgid "User Rating"
-msgstr ""
+msgstr "ユーザー評価"
 
 #: recipe_repo/recipes/models.py:61
 msgid "User Ratings"
-msgstr ""
+msgstr "ユーザー評価"
 
 #: recipe_repo/recipes/models.py:66
 msgid "Yield Unit"
-msgstr ""
+msgstr "利回り単位"
 
 #: recipe_repo/recipes/models.py:67
 msgid "Yield Units"
-msgstr ""
+msgstr "利回り単位"
 
 #: recipe_repo/recipes/models.py:71
 msgid "URL"
@@ -102,23 +102,23 @@ msgstr "URL"
 
 #: recipe_repo/recipes/models.py:72
 msgid "Book"
-msgstr ""
+msgstr "本"
 
 #: recipe_repo/recipes/models.py:73
 msgid "Person"
-msgstr ""
+msgstr "人"
 
 #: recipe_repo/recipes/models.py:74 recipe_repo/units/consts.py:15
 msgid "Other"
-msgstr ""
+msgstr "他の"
 
 #: recipe_repo/recipes/models.py:78 recipe_repo/units/models.py:29
 msgid "Type"
-msgstr ""
+msgstr "タイプ"
 
 #: recipe_repo/recipes/models.py:79
 msgid "Value"
-msgstr ""
+msgstr "値"
 
 #: recipe_repo/recipes/models.py:102 recipe_repo/recipes/models.py:122
 msgid "Source"
@@ -130,35 +130,35 @@ msgstr "ソース"
 
 #: recipe_repo/recipes/models.py:114
 msgid "Image"
-msgstr ""
+msgstr "イメージ("
 
 #: recipe_repo/recipes/models.py:115
 msgid "Description"
-msgstr ""
+msgstr "説明"
 
 #: recipe_repo/recipes/models.py:116
 msgid "Prep time"
-msgstr ""
+msgstr "準備時間"
 
 #: recipe_repo/recipes/models.py:117
 msgid "Cook time"
-msgstr ""
+msgstr "調理時間"
 
 #: recipe_repo/recipes/models.py:118
 msgid "Max cook time"
-msgstr ""
+msgstr "最大調理時間"
 
 #: recipe_repo/recipes/models.py:119
 msgid "Servings"
-msgstr ""
+msgstr "サービング"
 
 #: recipe_repo/recipes/models.py:120
 msgid "Yield"
-msgstr ""
+msgstr "収穫量"
 
 #: recipe_repo/recipes/models.py:123
 msgid "Source Value"
-msgstr ""
+msgstr "ソース値"
 
 #: recipe_repo/recipes/models.py:131
 msgid "Parent recipes"
@@ -204,15 +204,15 @@ msgstr "カロリー"
 
 #: recipe_repo/recipes/models.py:193
 msgid "in kilo-calories"
-msgstr ""
+msgstr "キロカロリーで"
 
 #: recipe_repo/recipes/models.py:194
 msgid "Serving Size"
-msgstr ""
+msgstr "サービングのサイズ"
 
 #: recipe_repo/recipes/models.py:194
 msgid "number of servings this corresponds to"
-msgstr ""
+msgstr "これらの値に対するサービング数"
 
 #: recipe_repo/recipes/models.py:195
 msgid "Fat"
@@ -252,7 +252,7 @@ msgstr "ナトリウ"
 
 #: recipe_repo/recipes/models.py:201
 msgid "Potassium"
-msgstr ""
+msgstr "カリウム"
 
 #: recipe_repo/recipes/models.py:202
 msgid "Carbohydrates"
@@ -376,7 +376,7 @@ msgstr ""
 
 #: recipe_repo/units/models.py:24
 msgid "Abbreviation for unit. e.g tsp"
-msgstr ""
+msgstr "単位の略語。例：小さじ"
 
 #: recipe_repo/units/models.py:30
 msgid "System"

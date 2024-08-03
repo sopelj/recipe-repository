@@ -18,11 +18,11 @@ msgstr ""
 
 #: recipe_repo/common/models.py:6
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #: recipe_repo/common/models.py:16
 msgid "Plural Name"
-msgstr ""
+msgstr "Nom pluriel"
 
 #: recipe_repo/food/apps.py:9 recipe_repo/food/models.py:8
 #: recipe_repo/food/models.py:9 recipe_repo/recipes/models.py:225
@@ -35,296 +35,296 @@ msgstr ""
 
 #: recipe_repo/recipes/admin.py:106 recipe_repo/recipes/models.py:41
 msgid "Thumbnail"
-msgstr ""
+msgstr "Vignette"
 
 #: recipe_repo/recipes/admin.py:111
 msgid "No thumbnail"
-msgstr ""
+msgstr "Aucune vignette"
 
 #: recipe_repo/recipes/admin.py:113 recipe_repo/recipes/models.py:50
 #: recipe_repo/recipes/models.py:125
 msgid "Categories"
-msgstr ""
+msgstr "Catégories"
 
 #: recipe_repo/recipes/admin.py:116
 msgid "No categories"
-msgstr ""
+msgstr "Aucune catégorie"
 
 #: recipe_repo/recipes/apps.py:11 recipe_repo/recipes/models.py:164
 #: recipe_repo/recipes/templates/admin/recipe_import.html:7
 #: recipe_repo/recipes/templates/admin/recipe_import.html:8
 msgid "Recipes"
-msgstr ""
+msgstr "Recettes"
 
 #: recipe_repo/recipes/forms.py:36
 msgid "Recipe URL"
-msgstr ""
+msgstr "L'URL de la recette"
 
 #: recipe_repo/recipes/forms.py:37
 msgid "Full URL to the desired recipe"
-msgstr ""
+msgstr "URL complet pour la recette"
 
 #: recipe_repo/recipes/models.py:40 recipe_repo/recipes/models.py:113
 msgid "Slug"
-msgstr ""
+msgstr "Jeton"
 
 #: recipe_repo/recipes/models.py:40 recipe_repo/recipes/models.py:113
 msgid "Automatically generated from the name"
-msgstr ""
+msgstr "Généré automatiquement à partir du nom"
 
 #: recipe_repo/recipes/models.py:49
 msgid "Category"
-msgstr "カテゴリ"
+msgstr "Catégorie"
 
 #: recipe_repo/recipes/models.py:55
 msgid "Rating"
-msgstr ""
+msgstr "Évaluation"
 
 #: recipe_repo/recipes/models.py:60
 msgid "User Rating"
-msgstr ""
+msgstr "Évaluation d'un utilisateur"
 
 #: recipe_repo/recipes/models.py:61
 msgid "User Ratings"
-msgstr ""
+msgstr "Évaluation des utilisateurs"
 
 #: recipe_repo/recipes/models.py:66
 msgid "Yield Unit"
-msgstr ""
+msgstr "Unités de rendements"
 
 #: recipe_repo/recipes/models.py:67
 msgid "Yield Units"
-msgstr ""
+msgstr "Unité de rendement"
 
 #: recipe_repo/recipes/models.py:71
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: recipe_repo/recipes/models.py:72
 msgid "Book"
-msgstr ""
+msgstr "Livre"
 
 #: recipe_repo/recipes/models.py:73
 msgid "Person"
-msgstr ""
+msgstr "Personne"
 
 #: recipe_repo/recipes/models.py:74 recipe_repo/units/consts.py:15
 msgid "Other"
-msgstr ""
+msgstr "Autre"
 
 #: recipe_repo/recipes/models.py:78 recipe_repo/units/models.py:29
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 #: recipe_repo/recipes/models.py:79
 msgid "Value"
-msgstr ""
+msgstr "Valeur"
 
 #: recipe_repo/recipes/models.py:102 recipe_repo/recipes/models.py:122
 msgid "Source"
-msgstr ""
+msgstr "Source"
 
 #: recipe_repo/recipes/models.py:103
 msgid "Sources"
-msgstr ""
+msgstr "Sources"
 
 #: recipe_repo/recipes/models.py:114
 msgid "Image"
-msgstr ""
+msgstr "Images"
 
 #: recipe_repo/recipes/models.py:115
 msgid "Description"
-msgstr ""
+msgstr "Description"
 
 #: recipe_repo/recipes/models.py:116
 msgid "Prep time"
-msgstr ""
+msgstr "Temps de préparation"
 
 #: recipe_repo/recipes/models.py:117
 msgid "Cook time"
-msgstr ""
+msgstr "Temps de cuisson"
 
 #: recipe_repo/recipes/models.py:118
 msgid "Max cook time"
-msgstr ""
+msgstr "Temps de cuisson maximal"
 
 #: recipe_repo/recipes/models.py:119
 msgid "Servings"
-msgstr ""
+msgstr "Portions"
 
 #: recipe_repo/recipes/models.py:120
 msgid "Yield"
-msgstr ""
+msgstr "Rendement"
 
 #: recipe_repo/recipes/models.py:123
 msgid "Source Value"
-msgstr ""
+msgstr "Valeur de la source"
 
 #: recipe_repo/recipes/models.py:131
 msgid "Parent recipes"
-msgstr ""
+msgstr "Recette parent"
 
 #: recipe_repo/recipes/models.py:138
 msgid "Added by"
-msgstr ""
+msgstr "Ajouté par"
 
 #: recipe_repo/recipes/models.py:145
 msgid "Rated by"
-msgstr ""
+msgstr "Évalué par"
 
 #: recipe_repo/recipes/models.py:163 recipe_repo/recipes/models.py:182
 #: recipe_repo/recipes/models.py:206 recipe_repo/recipes/models.py:223
 #: recipe_repo/recipes/models.py:278
 msgid "Recipe"
-msgstr ""
+msgstr "Recette"
 
 #: recipe_repo/recipes/models.py:169
 msgid "Title"
-msgstr ""
+msgstr "Titre"
 
 #: recipe_repo/recipes/models.py:175
 msgid "Ingredient Qualifier"
-msgstr ""
+msgstr "Qualificateur d'ingrédient"
 
 #: recipe_repo/recipes/models.py:176
 msgid "Ingredient Qualifiers"
-msgstr ""
+msgstr "Qualificateurs d'ingrédients"
 
 #: recipe_repo/recipes/models.py:188 recipe_repo/recipes/models.py:271
 msgid "Ingredient"
-msgstr ""
+msgstr "Ingrédient"
 
 #: recipe_repo/recipes/models.py:189 recipe_repo/recipes/models.py:272
 msgid "Ingredients"
-msgstr ""
+msgstr "Ingrédients"
 
 #: recipe_repo/recipes/models.py:193
 msgid "Calories"
-msgstr ""
+msgstr "Calories"
 
 #: recipe_repo/recipes/models.py:193
 msgid "in kilo-calories"
-msgstr ""
+msgstr "en kilocalories"
 
 #: recipe_repo/recipes/models.py:194
 msgid "Serving Size"
-msgstr ""
+msgstr "Nombre de portions"
 
 #: recipe_repo/recipes/models.py:194
 msgid "number of servings this corresponds to"
-msgstr ""
+msgstr "nombre de portions pour ces valeurs"
 
 #: recipe_repo/recipes/models.py:195
 msgid "Fat"
-msgstr ""
+msgstr "Gras"
 
 #: recipe_repo/recipes/models.py:195 recipe_repo/recipes/models.py:196
 #: recipe_repo/recipes/models.py:197 recipe_repo/recipes/models.py:198
 #: recipe_repo/recipes/models.py:202 recipe_repo/recipes/models.py:203
 #: recipe_repo/recipes/models.py:204 recipe_repo/recipes/models.py:205
 msgid "in grams"
-msgstr ""
+msgstr "en grammes"
 
 #: recipe_repo/recipes/models.py:196
 msgid "Saturated Fat"
-msgstr ""
+msgstr "Gras saturé"
 
 #: recipe_repo/recipes/models.py:197
 msgid "Trans Fat"
-msgstr ""
+msgstr "Gras trans"
 
 #: recipe_repo/recipes/models.py:198
 msgid "Unsaturated Fat"
-msgstr ""
+msgstr "Gras insaturés"
 
 #: recipe_repo/recipes/models.py:199
 msgid "Cholesterol"
-msgstr ""
+msgstr "Cholestérol"
 
 #: recipe_repo/recipes/models.py:199 recipe_repo/recipes/models.py:200
 #: recipe_repo/recipes/models.py:201
 msgid "in milligrams"
-msgstr ""
+msgstr "en milligrammes"
 
 #: recipe_repo/recipes/models.py:200
 msgid "Sodium"
-msgstr ""
+msgstr "Sodium"
 
 #: recipe_repo/recipes/models.py:201
 msgid "Potassium"
-msgstr ""
+msgstr "Potassium"
 
 #: recipe_repo/recipes/models.py:202
 msgid "Carbohydrates"
-msgstr ""
+msgstr "Glucides"
 
 #: recipe_repo/recipes/models.py:203
 msgid "Fiber"
-msgstr ""
+msgstr "Fibre"
 
 #: recipe_repo/recipes/models.py:204
 msgid "Sugar"
-msgstr ""
+msgstr "Sucre"
 
 #: recipe_repo/recipes/models.py:205
 msgid "Protein"
-msgstr ""
+msgstr "Protéine"
 
 #: recipe_repo/recipes/models.py:209 recipe_repo/recipes/models.py:210
 msgid "Nutritional Information"
-msgstr ""
+msgstr "Information nutritionnelle"
 
 #: recipe_repo/recipes/models.py:217 recipe_repo/recipes/models.py:277
 msgid "Order"
-msgstr ""
+msgstr "Ordre"
 
 #: recipe_repo/recipes/models.py:218
 msgid "Amount"
-msgstr ""
+msgstr "Montant"
 
 #: recipe_repo/recipes/models.py:219
 msgid "Max Amount"
-msgstr ""
+msgstr "Montant maximum"
 
 #: recipe_repo/recipes/models.py:220
 msgid "Note"
-msgstr ""
+msgstr "Note"
 
 #: recipe_repo/recipes/models.py:221
 msgid "Optional"
-msgstr ""
+msgstr "Facultatif"
 
 #: recipe_repo/recipes/models.py:228
 msgid "Qualifier"
-msgstr ""
+msgstr "Qualificatif"
 
 #: recipe_repo/recipes/models.py:236
 msgid "Group"
-msgstr ""
+msgstr "Groupe"
 
 #: recipe_repo/recipes/models.py:279
 msgid "Text"
-msgstr ""
+msgstr "Texte"
 
 #: recipe_repo/recipes/models.py:286
 msgid "Step"
-msgstr ""
+msgstr "Étape"
 
 #: recipe_repo/recipes/models.py:287
 msgid "Steps"
-msgstr ""
+msgstr "Étapes"
 
 #: recipe_repo/recipes/templates/admin/recipe_import.html:6
 msgid "Home"
-msgstr ""
+msgstr "Accueil"
 
 #: recipe_repo/recipes/templates/admin/recipe_import.html:18
 msgid "Attempt to scrape URL and import the recipe"
-msgstr ""
+msgstr "Essayez d'importer la recette à partir de cette URL"
 
 #: recipe_repo/recipes/templates/admin/recipes/recipe/change_list.html:7
 msgid "Import recipe"
-msgstr ""
+msgstr "Importé la recette"
 
 #: recipe_repo/recipes/urls.py:10
 msgid "recipes/<slug:slug>/"
@@ -340,61 +340,61 @@ msgstr "categories/<slug:category_slug>/"
 
 #: recipe_repo/settings.py:142
 msgid "English"
-msgstr ""
+msgstr "Anglais"
 
 #: recipe_repo/settings.py:143
 msgid "French"
-msgstr ""
+msgstr "Français"
 
 #: recipe_repo/settings.py:144
 msgid "Japanese"
-msgstr ""
+msgstr "Japonais"
 
 #: recipe_repo/units/apps.py:9 recipe_repo/units/models.py:49
 msgid "Units"
-msgstr ""
+msgstr "Unités"
 
 #: recipe_repo/units/consts.py:8
 msgid "Metric"
-msgstr ""
+msgstr "Métrique"
 
 #: recipe_repo/units/consts.py:9
 msgid "Imperial"
-msgstr ""
+msgstr "Impérial"
 
 #: recipe_repo/units/consts.py:13
 msgid "Volume"
-msgstr ""
+msgstr "Volume"
 
 #: recipe_repo/units/consts.py:14
 msgid "Weight"
-msgstr ""
+msgstr "Poids"
 
 #: recipe_repo/units/models.py:23
 msgid "Abbreviation"
-msgstr ""
+msgstr "Abbréviation"
 
 #: recipe_repo/units/models.py:24
 msgid "Abbreviation for unit. e.g tsp"
-msgstr ""
+msgstr "Abbréviation pour l'unité. e.g. c.à.thé"
 
 #: recipe_repo/units/models.py:30
 msgid "System"
-msgstr ""
+msgstr "Système"
 
 #: recipe_repo/units/models.py:48
 msgid "Unit"
-msgstr ""
+msgstr "Unité"
 
 #: recipe_repo/units/utils.py:31
 #, python-brace-format
 msgid "{whole} {numerator}⁄{denominator}"
-msgstr ""
+msgstr "{whole} {numerator}⁄{denominator}"
 
 #: recipe_repo/units/utils.py:36
 #, python-brace-format
 msgid "{numerator}⁄{denominator}"
-msgstr ""
+msgstr "{numerator}⁄{denominator}"
 
 #: recipe_repo/units/utils.py:67 recipe_repo/units/utils.py:84
 #, python-brace-format
@@ -403,7 +403,7 @@ msgstr "{amount} à {max_amount}"
 
 #: recipe_repo/units/utils.py:80
 msgid "a pinch"
-msgstr ""
+msgstr "une pincée"
 
 #: recipe_repo/urls.py:25
 msgid "admin/"
@@ -411,62 +411,62 @@ msgstr "admin/"
 
 #: recipe_repo/users/admin.py:17
 msgid "Personal info"
-msgstr ""
+msgstr "Informations personnelles"
 
 #: recipe_repo/users/admin.py:19
 msgid "Permissions"
-msgstr ""
+msgstr "Autorisations"
 
 #: recipe_repo/users/admin.py:24
 msgid "Important dates"
-msgstr ""
+msgstr "Dates importantes"
 
 #: recipe_repo/users/apps.py:11 recipe_repo/users/models.py:97
 msgid "Users"
-msgstr ""
+msgstr "Utilisateurs"
 
 #: recipe_repo/users/models.py:54
 msgid "First name"
-msgstr ""
+msgstr "Prénom"
 
 #: recipe_repo/users/models.py:55
 msgid "Last name"
-msgstr ""
+msgstr "Nom"
 
 #: recipe_repo/users/models.py:56
 msgid "Email address"
-msgstr ""
+msgstr "Courriel"
 
 #: recipe_repo/users/models.py:57
 msgid "Photo"
-msgstr ""
+msgstr "Photo"
 
 #: recipe_repo/users/models.py:59
 msgid "Language"
-msgstr ""
+msgstr "Langue"
 
 #: recipe_repo/users/models.py:65
 msgid "Staff status"
-msgstr ""
+msgstr "Statut du employée"
 
 #: recipe_repo/users/models.py:67
 msgid "Designates whether the user can log into this admin site."
-msgstr ""
+msgstr "Indique si l'utilisateur peut se connecter à l'admin."
 
 #: recipe_repo/users/models.py:70
 msgid "Active"
-msgstr ""
+msgstr "Actif"
 
 #: recipe_repo/users/models.py:73
 msgid ""
 "Designates whether this user should be treated as active. Unselect this "
 "instead of deleting accounts."
-msgstr ""
+msgstr "Indique si l'utilisateur est actif. Décoche au lieu de supprimée."
 
 #: recipe_repo/users/models.py:76
 msgid "Date joined"
-msgstr ""
+msgstr "Date d'adhésion"
 
 #: recipe_repo/users/models.py:96
 msgid "User"
-msgstr ""
+msgstr "Utilisateur"
