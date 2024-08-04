@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-03 20:20-0400\n"
+"POT-Creation-Date: 2024-08-03 21:02-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -112,7 +112,7 @@ msgstr "Personne"
 msgid "Other"
 msgstr "Autre"
 
-#: recipe_repo/recipes/models.py:78 recipe_repo/units/models.py:29
+#: recipe_repo/recipes/models.py:78 recipe_repo/units/models.py:34
 msgid "Type"
 msgstr "Type"
 
@@ -350,7 +350,7 @@ msgstr "Français"
 msgid "Japanese"
 msgstr "Japonais"
 
-#: recipe_repo/units/apps.py:9 recipe_repo/units/models.py:50
+#: recipe_repo/units/apps.py:9 recipe_repo/units/models.py:59
 msgid "Units"
 msgstr "Unités"
 
@@ -370,87 +370,87 @@ msgstr "Volume"
 msgid "Weight"
 msgstr "Poids"
 
-#: recipe_repo/units/models.py:23
+#: recipe_repo/units/models.py:28
 msgid "Abbreviation"
 msgstr "Abbréviation"
 
-#: recipe_repo/units/models.py:24
+#: recipe_repo/units/models.py:29
 msgid "Abbreviation for unit. e.g tsp"
 msgstr "Abbréviation pour l'unité. e.g. c.à.thé"
 
-#: recipe_repo/units/models.py:30
+#: recipe_repo/units/models.py:35
 msgid "System"
 msgstr "Système"
 
-#: recipe_repo/units/models.py:49
+#: recipe_repo/units/models.py:58
 msgid "Unit"
 msgstr "Unité"
 
-#: recipe_repo/units/utils.py:34
-msgid "tsp"
-msgstr ""
-
 #: recipe_repo/units/utils.py:35
+msgid "tsp"
+msgstr "c.à.thé"
+
+#: recipe_repo/units/utils.py:36
 msgid "tbsp"
-msgstr ""
+msgstr "c.à.soupe"
 
-#: recipe_repo/units/utils.py:36
+#: recipe_repo/units/utils.py:37
 msgid "cup"
-msgstr ""
+msgstr "tasse"
 
-#: recipe_repo/units/utils.py:36
+#: recipe_repo/units/utils.py:37
 msgid "cups"
-msgstr ""
+msgstr "tasses"
 
-#: recipe_repo/units/utils.py:37
+#: recipe_repo/units/utils.py:38
 msgid "pint"
-msgstr ""
+msgstr "pinte"
 
-#: recipe_repo/units/utils.py:37
+#: recipe_repo/units/utils.py:38
 msgid "pints"
-msgstr ""
-
-#: recipe_repo/units/utils.py:38
-msgid "quart"
-msgstr ""
-
-#: recipe_repo/units/utils.py:38
-msgid "quarts"
-msgstr ""
+msgstr "pintes"
 
 #: recipe_repo/units/utils.py:39
-msgid "oz"
-msgstr ""
+msgid "quart"
+msgstr "quart"
+
+#: recipe_repo/units/utils.py:39
+msgid "quarts"
+msgstr "quarts"
 
 #: recipe_repo/units/utils.py:40
-msgid "fl oz"
-msgstr ""
+msgid "oz"
+msgstr "once"
 
 #: recipe_repo/units/utils.py:41
-msgid "lb"
-msgstr ""
+msgid "fl oz"
+msgstr "once liquide"
 
-#: recipe_repo/units/utils.py:58
+#: recipe_repo/units/utils.py:42
+msgid "lb"
+msgstr "libre"
+
+#: recipe_repo/units/utils.py:59
 #, python-brace-format
 msgid "{whole} {numerator}⁄{denominator}"
 msgstr "{whole} {numerator}⁄{denominator}"
 
-#: recipe_repo/units/utils.py:63
+#: recipe_repo/units/utils.py:64
 #, python-brace-format
 msgid "{numerator}⁄{denominator}"
 msgstr "{numerator}⁄{denominator}"
 
-#: recipe_repo/units/utils.py:117 recipe_repo/units/utils.py:134
+#: recipe_repo/units/utils.py:116 recipe_repo/units/utils.py:133
 #: recipe_repo/units/utils.py:157
 #, python-brace-format
 msgid "{amount} to {max_amount}"
 msgstr "{amount} à {max_amount}"
 
-#: recipe_repo/units/utils.py:130
+#: recipe_repo/units/utils.py:129
 msgid "a pinch"
 msgstr "une pincée"
 
-#: recipe_repo/units/utils.py:148
+#: recipe_repo/units/utils.py:147
 #, fuzzy, python-brace-format
 #| msgid "{amount} to {max_amount}"
 msgid "{amount} {unit}"

@@ -49,18 +49,21 @@ const setLocale = (lang: string) => {
             <PButton
               v-if="locale !== 'en'"
               link
+              class="text-white"
               @click="setLocale('en')"
               >English</PButton
             >
             <PButton
               v-if="locale !== 'fr'"
               link
+              class="text-white"
               @click="setLocale('fr')"
               >Français</PButton
             >
             <PButton
               v-if="locale !== 'ja'"
               link
+              class="text-white"
               @click="setLocale('ja')"
               >日本語</PButton
             >
