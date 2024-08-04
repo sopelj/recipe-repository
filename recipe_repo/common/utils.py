@@ -17,7 +17,7 @@ def pluralize(singular: str, plural: str | None, count: Decimal | float) -> str:
         case "ja":
             return singular  # no plurals
         case "fr":
-            return plural if count > 1 else plural
+            return plural if count > 1 else singular
         case _:
             # Fallback to English pluralisation as that's the fallback language
             return singular if 0 < count <= 1 else plural
