@@ -8,8 +8,8 @@ This is an attempt to rebuild my recipe site and make it open source all whilst 
 ## Features
 - Create and add recipes using the Django Admin interface
 - Import recipes automatically using [recipe-scrapers](https://github.com/hhursev/recipe-scrapers)
-- Explore/Search recipes in Vue #TODO
-- Scale and display recipes in the most appropriate units #TODO
+- Explore/Search recipes
+- Scale and display recipes in the most appropriate units
 - Convert between Metric and Imperial Units #TODO
 
 ## Why another recipe manager site?
@@ -66,7 +66,10 @@ cp example.env .env
     ```
 3. Load default data
     ```bash
-    hatch run ./manage.py loaddata default-units
+    hatch run ./manage.py loaddata units
+    hatch run ./manage.py loaddata categories  # basic example categories
+    hatch run ./manage.py loaddata qualifiers
+    hatch run ./manage.py loaddata yield-units
     ```
 4. Run server
     ```bash
