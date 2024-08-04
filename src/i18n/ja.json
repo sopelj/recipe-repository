@@ -30,6 +30,7 @@
     "added_by": "によって追加",
     "categories": "カテゴリ",
     "from": "から",
+    "ingredient": "{amount}{ingredient}",
     "ingredients": "材料",
     "directions": "手順",
     "ratings": "評価なし | {n}件の評価 | {n}件の評価",

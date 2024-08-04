@@ -30,6 +30,7 @@
     "added_by": "Added by:",
     "categories": "Categories:",
     "from": "From:",
+    "ingredient": "{amount} {ingredient}",
     "ingredients": "Ingredients",
     "directions": "Directions",
     "ratings": "No ratings | {n} rating | {n} ratings",

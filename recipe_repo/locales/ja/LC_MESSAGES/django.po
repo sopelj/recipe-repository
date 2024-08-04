@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-03 21:02-0400\n"
+"POT-Creation-Date: 2024-08-03 21:30-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -112,7 +112,7 @@ msgstr "人"
 msgid "Other"
 msgstr "他の"
 
-#: recipe_repo/recipes/models.py:78 recipe_repo/units/models.py:34
+#: recipe_repo/recipes/models.py:78 recipe_repo/units/models.py:36
 msgid "Type"
 msgstr "タイプ"
 
@@ -350,7 +350,7 @@ msgstr "フランス語"
 msgid "Japanese"
 msgstr "日本語"
 
-#: recipe_repo/units/apps.py:9 recipe_repo/units/models.py:59
+#: recipe_repo/units/apps.py:9 recipe_repo/units/models.py:67
 msgid "Units"
 msgstr "測定単位"
 
@@ -370,19 +370,24 @@ msgstr "量"
 msgid "Weight"
 msgstr "重さ"
 
-#: recipe_repo/units/models.py:28
+#: recipe_repo/units/models.py:30
 msgid "Abbreviation"
-msgstr ""
+msgstr "略語"
 
-#: recipe_repo/units/models.py:29
+#: recipe_repo/units/models.py:31
 msgid "Abbreviation for unit. e.g tsp"
 msgstr "単位の略語。例：小さじ"
 
-#: recipe_repo/units/models.py:35
+#: recipe_repo/units/models.py:37
 msgid "System"
 msgstr "法"
 
-#: recipe_repo/units/models.py:58
+#: recipe_repo/units/models.py:58 recipe_repo/units/utils.py:147
+#, python-brace-format
+msgid "{amount} {unit}"
+msgstr "{amount}{unit}"
+
+#: recipe_repo/units/models.py:66
 msgid "Unit"
 msgstr "測定単位"
 
@@ -449,11 +454,6 @@ msgstr "{amount}～{max_amount}"
 #: recipe_repo/units/utils.py:129
 msgid "a pinch"
 msgstr "ひとつまみ"
-
-#: recipe_repo/units/utils.py:147
-#, python-brace-format
-msgid "{amount} "
-msgstr "{amount}"
 
 #: recipe_repo/urls.py:25
 msgid "admin/"

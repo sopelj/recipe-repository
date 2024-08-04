@@ -224,9 +224,15 @@ const updateServings = (multiplier: number) => {
                   v-for="ingredient in ingredients"
                   :key="ingredient.id"
                 >
-                  <span
-                    >{{ ingredient.amount_display }}<strong>&nbsp;{{ ingredient.food_display }}</strong></span
+                  <i18n-t
+                    keypath="recipe.ingredient"
+                    tag="span"
                   >
+                    <template #amount>{{ ingredient.amount_display }}</template>
+                    <template #ingredient>
+                      <strong>{{ ingredient.food_display }}</strong>
+                    </template>
+                  </i18n-t>
                   <span
                     v-if="ingredient.qualifier"
                     class="qualifier"
