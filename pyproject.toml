@@ -16,7 +16,7 @@ classifiers=[
     "Programming Language :: Python :: 3.12",
 ]
 dependencies = [
-    "django",
+    "django>=4.2",
     "django-stubs[compatible-mypy]",
     "django-admin-interface",
     "django-admin-sortable2",
@@ -43,6 +43,14 @@ test = [
     "pytest-cov",
     "pytest-asyncio",
     "pytest-django",
+]
+ldap = [
+    "django-auth-ldap",
+]
+production = [
+    "hypercorn",
+    "psycopg>=3.1.8",
+    "python-memcached"
 ]
 
 [project.urls]

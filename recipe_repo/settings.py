@@ -97,17 +97,12 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "recipe_repo.wsgi.application"
+ASGI_APPLICATION = "recipe_repo.asgi.application"
 
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    },
-}
+DATABASES = {"default": env.db_url("DATABASE_URL", default="sqlite:///db.sqlite3")}
 
 AUTH_USER_MODEL = "users.User"
 
@@ -149,7 +144,7 @@ LOCALE_PATHS = [
 MODELTRANSLATION_FALLBACK_LANGUAGES = ("en", "fr")
 MODELTRANSLATION_CUSTOM_FIELDS = ("ArrayField",)
 
-TIME_ZONE = "America/Montreal"
+TIME_ZONE = env("TZ", default="America/Montreal")
 USE_TZ = True
 
 # Default primary key field type
@@ -183,3 +178,29 @@ QUERYCOUNT = {
     "RESPONSE_HEADER": "X-DjangoQueryCount-Count",
     "DISPLAY_DUPLICATES": 0,
 }
+
+# Caching
+if env.bool("MEMCACHED_ENABLED", False):
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.memcached.MemcachedCache",
+            "LOCATION": env.cache_url("MEMCACHED_HOST"),
+        },
+    }
+
+
+# LDAP Auth
+if env.bool("AUTH_LDAP_ENABLED", False):
+    AUTH_LDAP_SERVER_URI = env("AUTH_LDAP_SERVER_URI")
+    AUTH_LDAP_START_TLS = env.bool("AUTH_LDAP_START_TLS", default=False)
+    AUTH_LDAP_BASE_DN = env("AUTH_LDAP_BASE_DN")
+    AUTH_LDAP_USER_DN_TEMPLATE = env("AUTH_LDAP_USER_DN_TEMPLATE", default=f"uid=%(user)s,{AUTH_LDAP_BASE_DN}")
+    AUTHENTICATION_BACKENDS = (
+        "django_auth_ldap.backend.LDAPBackend",
+        "django.contrib.auth.backends.ModelBackend",
+    )
+    if ldap_user_attr_map := env.dict("AUTH_LDAP_USER_ATTR_MAP", default=None):
+        AUTH_LDAP_USER_ATTR_MAP = ldap_user_attr_map
+
+    if ldap_user_group_flags := env.dict("AUTH_LDAP_USER_FLAGS_BY_GROUP", default=None):
+        AUTH_LDAP_USER_FLAGS_BY_GROUP = ldap_user_group_flags
