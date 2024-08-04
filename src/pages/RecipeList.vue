@@ -30,7 +30,7 @@ const title = computed(
 <template>
   <HeadSection :title="title" />
   <div class="container mx-auto">
-    <h1 class="text-4xl pt-2 pb-4">{{ title }}</h1>
+    <h1 class="text-4xl pt-2 pb-4 px-4">{{ title }}</h1>
     <data-view
       layout="grid"
       :value="filteredRecipes"

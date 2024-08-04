@@ -20,7 +20,7 @@ const filteredCategories = computed((): Category[] =>
 </script>
 
 <template>
-  <HeadSection title="categories" />
+  <HeadSection :title="t('categories.title')" />
   <div class="container mx-auto">
     <h1 class="sr-only">{{ t("categories.title") }}</h1>
     <DataView

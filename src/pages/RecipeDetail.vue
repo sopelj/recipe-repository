@@ -60,13 +60,13 @@ const updateServings = (multiplier: number) => {
 <template>
   <HeadSection :title="recipe.name" />
   <div
-    class="container mx-auto"
+    class="container mx-auto px-4"
     itemscope
     itemtype="https://schema.org/Recipe"
   >
     <div class="grid grid-cols-12 gap-4">
-      <div class="col-span-12 sm:col-span-10 md:col-span-8">
-        <div class="flex">
+      <div class="col-span-12 sm:col-span-9 md:col-span-8">
+        <div class="flex flex-wrap sm:flex-nowrap">
           <h1
             class="text-4xl mb-4 cursive flex-grow"
             itemprop="name"
@@ -77,6 +77,7 @@ const updateServings = (multiplier: number) => {
             v-tooltip="t('recipes.ratings', recipe.num_ratings)"
             :model-value="recipe.avg_rating"
             :readonly="true"
+            class="flex-grow sm:flex-grow-0"
           />
         </div>
         <div
@@ -243,7 +244,7 @@ const updateServings = (multiplier: number) => {
           </card>
         </div>
       </div>
-      <div class="col-span-12 sm:col-span-2 md:col-span-4">
+      <div class="col-span-12 sm:col-span-3 md:col-span-4">
         <div
           v-if="recipe.thumbnail_image_url"
           class="overflow-clip p-card"
@@ -261,7 +262,7 @@ const updateServings = (multiplier: number) => {
           class="mt-4"
         />
       </div>
-      <div class="col-span-8">
+      <div class="col-span-12 md:col-span-8">
         <h2 class="text-xl mb-2">{{ t("recipe.directions") }}</h2>
         <Panel
           v-for="(step, i) in recipe.steps"

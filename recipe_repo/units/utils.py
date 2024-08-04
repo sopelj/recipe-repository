@@ -5,8 +5,12 @@ from fractions import Fraction
 from typing import TYPE_CHECKING
 
 from django.utils.translation import gettext
+from django.utils.translation import gettext_lazy as _
+
+from recipe_repo.common.utils import pluralize
 
 if TYPE_CHECKING:
+    from pint import Quantity
     from pint import Unit as PintUnit
 
 
@@ -16,13 +20,37 @@ type SplitFractions = tuple[Decimal, FracTuple | None, Decimal]
 
 TSP_FRACTIONS = ((1, 2), (1, 4), (1, 8))
 TBSP_FRACTIONS = ((1, 2),)
-CUP_FRACTIONS = ((1, 2), (1, 3), (2, 3), (1, 4), (3, 4))
+BASIC_FRACTIONS = ((1, 2), (1, 3), (2, 3), (1, 4), (3, 4))
 
 FRACTIONS_PER_IMPERIAL_UNIT: dict[str, Fractions] = {
-    "cup": CUP_FRACTIONS,
-    "tbsp": TBSP_FRACTIONS,
-    "tsp": TSP_FRACTIONS,
+    "cup": BASIC_FRACTIONS,
+    "tablespoon": TBSP_FRACTIONS,
+    "teaspoon": TSP_FRACTIONS,
+    "pound": BASIC_FRACTIONS,
+    "ounce": BASIC_FRACTIONS,
 }
+IMPERIAL_UNITS_VOLUME = ("cup", "tablespoon", "teaspoon")
+IMPERIAL_UNITS_WEIGHT = ("pound", "ounce")
+IMPERIAL_LABELS = {
+    "teaspoon": (_("tsp"), None),
+    "tablespoon": (_("tbsp"), None),
+    "cup": (_("cup"), _("cups")),
+    "pint": (_("pint"), _("pints")),
+    "quart": (_("quart"), _("quarts")),
+    "ounce": (_("oz"), None),
+    "fluid_ounce": (_("fl oz"), None),
+    "pound": (_("lb"), None),
+}
+
+
+def soft_round(value: Decimal) -> Decimal:
+    """
+    Slightly round a decimal and remove trailing zeros.
+
+    We round to the last decimal place to avoid 0.9999999 != 1
+    TODO: validate decimal places to keep and impacts
+    """
+    return value.quantize(Decimal("1.00000")).normalize()
 
 
 def format_fraction(whole: Decimal | int, frac: Fraction) -> str:
@@ -47,8 +75,9 @@ def format_decimal_as_fraction(amount: Decimal) -> str:
     return str(whole)
 
 
-def decimal_to_fraction(amount: Decimal, limit: int = 100) -> tuple[Decimal, Fraction | None]:
+def decimal_to_fraction(amount: Decimal, limit: int = 10_000) -> tuple[Decimal, Fraction | None]:
     """Split decimal into whole number and fraction."""
+    amount = soft_round(amount)
     whole = Decimal(int(amount))
     frac = Fraction(remainder).limit_denominator(limit) if (remainder := amount - whole) else None
     return whole, frac
@@ -57,7 +86,27 @@ def decimal_to_fraction(amount: Decimal, limit: int = 100) -> tuple[Decimal, Fra
 def is_nice_fraction(amount: Decimal, allowed_fractions: Fractions) -> bool:
     """Check if a given amount is a nice fraction."""
     fraction = decimal_to_fraction(amount)[1]
-    return fraction and fraction.as_integer_ratio() in allowed_fractions
+    return not fraction or fraction.as_integer_ratio() in allowed_fractions
+
+
+def find_imperial_unit(quantity: Quantity) -> tuple[Decimal, str]:
+    """Find the best imperial unit for displaying this quantity."""
+    units = IMPERIAL_UNITS_VOLUME
+    if not quantity.units.is_compatible_with("cup"):
+        units = IMPERIAL_UNITS_WEIGHT
+
+    current_unit = str(quantity.units)
+    if current_unit not in units and not decimal_to_fraction(quantity.magnitude)[1]:
+        return soft_round(quantity.magnitude), current_unit
+    for new_unit in units:
+        new_unit_quantity = quantity.to(new_unit)
+        if is_nice_fraction(new_unit_quantity.magnitude, FRACTIONS_PER_IMPERIAL_UNIT.get(new_unit, [])):
+            quantity = new_unit_quantity
+            break
+        if not decimal_to_fraction(new_unit_quantity.magnitude)[1]:
+            quantity = new_unit_quantity
+            break
+    return soft_round(quantity.magnitude), str(quantity.units)
 
 
 def format_fraction_amounts(amount: Decimal, max_amount: Decimal | None) -> tuple[str, Decimal]:
@@ -88,3 +137,27 @@ def format_metric_amounts(amount: Decimal, max_amount: Decimal | None, unit: Pin
             compact_max.magnitude,
         )
     return f"{compact_amount:~P}", compact_amount.magnitude
+
+
+def format_imperial_amount(amount: Decimal, unit: str | None) -> str:
+    """Return a single unit formatted for display with unit if provided."""
+    formatted_amount = format_decimal_as_fraction(amount)
+    if unit:
+        name, name_plural = IMPERIAL_LABELS.get(unit, (unit, None))
+        return gettext("{amount} {unit}").format(amount=formatted_amount, unit=pluralize(name, name_plural, amount))
+    return formatted_amount
+
+
+def format_imperial_amounts(amount: Decimal, max_amount: Decimal | None, unit: PintUnit) -> tuple[str, Decimal]:
+    """Format amounts for imperial units."""
+    new_amount, new_unit = find_imperial_unit(amount * unit)
+    if max_amount:
+        new_amount_max, new_amount_max_unit = find_imperial_unit(max_amount * unit)
+        return (
+            gettext("{amount} to {max_amount}").format(
+                amount=format_imperial_amount(amount, new_unit if new_unit != new_amount_max_unit else None),
+                max_amount=format_imperial_amount(new_amount_max, new_amount_max_unit),
+            ),
+            new_amount_max,
+        )
+    return format_imperial_amount(new_amount, new_unit), new_amount

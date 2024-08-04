@@ -1,15 +1,11 @@
-{% load django_vite %}
-
-<!DOCTYPE html>
-<html lang="en">
-  <head>
+{% load django_vite i18n %}{% get_current_language as LANGUAGE_CODE %}<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
     <head>
-      <meta charset="utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      {% vite_hmr_client %}{% vite_asset 'main.ts' %}
-    <title>Recipe Repo</title>
-  </head>
-  <body>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        {% vite_hmr_client %}{% vite_asset 'main.ts' %}
+    </head>
+    <body>
     {% block inertia %}{% endblock %}
-  </body>
+    </body>
 </html>
