@@ -19,7 +19,7 @@ const props = defineProps<{
   ingredients: Ingredient[];
   servings: number;
   errors: FormErrors | null;
-  user: User;
+  user?: User;
 }>();
 
 const { t } = useI18n();
@@ -74,7 +74,7 @@ const updateServings = (multiplier: number) => {
             {{ recipe.name }}
           </h1>
           <rating
-            v-tooltip="t('recipes.ratings', recipe.num_ratings)"
+            v-tooltip="t('recipe.ratings', recipe.num_ratings)"
             :model-value="recipe.avg_rating"
             :readonly="true"
             class="flex-grow sm:flex-grow-0"
@@ -90,6 +90,7 @@ const updateServings = (multiplier: number) => {
               v-for="c in recipe.categories"
               :key="c.slug"
               :value="c.name"
+              class="mx-1"
               severity="secondary"
             />
           </div>
@@ -113,7 +114,7 @@ const updateServings = (multiplier: number) => {
               shape="circle"
             />
             <span class="pl-2">{{
-              recipe.added_by.id === user.id ? t("users.me") : recipe.added_by.full_name
+              recipe.added_by.id === user?.id ? t("users.me") : recipe.added_by.full_name
             }}</span>
           </div>
         </div>
@@ -156,7 +157,7 @@ const updateServings = (multiplier: number) => {
         >
           <splitter-panel
             v-if="recipe.prep_time"
-            class="flex items-center justify-center"
+            class="flex items-center justify-center m-2"
           >
             {{ t("times.prep") }}&nbsp;<meta
               itemprop="prepTime"
@@ -165,7 +166,7 @@ const updateServings = (multiplier: number) => {
           </splitter-panel>
           <splitter-panel
             v-if="recipe.cook_time"
-            class="flex items-center justify-center"
+            class="flex items-center justify-center m-2"
           >
             {{ t("times.cook") }}&nbsp;<meta
               itemprop="prepTime"
@@ -174,7 +175,7 @@ const updateServings = (multiplier: number) => {
           </splitter-panel>
           <splitter-panel
             v-if="recipe.total_time"
-            class="flex items-center justify-center"
+            class="flex items-center justify-center m-2"
           >
             {{ t("times.total") }}&nbsp;<meta
               itemprop="prepTime"
@@ -186,7 +187,7 @@ const updateServings = (multiplier: number) => {
           <card>
             <template #title>
               <div class="flex flex-row items-center">
-                <h2 class="text-xl grow w-100">{{ t("recipe.ingredients") }}</h2>
+                <h2 class="text-xxl grow w-100 mr-2">{{ t("recipe.ingredients") }}</h2>
                 <div class="grow-0">
                   <input-group class="grow-0">
                     <PButton

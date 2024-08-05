@@ -38,25 +38,23 @@ const title = computed(
     >
       <template #header>
         <div class="flex flex-wrap items-center justify-between">
-          <div>
-            <icon-field>
-              <input-icon class="pi pi-search" />
-              <input-text
-                v-model="search"
-                :placeholder="t('search.search')"
-              />
-            </icon-field>
-          </div>
-          <div>
-            <multi-select
-              v-model="selectedCategories"
-              :options="categoryOptions"
-              :placeholder="t('search.select_category')"
-              option-value="value"
-              option-label="label"
-              display="chip"
+          <icon-field class="w-full sm:w-auto mb-3 sm:mb-0">
+            <input-icon class="pi pi-search" />
+            <input-text
+              v-model="search"
+              :placeholder="t('search.search')"
+              class="w-full sm:w-auto"
             />
-          </div>
+          </icon-field>
+          <multi-select
+            v-model="selectedCategories"
+            :options="categoryOptions"
+            :placeholder="t('search.select_category')"
+            option-value="value"
+            option-label="label"
+            display="chip"
+            class="w-full sm:w-auto"
+          />
         </div>
       </template>
       <template #grid="{ items }">
@@ -65,7 +63,7 @@ const title = computed(
             v-for="recipe in items"
             :key="recipe.slug"
             :href="t('routes.recipe_details', { slug: recipe.slug })"
-            class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-2 p-2"
+            class="col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-2 p-2"
           >
             <card
               class="text-center overflow-clip transition-all border dark:border-slate-600 dark:hover:border-violet-700 hover:scale-105 w-100"
@@ -92,6 +90,7 @@ const title = computed(
                       v-for="c in recipe.categories"
                       :key="c.slug"
                       :value="c.name"
+                      class="m-1"
                       severity="secondary"
                     />
                   </div>

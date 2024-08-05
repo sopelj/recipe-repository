@@ -29,7 +29,7 @@ const setLocale = (lang: string) => {
 
 <template>
   <main :lang="locale">
-    <header class="w-100 mb-4 bg-purple-900/75 text-white sticky top-0 backdrop-blur-sm shadow-lg">
+    <header class="w-100 mb-4 bg-purple-900/75 text-white sticky top-0 backdrop-blur-sm shadow-lg z-50">
       <nav class="container mx-auto flex flex-row">
         <div class="flex-grow">
           <ILink
@@ -44,7 +44,7 @@ const setLocale = (lang: string) => {
             <div class="cursive text-3xl pl-2">{{ t("global.title") }}</div>
           </ILink>
         </div>
-        <div class="flex items-center gap-2">
+        <div class="flex items-center text-right gap-2">
           <div class="language-selector">
             <PButton
               v-if="locale !== 'en'"
@@ -83,6 +83,7 @@ const setLocale = (lang: string) => {
               shape="circle"
               aria-haspopup="true"
               aria-controls="user_menu"
+              class="mr-2"
               @click="toggleMenu"
             />
             <PMenu

@@ -204,6 +204,13 @@ QUERYCOUNT = {
 if env.bool("MEMCACHED_ENABLED", False):
     CACHES = {"default": env.cache_url("MEMCACHED_HOST")}
 
+# Behind Proxy for HTTPS
+if env.bool("SSL_ENABLED", False):
+    USE_X_FORWARDED_HOST = True
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = 31536000
 
 # LDAP Auth
 if env.bool("AUTH_LDAP_ENABLED", False):
