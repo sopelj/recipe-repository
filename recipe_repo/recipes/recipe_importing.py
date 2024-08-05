@@ -59,7 +59,7 @@ def add_image_to_recipe(recipe: Recipe, image_url: str) -> None:
     """Download and save image from URL."""
     if not image_url.lower().startswith("http"):
         raise ValueError("Invalid image URL")
-    with NamedTemporaryFile(delete=True, mode="wb") as temp_img:
+    with NamedTemporaryFile(delete=True) as temp_img:
         image_stream = requests.get(image_url, stream=True, headers={"User-Agent": USER_AGENT}, timeout=30)
         with contextlib.suppress(HTTPError):
             shutil.copyfileobj(image_stream.raw, temp_img)
