@@ -1,6 +1,7 @@
 import contextlib
 import logging
 import re
+import shutil
 from datetime import timedelta
 from decimal import Decimal
 from fractions import Fraction
@@ -9,8 +10,8 @@ from tempfile import NamedTemporaryFile
 from unicodedata import numeric
 from urllib.error import HTTPError
 from urllib.parse import urlsplit
-from urllib.request import Request, urlopen
 
+import requests
 from django.core.files import File
 from django.db import IntegrityError
 from django.db.models import Q
@@ -36,6 +37,7 @@ from .models import (
 
 logger = logging.getLogger(__name__)
 
+USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1"
 YIELD_REGEX = re.compile(r"^([0-9]+)\s?(.+)")
 NUMERIC_STRING_REGEX = re.compile(r"(([0-9]*\s?)?(([0-9]+/[0-9]+)|([\u2150-\u215E\u00BC-\u00BE])))|([0-9]+)")
 INGREDIENT_LINE_REGEX = re.compile(r"^([\u2150-\u215E\u00BC-\u00BE\d\s/-]+) (([\w.]*).+?)$")
@@ -57,12 +59,12 @@ def add_image_to_recipe(recipe: Recipe, image_url: str) -> None:
     """Download and save image from URL."""
     if not image_url.lower().startswith("http"):
         raise ValueError("Invalid image URL")
-    with NamedTemporaryFile(delete=True) as img_temp:
-        image_request = Request(image_url, headers={"User-Agent": "Magic Browser"})  # noqa: S310
+    with NamedTemporaryFile(delete=True, mode="wb") as temp_img:
+        image_stream = requests.get(image_url, stream=True, headers={"User-Agent": USER_AGENT}, timeout=30)
         with contextlib.suppress(HTTPError):
-            img_temp.write(urlopen(image_request).read())  # noqa: S310
-            img_temp.flush()
-            recipe.image.save(Path(image_url).name, File(img_temp))
+            shutil.copyfileobj(image_stream.raw, temp_img)
+            temp_img.flush()
+            recipe.image.save(Path(image_url).name, File(temp_img))
             recipe.save()
 
 

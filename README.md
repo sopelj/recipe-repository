@@ -91,3 +91,14 @@ pre-commit run --all-files
 ```
 
 Should be running on: <http://localhost:8000/>
+
+## Deployment
+
+> [!WARNING]
+> Not ready for production use!
+
+Build docker image:
+
+```bash
+DOCKER_BUILDKIT=1 docker build . -f docker/Dockerfile
+```

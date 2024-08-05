@@ -1,4 +1,4 @@
-"""URL configuration for recipe_book project."""
+"""URL configuration for recipe_repo project."""
 
 from django.conf import settings
 from django.conf.urls.i18n import i18n_patterns

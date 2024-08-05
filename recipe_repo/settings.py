@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 
+from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from environ import Env
 
@@ -105,6 +106,7 @@ ASGI_APPLICATION = "recipe_repo.asgi.application"
 DATABASES = {"default": env.db_url("DATABASE_URL", default="sqlite:///db.sqlite3")}
 
 AUTH_USER_MODEL = "users.User"
+LOGIN_URL = reverse_lazy("admin:login")
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -125,10 +127,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-STATIC_URL = "static/"
-
 MEDIA_ROOT = str(BASE_DIR / "uploads")
 MEDIA_URL = "/uploads/"
+
+STATIC_URL = "static/"
+STATIC_ROOT = str(BASE_DIR / "static")
 
 # Internationalization
 USE_I18N = True
@@ -161,6 +164,23 @@ THUMBNAIL_ALIASES = {
     },
 }
 
+DJANGO_BREEZE = {
+    "INERTIA": {
+        "LAYOUT": "index.html",
+        "SSR_URL": "http://localhost:13714",
+        "SSR_ENABLED": False,
+    },
+    "DJANGO_VITE": {
+        "DEV_MODE": True,  # vite dev mode, default based on django DEBUG
+        "SERVER_PROTOCOL": "http",
+        "DEV_SERVER_HOST": "localhost",
+        "DEV_SERVER_PORT": 5173,
+        "WS_CLIENT_URL": "@vite/client",
+        "ASSETS_PATH": "static/dist",  # vite build asset path
+        "STATIC_URL_PREFIX": "",
+    },
+}
+
 # Debugging
 QUERYCOUNT = {
     "IGNORE_ALL_REQUESTS": False,
@@ -181,12 +201,7 @@ QUERYCOUNT = {
 
 # Caching
 if env.bool("MEMCACHED_ENABLED", False):
-    CACHES = {
-        "default": {
-            "BACKEND": "django.core.cache.backends.memcached.MemcachedCache",
-            "LOCATION": env.cache_url("MEMCACHED_HOST"),
-        },
-    }
+    CACHES = {"default": env.cache_url("MEMCACHED_HOST")}
 
 
 # LDAP Auth
@@ -204,3 +219,45 @@ if env.bool("AUTH_LDAP_ENABLED", False):
 
     if ldap_user_group_flags := env.dict("AUTH_LDAP_USER_FLAGS_BY_GROUP", default=None):
         AUTH_LDAP_USER_FLAGS_BY_GROUP = ldap_user_group_flags
+
+# Logging
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "default": {
+            "format": "[DJANGO] %(levelname)s %(asctime)s %(module)s " "%(name)s.%(funcName)s:%(lineno)s: %(message)s",
+        },
+    },
+    "handlers": {
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+            "formatter": "default",
+        },
+    },
+    "loggers": {
+        "": {
+            "handlers": ["console"],
+            "level": "DEBUG",
+            "propagate": False,
+        },
+    },
+}
+
+DJANGO_BREEZE = {
+    "INERTIA": {
+        "LAYOUT": "index.html",
+        "SSR_URL": "http://localhost:13714",
+        "SSR_ENABLED": False,
+    },
+    "DJANGO_VITE": {
+        "DEV_MODE": DEBUG,  # vite dev mode, default based on django DEBUG
+        "SERVER_PROTOCOL": "http",
+        "DEV_SERVER_HOST": "localhost",
+        "DEV_SERVER_PORT": 5173,
+        "WS_CLIENT_URL": "@vite/client",
+        "ASSETS_PATH": "static/dist",  # vite build asset path
+        "STATIC_URL_PREFIX": "",
+    },
+}

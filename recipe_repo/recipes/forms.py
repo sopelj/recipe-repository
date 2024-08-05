@@ -3,14 +3,15 @@ from __future__ import annotations
 from decimal import Decimal
 from urllib.parse import urlsplit, urlunsplit
 
+import requests
 from django import forms
 from django.conf import settings
 from django.utils import translation
 from django.utils.translation import gettext_lazy as _
-from recipe_scrapers import AbstractScraper, NoSchemaFoundInWildMode, WebsiteNotImplementedError, scrape_me
+from recipe_scrapers import AbstractScraper, WebsiteNotImplementedError, scrape_html
 
 from .models import Recipe
-from .recipe_importing import create_recipe_from_scraper
+from .recipe_importing import USER_AGENT, create_recipe_from_scraper
 
 
 class ServingsForm(forms.Form):
@@ -41,9 +42,10 @@ class RecipeImportForm(forms.ModelForm):
     def clean(self) -> dict[str, str]:
         """Run scraping on form validation, so we can provide feedback."""
         url = urlunsplit((*urlsplit(self.cleaned_data["url"])[:3], None, None))
+        recipe_html = requests.get(url, headers={"User-Agent": USER_AGENT}, timeout=30).content
         try:
-            self.scraper = scrape_me(url, wild_mode=True)
-        except (WebsiteNotImplementedError, NoSchemaFoundInWildMode) as e:
+            self.scraper = scrape_html(recipe_html, org_url=url)
+        except WebsiteNotImplementedError as e:
             self.add_error("url", str(e))
         return self.cleaned_data
 

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+from django.contrib.auth.decorators import login_required
 from django.db.models import DecimalField, Q, Value
 from django.http import Http404
 from django.shortcuts import get_object_or_404
@@ -22,6 +23,7 @@ if TYPE_CHECKING:
     from django.http import HttpRequest, HttpResponse
 
 
+@login_required()
 @inertia("category-list")
 def category_list(request: HttpRequest) -> HttpResponse:
     """List all available categories."""
@@ -32,6 +34,7 @@ def category_list(request: HttpRequest) -> HttpResponse:
     )
 
 
+@login_required
 @inertia("recipe-list")
 def recipe_list(request: HttpRequest, category_slug: str | None = None) -> HttpResponse:
     """List all available recipes."""
