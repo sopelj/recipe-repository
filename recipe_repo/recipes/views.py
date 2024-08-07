@@ -30,7 +30,7 @@ def category_list(request: HttpRequest) -> HttpResponse:
     return render(
         request,
         "CategoryList",
-        {"categories": CategoryListSerializer(Category.objects.all(), many=True).data},
+        {"categories": CategoryListSerializer(Category.objects.filter(top_level=True), many=True).data},
     )
 
 
@@ -43,9 +43,9 @@ def recipe_list(request: HttpRequest, category_slug: str | None = None) -> HttpR
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         recipe_queryset = recipe_queryset.filter(categories__in=[category])
-        categories = category.get_descendants()
+        categories = category.sub_categories.all()
     else:
-        categories = Category.objects.filter()
+        categories = Category.objects.filter(top_level=True)
 
     return render(
         request,

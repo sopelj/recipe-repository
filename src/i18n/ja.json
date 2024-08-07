@@ -12,9 +12,9 @@
     "recipe_list": "/ja/",
     "recipe_details": "/ja/reshipi/{slug}/",
     "recipe_category": "/ja/kategori/{slug}/",
-    "admin": "/ja/kanri/",
-    "login": "/ja/kanri/login/",
-    "logout": "/ja/kanri/logout/"
+    "admin": "/ja/admin/",
+    "login": "/ja/admin/login/",
+    "logout": "/ja/admin/logout/"
   },
   "search": {
     "search": "サーチ",
@@ -35,7 +35,26 @@
     "directions": "手順",
     "ratings": "評価なし | {n}件の評価 | {n}件の評価",
     "servings": "{n}食分",
+    "step_title": "ステップ{step}",
     "yields": "収穫量"
+  },
+  "nutritional_information": {
+    "title": "栄養成分表示",
+    "serving_size": "{n}人分",
+    "calories": "カロリー",
+    "fat":  "脂肪",
+    "saturated_fat":  "飽和脂肪",
+    "trans_fat":  "トランス脂肪",
+    "unsaturated_fat":  "不飽和脂肪",
+    "cholesterol": "コレステロール",
+    "sodium":  "ナトリウム",
+    "potassium":  "カリウム",
+    "carbohydrate":  "炭水化物",
+    "fiber":  "ファイバ",
+    "sugar":  "砂糖",
+    "protein":  "タンパク質",
+    "value_g": "{value}グラム",
+    "value_mg": "{value}ミリグラム"
   },
   "times": {
     "prep": "準備時間",

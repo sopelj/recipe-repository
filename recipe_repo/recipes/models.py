@@ -13,7 +13,6 @@ from django.utils.translation import gettext_lazy as _
 from easy_thumbnails.fields import ThumbnailerImageField
 from easy_thumbnails.files import get_thumbnailer
 from modeltranslation.manager import MultilingualQuerySet
-from treebeard.mp_tree import MP_Node
 
 from ..common.models import NamedModel, NamedPluralModel
 from ..common.utils import pluralize
@@ -34,10 +33,23 @@ RATING_CHOICES = (
 )
 
 
-class Category(MP_Node, NamedPluralModel):
+class Category(NamedPluralModel):
     """Categories for organizing recipes."""
 
     slug = models.SlugField(_("Slug"), unique=True, help_text=_("Automatically generated from the name"))
+    top_level = models.BooleanField(
+        _("Top level"),
+        default=False,
+        help_text=_("This is one of the top level categories."),
+    )
+
+    sub_categories = models.ManyToManyField(
+        "self",
+        symmetrical=False,
+        blank=True,
+        related_name="parent_categories",
+        verbose_name=_("Sub-categories"),
+    )
     image = ThumbnailerImageField(_("Thumbnail"), upload_to="images/categories/", null=True, blank=True)
 
     @property
@@ -222,7 +234,7 @@ class Ingredient(models.Model):
 
     recipe = models.ForeignKey(Recipe, verbose_name=_("Recipe"), on_delete=models.CASCADE, related_name="ingredients")
     unit = models.ForeignKey("units.Unit", null=True, blank=True, on_delete=models.SET_NULL, related_name="+")
-    food = models.ForeignKey("food.Food", verbose_name=_("Food"), on_delete=models.CASCADE, related_name="+")
+    food = models.ForeignKey("food.Food", verbose_name=_("Food"), on_delete=models.CASCADE, related_name="ingredients")
     qualifier = models.ForeignKey(
         IngredientQualifier,
         verbose_name=_("Qualifier"),

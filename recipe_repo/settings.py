@@ -108,6 +108,7 @@ DATABASES = {"default": env.db_url("DATABASE_URL", default="sqlite:///db.sqlite3
 
 AUTH_USER_MODEL = "users.User"
 LOGIN_URL = reverse_lazy("admin:login")
+LOGIN_REDIRECT_URL = reverse_lazy("recipes:recipe-list")
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

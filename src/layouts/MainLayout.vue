@@ -7,6 +7,7 @@ import PButton from "primevue/button";
 
 import { ref, type ComponentInstance, computed } from "vue";
 import { useI18n } from "vue-i18n";
+import UserAvatar from "../components/UserAvatar.vue";
 
 const props = defineProps<{ user?: User }>();
 const { t, locale } = useI18n();
@@ -36,10 +37,10 @@ const setLocale = (lang: string) => {
             :href="t('routes.recipe_list')"
             class="flex flex-row py-2 items-center"
           >
-            <image
-              src="/static/images/recipe-logo.svg"
+            <Image
+              src="/static/recipe-logo.svg"
               alt=""
-              :width="50"
+              :width="40"
             />
             <div class="cursive text-3xl pl-2">{{ t("global.title") }}</div>
           </ILink>
@@ -77,13 +78,11 @@ const setLocale = (lang: string) => {
             v-else
             class="card flex justify-center"
           >
-            <avatar
-              :image="user.profile_image_url || ''"
-              size="large"
-              shape="circle"
+            <UserAvatar
+              :user="user"
               aria-haspopup="true"
               aria-controls="user_menu"
-              class="mr-2"
+              class="p-1"
               @click="toggleMenu"
             />
             <PMenu

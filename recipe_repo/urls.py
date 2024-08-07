@@ -8,7 +8,7 @@ from django.utils.translation import gettext_lazy as _
 from django.views.generic import RedirectView
 
 urlpatterns = [
-    path("", RedirectView.as_view(pattern_name="recipes:category-list"), name="index"),
+    path("", RedirectView.as_view(pattern_name="recipes:recipe-list"), name="index"),
     path("i18n/", include("django.conf.urls.i18n")),
 ]
 

@@ -35,7 +35,26 @@
     "directions": "Instructions",
     "ratings": "Pas de notes | {n} note | {n} notes",
     "servings": "{n} portion | {n} portions",
+    "step_title": "Étape {step}",
     "yields": "Donne :"
+  },
+  "nutritional_information": {
+    "title": "Information nutritionnelle",
+    "serving_size": "Quantité pour {n} portion | Quantité pour {n} portions",
+    "calories": "Calories",
+    "fat":  "Gras",
+    "saturated_fat":  "Gras saturé",
+    "trans_fat":  "Gras trans",
+    "unsaturated_fat":  "Gras insaturés",
+    "cholesterol": "Cholestérol",
+    "sodium":  "Sodium",
+    "potassium":  "Potassium",
+    "carbohydrate":  "Glucides",
+    "fiber":  "Fibre",
+    "sugar":  "Sucre",
+    "protein":  "Protéine",
+    "value_g": "{value} g",
+    "value_mg": "{value} mg"
   },
   "times": {
     "prep": "Temps de préparation :",

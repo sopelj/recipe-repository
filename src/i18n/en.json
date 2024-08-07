@@ -35,7 +35,26 @@
     "directions": "Directions",
     "ratings": "No ratings | {n} rating | {n} ratings",
     "servings": "{n} serving | {n} servings",
+    "step_title": "Step {step}",
     "yields": "Yields:"
+  },
+  "nutritional_information": {
+    "title": "Nutritional Information",
+    "serving_size": "Amount per {n} serving | Amount per {n} servings",
+    "calories": "Calories",
+    "fat":  "Fat",
+    "saturated_fat":  "Saturated Fat",
+    "trans_fat":  "Trans Fat",
+    "unsaturated_fat":  "Unsaturated Fat",
+    "cholesterol": "Cholesterol",
+    "sodium":  "Sodium",
+    "potassium":  "Potassium",
+    "carbohydrate":  "Carbohydrates",
+    "fiber":  "Fiber",
+    "sugar":  "Sugar",
+    "protein":  "Protein",
+    "value_g": "{value} g",
+    "value_mg": "{value} mg"
   },
   "times": {
     "prep": "Prep time:",

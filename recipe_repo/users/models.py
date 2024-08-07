@@ -90,7 +90,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     @property
     def initials(self) -> str:
         """Shortcut for formatting initials."""
-        return "".join(name[0] for name in (self.first_name, self.last_name, self.username) if name)[:2].upper()
+        return "".join(name[0] for name in (self.first_name, self.last_name) if name)[:2].upper()
 
     class Meta:
         verbose_name = _("User")

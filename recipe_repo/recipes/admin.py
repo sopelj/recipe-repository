@@ -9,9 +9,7 @@ from django.urls import URLPattern, path
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 from django.views.generic.edit import FormView
-from modeltranslation.admin import TranslationAdmin, TranslationBaseModelAdmin, TranslationTabularInline
-from treebeard.admin import TreeAdmin
-from treebeard.forms import movenodeform_factory
+from modeltranslation.admin import TranslationAdmin, TranslationTabularInline
 
 from .forms import RecipeImportForm
 from .models import Category, Ingredient, IngredientQualifier, Recipe, Source, Step, YieldUnit
@@ -23,10 +21,12 @@ if TYPE_CHECKING:
 
 
 @admin.register(Category)
-class CategoryAdmin(TreeAdmin, TranslationBaseModelAdmin):
+class CategoryAdmin(TranslationAdmin):
     prepopulated_fields = {"slug": ("name",)}
     search_fields = ("name",)
-    form = movenodeform_factory(Category, exclude=("name", "name_plural", "slug"))
+    list_display = ("name", "top_level")
+    autocomplete_fields = ("sub_categories",)
+    list_filter = ("sub_categories", "top_level")
 
 
 @admin.register(Source)
@@ -89,6 +89,7 @@ class RecipeAdmin(SortableAdminBase, TranslationAdmin):
     save_on_top = True
     search_fields = ("name",)
     list_display = ("get_thumbnail", "name", "get_categories")
+    list_display_links = ("get_thumbnail", "name")
     prepopulated_fields = {"slug": ("name",)}
     autocomplete_fields = ("source", "categories", "parent_recipes", "added_by", "rated_by")
     inlines = [IngredientInlineAdmin, StepInlineAdmin]

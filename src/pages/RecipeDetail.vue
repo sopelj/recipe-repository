@@ -9,6 +9,8 @@ import PButton from "primevue/button";
 import NutritionalInformation from "../components/NutritionalInformation.vue";
 import HeadSection from "../layouts/HeadSection.vue";
 import { useI18n } from "vue-i18n";
+import UserAvatar from "@/components/UserAvatar.vue";
+import RecipeSource from "@/components/RecipeSource.vue";
 
 interface FormErrors {
   servings?: string[];
@@ -101,18 +103,15 @@ const updateServings = (multiplier: number) => {
             <span
               v-if="recipe.yield_unit"
               itemprop="recipeYield"
-              >{{ recipe.yield_amount }} {{ recipe.yield_unit }} ({{ servings }} servings)</span
+              >{{ recipe.yield_amount }} {{ recipe.yield_unit }} ({{ t('recipe.servings', servings) }})</span
             >
-            <span v-else>{{ servings }} servings</span>
+            <span v-else>{{ t('recipe.servings', servings) }}</span>
           </div>
         </div>
         <div class="flex align-items-center py-3">
           <div class="w-1/4 text-500 font-medium">{{ t("recipe.added_by") }}</div>
           <div class="w-3/4 flex items-center">
-            <avatar
-              :image="recipe.added_by.profile_image_url || ''"
-              shape="circle"
-            />
+            <UserAvatar :user="recipe.added_by" size="normal" />
             <span class="pl-2">{{
               recipe.added_by.id === user?.id ? t("users.me") : recipe.added_by.full_name
             }}</span>
@@ -122,26 +121,9 @@ const updateServings = (multiplier: number) => {
           v-if="recipe.source"
           class="flex align-items-center py-3"
         >
-          <div class="w-1/4 text-500 font-medium">From:</div>
-          <div
-            class="w-3/4"
-            itemprop="isBasedOn"
-            itemscope
-            itemtype="https://schema.org/CreativeWork"
-          >
-            <div v-if="recipe.source.type === 1">
-              <link
-                itemprop="url"
-                :href="recipe.source_value"
-              />
-              <a
-                :href="recipe.source_value"
-                itemprop="publisher"
-                target="_blank"
-                class="underline"
-                >{{ recipe.source.name }}</a
-              >
-            </div>
+          <div class="w-1/4 text-500 font-medium">{{ t("recipe.from") }}</div>
+          <div class="w-3/4">
+            <recipe-source :source="recipe.source" :value="recipe.source_value" />
           </div>
         </div>
         <divider v-if="recipe.description" />
@@ -276,7 +258,7 @@ const updateServings = (multiplier: number) => {
           :key="i"
           toggleable
           class="mb-2"
-          :header="`Step ${i + 1}`"
+          :header="t('recipe.step_title', { step: i + 1})"
           itemprop="recipeInstructions"
         >
           {{ step }}
