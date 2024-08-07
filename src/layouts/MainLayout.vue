@@ -40,9 +40,10 @@ const setLocale = (lang: string) => {
             <Image
               src="/static/recipe-logo.svg"
               alt=""
-              :width="40"
+              class="w-14 sm:w-10"
             />
-            <div class="cursive text-3xl pl-2">{{ t("global.title") }}</div>
+            <span class="cursive text-3xl pl-2 hidden sm:inline-block">{{ t("global.title") }}</span>
+            <span class="cursive text-2xl pl-2 sm:hidden">{{ t("global.title_short") }}</span>
           </ILink>
         </div>
         <div class="flex items-center text-right gap-2">
@@ -50,24 +51,29 @@ const setLocale = (lang: string) => {
             <PButton
               v-if="locale !== 'en'"
               link
-              class="text-white"
+              class="text-white p-0"
               @click="setLocale('en')"
-              >English</PButton
             >
+              <span class="sm:hidden">EN</span>
+              <span class="hidden sm:inline-block">English</span>
+            </PButton>
             <PButton
               v-if="locale !== 'fr'"
               link
-              class="text-white"
+              class="text-white p-0"
               @click="setLocale('fr')"
-              >Français</PButton
             >
+              <span class="sm:hidden">FR</span>
+              <span class="hidden sm:inline-block">Frabçais</span>
+            </PButton>
             <PButton
               v-if="locale !== 'ja'"
               link
-              class="text-white"
+              class="text-white p-0"
               @click="setLocale('ja')"
-              >日本語</PButton
             >
+              日本語
+            </PButton>
           </div>
           <ILink
             v-if="!user"
@@ -103,7 +109,7 @@ const setLocale = (lang: string) => {
 </template>
 
 <style>
-.language-selector a:not(:last-child)::after {
-  content: " / ";
+.language-selector button:not(:last-child)::after {
+  content: "/";
 }
 </style>

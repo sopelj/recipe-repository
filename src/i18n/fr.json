@@ -4,6 +4,7 @@
   },
   "global": {
     "title": "Répertoire de recettes",
+    "title_short": "Recettes",
     "login": "Connexion",
     "logout": "Se déconnecter",
     "admin": "Admin"
@@ -23,7 +24,8 @@
   },
   "categories": {
     "all_categories": "Toutes catégories",
-    "title": "Catégories"
+    "title": "Catégories",
+    "no_match": "Aucune catégorie ne correspond aux critères donnés"
   },
   "recipe": {
     "all_recipes": "Toutes les recettes",

@@ -4,6 +4,7 @@
   },
   "global": {
     "title": "レシピリポジトリ",
+    "title_short": "レシピリポ",
     "login": "ログイン",
     "logout": "ログアウト",
     "admin": "管理"
@@ -23,7 +24,8 @@
   },
   "categories": {
     "all_categories": "すべてのカテゴリ",
-    "title": "カテゴリ"
+    "title": "カテゴリ",
+    "no_match": "指定された条件に一致するカテゴリはありません"
   },
   "recipe": {
     "all_recipes": "すべてのレシピ",

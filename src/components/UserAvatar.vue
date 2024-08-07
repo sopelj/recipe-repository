@@ -5,11 +5,11 @@ withDefaults(defineProps<{ user: User; size?: "normal" | "large" | "xlarge" }>()
 </script>
 
 <template>
-    <avatar
-      :image="user.profile_image_url ? user.profile_image_url : undefined"
-      :label="user.profile_image_url ? undefined : user.initials"
-      :size="size"
-      shape="circle"
-      class="mr-2"
-    />
+  <Avatar
+    :image="user.profile_image_url ? user.profile_image_url : undefined"
+    :icon="user.profile_image_url ? undefined : 'pi pi-user'"
+    :size="size"
+    shape="circle"
+    class="mr-2"
+  />
 </template>

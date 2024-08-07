@@ -1,5 +1,5 @@
 {
-  "name": "Recipe Repo",
+  "name": "Recipe Repository",
   "short_name": "Recipe Repo",
   "theme_color": "#482880",
   "icons": [
@@ -14,7 +14,7 @@
       "type": "image/png"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#482880"
 }

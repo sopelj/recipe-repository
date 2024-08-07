@@ -3,9 +3,10 @@ import type { RecipeItem } from "../types/recipes";
 import type { Category } from "../types/categories.ts";
 
 import { computed, ref } from "vue";
+import { useI18n } from "vue-i18n";
+
 import { Link as ILink } from "@inertiajs/vue3";
 import HeadSection from "../layouts/HeadSection.vue";
-import { useI18n } from "vue-i18n";
 
 const props = defineProps<{ recipes: RecipeItem[]; "category"?: Category; "categories": Category[] }>();
 const { t } = useI18n();

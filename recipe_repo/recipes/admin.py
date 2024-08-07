@@ -73,6 +73,9 @@ class RecipeImportView(FormView):
         if recipe is None:
             form.add_error("url", _("Failed to create a recipe from the provided URL"))
             return self.form_invalid(form)
+        if not recipe.added_by_id:
+            recipe.added_by = self.request.user
+            recipe.save()
         return redirect("admin:recipes_recipe_change", object_id=recipe.pk)
 
     def get_context_data(self, **kwargs: Any):
@@ -91,7 +94,7 @@ class RecipeAdmin(SortableAdminBase, TranslationAdmin):
     list_display = ("get_thumbnail", "name", "get_categories")
     list_display_links = ("get_thumbnail", "name")
     prepopulated_fields = {"slug": ("name",)}
-    autocomplete_fields = ("source", "categories", "parent_recipes", "added_by", "rated_by")
+    autocomplete_fields = ("source", "categories", "parent_recipes", "added_by", "rated_by", "favourited_by")
     inlines = [IngredientInlineAdmin, StepInlineAdmin]
 
     def get_queryset(self, request: HttpRequest) -> QuerySet[Recipe]:

@@ -156,6 +156,12 @@ class Recipe(NamedModel):
         through=UserRating,
         verbose_name=_("Rated by"),
     )
+    favourited_by = models.ManyToManyField(
+        "users.User",
+        related_name="favourite_recipes",
+        blank=True,
+        verbose_name=_("Favourited by"),
+    )
 
     objects = RecipeQuerySet.as_manager()
 

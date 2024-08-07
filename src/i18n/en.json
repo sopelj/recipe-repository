@@ -4,6 +4,7 @@
   },
   "global": {
     "title": "Recipe Repository",
+    "title_short": "Recipe Repo",
     "login": "Login",
     "logout": "Logout",
     "admin": "Admin"
@@ -23,7 +24,8 @@
   },
   "categories": {
     "all_categories": "All categories",
-    "title": "Categories"
+    "title": "Categories",
+    "no_match": "No categories match the given criteria"
   },
   "recipe": {
     "all_recipes": "All recipes",

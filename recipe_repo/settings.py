@@ -55,7 +55,6 @@ INSTALLED_APPS = [
     "easy_thumbnails",
     "django_breeze",
     "django_extensions",
-    "query_inspector",
     "treebeard",
     "colorfield",
     # Local apps
@@ -183,23 +182,26 @@ DJANGO_BREEZE = {
     },
 }
 
-# Debugging
-QUERYCOUNT = {
-    "IGNORE_ALL_REQUESTS": False,
-    "IGNORE_REQUEST_PATTERNS": [],
-    "IGNORE_SQL_PATTERNS": [],
-    "THRESHOLDS": {
-        "MEDIUM": 50,
-        "HIGH": 200,
-        "MIN_TIME_TO_LOG": 0,
-        "MIN_QUERY_COUNT_TO_LOG": 0,
-    },
-    "DISPLAY_ALL": True,
-    "DISPLAY_PRETTIFIED": True,
-    "COLOR_FORMATTER_STYLE": "monokai",
-    "RESPONSE_HEADER": "X-DjangoQueryCount-Count",
-    "DISPLAY_DUPLICATES": 0,
-}
+# Debug Queries
+if DEBUG or env.bool("QUERY_LOGGING_ENABLED", default=False):
+    INSTALLED_APPS.append("query_inspector")
+
+    QUERYCOUNT = {
+        "IGNORE_ALL_REQUESTS": False,
+        "IGNORE_REQUEST_PATTERNS": [],
+        "IGNORE_SQL_PATTERNS": [],
+        "THRESHOLDS": {
+            "MEDIUM": 50,
+            "HIGH": 200,
+            "MIN_TIME_TO_LOG": 0,
+            "MIN_QUERY_COUNT_TO_LOG": 0,
+        },
+        "DISPLAY_ALL": True,
+        "DISPLAY_PRETTIFIED": True,
+        "COLOR_FORMATTER_STYLE": "monokai",
+        "RESPONSE_HEADER": "X-DjangoQueryCount-Count",
+        "DISPLAY_DUPLICATES": 0,
+    }
 
 # Caching
 if env.bool("MEMCACHED_ENABLED", False):
@@ -223,11 +225,12 @@ if env.bool("AUTH_LDAP_ENABLED", False):
         "django_auth_ldap.backend.LDAPBackend",
         "django.contrib.auth.backends.ModelBackend",
     )
-    if ldap_user_attr_map := env.dict("AUTH_LDAP_USER_ATTR_MAP", default=None):
+    if ldap_user_attr_map := env.json("AUTH_LDAP_USER_ATTR_MAP", default=None):
         AUTH_LDAP_USER_ATTR_MAP = ldap_user_attr_map
 
-    if ldap_user_group_flags := env.dict("AUTH_LDAP_USER_FLAGS_BY_GROUP", default=None):
+    if ldap_user_group_flags := env.json("AUTH_LDAP_USER_FLAGS_BY_GROUP", default=None):
         AUTH_LDAP_USER_FLAGS_BY_GROUP = ldap_user_group_flags
+        AUTH_LDAP_FIND_GROUP_PERMS = True
 
 # Logging
 LOGGING = {
@@ -235,7 +238,7 @@ LOGGING = {
     "disable_existing_loggers": False,
     "formatters": {
         "default": {
-            "format": "[DJANGO] %(levelname)s %(asctime)s %(module)s " "%(name)s.%(funcName)s:%(lineno)s: %(message)s",
+            "format": "[DJANGO] %(levelname)s %(asctime)s %(module)s %(name)s.%(funcName)s:%(lineno)s: %(message)s",
         },
     },
     "handlers": {

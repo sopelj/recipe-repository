@@ -11,14 +11,12 @@
         "name_plural_en": "Main courses",
         "name_plural_fr": "Plats principaux",
         "name_plural_ja": "メインディッシュ",
-        "path": "0001",
-        "depth": 1,
-        "numchild": 1,
         "slug": "main-course",
         "slug_en": "main-course",
         "slug_fr": "plat-principal",
         "slug_ja": "mein-disshu",
-        "image": ""
+        "image": "",
+        "top_leve": true
     }
 },
 {
@@ -33,14 +31,12 @@
         "name_plural_en": "Desserts",
         "name_plural_fr": "Desserts",
         "name_plural_ja": "デザート",
-        "path": "0002",
-        "depth": 1,
-        "numchild": 1,
         "slug": "dessert",
         "slug_en": "dessert",
         "slug_fr": "dessert",
         "slug_ja": "dezaato",
-        "image": ""
+        "image": "",
+        "top_leve": true
     }
 },
 {
@@ -55,14 +51,12 @@
         "name_plural_en": null,
         "name_plural_fr": null,
         "name_plural_ja": null,
-        "path": "0003",
-        "depth": 1,
-        "numchild": 0,
         "slug": "breakfast",
         "slug_en": "breakfast",
         "slug_fr": "dejeuner",
         "slug_ja": "choshoku",
-        "image": ""
+        "image": "",
+        "top_leve": true
     }
 },
 {
@@ -77,14 +71,12 @@
         "name_plural_en": "Soups",
         "name_plural_fr": "Soupes",
         "name_plural_ja": "スープ",
-        "path": "0004",
-        "depth": 1,
-        "numchild": 0,
         "slug": "soup",
         "slug_en": "soup",
         "slug_fr": "soupe",
         "slug_ja": "suupu",
-        "image": ""
+        "image": "",
+        "top_leve": true
     }
 },
 {
@@ -99,14 +91,12 @@
         "name_plural_en": "Salads",
         "name_plural_fr": "Salades",
         "name_plural_ja": "サラダ",
-        "path": "0005",
-        "depth": 1,
-        "numchild": 0,
         "slug": "salad",
         "slug_en": "salad",
         "slug_fr": "salade",
         "slug_ja": "sarada",
-        "image": ""
+        "image": "",
+        "top_leve": true
     }
 },
 {
@@ -121,9 +111,6 @@
         "name_plural_en": "Cookies",
         "name_plural_fr": "Bisuits",
         "name_plural_ja": "クッキー",
-        "path": "00020001",
-        "depth": 2,
-        "numchild": 0,
         "slug": "cookie",
         "slug_en": "cookie",
         "slug_fr": "biscuit",
@@ -143,9 +130,6 @@
         "name_plural_en": "Pastas",
         "name_plural_fr": "Pâtes",
         "name_plural_ja": "パスタ",
-        "path": "00010001",
-        "depth": 2,
-        "numchild": 0,
         "slug": "pasta",
         "slug_en": "pasta",
         "slug_fr": "pate",
@@ -165,14 +149,12 @@
         "name_plural_en": "Snacks",
         "name_plural_fr": "Collations",
         "name_plural_ja": "軽食",
-        "path": "0006",
-        "depth": 1,
-        "numchild": 0,
         "slug": "snack",
         "slug_en": "snack",
         "slug_fr": "collation",
         "slug_ja": "keishoku",
-        "image": ""
+        "image": "",
+        "top_leve": true
     }
 },
 {
@@ -187,14 +169,12 @@
         "name_plural_en": "Side dishes",
         "name_plural_fr": "Plats d'accompagnements",
         "name_plural_ja": "副菜",
-        "path": "0007",
-        "depth": 1,
-        "numchild": 0,
         "slug": "side-dish",
         "slug_en": "side-dish",
         "slug_fr": "plat-daccompagnement",
         "slug_ja": "fukusai",
-        "image": ""
+        "image": "",
+        "top_leve": true
     }
 },
 {
@@ -209,14 +189,12 @@
         "name_plural_en": "Breads",
         "name_plural_fr": "Pains",
         "name_plural_ja": "パン",
-        "path": "0008",
-        "depth": 1,
-        "numchild": 0,
         "slug": "bread",
         "slug_en": "bread",
         "slug_fr": "pain",
         "slug_ja": "pan",
-        "image": ""
+        "image": "",
+        "top_leve": true
     }
 },
 {
@@ -231,9 +209,6 @@
         "name_plural_en": null,
         "name_plural_fr": null,
         "name_plural_ja": null,
-        "path": "0009",
-        "depth": 1,
-        "numchild": 0,
         "slug": "crockpot",
         "slug_en": "crockpot",
         "slug_fr": "mijoteuse",
