@@ -236,11 +236,11 @@ const updateServings = (multiplier: number) => {
       </div>
       <div class="col-span-12 sm:col-span-3 md:col-span-4">
         <div
-          v-if="recipe.thumbnail_image_url"
+          v-if="recipe.image_url"
           class="overflow-clip p-card"
         >
           <img
-            :src="recipe.thumbnail_image_url"
+            :src="recipe.image_url"
             :alt="recipe.name"
             class="w-full"
           />

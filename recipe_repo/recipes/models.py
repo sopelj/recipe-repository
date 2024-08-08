@@ -9,6 +9,7 @@ from django.core.validators import URLValidator
 from django.db import models
 from django.db.models.aggregates import Avg, Count
 from django.utils.html import format_html
+from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
 from easy_thumbnails.fields import ThumbnailerImageField
 from easy_thumbnails.files import get_thumbnailer
@@ -68,6 +69,13 @@ class UserRating(models.Model):
     rating = models.PositiveIntegerField(_("Rating"), choices=RATING_CHOICES)
     recipe = models.ForeignKey("Recipe", related_name="ratings", on_delete=models.CASCADE)
     user = models.ForeignKey("users.User", related_name="ratings", on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return gettext("User {user} rated '{recipe}' {rating}").format(
+            user=self.user.full_name or self.user.email,
+            recipe=self.recipe.name,
+            rating=self.get_rating_display(),
+        )
 
     class Meta:
         verbose_name = _("User Rating")
@@ -174,9 +182,14 @@ class Recipe(NamedModel):
         return self.prep_time or self.cook_time
 
     @property
-    def thumbnail_image_url(self) -> str | None:
+    def thumbnail_url(self) -> str | None:
         """Resolve URL of recipe thumbnail image."""
         return get_thumbnailer(self.image)["thumbnail"].url if self.image else None
+
+    @property
+    def image_url(self) -> str | None:
+        """Resolve URL of recipe thumbnail image."""
+        return get_thumbnailer(self.image)["image"].url if self.image else None
 
     class Meta:
         verbose_name = _("Recipe")
@@ -196,6 +209,7 @@ class IngredientQualifier(models.Model):
 
 
 class IngredientGroup(NamedModel):
+    order = models.PositiveIntegerField(_("Order"), blank=True, null=True)
     recipe = models.ForeignKey(
         Recipe,
         verbose_name=_("Recipe"),
@@ -204,8 +218,9 @@ class IngredientGroup(NamedModel):
     )
 
     class Meta:
-        verbose_name = _("Ingredient")
-        verbose_name_plural = _("Ingredients")
+        ordering = ("order",)
+        verbose_name = _("Ingredient Group")
+        verbose_name_plural = _("Ingredient Groups")
 
 
 class NutritionInformation(models.Model):

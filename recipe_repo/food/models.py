@@ -5,5 +5,6 @@ from ..common.models import NamedPluralModel
 
 class Food(NamedPluralModel):
     class Meta:
-        verbose_name = _("Food")
-        verbose_name_plural = _("Food")
+        ordering = ("name",)
+        verbose_name = _("Food Item")
+        verbose_name_plural = _("Food Items")

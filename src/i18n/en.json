@@ -1,67 +1,67 @@
 {
-  "users": {
-    "me": "Me"
-  },
-  "global": {
-    "title": "Recipe Repository",
-    "title_short": "Recipe Repo",
-    "login": "Login",
-    "logout": "Logout",
-    "admin": "Admin",
-    "keep_screen_on": "Keep screen on"
-  },
-  "routes": {
-    "recipe_list": "/en/",
-    "recipe_details": "/en/recipes/{slug}/",
-    "recipe_category": "/en/categories/{slug}/",
-    "admin": "/en/admin/",
-    "login": "/en/admin/login/",
-    "logout": "/en/admin/logout/"
-  },
-  "search": {
-    "search": "Search",
-    "select_category": "Categories",
-    "no_recipes_match": "No recipes match the given criteria"
-  },
   "categories": {
     "all_categories": "All categories",
-    "title": "Categories",
-    "no_match": "No categories match the given criteria"
+    "no_match": "No categories match the given criteria",
+    "title": "Categories"
+  },
+  "global": {
+    "admin": "Admin",
+    "keep_screen_on": "Keep screen on",
+    "login": "Login",
+    "logout": "Logout",
+    "title": "Recipe Repository",
+    "title_short": "Recipe Repo"
+  },
+  "nutritional_information": {
+    "calories": "Calories",
+    "carbohydrate": "Carbohydrates",
+    "cholesterol": "Cholesterol",
+    "fat": "Fat",
+    "fiber": "Fiber",
+    "potassium": "Potassium",
+    "protein": "Protein",
+    "saturated_fat": "Saturated Fat",
+    "serving_size": "Amount per {n} serving | Amount per {n} servings",
+    "sodium": "Sodium",
+    "sugar": "Sugar",
+    "title": "Nutritional Information",
+    "trans_fat": "Trans Fat",
+    "unsaturated_fat": "Unsaturated Fat",
+    "value_g": "{value} g",
+    "value_mg": "{value} mg"
   },
   "recipe": {
-    "all_recipes": "All recipes",
     "added_by": "Added by:",
+    "all_recipes": "All recipes",
     "categories": "Categories:",
+    "directions": "Directions",
     "from": "From:",
     "ingredient": "{amount} {ingredient}",
     "ingredients": "Ingredients",
-    "directions": "Directions",
     "ratings": "No ratings | {n} rating | {n} ratings",
     "servings": "{n} serving | {n} servings",
     "step_title": "Step {step}",
     "yields": "Yields:"
   },
-  "nutritional_information": {
-    "title": "Nutritional Information",
-    "serving_size": "Amount per {n} serving | Amount per {n} servings",
-    "calories": "Calories",
-    "fat":  "Fat",
-    "saturated_fat":  "Saturated Fat",
-    "trans_fat":  "Trans Fat",
-    "unsaturated_fat":  "Unsaturated Fat",
-    "cholesterol": "Cholesterol",
-    "sodium":  "Sodium",
-    "potassium":  "Potassium",
-    "carbohydrate":  "Carbohydrates",
-    "fiber":  "Fiber",
-    "sugar":  "Sugar",
-    "protein":  "Protein",
-    "value_g": "{value} g",
-    "value_mg": "{value} mg"
+  "routes": {
+    "admin": "/en/admin/",
+    "login": "/en/admin/login/",
+    "logout": "/en/admin/logout/",
+    "recipe_category": "/en/categories/{slug}/",
+    "recipe_details": "/en/recipes/{slug}/",
+    "recipe_list": "/en/"
+  },
+  "search": {
+    "no_recipes_match": "No recipes match the given criteria",
+    "search": "Search",
+    "select_category": "Categories"
   },
   "times": {
-    "prep": "Prep time:",
     "cook": "Cook time:",
+    "prep": "Prep time:",
     "total": "Total time:"
+  },
+  "users": {
+    "me": "Me"
   }
 }

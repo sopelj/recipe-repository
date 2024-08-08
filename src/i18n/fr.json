@@ -1,67 +1,67 @@
 {
-  "users": {
-    "me": "Moi"
-  },
-  "global": {
-    "title": "Répertoire de recettes",
-    "title_short": "Recettes",
-    "login": "Connexion",
-    "logout": "Se déconnecter",
-    "admin": "Admin",
-    "keep_screen_on": "Gardez l'écran éveillé"
-  },
-  "routes": {
-    "recipe_list": "/fr/",
-    "recipe_details": "/fr/recettes/{slug}/",
-    "recipe_category": "/fr/categories/{slug}/",
-    "admin": "/fr/admin/",
-    "login": "/fr/admin/login/",
-    "logout": "/fr/admin/logout/"
-  },
-  "search": {
-    "search": "Recherche",
-    "select_category": "Catégories",
-    "no_recipes_match": "Aucune recette ne correspond aux critères donnés."
-  },
   "categories": {
     "all_categories": "Toutes catégories",
-    "title": "Catégories",
-    "no_match": "Aucune catégorie ne correspond aux critères donnés"
+    "no_match": "Aucune catégorie ne correspond aux critères donnés",
+    "title": "Catégories"
+  },
+  "global": {
+    "admin": "Admin",
+    "keep_screen_on": "Gardez l'écran éveillé",
+    "login": "Connexion",
+    "logout": "Se déconnecter",
+    "title": "Répertoire de recettes",
+    "title_short": "Recettes"
+  },
+  "nutritional_information": {
+    "calories": "Calories",
+    "carbohydrate": "Glucides",
+    "cholesterol": "Cholestérol",
+    "fat": "Gras",
+    "fiber": "Fibre",
+    "potassium": "Potassium",
+    "protein": "Protéine",
+    "saturated_fat": "Gras saturé",
+    "serving_size": "Quantité pour {n} portion | Quantité pour {n} portions",
+    "sodium": "Sodium",
+    "sugar": "Sucre",
+    "title": "Information nutritionnelle",
+    "trans_fat": "Gras trans",
+    "unsaturated_fat": "Gras insaturés",
+    "value_g": "{value} g",
+    "value_mg": "{value} mg"
   },
   "recipe": {
-    "all_recipes": "Toutes les recettes",
     "added_by": "Ajouté par :",
+    "all_recipes": "Toutes les recettes",
     "categories": "Categories :",
+    "directions": "Instructions",
     "from": "De :",
     "ingredient": "{amount} {ingredient}",
     "ingredients": "Ingrédients",
-    "directions": "Instructions",
     "ratings": "Pas de notes | {n} note | {n} notes",
     "servings": "{n} portion | {n} portions",
     "step_title": "Étape {step}",
     "yields": "Donne :"
   },
-  "nutritional_information": {
-    "title": "Information nutritionnelle",
-    "serving_size": "Quantité pour {n} portion | Quantité pour {n} portions",
-    "calories": "Calories",
-    "fat":  "Gras",
-    "saturated_fat":  "Gras saturé",
-    "trans_fat":  "Gras trans",
-    "unsaturated_fat":  "Gras insaturés",
-    "cholesterol": "Cholestérol",
-    "sodium":  "Sodium",
-    "potassium":  "Potassium",
-    "carbohydrate":  "Glucides",
-    "fiber":  "Fibre",
-    "sugar":  "Sucre",
-    "protein":  "Protéine",
-    "value_g": "{value} g",
-    "value_mg": "{value} mg"
+  "routes": {
+    "admin": "/fr/admin/",
+    "login": "/fr/admin/login/",
+    "logout": "/fr/admin/logout/",
+    "recipe_category": "/fr/categories/{slug}/",
+    "recipe_details": "/fr/recettes/{slug}/",
+    "recipe_list": "/fr/"
+  },
+  "search": {
+    "no_recipes_match": "Aucune recette ne correspond aux critères donnés.",
+    "search": "Recherche",
+    "select_category": "Catégories"
   },
   "times": {
-    "prep": "Temps de préparation :",
     "cook": "Temps de cuisson :",
+    "prep": "Temps de préparation :",
     "total": "Temps total :"
+  },
+  "users": {
+    "me": "Moi"
   }
 }

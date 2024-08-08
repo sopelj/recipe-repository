@@ -82,7 +82,8 @@ def recipe_detail(request: HttpRequest, slug: str) -> HttpResponse:
     ingredients = (
         Ingredient.objects.filter(recipe_id=recipe_id)
         .annotate(scale=Value(scale or 1, output_field=DecimalField()))
-        .select_related("unit", "food", "qualifier")
+        .select_related("unit", "food", "qualifier", "group")
+        .order_by("group__order", "order")
     )
 
     return render(

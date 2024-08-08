@@ -44,7 +44,7 @@ class RecipeListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Recipe
-        fields = ("name", "slug", "thumbnail_image_url", "description", "categories", "num_ratings", "avg_ratings")
+        fields = ("name", "slug", "thumbnail_url", "description", "categories", "num_ratings", "avg_ratings")
 
 
 class RecipeSerializer(RecipeListSerializer):
@@ -60,7 +60,7 @@ class RecipeSerializer(RecipeListSerializer):
         fields = (
             "name",
             "slug",
-            "thumbnail_image_url",
+            "image_url",
             "description",
             "categories",
             "cook_time",

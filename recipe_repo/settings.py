@@ -161,7 +161,7 @@ THUMBNAIL_ALIASES = {
         "profile": {"size": (80, 80), "crop": True},
         "admin": {"size": (100, 100), "crop": True},
         "thumbnail": {"size": (250, 250), "crop": True},
-        "photo": {"size": (500, 500), "crop": True},
+        "image": {"size": (600, 600), "crop": True},
     },
 }
 

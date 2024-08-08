@@ -4,7 +4,7 @@ import type { User } from "./users";
 export interface RecipeItem {
   name: string;
   slug: string;
-  thumbnail_image_url: string | null;
+  thumbnail_url: string | null;
   num_ratings: number;
   avg_rating?: number;
   categories: Category[];
@@ -40,8 +40,9 @@ export interface Source {
   value?: string;
 }
 
-export interface Recipe extends RecipeItem {
+export interface Recipe extends Omit<RecipeItem, "thumbnail_url"> {
   description: string;
+  image_url: string | null;
   servings?: number;
   yield_unit?: string;
   yield_amount?: number;

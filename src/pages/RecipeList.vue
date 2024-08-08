@@ -74,7 +74,7 @@ const title = computed(
               >
               <template #header>
                 <img
-                  :src="recipe.thumbnail_image_url"
+                  :src="recipe.thumbnail_url"
                   alt=""
                   class="object-cover object-center w-full"
                 />

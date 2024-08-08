@@ -1,67 +1,67 @@
 {
-  "users": {
-    "me": "私"
-  },
-  "global": {
-    "title": "レシピリポジトリ",
-    "title_short": "レシピリポ",
-    "login": "ログイン",
-    "logout": "ログアウト",
-    "admin": "管理",
-    "keep_screen_on": "画面をオンにしたままにする"
-  },
-  "routes": {
-    "recipe_list": "/ja/",
-    "recipe_details": "/ja/reshipi/{slug}/",
-    "recipe_category": "/ja/kategori/{slug}/",
-    "admin": "/ja/admin/",
-    "login": "/ja/admin/login/",
-    "logout": "/ja/admin/logout/"
-  },
-  "search": {
-    "search": "サーチ",
-    "select_category": "カテゴリ",
-    "no_recipes_match": "指定された条件に一致するレシピはありません"
-  },
   "categories": {
     "all_categories": "すべてのカテゴリ",
-    "title": "カテゴリ",
-    "no_match": "指定された条件に一致するカテゴリはありません"
+    "no_match": "指定された条件に一致するカテゴリはありません",
+    "title": "カテゴリ"
+  },
+  "global": {
+    "admin": "管理",
+    "keep_screen_on": "画面をオンにしたままにする",
+    "login": "ログイン",
+    "logout": "ログアウト",
+    "title": "レシピリポジトリ",
+    "title_short": "レシピリポ"
+  },
+  "nutritional_information": {
+    "calories": "カロリー",
+    "carbohydrate": "炭水化物",
+    "cholesterol": "コレステロール",
+    "fat": "脂肪",
+    "fiber": "ファイバ",
+    "potassium": "カリウム",
+    "protein": "タンパク質",
+    "saturated_fat": "飽和脂肪",
+    "serving_size": "{n}人分",
+    "sodium": "ナトリウム",
+    "sugar": "砂糖",
+    "title": "栄養成分表示",
+    "trans_fat": "トランス脂肪",
+    "unsaturated_fat": "不飽和脂肪",
+    "value_g": "{value}グラム",
+    "value_mg": "{value}ミリグラム"
   },
   "recipe": {
-    "all_recipes": "すべてのレシピ",
     "added_by": "によって追加",
+    "all_recipes": "すべてのレシピ",
     "categories": "カテゴリ",
+    "directions": "手順",
     "from": "から",
     "ingredient": "{amount}{ingredient}",
     "ingredients": "材料",
-    "directions": "手順",
     "ratings": "評価なし | {n}件の評価 | {n}件の評価",
     "servings": "{n}食分",
     "step_title": "ステップ{step}",
     "yields": "収穫量"
   },
-  "nutritional_information": {
-    "title": "栄養成分表示",
-    "serving_size": "{n}人分",
-    "calories": "カロリー",
-    "fat":  "脂肪",
-    "saturated_fat":  "飽和脂肪",
-    "trans_fat":  "トランス脂肪",
-    "unsaturated_fat":  "不飽和脂肪",
-    "cholesterol": "コレステロール",
-    "sodium":  "ナトリウム",
-    "potassium":  "カリウム",
-    "carbohydrate":  "炭水化物",
-    "fiber":  "ファイバ",
-    "sugar":  "砂糖",
-    "protein":  "タンパク質",
-    "value_g": "{value}グラム",
-    "value_mg": "{value}ミリグラム"
+  "routes": {
+    "admin": "/ja/admin/",
+    "login": "/ja/admin/login/",
+    "logout": "/ja/admin/logout/",
+    "recipe_category": "/ja/kategori/{slug}/",
+    "recipe_details": "/ja/reshipi/{slug}/",
+    "recipe_list": "/ja/"
+  },
+  "search": {
+    "no_recipes_match": "指定された条件に一致するレシピはありません",
+    "search": "サーチ",
+    "select_category": "カテゴリ"
   },
   "times": {
-    "prep": "準備時間",
     "cook": "調理時間",
+    "prep": "準備時間",
     "total": "合計時間"
+  },
+  "users": {
+    "me": "私"
   }
 }

@@ -12,7 +12,17 @@ from django.views.generic.edit import FormView
 from modeltranslation.admin import TranslationAdmin, TranslationTabularInline
 
 from .forms import RecipeImportForm
-from .models import Category, Ingredient, IngredientQualifier, Recipe, Source, Step, YieldUnit
+from .models import (
+    Category,
+    Ingredient,
+    IngredientGroup,
+    IngredientQualifier,
+    Recipe,
+    Source,
+    Step,
+    UserRating,
+    YieldUnit,
+)
 
 if TYPE_CHECKING:
     from django.db.models import QuerySet
@@ -35,6 +45,29 @@ class SourceAdmin(admin.ModelAdmin):
     search_fields = ("name", "value")
 
 
+@admin.register(UserRating)
+class UserRatingAdmin(admin.ModelAdmin):
+    list_display = ("get_user_full_name", "get_recipe_name", "rating")
+    list_filter = [("user", admin.RelatedOnlyFieldListFilter), ("recipe", admin.RelatedOnlyFieldListFilter)]
+    autocomplete_fields = ("user", "recipe")
+
+    @admin.display(description=_("User"), ordering=("user__first_name", "user__last_name"))
+    def get_user_full_name(self, obj: UserRating) -> str:
+        """Get full name of user for list view."""
+        return obj.user.full_name or obj.user.email
+
+    @admin.display(description=_("Recipe"), ordering=("recipe__name",))
+    def get_recipe_name(self, obj: UserRating) -> str:
+        """Get the name of a recipe for list view."""
+        return obj.recipe.name
+
+    def get_queryset(self, request: HttpRequest) -> QuerySet[UserRating]:
+        """Pre-fetch some fields in list mode."""
+        if request.resolver_match.view_name == "admin:food_food_changelist":
+            return UserRating.objects.select_related("user", "recipe")
+        return UserRating.objects.filter()
+
+
 @admin.register(YieldUnit)
 class YieldUnitAdmin(TranslationAdmin):
     search_fields = ("name",)
@@ -54,7 +87,12 @@ class IngredientInlineAdmin(SortableInlineAdminMixin, TranslationTabularInline):
     model = Ingredient
     extra = 1
     autocomplete_fields = ("food", "unit", "qualifier")
-    fields = ("amount", "amount_max", "unit", "food", "qualifier", "optional", "note")
+    fields = ("amount", "amount_max", "unit", "food", "qualifier", "optional", "note", "group")
+
+
+class IngredientGroupInlineAdmin(SortableInlineAdminMixin, TranslationTabularInline):
+    model = IngredientGroup
+    extra = 0
 
 
 class StepInlineAdmin(SortableInlineAdminMixin, TranslationTabularInline):
@@ -95,7 +133,7 @@ class RecipeAdmin(SortableAdminBase, TranslationAdmin):
     list_display_links = ("get_thumbnail", "name")
     prepopulated_fields = {"slug": ("name",)}
     autocomplete_fields = ("source", "categories", "parent_recipes", "added_by", "rated_by", "favourited_by")
-    inlines = [IngredientInlineAdmin, StepInlineAdmin]
+    inlines = [IngredientGroupInlineAdmin, IngredientInlineAdmin, StepInlineAdmin]
 
     def get_queryset(self, request: HttpRequest) -> QuerySet[Recipe]:
         """Avoid extra queries by pre-fetching categories."""

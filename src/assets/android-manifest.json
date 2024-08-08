@@ -1,20 +1,20 @@
 {
-  "name": "Recipe Repository",
-  "short_name": "Recipe Repo",
-  "theme_color": "#482880",
+  "background_color": "#482880",
+  "display": "standalone",
   "icons": [
     {
-      "src": "/static/android-chrome-192x192.png",
       "sizes": "192x192",
+      "src": "/static/android-chrome-192x192.png",
       "type": "image/png"
     },
     {
-      "src": "/static/android-chrome-512x512.png",
       "sizes": "512x512",
+      "src": "/static/android-chrome-512x512.png",
       "type": "image/png"
     }
   ],
+  "name": "Recipe Repository",
+  "short_name": "Recipe Repo",
   "start_url": "/",
-  "display": "standalone",
-  "background_color": "#482880"
+  "theme_color": "#482880"
 }

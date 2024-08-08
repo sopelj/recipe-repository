@@ -18,13 +18,12 @@ if TYPE_CHECKING:
 class FoodAdmin(TranslationAdmin):
     search_fields = ("name",)
     list_display = ("name", "get_used_count")
-    ordering = ("name",)
 
     def get_queryset(self, request: HttpRequest) -> QuerySet[Food]:
         """Add count annotation in list mode."""
         if request.resolver_match.view_name == "admin:food_food_changelist":
             return Food.objects.annotate(used_count=Count("ingredients"))
-        return Food.objects.all()
+        return Food.objects.filter()
 
     @admin.display(description=_("Used count"), ordering="used_count")
     def get_used_count(self, obj: Food) -> str | None:
