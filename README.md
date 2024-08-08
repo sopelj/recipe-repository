@@ -67,6 +67,7 @@ cp example.env .env
 3. Load default data
     ```bash
     hatch run ./manage.py loaddata units
+    hatch run ./manage.py loaddata food  # example food
     hatch run ./manage.py loaddata categories  # basic example categories
     hatch run ./manage.py loaddata qualifiers
     hatch run ./manage.py loaddata yield-units

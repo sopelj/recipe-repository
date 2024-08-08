@@ -1,0 +1,2459 @@
+[
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Active dry yeast",
+        "name_en": "Active dry yeast",
+        "name_fr": "Levure sèche active",
+        "name_ja": "アクティブドライイースト",
+        "name_plural": null,
+        "name_plural_en": null,
+        "name_plural_fr": null,
+        "name_plural_ja": null
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Allspice",
+        "name_en": "Allspice",
+        "name_fr": "Piment de la Jamaïque",
+        "name_ja": "オールスパイス",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Almond",
+        "name_en": "Almond",
+        "name_fr": "Amande",
+        "name_ja": "アーモンド",
+        "name_plural": "Almonds",
+        "name_plural_en": "Almonds",
+        "name_plural_fr": "Amandes",
+        "name_plural_ja": "アーモンド"
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Almond extract",
+        "name_en": "Almond extract",
+        "name_fr": "Extrait d'amande",
+        "name_ja": "アーモンドエキス",
+        "name_plural": null,
+        "name_plural_en": null,
+        "name_plural_fr": null,
+        "name_plural_ja": null
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Almond flour",
+        "name_en": "Almond flour",
+        "name_fr": "Farine d'amande",
+        "name_ja": "アーモンド粉",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Anko",
+        "name_en": "Anko",
+        "name_fr": "",
+        "name_ja": "あんこ",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Apple",
+        "name_en": "Apple",
+        "name_fr": "Pomme",
+        "name_ja": "りんご",
+        "name_plural": "Apples",
+        "name_plural_en": "Apples",
+        "name_plural_fr": "Pommes",
+        "name_plural_ja": "りんご"
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Avocado oil",
+        "name_en": "Avocado oil",
+        "name_fr": "Huile d'avocat",
+        "name_ja": "アボカドオイル",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Azuki bean",
+        "name_en": "Azuki bean",
+        "name_fr": "Haricot adzuki",
+        "name_ja": "小豆",
+        "name_plural": "Azuki beans",
+        "name_plural_en": "Azuki beans",
+        "name_plural_fr": "Haricots adzuki",
+        "name_plural_ja": "小豆"
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Baby carrot",
+        "name_en": "Baby carrot",
+        "name_fr": "Petites carotte",
+        "name_ja": "ベビーキャロット",
+        "name_plural": "Baby carrots",
+        "name_plural_en": "Baby carrots",
+        "name_plural_fr": "Petites carottes",
+        "name_plural_ja": "ベビーキャロット"
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Baby potato",
+        "name_en": "Baby potato",
+        "name_fr": "Petite pomme de terre",
+        "name_ja": "ベビーポテト",
+        "name_plural": "Baby potatos",
+        "name_plural_en": "Baby potatos",
+        "name_plural_fr": "Petites pommes de terres",
+        "name_plural_ja": "ベビーポテト"
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Bacon",
+        "name_en": "Bacon",
+        "name_fr": "Bacon",
+        "name_ja": "ベーコン",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Baking powder",
+        "name_en": "Baking powder",
+        "name_fr": "Poudre à pâte",
+        "name_ja": "ベーキングパウダー",
+        "name_plural": null,
+        "name_plural_en": null,
+        "name_plural_fr": null,
+        "name_plural_ja": null
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Baking soda",
+        "name_en": "Baking soda",
+        "name_fr": "Bicarbonate de soude",
+        "name_ja": "重曹",
+        "name_plural": null,
+        "name_plural_en": null,
+        "name_plural_fr": null,
+        "name_plural_ja": null
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Balsamic vinegar",
+        "name_en": "Balsamic vinegar",
+        "name_fr": "Vinaigre balsamique",
+        "name_ja": "バルサミコ酢",
+        "name_plural": null,
+        "name_plural_en": null,
+        "name_plural_fr": null,
+        "name_plural_ja": null
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Banana",
+        "name_en": "Banana",
+        "name_fr": "Banane",
+        "name_ja": "バナナ",
+        "name_plural": "Bananas",
+        "name_plural_en": "Bananas",
+        "name_plural_fr": "Bananes",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Basil leaf",
+        "name_en": "Basil leaf",
+        "name_fr": "Feuille de basilic",
+        "name_ja": "バジルの葉",
+        "name_plural": "Basil leaves",
+        "name_plural_en": "Basil leaves",
+        "name_plural_fr": "Feuilles de basilic",
+        "name_plural_ja": "バジルの葉"
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Bayleaf",
+        "name_en": "Bayleaf",
+        "name_fr": "Feuille de laurier",
+        "name_ja": "ベイリーフ",
+        "name_plural": "Bayleaves",
+        "name_plural_en": "Bayleaves",
+        "name_plural_fr": "Feuilles de laurier",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Beef",
+        "name_en": "Beef",
+        "name_fr": "Boeuf",
+        "name_ja": "牛肉",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Beef broth",
+        "name_en": "Beef broth",
+        "name_fr": "Bouillon de boeuf",
+        "name_ja": "ビーフブロス",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Beef cube",
+        "name_en": "Beef cube",
+        "name_fr": "Cube de boeuf",
+        "name_ja": "ビーフキューブ",
+        "name_plural": "Beef cubes",
+        "name_plural_en": "Beef cubes",
+        "name_plural_fr": "Cubes de boeuf",
+        "name_plural_ja": "ビーフキューブ"
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Black pepper",
+        "name_en": "Black pepper",
+        "name_fr": "Poivre noir",
+        "name_ja": "ブラックペッパー",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Blueberry",
+        "name_en": "Blueberry",
+        "name_fr": "Bleuets",
+        "name_ja": "ブルーベリー",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Bread flour",
+        "name_en": "Bread flour",
+        "name_fr": "Farine de pain",
+        "name_ja": "パン粉",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Broccoli",
+        "name_en": "Broccoli",
+        "name_fr": "Brocoli",
+        "name_ja": "ブロッコリー",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Brown butter",
+        "name_en": "Brown butter",
+        "name_fr": "Beurre noisette",
+        "name_ja": "茶色のバター",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Brown lentils",
+        "name_en": "Brown lentils",
+        "name_fr": "Lentils bruns",
+        "name_ja": "ブラウンレンズ豆",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Brown sugar",
+        "name_en": "Brown sugar",
+        "name_fr": "Cassonade",
+        "name_ja": "黒砂糖",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Butter",
+        "name_en": "Butter",
+        "name_fr": "Beurre",
+        "name_ja": "バター",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Buttermilk",
+        "name_en": "Buttermilk",
+        "name_fr": "Babeurre",
+        "name_ja": "バターミルク",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Butterscotch chips",
+        "name_en": "Butterscotch chips",
+        "name_fr": "Chips de caramel au beurre",
+        "name_ja": "バタースコッチチップス",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Cabbage",
+        "name_en": "Cabbage",
+        "name_fr": "Chou",
+        "name_ja": "キャベツ",
+        "name_plural": "Cabbages",
+        "name_plural_en": "Cabbages",
+        "name_plural_fr": "Choux",
+        "name_plural_ja": "キャベツ"
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Cake flour",
+        "name_en": "Cake flour",
+        "name_fr": "Farine à gâteau",
+        "name_ja": "ケーキの粉",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Carrot",
+        "name_en": "Carrot",
+        "name_fr": "Carotte",
+        "name_ja": "にんじん",
+        "name_plural": "Carrots",
+        "name_plural_en": "Carrots",
+        "name_plural_fr": "Carottes",
+        "name_plural_ja": "にんじん"
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Cayenne pepper",
+        "name_en": "Cayenne pepper",
+        "name_fr": "Poivre de Cayenne",
+        "name_ja": "カイエンペッパー",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Celery",
+        "name_en": "Celery",
+        "name_fr": "Céleri",
+        "name_ja": "セロリ",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Cheddar cheese",
+        "name_en": "Cheddar cheese",
+        "name_fr": "Fromage cheddar",
+        "name_ja": "チェダーチーズ",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Chicken breast",
+        "name_en": "Chicken breast",
+        "name_fr": "Poitrine de poulet",
+        "name_ja": "鶏の胸肉",
+        "name_plural": "Chicken breasts",
+        "name_plural_en": "Chicken breasts",
+        "name_plural_fr": "Poitrines de poulets",
+        "name_plural_ja": "鶏の胸肉"
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Chicken broth",
+        "name_en": "Chicken broth",
+        "name_fr": "Bouillon de poulet",
+        "name_ja": "チキンブロス",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Chicken thigh",
+        "name_en": "Chicken thigh",
+        "name_fr": "Cuisse de poulet",
+        "name_ja": "鶏もも肉",
+        "name_plural": "Chicken thighs",
+        "name_plural_en": "Chicken thighs",
+        "name_plural_fr": "Cuisses de poulet",
+        "name_plural_ja": "鶏もも肉"
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Chili powder",
+        "name_en": "Chili powder",
+        "name_fr": "Poudre de chili",
+        "name_ja": "チリパウダー",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Chocolate chips",
+        "name_en": "Chocolate chips",
+        "name_fr": "Pépites de chocolat",
+        "name_ja": "チョコレートチップス",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Chow mein noodles",
+        "name_en": "Chow mein noodles",
+        "name_fr": "Nouilles Chow Mein",
+        "name_ja": "焼きそば",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Cilantro leaf",
+        "name_en": "Cilantro leaf",
+        "name_fr": "Feuille de coriandre",
+        "name_ja": "コリアンダーの葉",
+        "name_plural": "Cilantro leaves",
+        "name_plural_en": "Cilantro leaves",
+        "name_plural_fr": "Feuilles de coriandre",
+        "name_plural_ja": "コリアンダーの葉"
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Cinnamon",
+        "name_en": "Cinnamon",
+        "name_fr": "Cannelle",
+        "name_ja": "シナモン",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Cloves",
+        "name_en": "Cloves",
+        "name_fr": "Clous de girofles",
+        "name_ja": "クローブ",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Coconut",
+        "name_en": "Coconut",
+        "name_fr": "Noix de coco",
+        "name_ja": "ココナッツ",
+        "name_plural": "Coconuts",
+        "name_plural_en": "Coconuts",
+        "name_plural_fr": "Noix de cocos",
+        "name_plural_ja": "ココナッツ"
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Coconut milk",
+        "name_en": "Coconut milk",
+        "name_fr": "Lait de coco",
+        "name_ja": "ココナツミルク",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Coconut oil",
+        "name_en": "Coconut oil",
+        "name_fr": "Huile de noix de coco",
+        "name_ja": "ココナッツオイル",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Coffee",
+        "name_en": "Coffee",
+        "name_fr": "Café",
+        "name_ja": "コーヒー",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Icing sugar",
+        "name_en": "Icing sugar",
+        "name_fr": "Sucre glace",
+        "name_ja": "粉砂糖",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Cornmeal",
+        "name_en": "Cornmeal",
+        "name_fr": "Semoule de maïs",
+        "name_ja": "コーンミール",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Cornstarch",
+        "name_en": "Cornstarch",
+        "name_fr": "Fécule de maïs",
+        "name_ja": "コーンスターチ",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Cream",
+        "name_en": "Cream",
+        "name_fr": "Crème",
+        "name_ja": "クリーム",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Cream cheese",
+        "name_en": "Cream cheese",
+        "name_fr": "Fromage à la crème",
+        "name_ja": "クリームチーズ",
+        "name_plural": null,
+        "name_plural_en": null,
+        "name_plural_fr": null,
+        "name_plural_ja": null
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Cream of tartar",
+        "name_en": "Cream of tartar",
+        "name_fr": "Crème tartare",
+        "name_ja": "歯石のクリーム",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Crushed pineapple",
+        "name_en": "Crushed pineapple",
+        "name_fr": "Ananas écrasé",
+        "name_ja": "砕いたパイナップル",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Cumin",
+        "name_en": "Cumin",
+        "name_fr": "Cumin",
+        "name_ja": "クミン",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Curry powder",
+        "name_en": "Curry powder",
+        "name_fr": "Poudre de curry",
+        "name_ja": "カレー粉",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Dashi soup stock",
+        "name_en": "Dashi soup stock",
+        "name_fr": "Bouillon de soupe dashi",
+        "name_ja": "だし汁ストック",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Dijon mustard",
+        "name_en": "Dijon mustard",
+        "name_fr": "Moutarde de Dijon",
+        "name_ja": "ディジョンマスタード",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Dill",
+        "name_en": "Dill",
+        "name_fr": "Aneth",
+        "name_ja": "ディル",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Dried cranberries",
+        "name_en": "Dried cranberries",
+        "name_fr": "Canneberges séchées",
+        "name_ja": "ドライクランベリー",
+        "name_plural": null,
+        "name_plural_en": null,
+        "name_plural_fr": null,
+        "name_plural_ja": null
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Dry curd cottage cheese",
+        "name_en": "Dry curd cottage cheese",
+        "name_fr": "Fromage cottage en grains secs",
+        "name_ja": "ドライカードカッテージチーズ",
+        "name_plural": null,
+        "name_plural_en": null,
+        "name_plural_fr": null,
+        "name_plural_ja": null
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Egg",
+        "name_en": "Egg",
+        "name_fr": "Œuf",
+        "name_ja": "卵",
+        "name_plural": "Eggs",
+        "name_plural_en": "Eggs",
+        "name_plural_fr": "Œufs",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Egg noodles",
+        "name_en": "Egg noodles",
+        "name_fr": "Nouilles aux oeufs",
+        "name_ja": "卵麺",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Egg white",
+        "name_en": "Egg white",
+        "name_fr": "Blanc d'oeuf",
+        "name_ja": "卵白",
+        "name_plural": "Egg whites",
+        "name_plural_en": "Egg whites",
+        "name_plural_fr": "Blancs d'oeufs",
+        "name_plural_ja": null
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Egg yolk",
+        "name_en": "Egg yolk",
+        "name_fr": "Jaune d'œuf",
+        "name_ja": "卵黄",
+        "name_plural": "Egg yolks",
+        "name_plural_en": "Egg yolks",
+        "name_plural_fr": "Jaunes d'œufs",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Evaporated milk",
+        "name_en": "Evaporated milk",
+        "name_fr": "Lait évaporé",
+        "name_ja": "エバミルク",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Fish sauce",
+        "name_en": "Fish sauce",
+        "name_fr": "Sauce poisson",
+        "name_ja": "魚醤",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Flax seeds",
+        "name_en": "Flax seeds",
+        "name_fr": "Graines de lin",
+        "name_ja": "亜麻仁",
+        "name_plural": null,
+        "name_plural_en": null,
+        "name_plural_fr": null,
+        "name_plural_ja": null
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Garam masala",
+        "name_en": "Garam masala",
+        "name_fr": "Garam masala",
+        "name_ja": "ガラムマサラ",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Garlic",
+        "name_en": "Garlic",
+        "name_fr": "Ail",
+        "name_ja": "ニンニク",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Garlic powder",
+        "name_en": "Garlic powder",
+        "name_fr": "Poudre d'ail",
+        "name_ja": "ガーリックパウダー",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Ginger",
+        "name_en": "Ginger",
+        "name_fr": "Gingembre",
+        "name_ja": "ショウガ",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Gnocchi",
+        "name_en": "Gnocchi",
+        "name_fr": "Gnocchi",
+        "name_ja": "ニョッキ",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Graham cracker crumbs",
+        "name_en": "Graham cracker crumbs",
+        "name_fr": "Miettes de biscuits Graham",
+        "name_ja": "グラハムクラッカーのパン粉",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Granny smith spple",
+        "name_en": "Granny smith spple",
+        "name_fr": "Pomme verte",
+        "name_ja": "青りんご",
+        "name_plural": "Granny smith apples",
+        "name_plural_en": "Granny smith apples",
+        "name_plural_fr": "Pommes vertes",
+        "name_plural_ja": "青りんご"
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Greek yogurt",
+        "name_en": "Greek yogurt",
+        "name_fr": "Yaourt grec",
+        "name_ja": "ギリシャヨーグルト",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Green food colouring",
+        "name_en": "Green food colouring",
+        "name_fr": "Colorant alimentaire vert",
+        "name_ja": "緑の食品着色料",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Green onion",
+        "name_en": "Green onion",
+        "name_fr": "Oignon vert",
+        "name_ja": "緑ネギ",
+        "name_plural": "Green onions",
+        "name_plural_en": "Green onions",
+        "name_plural_fr": "Oignons verts",
+        "name_plural_ja": "緑ネギ"
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Green peas",
+        "name_en": "Green peas",
+        "name_fr": "Pois verts",
+        "name_ja": "グリーンピース",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Ground beef",
+        "name_en": "Ground beef",
+        "name_fr": "Bœuf haché",
+        "name_ja": "牛ひき肉",
+        "name_plural": null,
+        "name_plural_en": null,
+        "name_plural_fr": null,
+        "name_plural_ja": null
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Gruyère",
+        "name_en": "Gruyère",
+        "name_fr": "Gruyère",
+        "name_ja": "モツァレラチーズ",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Hoisin sauce",
+        "name_en": "Hoisin sauce",
+        "name_fr": "Sauce hoisin",
+        "name_ja": "海鮮醤",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Honey",
+        "name_en": "Honey",
+        "name_fr": "Miel",
+        "name_ja": "はちみつ",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Italian seasoning",
+        "name_en": "Italian seasoning",
+        "name_fr": "Assaisonnement italien",
+        "name_ja": "イタリアの調味料",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Ketchup",
+        "name_en": "Ketchup",
+        "name_fr": "Ketchup",
+        "name_ja": "ケチャップ",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Kosher salt",
+        "name_en": "Kosher salt",
+        "name_fr": "Sel casher",
+        "name_ja": "コーシャーソルト",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Leek",
+        "name_en": "Leek",
+        "name_fr": "Poireau",
+        "name_ja": "リーキ",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Lemon",
+        "name_en": "Lemon",
+        "name_fr": "Citron",
+        "name_ja": "レモン",
+        "name_plural": "Lemon",
+        "name_plural_en": "Lemon",
+        "name_plural_fr": "Citrons",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Lemon juice",
+        "name_en": "Lemon juice",
+        "name_fr": "Jus de citron",
+        "name_ja": "レモン汁",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Lemon zest",
+        "name_en": "Lemon zest",
+        "name_fr": "Zeste de citron",
+        "name_ja": "レモンの皮",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Lima beans",
+        "name_en": "Lima beans",
+        "name_fr": "Haricots de Lima",
+        "name_ja": "リママメ",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Lime juice",
+        "name_en": "Lime juice",
+        "name_fr": "Jus de citron vert",
+        "name_ja": "ライムジュース",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Low-fat plain yogurt",
+        "name_en": "Low-fat plain yogurt",
+        "name_fr": "Yaourt nature allégé",
+        "name_ja": "低脂肪プレーンヨーグルト",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Low-sodium soy sauce",
+        "name_en": "Low-sodium soy sauce",
+        "name_fr": "Sauce soja à faible teneur en sodium",
+        "name_ja": "減塩醤油",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Maple syrup",
+        "name_en": "Maple syrup",
+        "name_fr": "Sirop d'érable",
+        "name_ja": "メープルシロップ",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Maraschino cherries",
+        "name_en": "Maraschino cherries",
+        "name_fr": "Cerise au marasquin",
+        "name_ja": "マラスキーノチェリー",
+        "name_plural": "Maraschino cherry",
+        "name_plural_en": "Maraschino cherry",
+        "name_plural_fr": "Cerises au marasquin",
+        "name_plural_ja": "マラスキーノチェリー"
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Marshmallow",
+        "name_en": "Marshmallow",
+        "name_fr": "Guimauve",
+        "name_ja": "マシュマロ",
+        "name_plural": "Marshmallows",
+        "name_plural_en": "Marshmallows",
+        "name_plural_fr": "Guimauves",
+        "name_plural_ja": "マシュマロ"
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Matcha powder",
+        "name_en": "Matcha powder",
+        "name_fr": "Matcha en poudre",
+        "name_ja": "抹茶パウダー",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Mayonnaise",
+        "name_en": "Mayonnaise",
+        "name_fr": "Mayonnaise",
+        "name_ja": "マヨネーズ",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Milk",
+        "name_en": "Milk",
+        "name_fr": "Lait",
+        "name_ja": "牛乳",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Mirin",
+        "name_en": "Mirin",
+        "name_fr": "Mirin",
+        "name_ja": "みりん",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Mixed vegetables",
+        "name_en": "Mixed vegetables",
+        "name_fr": "Légumes mélangés",
+        "name_ja": "ミックス野菜",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Mochiko",
+        "name_en": "Mochiko",
+        "name_fr": "Mochiko",
+        "name_ja": "もちこ",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Molasses",
+        "name_en": "Molasses",
+        "name_fr": "Mélasse",
+        "name_ja": "糖蜜",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Monterey jack",
+        "name_en": "Monterey jack",
+        "name_fr": "Monterey Jack",
+        "name_ja": "モントレージャックチーズ",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Mushroom",
+        "name_en": "Mushroom",
+        "name_fr": "Champignon",
+        "name_ja": "キノコ",
+        "name_plural": "Mushrooms",
+        "name_plural_en": "Mushrooms",
+        "name_plural_fr": "Champignons",
+        "name_plural_ja": "キノコ"
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Nutmeg",
+        "name_en": "Nutmeg",
+        "name_fr": "Noix de muscade",
+        "name_ja": "ナツメグ",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Oatmeal",
+        "name_en": "Oatmeal",
+        "name_fr": "Gruau",
+        "name_ja": "オートミール",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Oil",
+        "name_en": "Oil",
+        "name_fr": "Huile",
+        "name_ja": "オイル",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Olive Oil",
+        "name_en": "Olive Oil",
+        "name_fr": "Huile d'olive",
+        "name_ja": "オリーブオイル",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Onion",
+        "name_en": "Onion",
+        "name_fr": "Oignon",
+        "name_ja": "玉ねぎ",
+        "name_plural": "Onions",
+        "name_plural_en": "Onions",
+        "name_plural_fr": "Oignons",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Onion powder",
+        "name_en": "Onion powder",
+        "name_fr": "Poudre d'oignon",
+        "name_ja": "オニオンパウダー",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Orange juice",
+        "name_en": "Orange juice",
+        "name_fr": "Jus d'orange",
+        "name_ja": "オレンジジュース",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Orange zest",
+        "name_en": "Orange zest",
+        "name_fr": "Zeste d'orange",
+        "name_ja": "オレンジの皮",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Oregano",
+        "name_en": "Oregano",
+        "name_fr": "Origan",
+        "name_ja": "オレガノ",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Paprika",
+        "name_en": "Paprika",
+        "name_fr": "Paprika",
+        "name_ja": "パプリカ",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Parmesan cheese",
+        "name_en": "Parmesan cheese",
+        "name_fr": "Parmesan",
+        "name_ja": "パルメザンチーズ",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Parsley",
+        "name_en": "Parsley",
+        "name_fr": "Persil",
+        "name_ja": "パセリ",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Peach",
+        "name_en": "Peach",
+        "name_fr": "Pêche",
+        "name_ja": "桃",
+        "name_plural": "Peaches",
+        "name_plural_en": "Peaches",
+        "name_plural_fr": "Pêches",
+        "name_plural_ja": "桃"
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Peanut",
+        "name_en": "Peanut",
+        "name_fr": "Peanut",
+        "name_ja": "ピーナッツ",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Peanut butter",
+        "name_en": "Peanut butter",
+        "name_fr": "Beurre d'arachide",
+        "name_ja": "ピーナッツバター",
+        "name_plural": null,
+        "name_plural_en": null,
+        "name_plural_fr": null,
+        "name_plural_ja": null
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Pecan",
+        "name_en": "Pecan",
+        "name_fr": "Noix de pécan",
+        "name_ja": "ペカン",
+        "name_plural": "Pecans",
+        "name_plural_en": "Pecans",
+        "name_plural_fr": "Noix de pécans",
+        "name_plural_ja": "ペカン"
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Pepper",
+        "name_en": "Pepper",
+        "name_fr": "Poivre",
+        "name_ja": "コショウ",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Peppermint extract",
+        "name_en": "Peppermint extract",
+        "name_fr": "Extrait de menthe poivrée",
+        "name_ja": "ペパーミントエキス",
+        "name_plural": null,
+        "name_plural_en": null,
+        "name_plural_fr": null,
+        "name_plural_ja": null
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Pesto",
+        "name_en": "Pesto",
+        "name_fr": "Pesto",
+        "name_ja": "ペスト",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Pineapple juice",
+        "name_en": "Pineapple juice",
+        "name_fr": "Jus d'ananas",
+        "name_ja": "バイナップルジュース",
+        "name_plural": null,
+        "name_plural_en": null,
+        "name_plural_fr": null,
+        "name_plural_ja": null
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Pistachio",
+        "name_en": "Pistachio",
+        "name_fr": "Pistache",
+        "name_ja": "ピスタチオ",
+        "name_plural": "Pistachios",
+        "name_plural_en": "Pistachios",
+        "name_plural_fr": "Pistaches",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Plain yogurt",
+        "name_en": "Plain yogurt",
+        "name_fr": "Yahourt nature",
+        "name_ja": "プレーンヨーグルト",
+        "name_plural": null,
+        "name_plural_en": null,
+        "name_plural_fr": null,
+        "name_plural_ja": null
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Portobello mushroom",
+        "name_en": "Portobello mushroom",
+        "name_fr": "Champignon portobello",
+        "name_ja": "ポートベローマッシュルーム",
+        "name_plural": "Portobello mushrooms",
+        "name_plural_en": "Portobello mushrooms",
+        "name_plural_fr": "Champignons portobellos",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Potato",
+        "name_en": "Potato",
+        "name_fr": "Pomme de terre",
+        "name_ja": "ポテト",
+        "name_plural": "Potatoes",
+        "name_plural_en": "Potatoes",
+        "name_plural_fr": "Pommes de terres",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Pumpkin",
+        "name_en": "Pumpkin",
+        "name_fr": "Citrouille",
+        "name_ja": "かぼちゃ",
+        "name_plural": "Pumpkins",
+        "name_plural_en": "Pumpkins",
+        "name_plural_fr": "Citrouilles",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Pumpkin pie spice",
+        "name_en": "Pumpkin pie spice",
+        "name_fr": "Épice à tarte à la citrouille",
+        "name_ja": "パンプキンパイスパイス",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Pumpkin purée",
+        "name_en": "Pumpkin purée",
+        "name_fr": "Purée de citrouille",
+        "name_ja": "かぼちゃのピューレ",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Raisin",
+        "name_en": "Raisin",
+        "name_fr": "Raisin sec",
+        "name_ja": "レーズン",
+        "name_plural": "Raisins",
+        "name_plural_en": "Raisins",
+        "name_plural_fr": "Raisins secs",
+        "name_plural_ja": "レーズン"
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Ramen Noodles",
+        "name_en": "Ramen Noodles",
+        "name_fr": "Nouilles ramen",
+        "name_ja": "ラーメン",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Raspberry",
+        "name_en": "Raspberry",
+        "name_fr": "Framboise",
+        "name_ja": "ラズベリー",
+        "name_plural": "Raspberries",
+        "name_plural_en": "Raspberries",
+        "name_plural_fr": "Framboises",
+        "name_plural_ja": "ラズベリー"
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Red curry paste",
+        "name_en": "Red curry paste",
+        "name_fr": "Pâte de curry rouge",
+        "name_ja": "レッドカレーペースト",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Red food coloring",
+        "name_en": "Red food coloring",
+        "name_fr": "Colorant alimentaire rouge",
+        "name_ja": "赤い食用色素",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Red Onion",
+        "name_en": "Red Onion",
+        "name_fr": "Oignon rouge",
+        "name_ja": "赤タマネギ",
+        "name_plural": "Red onions",
+        "name_plural_en": "Red onions",
+        "name_plural_fr": "Oignons rouges",
+        "name_plural_ja": "赤タマネギ"
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Red pepper",
+        "name_en": "Red pepper",
+        "name_fr": "Poivron rouge",
+        "name_ja": "唐辛子",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Red pepper flakes",
+        "name_en": "Red pepper flakes",
+        "name_fr": "Flocons de piment rouge",
+        "name_ja": "赤唐辛子フレーク",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Red Wine",
+        "name_en": "Red Wine",
+        "name_fr": "赤ワイン",
+        "name_ja": "Vin rouge",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Rhubarb",
+        "name_en": "Rhubarb",
+        "name_fr": "Rhubarbe",
+        "name_ja": "ダイオウ",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Rice",
+        "name_en": "Rice",
+        "name_fr": "Riz",
+        "name_ja": "ご飯",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Rice flour",
+        "name_en": "Rice flour",
+        "name_fr": "Farine de riz",
+        "name_ja": "米粉",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Rice noodles",
+        "name_en": "Rice noodles",
+        "name_fr": "Nouilles de riz",
+        "name_ja": "ライスヌードル",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Rice vinegar",
+        "name_en": "Rice vinegar",
+        "name_fr": "Vinaigre de riz",
+        "name_ja": "米酢",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Rosemary",
+        "name_en": "Rosemary",
+        "name_fr": "Romarin",
+        "name_ja": "ローズマリー",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Rum",
+        "name_en": "Rum",
+        "name_fr": "Rhum",
+        "name_ja": "ラム酒",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Russet potato",
+        "name_en": "Russet potato",
+        "name_fr": "Pomme de terre rousse",
+        "name_ja": "ラセットポテト",
+        "name_plural": "Russet potatoes",
+        "name_plural_en": "Russet potatoes",
+        "name_plural_fr": "Pommes de terres rousses",
+        "name_plural_ja": "ラセットポテト"
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Sake",
+        "name_en": "Sake",
+        "name_fr": "Saké",
+        "name_ja": "酒",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Salt",
+        "name_en": "Salt",
+        "name_fr": "Sel",
+        "name_ja": "塩",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Salt and pepper",
+        "name_en": "Salt and pepper",
+        "name_fr": "Sel et poivre",
+        "name_ja": "塩と胡椒",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Scallion",
+        "name_en": "Scallion",
+        "name_fr": "Scallion",
+        "name_ja": "新玉ねぎ",
+        "name_plural": "Scallions",
+        "name_plural_en": "Scallions",
+        "name_plural_fr": "Scallions",
+        "name_plural_ja": "新玉ねぎ"
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Sesame oil",
+        "name_en": "Sesame oil",
+        "name_fr": "Huile de sésame",
+        "name_ja": "胡麻油",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Shallot",
+        "name_en": "Shallot",
+        "name_fr": "Échalote",
+        "name_ja": "エシャロット",
+        "name_plural": "Shallots",
+        "name_plural_en": "Shallots",
+        "name_plural_fr": "Échalotes",
+        "name_plural_ja": "エシャロット"
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Sour Cream",
+        "name_en": "Sour Cream",
+        "name_fr": "Crème sure",
+        "name_ja": "サワークリーム",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Soy Sauce",
+        "name_en": "Soy Sauce",
+        "name_fr": "Sauce soja",
+        "name_ja": "醤油",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Spinach",
+        "name_en": "Spinach",
+        "name_fr": "Épinard",
+        "name_ja": "ほうれん草",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Spring onion",
+        "name_en": "Spring onion",
+        "name_fr": "Oignon de printemps",
+        "name_ja": "ネギ",
+        "name_plural": "Spring onions",
+        "name_plural_en": "Spring onions",
+        "name_plural_fr": "Oignons de printemps",
+        "name_plural_ja": "ネギ"
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Sriracha",
+        "name_en": "Sriracha",
+        "name_fr": "Sriracha",
+        "name_ja": "スリラチャ",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Strawberry",
+        "name_en": "Strawberry",
+        "name_fr": "Fraise",
+        "name_ja": "いちご",
+        "name_plural": "Strawberries",
+        "name_plural_en": "Strawberries",
+        "name_plural_fr": "Fraises",
+        "name_plural_ja": "いちご"
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Sweet potato",
+        "name_en": "Sweet potato",
+        "name_fr": "Patate douce",
+        "name_ja": "スイートポテト",
+        "name_plural": "Sweet potatoes",
+        "name_plural_en": "Sweet potatoes",
+        "name_plural_fr": "Patates douces",
+        "name_plural_ja": "スイートポテト"
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Thyme",
+        "name_en": "Thyme",
+        "name_fr": "Thym",
+        "name_ja": "タイム",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Tomato",
+        "name_en": "Tomato",
+        "name_fr": "Tomate",
+        "name_ja": "トマト",
+        "name_plural": "Tomatoes",
+        "name_plural_en": "Tomatoes",
+        "name_plural_fr": "Tomates",
+        "name_plural_ja": "トマト"
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Tomato paste",
+        "name_en": "Tomato paste",
+        "name_fr": "Pâte de Tomate",
+        "name_ja": "トマトペースト",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Tonkatsu Sauce",
+        "name_en": "Tonkatsu Sauce",
+        "name_fr": "Sauce Tonkatsu",
+        "name_ja": "とんかつソース",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Tortellini",
+        "name_en": "Tortellini",
+        "name_fr": "Tortellini",
+        "name_ja": "トルテリーニ",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Glutinous Rice",
+        "name_en": "Glutinous Rice",
+        "name_fr": "Riz gluant",
+        "name_ja": "未調理もち米",
+        "name_plural": null,
+        "name_plural_en": null,
+        "name_plural_fr": null,
+        "name_plural_ja": null
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Unsalted Butter",
+        "name_en": "Unsalted Butter",
+        "name_fr": "Beurre sans sel",
+        "name_ja": "無塩バター",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Applesauce",
+        "name_en": "Applesauce",
+        "name_fr": "Compote de pommes",
+        "name_ja": "アップルソース",
+        "name_plural": null,
+        "name_plural_en": null,
+        "name_plural_fr": null,
+        "name_plural_ja": null
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Unsweetened cocoa powder",
+        "name_en": "Unsweetened cocoa powder",
+        "name_fr": "Poudre de cacao sans sucre",
+        "name_ja": "無糖のカカオパウダー",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Vanilla Extract",
+        "name_en": "Vanilla Extract",
+        "name_fr": "Extrait de vanille",
+        "name_ja": "バニラ抽出物",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Vegetable Bouillon Powder",
+        "name_en": "Vegetable Bouillon Powder",
+        "name_fr": "Poudre de bouillon de légumes",
+        "name_ja": "野菜ブイヨンパウダー",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Vegetable broth",
+        "name_en": "Vegetable broth",
+        "name_fr": "Bouillon de legumes",
+        "name_ja": "野菜スープ",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Vegetable Oil",
+        "name_en": "Vegetable Oil",
+        "name_fr": "Huile végétale",
+        "name_ja": "植物油",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Walnut",
+        "name_en": "Walnut",
+        "name_fr": "Noix de Grenoble",
+        "name_ja": "クルミ",
+        "name_plural": "Walnuts",
+        "name_plural_en": "Walnuts",
+        "name_plural_fr": "Noix de Grenobles",
+        "name_plural_ja": "クルミ"
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Mashed potatoes",
+        "name_en": "Mashed potatoes",
+        "name_fr": "Patates pilées",
+        "name_ja": "マッシュポテト",
+        "name_plural": null,
+        "name_plural_en": null,
+        "name_plural_fr": null,
+        "name_plural_ja": null
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Water",
+        "name_en": "Water",
+        "name_fr": "Eau",
+        "name_ja": "水",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Whipped cream",
+        "name_en": "Whipped cream",
+        "name_fr": "Crème fouettée",
+        "name_ja": "ホイップクリーム",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "White navy bean",
+        "name_en": "White navy bean",
+        "name_fr": "Haricot blanc",
+        "name_ja": "白インゲン豆",
+        "name_plural": "White navy beans",
+        "name_plural_en": "White navy beans",
+        "name_plural_fr": "Haricots blancs",
+        "name_plural_ja": "白インゲン豆"
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Whole milk",
+        "name_en": "Whole milk",
+        "name_fr": "Lait entier",
+        "name_ja": "全乳",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Worcestershire Sauce",
+        "name_en": "Worcestershire Sauce",
+        "name_fr": "Sauce Worcestershire",
+        "name_ja": "ウスターソース",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Yellow pepper",
+        "name_en": "Yellow pepper",
+        "name_fr": "Poivron jaune",
+        "name_ja": "イエローペッパー",
+        "name_plural": "Yellow peppers",
+        "name_plural_en": "Yellow peppers",
+        "name_plural_fr": "Poivrons jaunes",
+        "name_plural_ja": "イエローペッパー"
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Yukon gold potato",
+        "name_en": "Yukon gold potato",
+        "name_fr": "Pomme de terre d'or du Yukon",
+        "name_ja": "ユーコンゴールドポテト",
+        "name_plural": "Yukon gold potatoes",
+        "name_plural_en": "Yukon gold potatoes",
+        "name_plural_fr": "Pommes de terres d'or du Yukon",
+        "name_plural_ja": ""
+    }
+},
+{
+    "model": "food.food",
+    "fields": {
+        "name": "Zucchini",
+        "name_en": "Zucchini",
+        "name_fr": "Courgette",
+        "name_ja": "ズッキーニ",
+        "name_plural": "",
+        "name_plural_en": "",
+        "name_plural_fr": "",
+        "name_plural_ja": ""
+    }
+}
+]

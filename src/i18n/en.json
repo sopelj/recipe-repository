@@ -7,7 +7,8 @@
     "title_short": "Recipe Repo",
     "login": "Login",
     "logout": "Logout",
-    "admin": "Admin"
+    "admin": "Admin",
+    "keep_screen_on": "Keep screen on"
   },
   "routes": {
     "recipe_list": "/en/",

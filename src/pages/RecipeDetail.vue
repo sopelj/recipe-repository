@@ -11,6 +11,7 @@ import HeadSection from "../layouts/HeadSection.vue";
 import { useI18n } from "vue-i18n";
 import UserAvatar from "@/components/UserAvatar.vue";
 import RecipeSource from "@/components/RecipeSource.vue";
+import KeepAwake from "@/components/KeepAwake.vue";
 
 interface FormErrors {
   servings?: string[];
@@ -252,7 +253,10 @@ const updateServings = (multiplier: number) => {
         />
       </div>
       <div class="col-span-12 md:col-span-8">
-        <h2 class="text-xl mb-2">{{ t("recipe.directions") }}</h2>
+        <div class="flex flex-row">
+          <h2 class="text-xl mb-2 flex-grow">{{ t("recipe.directions") }}</h2>
+          <KeepAwake />
+        </div>
         <Panel
           v-for="(step, i) in recipe.steps"
           :key="i"

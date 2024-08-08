@@ -7,7 +7,8 @@
     "title_short": "レシピリポ",
     "login": "ログイン",
     "logout": "ログアウト",
-    "admin": "管理"
+    "admin": "管理",
+    "keep_screen_on": "画面をオンにしたままにする"
   },
   "routes": {
     "recipe_list": "/ja/",

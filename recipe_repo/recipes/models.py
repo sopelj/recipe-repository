@@ -16,6 +16,7 @@ from modeltranslation.manager import MultilingualQuerySet
 
 from ..common.models import NamedModel, NamedPluralModel
 from ..common.utils import pluralize
+from ..units.consts import UnitType
 from ..units.utils import format_fraction_amounts
 
 if TYPE_CHECKING:
@@ -283,6 +284,10 @@ class Ingredient(models.Model):
     @cached_property
     def food_display(self) -> str:
         """Return Food pluralised based on formatted amounts."""
+        if self.unit and self.unit.type != UnitType.OTHER:
+            # When dealing with weight or volume based units always use the plural name if defined
+            # One may say "1 almond", but it would be "1 cup almonds" regardless of number.
+            return self.food.name_plural or self.food.name
         return pluralize(self.food.name, self.food.name_plural, self.formatted_amounts[1])
 
     class Meta:
