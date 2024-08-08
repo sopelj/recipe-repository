@@ -18,6 +18,7 @@ if TYPE_CHECKING:
 class FoodAdmin(TranslationAdmin):
     search_fields = ("name",)
     list_display = ("name", "get_used_count")
+    ordering = ("name",)
 
     def get_queryset(self, request: HttpRequest) -> QuerySet[Food]:
         """Add count annotation in list mode."""
