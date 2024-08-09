@@ -167,7 +167,7 @@ def get_nutrition_unit_value(name: str, value: str) -> float:
     """Get recommended unit based on value."""
     mg_values = ("potassiumContent", "sodiumContent", "cholesterolContent")
     unit = "mg" if name in mg_values else "g"
-    return unit_registry(value).to(unit).magnitude
+    return unit_registry(name).to(unit).magnitude
 
 
 def create_nutrition_information(recipe: Recipe, nutrition: dict[str, str]) -> None:
