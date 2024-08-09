@@ -55,7 +55,7 @@ const filteredCategories = computed((): Category[] =>
             <Card
               class="text-center overflow-clip transition-all border dark:border-slate-600 dark:hover:border-violet-700 hover:scale-105 w-100"
             >
-              <template #title>{{ category.name_plural || category.name }}</template>
+              <template #title><h2>{{ category.name_plural || category.name }}</h2></template>
               <template #header>
                 <img
                   :src="category.thumbnail_image_url"
