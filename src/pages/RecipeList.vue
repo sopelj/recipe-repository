@@ -5,7 +5,6 @@ import type { Category } from "../types/categories.ts";
 import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 
-import Button from "primevue/button";
 import { Link as ILink } from "@inertiajs/vue3";
 import HeadSection from "../layouts/HeadSection.vue";
 

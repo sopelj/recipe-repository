@@ -64,7 +64,7 @@ const setLocale = (lang: string) => {
               @click="setLocale('fr')"
             >
               <span class="sm:hidden">FR</span>
-              <span class="hidden sm:inline-block">Frabçais</span>
+              <span class="hidden sm:inline-block">Français</span>
             </PButton>
             <PButton
               v-if="locale !== 'ja'"
