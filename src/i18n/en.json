@@ -33,6 +33,7 @@
   "recipe": {
     "added_by": "Added by:",
     "all_recipes": "All recipes",
+    "browse_categories": "Browse categories",
     "categories": "Categories:",
     "directions": "Directions",
     "from": "From:",
@@ -45,6 +46,7 @@
   },
   "routes": {
     "admin": "/en/admin/",
+    "category_list": "/en/categories/",
     "login": "/en/admin/login/",
     "logout": "/en/admin/logout/",
     "recipe_category": "/en/categories/{slug}/",

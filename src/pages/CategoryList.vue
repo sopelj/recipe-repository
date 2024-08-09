@@ -20,6 +20,12 @@ const filteredCategories = computed((): Category[] =>
 <template>
   <HeadSection :title="t('categories.title')" />
   <div class="container mx-auto">
+    <div class="flex items-center">
+      <h1 class="text-4xl pt-2 pb-4 px-4 flex-grow">{{ t('categories.all_categories') }}</h1>
+      <ILink :href="t('routes.recipe_list')" class="pr-2">
+        {{ t("recipe.all_recipes") }}
+      </ILink>
+    </div>
     <h1 class="sr-only">{{ t("categories.title") }}</h1>
     <DataView
       layout="grid"

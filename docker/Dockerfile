@@ -26,7 +26,7 @@ RUN set -ex \
 COPY --from=build-image /opt/venv /opt/venv
 
 # Install Deps (translations and SSR)
-RUN apk add --no-cache nodejs yarn gettext libpq-dev
+RUN apk add --no-cache nodejs yarn gettext libpq-dev libldap
 
 # Entrypoint
 COPY ./docker/entrypoint.sh /entrypoint.sh

@@ -5,6 +5,7 @@ import type { Category } from "../types/categories.ts";
 import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 
+import Button from "primevue/button";
 import { Link as ILink } from "@inertiajs/vue3";
 import HeadSection from "../layouts/HeadSection.vue";
 
@@ -31,7 +32,15 @@ const title = computed(
 <template>
   <HeadSection :title="title" />
   <div class="container mx-auto">
-    <h1 class="text-4xl pt-2 pb-4 px-4">{{ title }}</h1>
+    <div class="flex items-center">
+      <h1 class="text-4xl pt-2 pb-4 px-4 flex-grow">{{ title }}</h1>
+      <ILink v-if="category" :href="t('routes.recipe_list')" class="pr-2">
+        {{ t("recipe.all_recipes") }}
+      </ILink>
+      <ILink :href="t('routes.category_list')">
+        {{ category ? t("categories.all_categories") : t("recipe.browse_categories") }}
+      </ILink>
+    </div>
     <data-view
       layout="grid"
       :value="filteredRecipes"

@@ -34,9 +34,17 @@ if TYPE_CHECKING:
 class CategoryAdmin(TranslationAdmin):
     prepopulated_fields = {"slug": ("name",)}
     search_fields = ("name",)
-    list_display = ("name", "top_level")
+    list_display = ("get_thumbnail", "name", "top_level")
+    ordering = ("name",)
     autocomplete_fields = ("sub_categories",)
     list_filter = ("sub_categories", "top_level")
+
+    @admin.display(description=_("Thumbnail"))
+    def get_thumbnail(self, obj: Recipe) -> str:
+        """Add Small thumbnail to recipe admin list view."""
+        if obj.image:
+            return format_html('<img src="{}" />', obj.image["admin"].url)
+        return _("No thumbnail")
 
 
 @admin.register(Source)

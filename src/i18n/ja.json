@@ -33,6 +33,7 @@
   "recipe": {
     "added_by": "によって追加",
     "all_recipes": "すべてのレシピ",
+    "browse_categories": "カテゴリを閲覧する",
     "categories": "カテゴリ",
     "directions": "手順",
     "from": "から",
@@ -45,6 +46,7 @@
   },
   "routes": {
     "admin": "/ja/admin/",
+    "category_list": "/ja/kategori/",
     "login": "/ja/admin/login/",
     "logout": "/ja/admin/logout/",
     "recipe_category": "/ja/kategori/{slug}/",
