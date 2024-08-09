@@ -1,8 +1,10 @@
 from __future__ import annotations
 
+import re
 from decimal import Decimal
 from fractions import Fraction
 from typing import TYPE_CHECKING
+from unicodedata import numeric
 
 from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
@@ -17,6 +19,8 @@ if TYPE_CHECKING:
 type FracTuple = tuple[int, int]
 type Fractions = tuple[FracTuple, ...]
 type SplitFractions = tuple[Decimal, FracTuple | None, Decimal]
+
+NUMERIC_STRING_REGEX = re.compile(r"(([0-9]*\s?)?(([0-9]+/[0-9]+)|([\u2150-\u215E\u00BC-\u00BE])))|([0-9]+)")
 
 TSP_FRACTIONS = ((1, 2), (1, 4), (1, 8))
 TBSP_FRACTIONS = ((1, 2),)
@@ -41,6 +45,18 @@ IMPERIAL_LABELS = {
     "fluid_ounce": (_("fl oz"), None),
     "pound": (_("lb"), None),
 }
+
+
+def parse_numeric_string(value: str) -> Decimal:
+    """Attempt to parse a string that could be an int or fraction into a decimal."""
+    match = NUMERIC_STRING_REGEX.match(value.strip(" "))
+    whole, __, fraction, fake_fraction, only_num = match.groups()[1:]
+    amount = int(num) if (num := only_num or whole) else 0
+    if fraction and (f := Fraction(fraction)):
+        amount += f.numerator / f.denominator
+    elif fake_fraction:
+        amount += numeric(fake_fraction)
+    return Decimal(amount)
 
 
 def soft_round(value: Decimal) -> Decimal:

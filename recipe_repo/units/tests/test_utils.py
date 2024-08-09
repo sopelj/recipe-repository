@@ -16,12 +16,28 @@ from ..utils import (
     format_fraction,
     format_imperial_amounts,
     is_nice_fraction,
+    parse_numeric_string,
 )
 
 if TYPE_CHECKING:
     from pint.registry import Quantity, Unit
 
     from ..utils import Fractions
+
+
+@pytest.mark.parametrize(
+    ("numeric", "number"),
+    [
+        ("1", 1),
+        ("1/2", 0.5),
+        ("2/3", 0.666),
+        ("1 3/4", 1.75),
+        ("2 3/4", 2.75),
+        ("1 ¼", 1.25),
+    ],
+)
+def test_parse_numeric_string(numeric: str, number: float) -> None:
+    assert pytest.approx(parse_numeric_string(numeric), rel=Decimal("1e-3")) == Decimal(number)
 
 
 @pytest.mark.parametrize(
@@ -35,7 +51,7 @@ if TYPE_CHECKING:
         ("ja", 2, "1/2", "2と2分の1分"),
     ],
 )
-def test_parse_numeric_string(language: str, whole: int, fraction: str, expected: str) -> None:
+def test_format_fraction(language: str, whole: int, fraction: str, expected: str) -> None:
     with translation.override(language):
         assert format_fraction(whole, Fraction(fraction)) == expected
 

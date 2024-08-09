@@ -249,8 +249,8 @@ class Ingredient(models.Model):
     scale: int = 1
 
     order = models.PositiveIntegerField(_("Order"), blank=True, null=True)
-    amount = models.DecimalField(_("Amount"), null=True, blank=True, max_digits=10, decimal_places=4)
-    amount_max = models.DecimalField(_("Max Amount"), null=True, blank=True, max_digits=10, decimal_places=4)
+    amount = models.DecimalField(_("Amount"), null=True, blank=True, max_digits=10, decimal_places=5)
+    amount_max = models.DecimalField(_("Max Amount"), null=True, blank=True, max_digits=10, decimal_places=5)
     note = models.CharField(_("Note"), max_length=100, blank=True)
     optional = models.BooleanField(_("Optional"), default=False)
 

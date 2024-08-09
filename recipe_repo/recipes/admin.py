@@ -11,7 +11,7 @@ from django.utils.translation import gettext_lazy as _
 from django.views.generic.edit import FormView
 from modeltranslation.admin import TranslationAdmin, TranslationTabularInline
 
-from .forms import RecipeImportForm
+from .forms import IngredientAdminForm, RecipeImportForm
 from .models import (
     Category,
     Ingredient,
@@ -83,16 +83,17 @@ class IngredientQualifierAdmin(TranslationAdmin):
         super().save_model(request, obj, form, change)
 
 
-class IngredientInlineAdmin(SortableInlineAdminMixin, TranslationTabularInline):
-    model = Ingredient
-    extra = 1
-    autocomplete_fields = ("food", "unit", "qualifier")
-    fields = ("amount", "amount_max", "unit", "food", "qualifier", "optional", "note", "group")
-
-
 class IngredientGroupInlineAdmin(SortableInlineAdminMixin, TranslationTabularInline):
     model = IngredientGroup
     extra = 0
+
+
+class IngredientInlineAdmin(SortableInlineAdminMixin, TranslationTabularInline):
+    model = Ingredient
+    extra = 1
+    form = IngredientAdminForm
+    autocomplete_fields = ("food", "unit", "qualifier")
+    fields = ("amount", "amount_max", "unit", "food", "qualifier", "optional", "note", "group")
 
 
 class StepInlineAdmin(SortableInlineAdminMixin, TranslationTabularInline):

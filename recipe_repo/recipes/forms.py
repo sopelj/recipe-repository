@@ -10,7 +10,8 @@ from django.utils import translation
 from django.utils.translation import gettext_lazy as _
 from recipe_scrapers import AbstractScraper, WebsiteNotImplementedError, scrape_html
 
-from .models import Recipe
+from .fields import FractionField
+from .models import Ingredient, Recipe
 from .recipe_importing import USER_AGENT, create_recipe_from_scraper
 
 
@@ -22,6 +23,17 @@ class ServingsForm(forms.Form):
         required=False,
         initial=Decimal(1),
     )
+
+
+class IngredientAdminForm(forms.ModelForm):
+    """Custom form to allow for entering fractions into decimal fields for ease of use."""
+
+    amount = FractionField(required=False)
+    amount_max = FractionField(required=False)
+
+    class Meta:
+        model = Ingredient
+        fields = "__all__"
 
 
 class RecipeImportForm(forms.ModelForm):

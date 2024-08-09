@@ -3,11 +3,8 @@ import logging
 import re
 import shutil
 from datetime import timedelta
-from decimal import Decimal
-from fractions import Fraction
 from pathlib import Path
 from tempfile import NamedTemporaryFile
-from unicodedata import numeric
 from urllib.error import HTTPError
 from urllib.parse import urlsplit
 
@@ -22,6 +19,7 @@ from ..common.utils import to_snake_case
 from ..food.models import Food
 from ..units import unit_registry
 from ..units.models import Unit
+from ..units.utils import parse_numeric_string
 from .models import (
     Category,
     Ingredient,
@@ -39,7 +37,6 @@ logger = logging.getLogger(__name__)
 
 USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1"
 YIELD_REGEX = re.compile(r"^([0-9]+)\s?(.+)")
-NUMERIC_STRING_REGEX = re.compile(r"(([0-9]*\s?)?(([0-9]+/[0-9]+)|([\u2150-\u215E\u00BC-\u00BE])))|([0-9]+)")
 INGREDIENT_LINE_REGEX = re.compile(r"^([\u2150-\u215E\u00BC-\u00BE\d\s/-]+) (([\w.]*).+?)$")
 
 
@@ -83,18 +80,6 @@ def parse_yield_values(yields: str | None) -> tuple[int | None, str | None, int 
             Q(name__iexact=unit.rstrip("s")) | Q(name_plural__istartswith=unit),
         ).get_or_create(defaults={"name": unit.capitalize().rstrip("s"), "name_plural": unit.capitalize()})[0]
     return yield_value, yield_unit, servings
-
-
-def parse_numeric_string(value: str) -> Decimal:
-    """Attempt to parse a string that could be an int or fraction into a decimal."""
-    match = NUMERIC_STRING_REGEX.match(value.strip(" "))
-    whole, __, fraction, fake_fraction, only_num = match.groups()[1:]
-    amount = int(num) if (num := only_num or whole) else 0
-    if fraction and (f := Fraction(fraction)):
-        amount += f.numerator / f.denominator
-    elif fake_fraction:
-        amount += numeric(fake_fraction)
-    return Decimal(amount)
 
 
 def extract_notes(text: str) -> tuple[str, str]:
