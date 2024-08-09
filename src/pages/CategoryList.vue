@@ -21,12 +21,14 @@ const filteredCategories = computed((): Category[] =>
   <HeadSection :title="t('categories.title')" />
   <div class="container mx-auto">
     <div class="flex items-center">
-      <h1 class="text-4xl pt-2 pb-4 px-4 flex-grow">{{ t('categories.all_categories') }}</h1>
-      <ILink :href="t('routes.recipe_list')" class="pr-2">
+      <h1 class="text-4xl pt-2 pb-4 px-4 flex-grow">{{ t("categories.all_categories") }}</h1>
+      <ILink
+        :href="t('routes.recipe_list')"
+        class="pr-2 sm:pr-0 text-center hover:underline"
+      >
         {{ t("recipe.all_recipes") }}
       </ILink>
     </div>
-    <h1 class="sr-only">{{ t("categories.title") }}</h1>
     <DataView
       layout="grid"
       :value="filteredCategories"
@@ -50,12 +52,14 @@ const filteredCategories = computed((): Category[] =>
             v-for="category in items"
             :key="category.slug"
             :href="t('routes.recipe_category', { slug: category.slug })"
-            class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-2 p-2"
+            class="col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-2 p-2"
           >
             <Card
               class="text-center overflow-clip transition-all border dark:border-slate-600 dark:hover:border-violet-700 hover:scale-105 w-100"
             >
-              <template #title><h2>{{ category.name_plural || category.name }}</h2></template>
+              <template #title>
+                <h2>{{ category.name_plural || category.name }}</h2>
+              </template>
               <template #header>
                 <img
                   :src="category.thumbnail_image_url"

@@ -33,10 +33,10 @@ const title = computed(
   <div class="container mx-auto">
     <div class="flex items-center">
       <h1 class="text-4xl pt-2 pb-4 px-4 flex-grow">{{ title }}</h1>
-      <ILink v-if="category" :href="t('routes.recipe_list')" class="pr-2">
+      <ILink v-if="category" :href="t('routes.recipe_list')" class="pr-2 text-center hover:underline">
         {{ t("recipe.all_recipes") }}
       </ILink>
-      <ILink :href="t('routes.category_list')">
+      <ILink :href="t('routes.category_list')" class="text-center pr-2 sm:pr-0 hover:underline">
         {{ category ? t("categories.all_categories") : t("recipe.browse_categories") }}
       </ILink>
     </div>
