@@ -55,7 +55,6 @@ INSTALLED_APPS = [
     "easy_thumbnails",
     "django_breeze",
     "django_extensions",
-    "treebeard",
     "colorfield",
     # Local apps
     "recipe_repo.food",
