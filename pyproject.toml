@@ -17,7 +17,6 @@ classifiers=[
 ]
 dependencies = [
     "django>=4.2",
-    "django-stubs[compatible-mypy]",
     "django-admin-interface",
     "django-admin-sortable2",
     "django-colorfield",
@@ -51,6 +50,11 @@ production = [
     "psycopg[c]>=3.1.8",
     "pymemcache"
 ]
+mypy = [
+    "djangorestframework-stubs[compatible-mypy]>=3.15.0",
+    "types-requests",
+    "django-stubs-ext",
+]
 
 [project.urls]
 "Source code" = "https://github.com/sopelj/recipe-repository/"
@@ -70,8 +74,29 @@ features = ["test"]
 cov = "pytest -vvv --asyncio-mode=auto --cov=recipe_repo --cov-branch --cov-report=xml --cov-report=term-missing"
 no-cov = "cov --no-cov"
 
+[tool.hatch.envs.mypy]
+features = ["mypy"]
+
+[tool.hatch.envs.mypy.scripts]
+check = "mypy {args}"
+
 [tool.mypy]
+# Requires mypy >= 1.11.0
+# enable_incomplete_feature = "NewGenericSyntax"
 plugins = ["mypy_django_plugin.main"]
+enable_error_code = [
+  "truthy-bool",
+  "truthy-iterable",
+  "redundant-expr",
+  "unused-awaitable",
+  "ignore-without-code",
+  "possibly-undefined",
+  "redundant-self",
+]
+explicit_package_bases = true
+ignore_missing_imports = true
+strict = true
+warn_unreachable = true
 
 [tool.black]
 line-length = 120

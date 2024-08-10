@@ -25,7 +25,7 @@ class ServingsForm(forms.Form):
     )
 
 
-class IngredientAdminForm(forms.ModelForm):
+class IngredientAdminForm(forms.ModelForm[Ingredient]):
     """Custom form to allow for entering fractions into decimal fields for ease of use."""
 
     amount = FractionField(required=False)
@@ -36,7 +36,7 @@ class IngredientAdminForm(forms.ModelForm):
         fields = "__all__"
 
 
-class RecipeImportForm(forms.ModelForm):
+class RecipeImportForm(forms.ModelForm[Recipe]):
     """
     Take a URL and try and scrape it and build a recipe from it.
 

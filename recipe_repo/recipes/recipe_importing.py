@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import contextlib
 import logging
 import re
@@ -5,6 +7,7 @@ import shutil
 from datetime import timedelta
 from pathlib import Path
 from tempfile import NamedTemporaryFile
+from typing import TYPE_CHECKING
 from urllib.error import HTTPError
 from urllib.parse import urlsplit
 
@@ -13,7 +16,6 @@ from django.core.files import File
 from django.db import IntegrityError
 from django.db.models import Q
 from pint.errors import UndefinedUnitError
-from recipe_scrapers import AbstractScraper
 from slugify import slugify
 
 from ..common.utils import to_snake_case
@@ -33,6 +35,20 @@ from .models import (
     Step,
     YieldUnit,
 )
+
+if TYPE_CHECKING:
+    from recipe_scrapers import AbstractScraper
+    from recipe_scrapers._grouping_utils import IngredientGroup as ScraperIngredientGroup
+
+    class Scraper(AbstractScraper):
+        def title(self) -> str: ...  # noqa: D102
+        def description(self) -> str | None: ...  # noqa: D102
+        def yields(self) -> str | None: ...  # noqa: D102
+        def image(self) -> str | None: ...  # noqa: D102
+        def cook_time(self) -> float | None: ...  # noqa: D102
+        def prep_time(self) -> float | None: ...  # noqa: D102
+        def ingredient_groups(self) -> list[ScraperIngredientGroup]: ...  # noqa: D102
+
 
 logger = logging.getLogger(__name__)
 
@@ -193,7 +209,7 @@ def create_nutrition_information(recipe: Recipe, nutrition: dict[str, str]) -> N
     )
 
 
-def create_recipe_from_scraper(scraper: AbstractScraper, url: str) -> Recipe | None:
+def create_recipe_from_scraper(scraper: Scraper, url: str) -> Recipe | None:
     """Take a scraper and try to create a recipe from it."""
     title = scraper.title()
     host = scraper.host() or urlsplit(url).hostname

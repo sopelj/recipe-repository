@@ -49,9 +49,9 @@ class Unit(NamedPluralModel):
 
     def format_amounts(self, amount: Decimal, max_amount: Decimal | None) -> tuple[str, Decimal]:
         """Format amounts based on this unit."""
-        if self.system == System.METRIC:
+        if self.unit and self.system == System.METRIC:
             return format_metric_amounts(amount, max_amount, self.unit)
-        if self.system == System.IMPERIAL:
+        if self.unit and self.system == System.IMPERIAL:
             return format_imperial_amounts(amount, max_amount, self.unit)
         formatted_amount, count = format_fraction_amounts(amount, max_amount)
         return (

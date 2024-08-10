@@ -1,34 +1,36 @@
+from __future__ import annotations
+
 from rest_framework import serializers
 
 from ..users.serializers import UserSerializer
 from .models import Category, Ingredient, NutritionInformation, Recipe, Source
 
 
-class CategorySerializer(serializers.ModelSerializer):
+class CategorySerializer(serializers.ModelSerializer[Category]):
     class Meta:
         model = Category
         fields = ("name", "name_plural", "slug")
 
 
-class CategoryListSerializer(serializers.ModelSerializer):
+class CategoryListSerializer(serializers.ModelSerializer[Category]):
     class Meta:
         model = Category
         fields = ("name", "name_plural", "slug", "thumbnail_image_url")
 
 
-class NutritionSerializer(serializers.ModelSerializer):
+class NutritionSerializer(serializers.ModelSerializer[NutritionInformation]):
     class Meta:
         model = NutritionInformation
         exclude = ("recipe", "id")
 
 
-class SourceSerializer(serializers.ModelSerializer):
+class SourceSerializer(serializers.ModelSerializer[Source]):
     class Meta:
         model = Source
         fields = ("name", "type", "value")
 
 
-class IngredientSerializer(serializers.ModelSerializer):
+class IngredientSerializer(serializers.ModelSerializer[Ingredient]):
     qualifier = serializers.SlugRelatedField(read_only=True, slug_field="title")
     group_id = serializers.IntegerField()
 
@@ -37,7 +39,7 @@ class IngredientSerializer(serializers.ModelSerializer):
         fields = ("id", "amount_display", "food_display", "optional", "note", "qualifier", "group_id")
 
 
-class RecipeListSerializer(serializers.ModelSerializer):
+class RecipeListSerializer(serializers.ModelSerializer[Recipe]):
     num_ratings = serializers.IntegerField()
     avg_ratings = serializers.IntegerField(allow_null=True)
     categories = CategorySerializer(many=True, read_only=True)
@@ -47,7 +49,7 @@ class RecipeListSerializer(serializers.ModelSerializer):
         fields = ("name", "slug", "thumbnail_url", "description", "categories", "num_ratings", "avg_ratings")
 
 
-class RecipeSerializer(RecipeListSerializer):
+class RecipeSerializer(RecipeListSerializer[Recipe]):
     total_time = serializers.DurationField()
     yield_unit = serializers.SlugRelatedField(read_only=True, slug_field="name")
     steps = serializers.SlugRelatedField(many=True, read_only=True, slug_field="text")

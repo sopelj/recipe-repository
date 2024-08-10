@@ -23,7 +23,7 @@ if TYPE_CHECKING:
     from django.http import HttpRequest, HttpResponse
 
 
-@login_required()
+@login_required
 @inertia("category-list")
 def category_list(request: HttpRequest) -> HttpResponse:
     """List all available categories."""

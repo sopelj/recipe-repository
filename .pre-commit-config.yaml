@@ -53,3 +53,12 @@ repos:
           - "eslint-plugin-prettier@^5.2.1"
           - "prettier@^3.3.3"
           - "typescript-eslint@^8.0.0"
+  - repo: local
+    hooks:
+      - id: mypy
+        language: python
+        language_version: python3.12
+        name: Run mypy
+        entry: hatch run mypy:check
+        files: \.(py)$
+        additional_dependencies: ["hatch"]

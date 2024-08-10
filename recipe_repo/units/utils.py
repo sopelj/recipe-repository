@@ -16,9 +16,9 @@ if TYPE_CHECKING:
     from pint import Unit as PintUnit
 
 
-type FracTuple = tuple[int, int]
-type Fractions = tuple[FracTuple, ...]
-type SplitFractions = tuple[Decimal, FracTuple | None, Decimal]
+type FracTuple = tuple[int, int]  # type: ignore[valid-type]
+type Fractions = tuple[FracTuple, ...]  # type: ignore[valid-type]
+type SplitFractions = tuple[Decimal, FracTuple | None, Decimal]  # type: ignore[valid-type]
 
 NUMERIC_STRING_REGEX = re.compile(r"(([0-9]*\s?)?(([0-9]+/[0-9]+)|([\u2150-\u215E\u00BC-\u00BE])))|([0-9]+)")
 
@@ -51,7 +51,7 @@ def parse_numeric_string(value: str) -> Decimal:
     """Attempt to parse a string that could be an int or fraction into a decimal."""
     match = NUMERIC_STRING_REGEX.match(value.strip(" "))
     whole, __, fraction, fake_fraction, only_num = match.groups()[1:]
-    amount = int(num) if (num := only_num or whole) else 0
+    amount: float = int(num) if (num := only_num or whole) else 0
     if fraction and (f := Fraction(fraction)):
         amount += f.numerator / f.denominator
     elif fake_fraction:
@@ -107,7 +107,7 @@ def is_nice_fraction(amount: Decimal, allowed_fractions: Fractions) -> bool:
 
 def find_imperial_unit(quantity: Quantity) -> tuple[Decimal, str]:
     """Find the best imperial unit for displaying this quantity."""
-    units = IMPERIAL_UNITS_VOLUME
+    units: tuple[str, ...] = IMPERIAL_UNITS_VOLUME
     if not quantity.units.is_compatible_with("cup"):
         units = IMPERIAL_UNITS_WEIGHT
 

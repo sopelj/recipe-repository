@@ -275,9 +275,9 @@ class Ingredient(models.Model):
     )
 
     @cached_property
-    def scaled_amount(self) -> Decimal:
+    def scaled_amount(self) -> Decimal | None:
         """Amount scaled."""
-        return self.amount * self.scale
+        return self.amount * self.scale if self.amount else None
 
     @cached_property
     def scaled_amount_max(self) -> Decimal | None:
