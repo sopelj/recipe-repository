@@ -8,8 +8,10 @@ from django.utils.translation import get_language
 if TYPE_CHECKING:
     from decimal import Decimal
 
+    from django_stubs_ext import StrOrPromise
 
-def pluralize(singular: str, plural: str | None, count: Decimal | float) -> str:
+
+def pluralize(singular: StrOrPromise, plural: StrOrPromise | None, count: Decimal | float) -> StrOrPromise:
     """Return the plural or singular form depending on language and count."""
     if not plural:  # no point checking
         return singular

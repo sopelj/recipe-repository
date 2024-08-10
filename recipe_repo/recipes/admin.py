@@ -31,7 +31,7 @@ if TYPE_CHECKING:
 
 
 @admin.register(Category)
-class CategoryAdmin(TranslationAdmin):
+class CategoryAdmin(TranslationAdmin[Category]):
     prepopulated_fields = {"slug": ("name",)}
     search_fields = ("name",)
     list_display = ("get_thumbnail", "name", "top_level")
@@ -48,13 +48,13 @@ class CategoryAdmin(TranslationAdmin):
 
 
 @admin.register(Source)
-class SourceAdmin(admin.ModelAdmin):
+class SourceAdmin(admin.ModelAdmin[Source]):
     list_display = ("value",)
     search_fields = ("name", "value")
 
 
 @admin.register(UserRating)
-class UserRatingAdmin(admin.ModelAdmin):
+class UserRatingAdmin(admin.ModelAdmin[UserRating]):
     list_display = ("get_user_full_name", "get_recipe_name", "rating")
     list_filter = [("user", admin.RelatedOnlyFieldListFilter), ("recipe", admin.RelatedOnlyFieldListFilter)]
     autocomplete_fields = ("user", "recipe")
@@ -77,12 +77,12 @@ class UserRatingAdmin(admin.ModelAdmin):
 
 
 @admin.register(YieldUnit)
-class YieldUnitAdmin(TranslationAdmin):
+class YieldUnitAdmin(TranslationAdmin[YieldUnit]):
     search_fields = ("name",)
 
 
 @admin.register(IngredientQualifier)
-class IngredientQualifierAdmin(TranslationAdmin):
+class IngredientQualifierAdmin(TranslationAdmin[IngredientQualifier]):
     search_fields = ("title",)
 
     def save_model(self, request: HttpRequest, obj: IngredientQualifier, form: ModelForm, change: bool) -> None:
@@ -91,12 +91,18 @@ class IngredientQualifierAdmin(TranslationAdmin):
         super().save_model(request, obj, form, change)
 
 
-class IngredientGroupInlineAdmin(SortableInlineAdminMixin, TranslationTabularInline):
+class IngredientGroupInlineAdmin(
+    SortableInlineAdminMixin,  # type: ignore[misc]
+    TranslationTabularInline[IngredientGroup, Recipe],
+):
     model = IngredientGroup
     extra = 0
 
 
-class IngredientInlineAdmin(SortableInlineAdminMixin, TranslationTabularInline):
+class IngredientInlineAdmin(
+    SortableInlineAdminMixin,  # type: ignore[misc]
+    TranslationTabularInline[Ingredient, Recipe],
+):  # type: ignore[misc]
     model = Ingredient
     extra = 1
     form = IngredientAdminForm
@@ -104,12 +110,12 @@ class IngredientInlineAdmin(SortableInlineAdminMixin, TranslationTabularInline):
     fields = ("amount", "amount_max", "unit", "food", "qualifier", "optional", "note", "group")
 
 
-class StepInlineAdmin(SortableInlineAdminMixin, TranslationTabularInline):
+class StepInlineAdmin(SortableInlineAdminMixin, TranslationTabularInline[Step, Recipe]):  # type: ignore[misc]
     model = Step
     extra = 1
 
 
-class RecipeImportView(FormView):
+class RecipeImportView(FormView[RecipeImportForm]):
     admin_site: admin.AdminSite
     template_name = "admin/recipe_import.html"
     form_class = RecipeImportForm
@@ -125,7 +131,7 @@ class RecipeImportView(FormView):
             recipe.save()
         return redirect("admin:recipes_recipe_change", object_id=recipe.pk)
 
-    def get_context_data(self, **kwargs: Any):
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         """Add form data to context."""
         context = super().get_context_data(**kwargs)
         if "form" not in context:
@@ -135,7 +141,7 @@ class RecipeImportView(FormView):
 
 
 @admin.register(Recipe)
-class RecipeAdmin(SortableAdminBase, TranslationAdmin):
+class RecipeAdmin(SortableAdminBase, TranslationAdmin[Recipe]):  # type: ignore[misc]
     save_on_top = True
     search_fields = ("name",)
     list_display = ("get_thumbnail", "name", "get_categories")

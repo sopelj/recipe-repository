@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import re
 from functools import cached_property
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, override
 
 from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
@@ -23,6 +23,8 @@ from ..units.utils import format_fraction_amounts
 if TYPE_CHECKING:
     from datetime import timedelta
     from decimal import Decimal
+
+    from django_stubs_ext.db.models.manager import RelatedManager
 
 
 RATING_CHOICES = (
@@ -70,6 +72,7 @@ class UserRating(models.Model):
     recipe = models.ForeignKey("Recipe", related_name="ratings", on_delete=models.CASCADE)
     user = models.ForeignKey("users.User", related_name="ratings", on_delete=models.CASCADE)
 
+    @override
     def __str__(self) -> str:
         return gettext("User {user} rated '{recipe}' {rating}").format(
             user=self.user.full_name or self.user.email,
@@ -83,6 +86,8 @@ class UserRating(models.Model):
 
 
 class YieldUnit(NamedPluralModel):
+    recipe_set: RelatedManager[Recipe]
+
     class Meta:
         verbose_name = _("Yield Unit")
         verbose_name_plural = _("Yield Units")
@@ -96,6 +101,8 @@ class SourceTypes(models.IntegerChoices):
 
 
 class Source(NamedModel):
+    recipe_set: RelatedManager[Recipe]
+
     type = models.PositiveIntegerField(_("Type"), choices=SourceTypes.choices, default=SourceTypes.URL)
     value = models.CharField(_("Value"), blank=True, null=True, max_length=200)
 
@@ -104,11 +111,7 @@ class Source(NamedModel):
         """Validate values if types if URL or Book."""
         if source_type == SourceTypes.URL:
             URLValidator()(value)
-        elif (
-            source_type == SourceTypes.BOOK
-            and value is not None
-            and not re.match(r"(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)", value)
-        ):
+        elif source_type == SourceTypes.BOOK and value and not re.match(r"(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)", value):
             raise ValidationError("Invalid ISBN value")
 
     def get_value_display(self) -> str:
@@ -200,6 +203,7 @@ class Recipe(NamedModel):
 class IngredientQualifier(models.Model):
     title = models.CharField(_("Title"), max_length=100, unique=True)
 
+    @override
     def __str__(self) -> str:
         return self.title
 
@@ -316,6 +320,7 @@ class Step(models.Model):
     recipe = models.ForeignKey(Recipe, verbose_name=_("Recipe"), related_name="steps", on_delete=models.CASCADE)
     text = models.TextField(_("Text"), blank=True)
 
+    @override
     def __str__(self) -> str:
         """Display truncated text as string value."""
         return f"{self.text[:25]}..." if len(self.text) > 25 else self.text

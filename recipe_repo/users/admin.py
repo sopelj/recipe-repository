@@ -8,7 +8,7 @@ from django.utils.translation import gettext_lazy as _
 from .models import User
 
 
-class UserAddForm(BaseUserCreationForm):
+class UserAddForm(BaseUserCreationForm[User]):
     class Meta:
         model = User
         fields = ("email",)
@@ -16,7 +16,7 @@ class UserAddForm(BaseUserCreationForm):
 
 
 @admin.register(User)
-class UserAdmin(BaseUserAdmin):
+class UserAdmin(BaseUserAdmin[User]):
     add_form = UserAddForm
     list_display = ("email", "first_name", "last_name", "is_staff")
     search_fields = ("first_name", "last_name", "email")

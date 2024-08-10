@@ -15,7 +15,7 @@ from easy_thumbnails.files import get_thumbnailer
 class UserManager(BaseUserManager):
     use_in_migrations = True
 
-    def _create_user(self, email: str | None, password: str, **extra_fields: Any) -> User:
+    def _create_user(self, email: str, password: str, **extra_fields: Any) -> User:
         """Create and save a user with the given email, and password."""
         if not email:
             raise ValueError("The given email must be set")
@@ -26,7 +26,7 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_user(self, email: str, password: str | None = None, **extra_fields: Any):
+    def create_user(self, email: str, password: str, **extra_fields: Any):
         """Create user with email."""
         extra_fields.setdefault("is_staff", False)
         extra_fields.setdefault("is_superuser", False)

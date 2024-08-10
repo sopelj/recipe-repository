@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from decimal import Decimal
+from typing import TYPE_CHECKING
 from urllib.parse import urlsplit, urlunsplit
 
 import requests
@@ -8,11 +9,15 @@ from django import forms
 from django.conf import settings
 from django.utils import translation
 from django.utils.translation import gettext_lazy as _
-from recipe_scrapers import AbstractScraper, WebsiteNotImplementedError, scrape_html
+from recipe_scrapers import scrape_html
+from recipe_scrapers._exceptions import RecipeScrapersExceptions
 
 from .fields import FractionField
 from .models import Ingredient, Recipe
 from .recipe_importing import USER_AGENT, create_recipe_from_scraper
+
+if TYPE_CHECKING:
+    from recipe_scrapers import AbstractScraper
 
 
 class ServingsForm(forms.Form):
@@ -57,7 +62,7 @@ class RecipeImportForm(forms.ModelForm[Recipe]):
         recipe_html = requests.get(url, headers={"User-Agent": USER_AGENT}, timeout=30).content
         try:
             self.scraper = scrape_html(recipe_html, org_url=url)
-        except WebsiteNotImplementedError as e:
+        except RecipeScrapersExceptions as e:
             self.add_error("url", str(e))
         return self.cleaned_data
 
