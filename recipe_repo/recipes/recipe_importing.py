@@ -12,6 +12,7 @@ import requests
 from django.core.files import File
 from django.db import IntegrityError
 from django.db.models import Q
+from pint.errors import UndefinedUnitError
 from recipe_scrapers import AbstractScraper
 from slugify import slugify
 
@@ -163,11 +164,15 @@ def parse_ingredient(recipe: Recipe, group: IngredientGroup, ingredient_text: st
     )
 
 
-def get_nutrition_unit_value(name: str, value: str) -> float:
+def get_nutrition_unit_value(name: str, value: str) -> float | None:
     """Get recommended unit based on value."""
     mg_values = ("potassiumContent", "sodiumContent", "cholesterolContent")
     unit = "mg" if name in mg_values else "g"
-    return unit_registry(name).to(unit).magnitude
+    try:
+        return unit_registry(value).to(unit).magnitude
+    except UndefinedUnitError as e:
+        logger.warning("Failed to parse value '%s' for nutrition '%s'. Error: %s", value, name, e)
+        return None
 
 
 def create_nutrition_information(recipe: Recipe, nutrition: dict[str, str]) -> None:
@@ -181,9 +186,9 @@ def create_nutrition_information(recipe: Recipe, nutrition: dict[str, str]) -> N
             parse_numeric_string(servings.split(" ")[0]) if (servings := nutrition.pop("servingSize", None)) else 1
         ),
         **{
-            to_snake_case(name.replace("Content", "")): get_nutrition_unit_value(name, value)
+            to_snake_case(name.replace("Content", "")): v
             for name, value in nutrition.items()
-            if value
+            if (v := get_nutrition_unit_value(name, value))
         },
     )
 
