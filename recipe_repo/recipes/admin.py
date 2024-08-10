@@ -36,8 +36,8 @@ class CategoryAdmin(TranslationAdmin):
     search_fields = ("name",)
     list_display = ("get_thumbnail", "name", "top_level")
     ordering = ("name",)
-    autocomplete_fields = ("sub_categories",)
-    list_filter = ("sub_categories", "top_level")
+    autocomplete_fields = ("parent_categories",)
+    list_filter = ("parent_categories", "top_level")
 
     @admin.display(description=_("Thumbnail"))
     def get_thumbnail(self, obj: Recipe) -> str:

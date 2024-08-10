@@ -45,12 +45,12 @@ class Category(NamedPluralModel):
         help_text=_("This is one of the top level categories."),
     )
 
-    sub_categories = models.ManyToManyField(
+    parent_categories = models.ManyToManyField(
         "self",
         symmetrical=False,
         blank=True,
-        related_name="parent_categories",
-        verbose_name=_("Sub-categories"),
+        related_name="sub_categories",
+        verbose_name=_("Parent-categories"),
     )
     image = ThumbnailerImageField(_("Thumbnail"), upload_to="images/categories/", null=True, blank=True)
 
