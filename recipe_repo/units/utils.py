@@ -14,12 +14,12 @@ from recipe_repo.common.utils import pluralize
 if TYPE_CHECKING:
     from typing import TypeAlias
 
-    from pint.facets.plain.quantity import PlainQuantity
+    from pint import Quantity as PintQuantity
+    from pint import Unit as PintUnit
 
     FracTuple: TypeAlias = tuple[int, int]  # noqa UP040
     Fractions: TypeAlias = tuple[FracTuple, ...]  # noqa UP040
     SplitFractions: TypeAlias = tuple[Decimal, FracTuple | None, Decimal]  # noqa UP040
-    DecimalQuantity: TypeAlias = PlainQuantity[Decimal]  # noqa UP040
 
 NUMERIC_STRING_REGEX = re.compile(r"(([0-9]*\s?)?(([0-9]+/[0-9]+)|([\u2150-\u215E\u00BC-\u00BE])))|([0-9]+)")
 
@@ -107,7 +107,7 @@ def is_nice_fraction(amount: Decimal, allowed_fractions: Fractions) -> bool:
     return not fraction or fraction.as_integer_ratio() in allowed_fractions
 
 
-def find_imperial_unit(quantity: DecimalQuantity) -> tuple[Decimal, str]:
+def find_imperial_unit(quantity: PintQuantity) -> tuple[Decimal, str]:
     """Find the best imperial unit for displaying this quantity."""
     units: tuple[str, ...] = IMPERIAL_UNITS_VOLUME
     if not quantity.units.is_compatible_with("cup"):
@@ -140,7 +140,7 @@ def format_fraction_amounts(amount: Decimal, max_amount: Decimal | None) -> tupl
     return format_decimal_as_fraction(amount), amount
 
 
-def format_metric_amounts(amount: Decimal, max_amount: Decimal | None, unit: DecimalQuantity) -> tuple[str, Decimal]:
+def format_metric_amounts(amount: Decimal, max_amount: Decimal | None, unit: PintUnit) -> tuple[str, Decimal]:
     """Format metric amounts as needed."""
     compact_amount = (amount * unit).to_compact()
     if compact_amount.magnitude < 0.0001:
@@ -166,7 +166,7 @@ def format_imperial_amount(amount: Decimal, unit: str | None) -> str:
     return formatted_amount
 
 
-def format_imperial_amounts(amount: Decimal, max_amount: Decimal | None, unit: DecimalQuantity) -> tuple[str, Decimal]:
+def format_imperial_amounts(amount: Decimal, max_amount: Decimal | None, unit: PintUnit) -> tuple[str, Decimal]:
     """Format amounts for imperial units."""
     new_amount, new_unit = find_imperial_unit(amount * unit)
     if max_amount:

@@ -127,8 +127,8 @@ class Source(NamedModel):
         verbose_name_plural = _("Sources")
 
 
-class RecipeQuerySet(MultilingualQuerySet):
-    def with_ratings(self) -> RecipeQuerySet[Recipe]:
+class RecipeQuerySet(MultilingualQuerySet["Recipe"]):
+    def with_ratings(self) -> RecipeQuerySet:
         """Return Queryset with rating annotations."""
         return self.annotate(avg_rating=Avg("ratings__rating"), num_ratings=Count("ratings"))
 

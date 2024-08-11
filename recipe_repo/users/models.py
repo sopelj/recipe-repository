@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from django.conf import settings
 from django.contrib.auth.base_user import BaseUserManager
@@ -11,8 +11,13 @@ from django.utils.translation import gettext_lazy as _
 from easy_thumbnails.fields import ThumbnailerImageField
 from easy_thumbnails.files import get_thumbnailer
 
+if TYPE_CHECKING:
+    from django_stubs_ext.db.models.manager import RelatedManager
 
-class UserManager(BaseUserManager):
+    from recipe_repo.recipes.models import Recipe
+
+
+class UserManager(BaseUserManager["User"]):
     use_in_migrations = True
 
     def _create_user(self, email: str, password: str, **extra_fields: Any) -> User:
@@ -26,7 +31,7 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_user(self, email: str, password: str, **extra_fields: Any):
+    def create_user(self, email: str, password: str, **extra_fields: Any) -> User:
         """Create user with email."""
         extra_fields.setdefault("is_staff", False)
         extra_fields.setdefault("is_superuser", False)
@@ -50,6 +55,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     EMAIL_FIELD = "email"
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
+
+    my_recipes: RelatedManager[Recipe]
 
     first_name = models.CharField(_("First name"), max_length=150, blank=True)
     last_name = models.CharField(_("Last name"), max_length=150, blank=True)

@@ -16,6 +16,7 @@ from django.core.files import File
 from django.db import IntegrityError
 from django.db.models import Q
 from pint.errors import UndefinedUnitError
+from recipe_scrapers._exceptions import SchemaOrgException
 from slugify import slugify
 
 from ..common.utils import to_snake_case
@@ -37,10 +38,13 @@ from .models import (
 )
 
 if TYPE_CHECKING:
+    from collections.abc import Callable
+
     from recipe_scrapers import AbstractScraper
     from recipe_scrapers._grouping_utils import IngredientGroup as ScraperIngredientGroup
 
     class Scraper(AbstractScraper):
+        def language(self) -> str: ...  # noqa: D102
         def title(self) -> str: ...  # noqa: D102
         def description(self) -> str | None: ...  # noqa: D102
         def yields(self) -> str | None: ...  # noqa: D102
@@ -82,9 +86,11 @@ def add_image_to_recipe(recipe: Recipe, image_url: str) -> None:
             recipe.save()
 
 
-def parse_yield_values(yields: str | None) -> tuple[int | None, str | None, int | None]:
+def parse_yield_values(yields: str | None) -> tuple[int | None, YieldUnit | None, int | None]:
     """Attempt to parse yields values from text."""
-    yield_value, yield_unit, servings = None, None, None
+    yield_value: int | None = None
+    yield_unit: YieldUnit | None = None
+    servings: int | None = None
     if yields and (match := YIELD_REGEX.match(yields)):
         value, unit = match.groups()
         with contextlib.suppress(ValueError):
@@ -175,7 +181,7 @@ def parse_ingredient(recipe: Recipe, group: IngredientGroup, ingredient_text: st
         group=group,
         optional=optional,
         recipe=recipe,
-        note=notes or None,
+        note=notes or "",
         order=order,
     )
 
@@ -185,7 +191,8 @@ def get_nutrition_unit_value(name: str, value: str) -> float | None:
     mg_values = ("potassiumContent", "sodiumContent", "cholesterolContent")
     unit = "mg" if name in mg_values else "g"
     try:
-        return unit_registry(value).to(unit).magnitude
+        magnitude: float = unit_registry(value).to(unit).magnitude
+        return magnitude
     except UndefinedUnitError as e:
         logger.warning("Failed to parse value '%s' for nutrition '%s'. Error: %s", value, name, e)
         return None
@@ -193,20 +200,27 @@ def get_nutrition_unit_value(name: str, value: str) -> float | None:
 
 def create_nutrition_information(recipe: Recipe, nutrition: dict[str, str]) -> None:
     """Create Nutrition information from schema data."""
+    serving_value = servings.split(" ")[0] if (servings := nutrition.pop("servingSize", None)) else None
+    calorie_value = calories.split(" ")[0] if (calories := nutrition.pop("calories", None)) else None
     NutritionInformation.objects.create(
         recipe=recipe,
-        calories=(
-            parse_numeric_string(calories.split(" ")[0]) if (calories := nutrition.pop("calories", None)) else None
-        ),
-        serving_size=(
-            parse_numeric_string(servings.split(" ")[0]) if (servings := nutrition.pop("servingSize", None)) else 1
-        ),
+        calories=int(c) if calorie_value and (c := parse_numeric_string(calorie_value)) else None,
+        serving_size=int(c) if serving_value and (c := parse_numeric_string(serving_value)) else 1,
         **{
             to_snake_case(name.replace("Content", "")): v
             for name, value in nutrition.items()
             if (v := get_nutrition_unit_value(name, value))
         },
     )
+
+
+def get_from_schema[T](method: Callable[[], T]) -> T | None:  # type: ignore[valid-type,name-defined]
+    """Try to get value from scraper, but fall back to None with logging."""
+    try:
+        return method()
+    except SchemaOrgException as e:
+        logger.debug("Failed to get value from %: %s", method, e)
+        return None
 
 
 def create_recipe_from_scraper(scraper: Scraper, url: str) -> Recipe | None:
@@ -217,10 +231,10 @@ def create_recipe_from_scraper(scraper: Scraper, url: str) -> Recipe | None:
         name=title,
         slug=slugify(title),
         source_value=url,
-        cook_time=timedelta(minutes=cook_time) if (cook_time := scraper.cook_time()) else None,
-        prep_time=timedelta(minutes=pre_time) if (pre_time := scraper.prep_time()) else None,
+        cook_time=timedelta(minutes=cook_time) if (cook_time := get_from_schema(scraper.cook_time)) else None,
+        prep_time=timedelta(minutes=pre_time) if (pre_time := get_from_schema(scraper.prep_time)) else None,
         source=get_or_create_source(host, scraper.site_name()),
-        description=scraper.description(),
+        description=scraper.description() or "",
     )
     try:
         recipe.save()
@@ -230,7 +244,7 @@ def create_recipe_from_scraper(scraper: Scraper, url: str) -> Recipe | None:
     if image_url := scraper.image():
         add_image_to_recipe(recipe, image_url)
 
-    recipe.yield_label, recipe.yield_unit, recipe.servings = parse_yield_values(scraper.yields())
+    recipe.yield_amount, recipe.yield_unit, recipe.servings = parse_yield_values(scraper.yields())
     recipe.save()
 
     # Create one Step for each line in recipe instructions

@@ -1,11 +1,19 @@
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
 from django.conf import settings
-from django.http import HttpRequest, HttpResponse
 from inertia import share
 
 from recipe_repo.users.serializers import UserSerializer
 
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
-def inertia_share(get_response):
+    from django.http import HttpRequest, HttpResponse
+
+
+def inertia_share(get_response: Callable[[HttpRequest], HttpResponse]) -> Callable[[HttpRequest], HttpResponse]:
     """Middleware to inject shared data for inertia."""
 
     def middleware(request: HttpRequest) -> HttpResponse:

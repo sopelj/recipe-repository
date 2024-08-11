@@ -24,18 +24,19 @@ if TYPE_CHECKING:
 
 
 @login_required
-@inertia("category-list")
+@inertia("category-list")  # type: ignore[misc]
 def category_list(request: HttpRequest) -> HttpResponse:
     """List all available categories."""
-    return render(
+    response: HttpResponse = render(
         request,
         "CategoryList",
         {"categories": CategoryListSerializer(Category.objects.filter(top_level=True), many=True).data},
     )
+    return response
 
 
 @login_required
-@inertia("recipe-list")
+@inertia("recipe-list")  # type: ignore[misc]
 def recipe_list(request: HttpRequest, category_slug: str | None = None) -> HttpResponse:
     """List all available recipes."""
     category: Category | None = None
@@ -47,7 +48,7 @@ def recipe_list(request: HttpRequest, category_slug: str | None = None) -> HttpR
     else:
         categories = Category.objects.filter(top_level=True)
 
-    return render(
+    response: HttpResponse = render(
         request,
         "RecipeList",
         {
@@ -56,16 +57,25 @@ def recipe_list(request: HttpRequest, category_slug: str | None = None) -> HttpR
             "categories": CategorySerializer(categories, many=True).data,
         },
     )
+    return response
 
 
 def get_full_recipe(recipe_id: int) -> Recipe:
     """Ger the recipe with all necessary relationships."""
-    return (
-        Recipe.objects.with_ratings().select_related("source", "nutrition", "yield_unit", "added_by").get(pk=recipe_id)
+    recipe: Recipe = (
+        Recipe.objects.with_ratings()
+        .select_related(
+            "source",
+            "nutrition",
+            "yield_unit",
+            "added_by",
+        )
+        .get(pk=recipe_id)
     )
+    return recipe
 
 
-@inertia("recipe-detail")
+@inertia("recipe-detail")  # type: ignore[misc]
 def recipe_detail(request: HttpRequest, slug: str) -> HttpResponse:
     """Get a specific recipe by slug."""
     try:
@@ -86,7 +96,7 @@ def recipe_detail(request: HttpRequest, slug: str) -> HttpResponse:
         .order_by("group__order", "order")
     )
 
-    return render(
+    response: HttpResponse = render(
         request,
         "RecipeDetail",
         {
@@ -96,3 +106,4 @@ def recipe_detail(request: HttpRequest, slug: str) -> HttpResponse:
             "errors": errors,
         },
     )
+    return response

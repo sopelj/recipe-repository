@@ -1,47 +1,52 @@
 from __future__ import annotations
 
-from rest_framework import serializers
+from typing import TYPE_CHECKING
+
+from rest_framework.serializers import DurationField, IntegerField, ModelSerializer, SlugRelatedField
 
 from ..users.serializers import UserSerializer
 from .models import Category, Ingredient, NutritionInformation, Recipe, Source
 
+if TYPE_CHECKING:
+    from .models import IngredientQualifier, Step, YieldUnit
 
-class CategorySerializer(serializers.ModelSerializer[Category]):
+
+class CategorySerializer(ModelSerializer[Category]):
     class Meta:
         model = Category
         fields = ("name", "name_plural", "slug")
 
 
-class CategoryListSerializer(serializers.ModelSerializer[Category]):
+class CategoryListSerializer(ModelSerializer[Category]):
     class Meta:
         model = Category
         fields = ("name", "name_plural", "slug", "thumbnail_image_url")
 
 
-class NutritionSerializer(serializers.ModelSerializer[NutritionInformation]):
+class NutritionSerializer(ModelSerializer[NutritionInformation]):
     class Meta:
         model = NutritionInformation
         exclude = ("recipe", "id")
 
 
-class SourceSerializer(serializers.ModelSerializer[Source]):
+class SourceSerializer(ModelSerializer[Source]):
     class Meta:
         model = Source
         fields = ("name", "type", "value")
 
 
-class IngredientSerializer(serializers.ModelSerializer[Ingredient]):
-    qualifier = serializers.SlugRelatedField(read_only=True, slug_field="title")
-    group_id = serializers.IntegerField()
+class IngredientSerializer(ModelSerializer[Ingredient]):
+    qualifier: SlugRelatedField[IngredientQualifier] = SlugRelatedField(read_only=True, slug_field="title")
+    group_id = IntegerField()
 
     class Meta:
         model = Ingredient
         fields = ("id", "amount_display", "food_display", "optional", "note", "qualifier", "group_id")
 
 
-class RecipeListSerializer(serializers.ModelSerializer[Recipe]):
-    num_ratings = serializers.IntegerField()
-    avg_ratings = serializers.IntegerField(allow_null=True)
+class RecipeListSerializer(ModelSerializer[Recipe]):
+    num_ratings = IntegerField()
+    avg_ratings = IntegerField(allow_null=True)
     categories = CategorySerializer(many=True, read_only=True)
 
     class Meta:
@@ -49,11 +54,11 @@ class RecipeListSerializer(serializers.ModelSerializer[Recipe]):
         fields = ("name", "slug", "thumbnail_url", "description", "categories", "num_ratings", "avg_ratings")
 
 
-class RecipeSerializer(RecipeListSerializer[Recipe]):
-    total_time = serializers.DurationField()
-    yield_unit = serializers.SlugRelatedField(read_only=True, slug_field="name")
-    steps = serializers.SlugRelatedField(many=True, read_only=True, slug_field="text")
-    source = SourceSerializer(read_only=True)
+class RecipeSerializer(RecipeListSerializer):
+    total_time = DurationField()
+    yield_unit: SlugRelatedField[YieldUnit] = SlugRelatedField(read_only=True, slug_field="name")
+    steps: SlugRelatedField[Step] = SlugRelatedField(many=True, read_only=True, slug_field="text")
+    source = SourceSerializer(read_only=True)  # type: ignore[assignment]
     nutrition = NutritionSerializer(read_only=True)
     added_by = UserSerializer(read_only=True)
 

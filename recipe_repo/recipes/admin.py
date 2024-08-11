@@ -28,6 +28,7 @@ if TYPE_CHECKING:
     from django.db.models import QuerySet
     from django.forms import ModelForm
     from django.http import HttpRequest, HttpResponseRedirect
+    from django_stubs_ext import StrOrPromise
 
 
 @admin.register(Category)
@@ -40,7 +41,7 @@ class CategoryAdmin(TranslationAdmin[Category]):
     list_filter = ("parent_categories", "top_level")
 
     @admin.display(description=_("Thumbnail"))
-    def get_thumbnail(self, obj: Recipe) -> str:
+    def get_thumbnail(self, obj: Recipe) -> StrOrPromise:
         """Add Small thumbnail to recipe admin list view."""
         if obj.image:
             return format_html('<img src="{}" />', obj.image["admin"].url)
@@ -59,19 +60,22 @@ class UserRatingAdmin(admin.ModelAdmin[UserRating]):
     list_filter = [("user", admin.RelatedOnlyFieldListFilter), ("recipe", admin.RelatedOnlyFieldListFilter)]
     autocomplete_fields = ("user", "recipe")
 
-    @admin.display(description=_("User"), ordering=("user__first_name", "user__last_name"))
+    @admin.display(  # type: ignore[call-overload,misc]
+        description=_("User"),
+        ordering=("user__first_name", "user__last_name"),
+    )
     def get_user_full_name(self, obj: UserRating) -> str:
         """Get full name of user for list view."""
         return obj.user.full_name or obj.user.email
 
-    @admin.display(description=_("Recipe"), ordering=("recipe__name",))
+    @admin.display(description=_("Recipe"), ordering=("recipe__name",))  # type: ignore[call-overload,misc]
     def get_recipe_name(self, obj: UserRating) -> str:
         """Get the name of a recipe for list view."""
         return obj.recipe.name
 
     def get_queryset(self, request: HttpRequest) -> QuerySet[UserRating]:
         """Pre-fetch some fields in list mode."""
-        if request.resolver_match.view_name == "admin:food_food_changelist":
+        if request.resolver_match and request.resolver_match.view_name == "admin:food_food_changelist":
             return UserRating.objects.select_related("user", "recipe")
         return UserRating.objects.filter()
 
@@ -85,7 +89,13 @@ class YieldUnitAdmin(TranslationAdmin[YieldUnit]):
 class IngredientQualifierAdmin(TranslationAdmin[IngredientQualifier]):
     search_fields = ("title",)
 
-    def save_model(self, request: HttpRequest, obj: IngredientQualifier, form: ModelForm, change: bool) -> None:
+    def save_model(
+        self,
+        request: HttpRequest,
+        obj: IngredientQualifier,
+        form: ModelForm[IngredientQualifier],
+        change: bool,
+    ) -> None:
         """Ensure lower case title for uniformity."""
         obj.title = obj.title.lower()
         super().save_model(request, obj, form, change)
@@ -102,7 +112,7 @@ class IngredientGroupInlineAdmin(
 class IngredientInlineAdmin(
     SortableInlineAdminMixin,  # type: ignore[misc]
     TranslationTabularInline[Ingredient, Recipe],
-):  # type: ignore[misc]
+):
     model = Ingredient
     extra = 1
     form = IngredientAdminForm
@@ -123,10 +133,7 @@ class RecipeImportView(FormView[RecipeImportForm]):
     def form_valid(self, form: RecipeImportForm) -> HttpResponseRedirect:
         """Check if recipe is imported successfully."""
         recipe = form.save()
-        if recipe is None:
-            form.add_error("url", _("Failed to create a recipe from the provided URL"))
-            return self.form_invalid(form)
-        if not recipe.added_by_id:
+        if not recipe.added_by_id and self.request.user.is_authenticated:
             recipe.added_by = self.request.user
             recipe.save()
         return redirect("admin:recipes_recipe_change", object_id=recipe.pk)
@@ -161,19 +168,19 @@ class RecipeAdmin(SortableAdminBase, TranslationAdmin[Recipe]):  # type: ignore[
         return [path("import/", view, name="recipe_recipes_import"), *super().get_urls()]
 
     @admin.display(description=_("Thumbnail"))
-    def get_thumbnail(self, obj: Recipe) -> str:
+    def get_thumbnail(self, obj: Recipe) -> StrOrPromise:
         """Add Small thumbnail to recipe admin list view."""
         if obj.image:
             return format_html('<img src="{}" />', obj.image["admin"].url)
         return _("No thumbnail")
 
     @admin.display(description=_("Categories"))
-    def get_categories(self, obj: Recipe) -> str:
+    def get_categories(self, obj: Recipe) -> StrOrPromise:
         """Display categories as a coma-separated list."""
         return ", ".join(n for n in obj.categories.values_list("name", flat=True)) or _("No categories")
 
-    def save_model(self, request: HttpRequest, obj: Recipe, form: ModelForm, change: bool) -> None:
+    def save_model(self, request: HttpRequest, obj: Recipe, form: ModelForm[Recipe], change: bool) -> None:
         """Automatically set added by to current user."""
-        if not obj.added_by_id:
-            obj.added_by_id = request.user
+        if not obj.added_by_id and request.user.is_authenticated:
+            obj.added_by = request.user
         super().save_model(request, obj, form, change)

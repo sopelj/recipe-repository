@@ -16,7 +16,7 @@ class FractionField(forms.Field):
         if "/" in value:
             try:
                 amount = utils.parse_numeric_string(value)
-                return utils.soft_round(amount)
+                return utils.soft_round(amount) if amount else None
             except ValueError as e:
                 raise forms.ValidationError(self.error_messages["invalid"], code="invalid") from e
         try:
