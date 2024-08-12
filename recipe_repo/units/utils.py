@@ -14,8 +14,7 @@ from recipe_repo.common.utils import pluralize
 if TYPE_CHECKING:
     from typing import TypeAlias
 
-    from pint import Quantity as PintQuantity
-    from pint import Unit as PintUnit
+    import pint
 
     FracTuple: TypeAlias = tuple[int, int]  # noqa UP040
     Fractions: TypeAlias = tuple[FracTuple, ...]  # noqa UP040
@@ -107,7 +106,7 @@ def is_nice_fraction(amount: Decimal, allowed_fractions: Fractions) -> bool:
     return not fraction or fraction.as_integer_ratio() in allowed_fractions
 
 
-def find_imperial_unit(quantity: PintQuantity) -> tuple[Decimal, str]:
+def find_imperial_unit(quantity: pint.Quantity) -> tuple[Decimal, str]:
     """Find the best imperial unit for displaying this quantity."""
     units: tuple[str, ...] = IMPERIAL_UNITS_VOLUME
     if not quantity.units.is_compatible_with("cup"):
@@ -119,10 +118,10 @@ def find_imperial_unit(quantity: PintQuantity) -> tuple[Decimal, str]:
     for new_unit in units:
         new_unit_quantity = quantity.to(new_unit)
         if is_nice_fraction(new_unit_quantity.magnitude, FRACTIONS_PER_IMPERIAL_UNIT.get(new_unit, ())):
-            quantity = new_unit_quantity
+            quantity = new_unit_quantity  # type: ignore[assignment]
             break
         if not decimal_to_fraction(new_unit_quantity.magnitude)[1]:
-            quantity = new_unit_quantity
+            quantity = new_unit_quantity  # type: ignore[assignment]
             break
     return soft_round(quantity.magnitude), str(quantity.units)
 
@@ -140,7 +139,7 @@ def format_fraction_amounts(amount: Decimal, max_amount: Decimal | None) -> tupl
     return format_decimal_as_fraction(amount), amount
 
 
-def format_metric_amounts(amount: Decimal, max_amount: Decimal | None, unit: PintUnit) -> tuple[str, Decimal]:
+def format_metric_amounts(amount: Decimal, max_amount: Decimal | None, unit: pint.Unit) -> tuple[str, Decimal]:
     """Format metric amounts as needed."""
     compact_amount = (amount * unit).to_compact()
     if compact_amount.magnitude < 0.0001:
@@ -166,7 +165,11 @@ def format_imperial_amount(amount: Decimal, unit: str | None) -> str:
     return formatted_amount
 
 
-def format_imperial_amounts(amount: Decimal, max_amount: Decimal | None, unit: PintUnit) -> tuple[str, Decimal]:
+def format_imperial_amounts(
+    amount: Decimal,
+    max_amount: Decimal | None,
+    unit: pint.Unit,
+) -> tuple[str, Decimal]:
     """Format amounts for imperial units."""
     new_amount, new_unit = find_imperial_unit(amount * unit)
     if max_amount:

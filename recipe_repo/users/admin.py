@@ -12,11 +12,10 @@ class UserAddForm(BaseUserCreationForm[User]):
     class Meta:
         model = User
         fields = ("email",)
-        field_classes = {}
 
 
 @admin.register(User)
-class UserAdmin(BaseUserAdmin[User]):
+class UserAdmin(BaseUserAdmin[User]):  # type: ignore[type-var]
     add_form = UserAddForm
     list_display = ("email", "first_name", "last_name", "is_staff")
     search_fields = ("first_name", "last_name", "email")

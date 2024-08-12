@@ -23,8 +23,14 @@ from ..units.utils import format_fraction_amounts
 if TYPE_CHECKING:
     from datetime import timedelta
     from decimal import Decimal
+    from typing import TypedDict
 
+    from django_stubs_ext import StrOrPromise, WithAnnotations
     from django_stubs_ext.db.models.manager import RelatedManager
+
+    class RecipeRatings(TypedDict):
+        avg_rating: float
+        num_ratings: int | None
 
 
 RATING_CHOICES = (
@@ -107,7 +113,7 @@ class Source(NamedModel):
     value = models.CharField(_("Value"), blank=True, null=True, max_length=200)
 
     @staticmethod
-    def validate_value(value: int | str, source_type: SourceTypes) -> None:
+    def validate_value(value: str, source_type: SourceTypes) -> None:
         """Validate values if types if URL or Book."""
         if source_type == SourceTypes.URL:
             URLValidator()(value)
@@ -128,9 +134,12 @@ class Source(NamedModel):
 
 
 class RecipeQuerySet(MultilingualQuerySet["Recipe"]):
-    def with_ratings(self) -> RecipeQuerySet:
+    def with_ratings(self) -> RecipeQuerySet[WithAnnotations[Recipe, RecipeRatings]]:  # type: ignore[type-arg]
         """Return Queryset with rating annotations."""
-        return self.annotate(avg_rating=Avg("ratings__rating"), num_ratings=Count("ratings"))
+        return self.annotate(
+            avg_rating=Avg("ratings__rating"),
+            num_ratings=Count("ratings"),
+        )
 
 
 class Recipe(NamedModel):
@@ -175,10 +184,10 @@ class Recipe(NamedModel):
         verbose_name=_("Favourited by"),
     )
 
-    objects = RecipeQuerySet.as_manager()
+    objects: models.Manager[Recipe] = RecipeQuerySet.as_manager()
 
     @property
-    def total_time(self) -> timedelta:
+    def total_time(self) -> timedelta | None:
         """Return total time combining prep and cook times."""
         if self.prep_time and self.cook_time:
             return self.prep_time + self.cook_time
@@ -289,8 +298,10 @@ class Ingredient(models.Model):
         return (self.amount_max * self.scale) if self.amount_max else None
 
     @cached_property
-    def formatted_amounts(self) -> tuple[str, Decimal]:
+    def formatted_amounts(self) -> tuple[str, Decimal | None]:
         """Return the formatted amount and the count for pluralising."""
+        if not self.scaled_amount:
+            return "", None
         if self.unit:
             return self.unit.format_amounts(self.scaled_amount, self.scaled_amount_max)
         return format_fraction_amounts(self.scaled_amount, self.scaled_amount_max)
@@ -301,13 +312,13 @@ class Ingredient(models.Model):
         return self.formatted_amounts[0]
 
     @cached_property
-    def food_display(self) -> str:
+    def food_display(self) -> StrOrPromise:
         """Return Food pluralised based on formatted amounts."""
         if self.unit and self.unit.type != UnitType.OTHER:
             # When dealing with weight or volume based units always use the plural name if defined
             # One may say "1 almond", but it would be "1 cup almonds" regardless of number.
             return self.food.name_plural or self.food.name
-        return pluralize(self.food.name, self.food.name_plural, self.formatted_amounts[1])
+        return pluralize(self.food.name, self.food.name_plural, self.formatted_amounts[1] or 0)
 
     class Meta:
         verbose_name = _("Ingredient")

@@ -46,12 +46,16 @@ if TYPE_CHECKING:
     class Scraper(AbstractScraper):
         def language(self) -> str: ...  # noqa: D102
         def title(self) -> str: ...  # noqa: D102
+        def site_name(self) -> str: ...  # noqa: D102
         def description(self) -> str | None: ...  # noqa: D102
+        def category(self) -> str | None: ...  # noqa: D102
         def yields(self) -> str | None: ...  # noqa: D102
         def image(self) -> str | None: ...  # noqa: D102
         def cook_time(self) -> float | None: ...  # noqa: D102
         def prep_time(self) -> float | None: ...  # noqa: D102
         def ingredient_groups(self) -> list[ScraperIngredientGroup]: ...  # noqa: D102
+        def instructions_list(self) -> list[str]: ...  # noqa: D102
+        def nutrients(self) -> dict[str, str]: ...  # noqa: D102
 
 
 logger = logging.getLogger(__name__)
@@ -125,7 +129,7 @@ def extract_notes(text: str) -> tuple[str, str]:
     return remainder, notes.strip()
 
 
-def parse_ingredient(recipe: Recipe, group: IngredientGroup, ingredient_text: str, order: int) -> None:
+def parse_ingredient(recipe: Recipe, group: IngredientGroup | None, ingredient_text: str, order: int) -> None:
     """Attempt to parse the ingredient line into and Ingredient object."""
     if not (match := INGREDIENT_LINE_REGEX.match(ingredient_text.strip())):
         logger.warning("Unable to parse ingredient text. Might be title.")
@@ -204,8 +208,8 @@ def create_nutrition_information(recipe: Recipe, nutrition: dict[str, str]) -> N
     calorie_value = calories.split(" ")[0] if (calories := nutrition.pop("calories", None)) else None
     NutritionInformation.objects.create(
         recipe=recipe,
-        calories=int(c) if calorie_value and (c := parse_numeric_string(calorie_value)) else None,
-        serving_size=int(c) if serving_value and (c := parse_numeric_string(serving_value)) else 1,
+        calories=int(c) if calorie_value and (c := parse_numeric_string(calorie_value)) else 0,
+        serving_size=int(s) if serving_value and (s := parse_numeric_string(serving_value)) else 1,
         **{
             to_snake_case(name.replace("Content", "")): v
             for name, value in nutrition.items()
@@ -226,7 +230,7 @@ def get_from_schema[T](method: Callable[[], T]) -> T | None:  # type: ignore[val
 def create_recipe_from_scraper(scraper: Scraper, url: str) -> Recipe | None:
     """Take a scraper and try to create a recipe from it."""
     title = scraper.title()
-    host = scraper.host() or urlsplit(url).hostname
+    host: str = scraper.host() or urlsplit(url).hostname or url
     recipe = Recipe(
         name=title,
         slug=slugify(title),
@@ -261,7 +265,7 @@ def create_recipe_from_scraper(scraper: Scraper, url: str) -> Recipe | None:
     for group in scraper.ingredient_groups():
         ingredient_group = None
         if group.purpose:
-            ingredient_group = IngredientGroup.objects.create(recipe=recipe, text=group.purpose, order=ingredient_order)
+            ingredient_group = IngredientGroup.objects.create(recipe=recipe, name=group.purpose, order=ingredient_order)
             ingredient_order += 1
         for ingredient_line in group.ingredients:
             parse_ingredient(recipe, ingredient_group, ingredient_line, ingredient_order)

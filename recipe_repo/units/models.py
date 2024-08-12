@@ -19,7 +19,7 @@ from .utils import format_fraction_amounts, format_imperial_amounts, format_metr
 if TYPE_CHECKING:
     from decimal import Decimal
 
-    from pint import Unit as PintUnit
+    import pint
 
 
 logger = logging.getLogger(__name__)
@@ -37,12 +37,12 @@ class Unit(NamedPluralModel):
     system = models.CharField(_("System"), max_length=1, choices=System.choices, null=True, blank=True)
 
     @cached_property
-    def unit(self) -> PintUnit | None:
+    def unit(self) -> pint.Unit | None:
         """Return unit registry for this custom Unit."""
         if self.system:
             with translation.override("en"):
                 try:
-                    return unit_registry((self.abbreviation or self.name).lower())
+                    return unit_registry.Unit((self.abbreviation or self.name).lower())
                 except UndefinedUnitError:
                     logger.warning("The unit %s was not defined in the unit registry", self.abbreviation)
         return None

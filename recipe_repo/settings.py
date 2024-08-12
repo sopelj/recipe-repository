@@ -57,10 +57,11 @@ INSTALLED_APPS = [
     "django_extensions",
     "colorfield",
     # Local apps
+    "recipe_repo.inertia",
     "recipe_repo.food",
+    "recipe_repo.recipes",
     "recipe_repo.users",
     "recipe_repo.units",
-    "recipe_repo.recipes",
 ]
 
 MIDDLEWARE = [
@@ -164,6 +165,11 @@ THUMBNAIL_ALIASES = {
     },
 }
 
+# Frontend
+APP_TITLE = env("VITE_APP_TITLE", default="Recipe Repository")
+APP_TITLE_SHORT = env("VITE_APP_TITLE_SHORT", default="Recipes")
+APP_THEME_COLOUR = env("VITE_APP_THEME_COLOUR", default="#482880")
+
 DJANGO_BREEZE = {
     "INERTIA": {
         "LAYOUT": "index.html",
@@ -171,7 +177,7 @@ DJANGO_BREEZE = {
         "SSR_ENABLED": False,
     },
     "DJANGO_VITE": {
-        "DEV_MODE": True,  # vite dev mode, default based on django DEBUG
+        "DEV_MODE": DEBUG,
         "SERVER_PROTOCOL": "http",
         "DEV_SERVER_HOST": "localhost",
         "DEV_SERVER_PORT": 5173,
@@ -232,6 +238,7 @@ if env.bool("AUTH_LDAP_ENABLED", False):
         AUTH_LDAP_FIND_GROUP_PERMS = True
 
 # Logging
+LOG_LEVEL = env("LOG_LEVEL", default="WARNING")
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
@@ -242,7 +249,7 @@ LOGGING = {
     },
     "handlers": {
         "console": {
-            "level": "DEBUG",
+            "level": LOG_LEVEL,
             "class": "logging.StreamHandler",
             "formatter": "default",
         },
@@ -250,25 +257,8 @@ LOGGING = {
     "loggers": {
         "": {
             "handlers": ["console"],
-            "level": "DEBUG",
+            "level": LOG_LEVEL,
             "propagate": False,
         },
-    },
-}
-
-DJANGO_BREEZE = {
-    "INERTIA": {
-        "LAYOUT": "index.html",
-        "SSR_URL": "http://localhost:13714",
-        "SSR_ENABLED": False,
-    },
-    "DJANGO_VITE": {
-        "DEV_MODE": DEBUG,  # vite dev mode, default based on django DEBUG
-        "SERVER_PROTOCOL": "http",
-        "DEV_SERVER_HOST": "localhost",
-        "DEV_SERVER_PORT": 5173,
-        "WS_CLIENT_URL": "@vite/client",
-        "ASSETS_PATH": "static/dist",  # vite build asset path
-        "STATIC_URL_PREFIX": "",
     },
 }
