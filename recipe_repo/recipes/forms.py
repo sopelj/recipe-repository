@@ -31,6 +31,11 @@ class ServingsForm(forms.Form):
     )
 
 
+class RecipeReviewForm(forms.Form):
+    favourite = forms.BooleanField(required=False)
+    rating = forms.IntegerField(min_value=0, max_value=5, required=False)
+
+
 class IngredientAdminForm(forms.ModelForm[Ingredient]):
     """Custom form to allow for entering fractions into decimal fields for ease of use."""
 

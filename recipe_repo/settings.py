@@ -76,7 +76,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-if DEBUG or env.bool("DEBUG_QUERIES", default=False):
+if env.bool("QUERY_LOGGING_ENABLED", default=False):
     MIDDLEWARE.append("query_inspector.middleware.QueryCountMiddleware")
 
 ROOT_URLCONF = "recipe_repo.urls"
@@ -188,7 +188,7 @@ DJANGO_BREEZE = {
 }
 
 # Debug Queries
-if DEBUG or env.bool("QUERY_LOGGING_ENABLED", default=False):
+if env.bool("QUERY_LOGGING_ENABLED", default=False):
     INSTALLED_APPS.append("query_inspector")
 
     QUERYCOUNT = {

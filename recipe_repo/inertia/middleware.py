@@ -22,6 +22,7 @@ def inertia_share(get_response: Callable[[HttpRequest], HttpResponse]) -> Callab
             request,
             user=lambda: UserSerializer(request.user).data if request.user.is_authenticated else None,
             locale=lambda: getattr(request, "LANGUAGE_CODE", settings.LANGUAGE_CODE),
+            errors=lambda: request.session.pop("errors", {}),
         )
         return get_response(request)
 

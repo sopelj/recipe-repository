@@ -164,7 +164,7 @@ class RecipeAdmin(SortableAdminBase, TranslationAdmin[Recipe]):  # type: ignore[
     def get_urls(self) -> list[URLPattern]:
         """Add Import page to Recipe Admin URLs."""
         RecipeImportView.admin_site = self.admin_site
-        view = self.admin_site.admin_view(RecipeImportView.as_view())
+        view = self.admin_site.admin_view(RecipeImportView.as_view())  # type: ignore[type-var]
         return [path("import/", view, name="recipe_recipes_import"), *super().get_urls()]
 
     @admin.display(description=_("Thumbnail"))

@@ -35,4 +35,4 @@ class IngredientTranslationOptions(TranslationOptions):
 
 @register(Recipe)
 class RecipeTranslationOptions(TranslationOptions):
-    fields = ("name", "slug")
+    fields = ("name", "slug", "description")

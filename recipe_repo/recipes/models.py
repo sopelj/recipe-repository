@@ -89,6 +89,7 @@ class UserRating(models.Model):
     class Meta:
         verbose_name = _("User Rating")
         verbose_name_plural = _("User Ratings")
+        unique_together = ("user", "recipe")
 
 
 class YieldUnit(NamedPluralModel):

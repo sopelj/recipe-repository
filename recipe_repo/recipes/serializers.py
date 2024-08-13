@@ -46,12 +46,12 @@ class IngredientSerializer(ModelSerializer[Ingredient]):
 
 class RecipeListSerializer(ModelSerializer[Recipe]):
     num_ratings = IntegerField()
-    avg_ratings = IntegerField(allow_null=True)
+    avg_rating = IntegerField(allow_null=True)
     categories = CategorySerializer(many=True, read_only=True)
 
     class Meta:
         model = Recipe
-        fields = ("name", "slug", "thumbnail_url", "description", "categories", "num_ratings", "avg_ratings")
+        fields = ("name", "slug", "thumbnail_url", "description", "categories", "num_ratings", "avg_rating")
 
 
 class RecipeSerializer(RecipeListSerializer):
@@ -75,7 +75,7 @@ class RecipeSerializer(RecipeListSerializer):
             "total_time",
             "nutrition",
             "num_ratings",
-            "avg_ratings",
+            "avg_rating",
             "steps",
             "source",
             "source_value",

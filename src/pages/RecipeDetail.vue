@@ -23,6 +23,7 @@ const props = defineProps<{
   servings: number;
   errors: FormErrors | null;
   user?: User;
+  userRating: number | null;
 }>();
 
 const { t } = useI18n();
@@ -55,7 +56,7 @@ const updateServings = (multiplier: number) => {
   }
   // TODO: use `useForm` when django-inertia supports it.
   router.visit(`${window.location.pathname}?servings=${newValue}`, {
-    only: ["ingredients", "servings", "errors"],
+    only: ["ingredients", "servings"],
   });
 };
 </script>
@@ -78,7 +79,7 @@ const updateServings = (multiplier: number) => {
           </h1>
           <rating
             v-tooltip="t('recipe.ratings', recipe.num_ratings)"
-            :model-value="recipe.avg_rating"
+            :model-value="userRating || recipe.avg_rating"
             :readonly="true"
             class="flex-grow sm:flex-grow-0"
           />
