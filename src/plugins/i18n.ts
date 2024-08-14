@@ -1,12 +1,11 @@
 import { createI18n } from "vue-i18n";
-
-import { messages, defaultLocale } from "../i18n";
+import messages from "@intlify/unplugin-vue-i18n/messages"
 
 const currentLocale = window.location.pathname.split("/")[1];
 
 export const i18n = createI18n({
   legacy: false,
-  locale: currentLocale || defaultLocale,
-  fallbackLocale: defaultLocale,
+  locale: currentLocale || "en",
+  fallbackLocale: "en",
   messages,
 });

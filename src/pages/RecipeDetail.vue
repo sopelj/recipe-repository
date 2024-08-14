@@ -8,7 +8,7 @@ import { useI18n } from "vue-i18n";
 import { useShare } from "@/composables/share";
 
 import NutritionalInformation from "@/components/NutritionalInformation.vue";
-import HeadSection from "../layouts/HeadSection.vue";
+import HeadSection from "@/layouts/HeadSection.vue";
 import UserAvatar from "@/components/UserAvatar.vue";
 import RecipeDuration from "@/components/DurationSplitter.vue";
 import RecipeSource from "@/components/RecipeSource.vue";
