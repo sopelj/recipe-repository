@@ -36,12 +36,16 @@
     "browse_categories": "Browse categories",
     "categories": "Categories:",
     "directions": "Directions",
+    "favourite": "Favourite",
     "from": "From:",
     "ingredient": "{amount} {ingredient}",
     "ingredients": "Ingredients",
     "ratings": "No ratings | {n} rating | {n} ratings",
     "servings": "{n} serving | {n} servings",
+    "share": "Share recipe",
+    "share_title": "Recipe for \"{name}\"",
     "step_title": "Step {step}",
+    "un-favourite": "Un-favourite",
     "yields": "Yields:"
   },
   "routes": {

@@ -36,12 +36,15 @@
     "browse_categories": "Voir les catégories",
     "categories": "Categories :",
     "directions": "Instructions",
+    "favourite": "J'aime",
     "from": "De :",
     "ingredient": "{amount} {ingredient}",
     "ingredients": "Ingrédients",
     "ratings": "Pas de notes | {n} note | {n} notes",
     "servings": "{n} portion | {n} portions",
+    "share": "Recette pour « {name} »",
     "step_title": "Étape {step}",
+    "un-favourite": "Je n'aime pas",
     "yields": "Donne :"
   },
   "routes": {

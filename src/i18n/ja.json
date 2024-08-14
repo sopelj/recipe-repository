@@ -36,12 +36,16 @@
     "browse_categories": "カテゴリを閲覧する",
     "categories": "カテゴリ",
     "directions": "手順",
+    "favourite": "いいね",
     "from": "から",
     "ingredient": "{amount}{ingredient}",
     "ingredients": "材料",
     "ratings": "評価なし | {n}件の評価 | {n}件の評価",
     "servings": "{n}食分",
+    "share": "レシピを共有する",
+    "share_title": "「{name}}」のレシピ",
     "step_title": "ステップ{step}",
+    "un-favourite": "いいない",
     "yields": "収穫量"
   },
   "routes": {

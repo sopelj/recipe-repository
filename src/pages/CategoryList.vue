@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Category } from "../types/categories";
+import type { Category } from "@/types/categories";
 
 import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
@@ -9,6 +9,7 @@ import HeadSection from "@/layouts/HeadSection.vue";
 
 const props = defineProps<{ parentCategories?: Category[]; categories: Category[] }>();
 const { t } = useI18n();
+
 const search = ref<string>("");
 const filteredCategories = computed((): Category[] =>
   search.value

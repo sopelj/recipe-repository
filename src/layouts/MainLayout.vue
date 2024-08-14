@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import type { User } from "../types/users.ts";
+import type { User } from "@/types/users";
 
 import { Link as ILink, router } from "@inertiajs/vue3";
-import PMenu from "primevue/menu";
-import PButton from "primevue/button";
+import Menu from "primevue/menu";
 
 import { ref, type ComponentInstance, computed } from "vue";
 import { useI18n } from "vue-i18n";
@@ -11,7 +10,7 @@ import UserAvatar from "../components/UserAvatar.vue";
 
 const props = defineProps<{ user?: User }>();
 const { t, locale } = useI18n();
-const userMenu = ref<ComponentInstance<typeof PMenu>>();
+const userMenu = ref<ComponentInstance<typeof Menu>>();
 const toggleMenu = (event: Event) => {
   userMenu.value?.toggle(event);
 };
@@ -48,7 +47,7 @@ const setLocale = (lang: string) => {
         </div>
         <div class="flex items-center text-right gap-2">
           <div class="language-selector">
-            <PButton
+            <Button
               v-if="locale !== 'en'"
               link
               class="text-white p-0"
@@ -56,8 +55,8 @@ const setLocale = (lang: string) => {
             >
               <span class="sm:hidden">EN</span>
               <span class="hidden sm:inline-block">English</span>
-            </PButton>
-            <PButton
+            </Button>
+            <Button
               v-if="locale !== 'fr'"
               link
               class="text-white p-0"
@@ -65,15 +64,15 @@ const setLocale = (lang: string) => {
             >
               <span class="sm:hidden">FR</span>
               <span class="hidden sm:inline-block">Français</span>
-            </PButton>
-            <PButton
+            </Button>
+            <Button
               v-if="locale !== 'ja'"
               link
               class="text-white p-0"
               @click="setLocale('ja')"
             >
               日本語
-            </PButton>
+            </Button>
           </div>
           <ILink
             v-if="!user"
@@ -91,7 +90,7 @@ const setLocale = (lang: string) => {
               class="p-1"
               @click="toggleMenu"
             />
-            <PMenu
+            <Menu
               id="user_menu"
               ref="userMenu"
               :model="userMenuItems"

@@ -1,17 +1,19 @@
 <script setup lang="ts">
-import type { User } from "../types/users";
-import type { Recipe, Ingredient } from "../types/recipes";
+import type { User } from "@/types/users";
+import type { Recipe, Ingredient } from "@/types/recipes";
 
 import { ref } from "vue";
 import { router } from "@inertiajs/vue3";
-
-import PButton from "primevue/button";
-import NutritionalInformation from "../components/NutritionalInformation.vue";
-import HeadSection from "../layouts/HeadSection.vue";
 import { useI18n } from "vue-i18n";
+import { useShare } from "@/composables/share";
+
+import NutritionalInformation from "@/components/NutritionalInformation.vue";
+import HeadSection from "../layouts/HeadSection.vue";
 import UserAvatar from "@/components/UserAvatar.vue";
+import RecipeDuration from "@/components/DurationSplitter.vue";
 import RecipeSource from "@/components/RecipeSource.vue";
 import KeepAwake from "@/components/KeepAwake.vue";
+import DescriptionItem from "@/components/DescriptionItem.vue";
 
 interface FormErrors {
   servings?: string[];
@@ -27,19 +29,11 @@ const props = defineProps<{
 }>();
 
 const { t } = useI18n();
-
-const formatDuration = (duration: string) => {
-  const [h, m, s] = duration.split(":");
-  return Object.entries({ h, m, s })
-    .reduce((acc, [n, v]) => {
-      const f = parseInt(v);
-      return f ? acc + ` ${f}${n}` : acc;
-    }, "")
-    .trim();
+const { share, canShare } = useShare();
+const shareRecipe = async () => {
+  await share(props.recipe.name, t("recipe.share", { name: props.recipe.name }));
 };
 
-const formatIsoDuration = (duration: string): string =>
-  `PT${formatDuration(duration).replace(" ", "").toUpperCase()}`;
 const servingAmount = ref<number>(props.servings || 1);
 const formError = ref<string | undefined>();
 
@@ -77,58 +71,61 @@ const updateServings = (multiplier: number) => {
           >
             {{ recipe.name }}
           </h1>
-          <rating
+          <Rating
             v-tooltip="t('recipe.ratings', recipe.num_ratings)"
             :model-value="userRating || recipe.avg_rating"
             :readonly="true"
             class="flex-grow sm:flex-grow-0"
           />
+          <Button
+            v-if="canShare"
+            v-tooltip="t('recipe.share')"
+            icon="pi pi-share-alt"
+            class="ml-1"
+            text
+            @click="shareRecipe"
+          />
         </div>
-        <div
+        <DescriptionItem
           v-if="recipe.categories"
-          class="flex align-items-center py-3"
+          :label="t('recipe.categories')"
         >
-          <div class="w-1/4 text-500 font-medium">{{ t("recipe.categories") }}</div>
-          <div class="w-3/4">
-            <tag
-              v-for="c in recipe.categories"
-              :key="c.slug"
-              :value="c.name"
-              class="mx-1"
-              severity="secondary"
-            />
-          </div>
-        </div>
-        <div class="flex align-items-center py-3">
-          <div class="w-1/4 text-500 font-medium">{{ t("recipe.yields") }}</div>
-          <div class="w-3/4">
-            <span
-              v-if="recipe.yield_unit"
-              itemprop="recipeYield"
-              >{{ recipe.yield_amount }} {{ recipe.yield_unit }} ({{ t('recipe.servings', servings) }})</span
-            >
-            <span v-else>{{ t('recipe.servings', servings) }}</span>
-          </div>
-        </div>
-        <div class="flex align-items-center py-3">
-          <div class="w-1/4 text-500 font-medium">{{ t("recipe.added_by") }}</div>
-          <div class="w-3/4 flex items-center">
-            <UserAvatar :user="recipe.added_by" size="normal" />
-            <span class="pl-2">{{
-              recipe.added_by.id === user?.id ? t("users.me") : recipe.added_by.full_name
-            }}</span>
-          </div>
-        </div>
-        <div
+          <Tag
+            v-for="c in recipe.categories"
+            :key="c.slug"
+            class="mx-1"
+            severity="secondary"
+          >
+            {{ c.name }}
+          </Tag>
+        </DescriptionItem>
+        <DescriptionItem :label="t('recipe.yields')">
+          <span
+            v-if="recipe.yield_unit"
+            itemprop="recipeYield"
+            >{{ recipe.yield_amount }} {{ recipe.yield_unit }} ({{ t("recipe.servings", servings) }})</span
+          >
+          <span v-else>{{ t("recipe.servings", servings) }}</span>
+        </DescriptionItem>
+        <DescriptionItem :label="t('recipe.added_by')">
+          <UserAvatar
+            :user="recipe.added_by"
+            size="normal"
+          />
+          <span class="pl-2">{{
+            recipe.added_by.id === user?.id ? t("users.me") : recipe.added_by.full_name
+          }}</span>
+        </DescriptionItem>
+        <DescriptionItem
           v-if="recipe.source"
-          class="flex align-items-center py-3"
+          :label="t('recipe.from')"
         >
-          <div class="w-1/4 text-500 font-medium">{{ t("recipe.from") }}</div>
-          <div class="w-3/4">
-            <recipe-source :source="recipe.source" :value="recipe.source_value" />
-          </div>
-        </div>
-        <divider v-if="recipe.description" />
+          <RecipeSource
+            :source="recipe.source"
+            :value="recipe.source_value"
+          />
+        </DescriptionItem>
+        <Divider v-if="recipe.description" />
         <div
           class="mt-2 pb-5"
           itemprop="description"
@@ -139,33 +136,18 @@ const updateServings = (multiplier: number) => {
           v-if="recipe.total_time"
           class="mb-5"
         >
-          <splitter-panel
-            v-if="recipe.prep_time"
-            class="flex items-center justify-center m-2"
-          >
-            {{ t("times.prep") }}&nbsp;<meta
-              itemprop="prepTime"
-              :content="formatIsoDuration(recipe.prep_time)"
-            />{{ formatDuration(recipe.prep_time) }}
-          </splitter-panel>
-          <splitter-panel
-            v-if="recipe.cook_time"
-            class="flex items-center justify-center m-2"
-          >
-            {{ t("times.cook") }}&nbsp;<meta
-              itemprop="prepTime"
-              :content="formatIsoDuration(recipe.cook_time)"
-            />{{ formatDuration(recipe.cook_time) }}
-          </splitter-panel>
-          <splitter-panel
-            v-if="recipe.total_time"
-            class="flex items-center justify-center m-2"
-          >
-            {{ t("times.total") }}&nbsp;<meta
-              itemprop="prepTime"
-              :content="formatIsoDuration(recipe.total_time)"
-            />{{ formatDuration(recipe.total_time) }}
-          </splitter-panel>
+          <RecipeDuration
+            type="prep"
+            :time="recipe.prep_time"
+          />
+          <RecipeDuration
+            type="cook"
+            :time="recipe.cook_time"
+          />
+          <RecipeDuration
+            type="prep"
+            :time="recipe.total_time"
+          />
         </splitter>
         <div class="ingredients">
           <card>
@@ -174,10 +156,10 @@ const updateServings = (multiplier: number) => {
                 <h2 class="text-xxl grow w-100 mr-2">{{ t("recipe.ingredients") }}</h2>
                 <div class="grow-0">
                   <input-group class="grow-0">
-                    <PButton
+                    <Button
                       :disabled="!servingAmount || servingAmount / 2 <= 0.125"
                       @click="updateServings(0.5)"
-                      >½</PButton
+                      >½</Button
                     >
                     <input-number
                       v-model="servingAmount"
@@ -188,10 +170,10 @@ const updateServings = (multiplier: number) => {
                       :fluid="true"
                       @update="updateServings(1)"
                     />
-                    <PButton
+                    <Button
                       :disabled="servingAmount * 2 >= 100"
                       @click="updateServings(2)"
-                      >x2</PButton
+                      >x2</Button
                     >
                   </input-group>
                   <p
@@ -263,7 +245,7 @@ const updateServings = (multiplier: number) => {
           :key="i"
           toggleable
           class="mb-2"
-          :header="t('recipe.step_title', { step: i + 1})"
+          :header="t('recipe.step_title', { step: i + 1 })"
           itemprop="recipeInstructions"
         >
           {{ step }}
