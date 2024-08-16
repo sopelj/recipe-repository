@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "allowImportingTsExtensions": true,
+    "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "lib": [
       "ES2022",
@@ -24,6 +25,7 @@
     "target": "ES2022",
     "types": [
       "vite/client",
+      "vitest/globals",
       "@intlify/unplugin-vue-i18n/messages"
     ]
   },

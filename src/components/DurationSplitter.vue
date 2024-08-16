@@ -1,19 +1,12 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useI18n } from "vue-i18n";
+import { formatDuration } from "@/utils/durations";
 
 const props = defineProps<{ type: string; time?: string }>();
 const { t } = useI18n();
 
-const formattedDuration = computed((): string => {
-  const [h, m, s] = props.time?.split(":") || "";
-  return Object.entries({ h, m, s })
-    .reduce((acc, [n, v]) => {
-      const f = parseInt(v);
-      return f ? acc + ` ${f}${n}` : acc;
-    }, "")
-    .trim();
-});
+const formattedDuration = computed((): string => (props?.time ? formatDuration(props.time) : ""));
 const isoTime = computed((): string => `PT${formattedDuration.value.replace(" ", "").toUpperCase()}`);
 </script>
 

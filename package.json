@@ -8,17 +8,20 @@
     "vue-i18n": "^9.13.1"
   },
   "devDependencies": {
-    "@eslint/js": "^9.8.0",
+    "@eslint/js": "^9.9.0",
     "@intlify/unplugin-vue-i18n": "^4.0.0",
     "@primevue/auto-import-resolver": "^4.0.1",
+    "@types/jest": "^29.5.12",
     "@types/node": "^22.1.0",
     "@vitejs/plugin-vue": "^5.1.2",
+    "@vue/test-utils": "^2.4.6",
     "autoprefixer": "^10.4.19",
     "cssnano": "^7.0.4",
-    "eslint": "9.8.0",
+    "eslint": "9.9.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-vue": "^9.27.0",
+    "happy-dom": "^14.12.3",
     "postcss": "^8.4.39",
     "prettier": "^3.3.3",
     "sass": "^1.77.8",
@@ -29,14 +32,17 @@
     "unplugin-vue-components": "^0.27.0",
     "vite": "^5.3.5",
     "vite-plugin-pwa": "^0.20.1",
+    "vitest": "^2.0.5",
     "vue-tsc": "^2.0.29"
   },
   "name": "recipe-repo-frontend",
   "private": true,
   "scripts": {
     "build": "vue-tsc && vite build",
+    "coverage": "vitest run --coverage",
     "dev": "vite",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest run"
   },
   "type": "module",
   "version": "0.1.0"

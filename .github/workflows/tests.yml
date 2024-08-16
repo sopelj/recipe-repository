@@ -1,0 +1,39 @@
+---
+name: Tests and Linters
+
+"on":
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.12
+      - name: Set Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22.x
+
+      - name: Install Python Dependencies
+        run: |
+          python3.12 -m pip install --upgrade pip
+          python3.12 -m pip install hatch hatchling pre-commit
+
+      - name: Install Frontend Dependencies
+        run: yarn install
+
+      - name: Run pre-commit
+        run: pre-commit run --all-files
+
+      - name: Run Python Tests
+        run: hatch run test:cov
+
+      - name: Run Frontend Tests
+        run: yarn test
