@@ -64,9 +64,9 @@ const updateServings = (multiplier: number) => {
   >
     <div class="grid grid-cols-12 gap-4">
       <div class="col-span-12 sm:col-span-9 md:col-span-8">
-        <div class="flex flex-wrap sm:flex-nowrap">
+        <div class="flex flex-wrap sm:flex-nowrap items-center mb-4 ">
           <h1
-            class="text-4xl mb-4 cursive flex-grow"
+            class="text-4xl cursive flex-grow"
             itemprop="name"
           >
             {{ recipe.name }}
@@ -84,6 +84,15 @@ const updateServings = (multiplier: number) => {
             class="ml-1"
             text
             @click="shareRecipe"
+          />
+        </div>
+        <div
+          v-if="recipe.image_url"
+          class="overflow-clip p-card mt-4 sm:hidden"
+        >
+          <img
+            :src="recipe.image_url"
+            :alt="recipe.name"
           />
         </div>
         <DescriptionItem
@@ -154,14 +163,14 @@ const updateServings = (multiplier: number) => {
             <template #title>
               <div class="flex flex-row items-center">
                 <h2 class="text-xxl grow w-100 mr-2">{{ t("recipe.ingredients") }}</h2>
-                <div class="grow-0">
-                  <input-group class="grow-0">
+                <div class="grow-0 ml-4">
+                  <InputGroup class="grow-0">
                     <Button
                       :disabled="!servingAmount || servingAmount / 2 <= 0.125"
                       @click="updateServings(0.5)"
                       >½</Button
                     >
-                    <input-number
+                    <InputNumber
                       v-model="servingAmount"
                       placeholder="servings"
                       :min="0.125"
@@ -175,7 +184,7 @@ const updateServings = (multiplier: number) => {
                       @click="updateServings(2)"
                       >x2</Button
                     >
-                  </input-group>
+                  </InputGroup>
                   <p
                     v-if="errors?.servings?.length"
                     class="text-xs text-red-600"
@@ -220,7 +229,7 @@ const updateServings = (multiplier: number) => {
       <div class="col-span-12 sm:col-span-3 md:col-span-4">
         <div
           v-if="recipe.image_url"
-          class="overflow-clip p-card"
+          class="overflow-clip p-card hidden sm:flex"
         >
           <img
             :src="recipe.image_url"

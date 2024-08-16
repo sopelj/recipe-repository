@@ -75,7 +75,7 @@ cov = "pytest -vvv --asyncio-mode=auto --cov=recipe_repo --cov-branch --cov-repo
 no-cov = "cov --no-cov"
 
 [tool.hatch.envs.mypy]
-features = ["mypy"]
+features = ["mypy", "test"]
 
 [tool.hatch.envs.mypy.scripts]
 check = "mypy {args}"
