@@ -50,10 +50,10 @@ repos:
     hooks:
       - id: eslint
         args: [--fix]
-        types: [javascript, ts, vue]
+        files: \.(ts|js|vue)$
         additional_dependencies:
-          - "eslint@^9.8.0"
-          - "@eslint/js@^9.8.0"
+          - "eslint@^9.9.0"
+          - "@eslint/js@^9.9.0"
           - "eslint-config-prettier@^9.1.0"
           - "eslint-plugin-prettier@^5.2.1"
           - "prettier@^3.3.3"
@@ -61,9 +61,7 @@ repos:
   - repo: local
     hooks:
       - id: mypy
-        language: python
-        language_version: python3.12
+        language: system
         name: Run mypy
         entry: hatch run mypy:check
         files: \.(py)$
-        additional_dependencies: ["hatch"]

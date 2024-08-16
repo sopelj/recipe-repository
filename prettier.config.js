@@ -4,5 +4,5 @@ export default {
   "singleQuote": false,
   "trailingComma": "all",
   "quoteProps": "preserve",
-  "singleAttributePerLine": true
-}
+  "singleAttributePerLine": true,
+};
