@@ -29,6 +29,9 @@ jobs:
       - name: Install Frontend Dependencies
         run: yarn install
 
+      - name: Setup Env Variables
+        run: sed s/SECRET_KEY=/SECRET_KEY=fake-key/ example.env > .env
+
       - name: Run pre-commit
         run: pre-commit run --all-files
 
