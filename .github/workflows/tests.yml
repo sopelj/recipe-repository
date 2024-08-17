@@ -24,11 +24,13 @@ jobs:
 
       - name: Setup Locales
         run: |
-          apt-get install locales
-          echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
-          echo "fr_FR.UTF-8 UTF-8" >> /etc/locale.gen
-          echo "ja_JP.UTF-8 UTF-8" >> /etc/locale.gen
-          locale-gen
+          sudo apt-get install -y locales
+          echo "en_US.UTF-8 UTF-8" | sudo tee -a /etc/locale.gen
+          echo "fr_FR.UTF-8 UTF-8" | sudo tee -a /etc/locale.gen
+          echo "ja_JP.UTF-8 UTF-8" | sudo tee -a /etc/locale.gen
+          sudo locale-gen
+          sudo locale -a
+          localectl status
 
       - name: Install Python Dependencies
         run: |
