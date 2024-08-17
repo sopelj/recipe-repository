@@ -7,10 +7,13 @@ import { router } from "@inertiajs/vue3";
 import { useI18n } from "vue-i18n";
 import { useShare } from "@/composables/share";
 
+import { breakpointsTailwind, useBreakpoints } from '@vueuse/core';
+
+
 import NutritionalInformation from "@/components/NutritionalInformation.vue";
 import HeadSection from "@/layouts/HeadSection.vue";
 import UserAvatar from "@/components/UserAvatar.vue";
-import RecipeDuration from "@/components/DurationSplitter.vue";
+import RecipeDurations from "@/components/RecipeDurations.vue";
 import RecipeSource from "@/components/RecipeSource.vue";
 import KeepAwake from "@/components/KeepAwake.vue";
 import DescriptionItem from "@/components/DescriptionItem.vue";
@@ -29,6 +32,10 @@ const props = defineProps<{
 }>();
 
 const { t } = useI18n();
+
+const breakpoints = useBreakpoints(breakpointsTailwind);
+const isAboveSmall = breakpoints.greater("sm");
+
 const { share, canShare } = useShare();
 const shareRecipe = async () => {
   await share(props.recipe.name, t("recipe.share", { name: props.recipe.name }));
@@ -134,30 +141,21 @@ const updateServings = (multiplier: number) => {
             :value="recipe.source_value"
           />
         </DescriptionItem>
-        <Divider v-if="recipe.description" />
         <div
+          v-if="recipe.description"
           class="mt-2 pb-5"
           itemprop="description"
         >
+          <Divider />
           {{ recipe.description }}
         </div>
-        <splitter
-          v-if="recipe.total_time"
-          class="mb-5"
-        >
-          <RecipeDuration
-            type="prep"
-            :time="recipe.prep_time"
-          />
-          <RecipeDuration
-            type="cook"
-            :time="recipe.cook_time"
-          />
-          <RecipeDuration
-            type="prep"
-            :time="recipe.total_time"
-          />
-        </splitter>
+        <RecipeDurations :prep-time="recipe.prep_time" :cook-time="recipe.cook_time" :total-time="recipe.total_time" />
+        <NutritionalInformation
+          v-if="recipe.nutrition && !isAboveSmall"
+          :nutrition="recipe.nutrition"
+          :servings="servings"
+          class="mt-4"
+        />
         <div class="ingredients">
           <card>
             <template #title>
@@ -168,7 +166,7 @@ const updateServings = (multiplier: number) => {
                     <Button
                       :disabled="!servingAmount || servingAmount / 2 <= 0.125"
                       @click="updateServings(0.5)"
-                      >½</Button
+                      >{{ t("recipe.scale_halve") }}</Button
                     >
                     <InputNumber
                       v-model="servingAmount"
@@ -182,7 +180,7 @@ const updateServings = (multiplier: number) => {
                     <Button
                       :disabled="servingAmount * 2 >= 100"
                       @click="updateServings(2)"
-                      >x2</Button
+                      >{{ t("recipe.scale_double") }}</Button
                     >
                   </InputGroup>
                   <Message v-if="errors?.servings?.length" severity="error">{{ errors.servings[0] }}</Message>
@@ -207,14 +205,14 @@ const updateServings = (multiplier: number) => {
                   <span
                     v-if="ingredient.qualifier"
                     class="qualifier"
-                    >, {{ ingredient.qualifier }}</span
+                    >{{ t("recipe.ingredient_qualifier", { qualifier: ingredient.qualifier}) }}</span
                   >
                   <span
                     v-if="ingredient.optional"
                     class="optional"
-                    >*Optional</span
+                    >{{ t("recipe.ingredient_optional") }}</span
                   >
-                  <span v-if="ingredient.note">&nbsp;({{ ingredient.note }})</span>
+                  <span v-if="ingredient.note">{{ t("recipe.ingredient_note", { note: ingredient.note }) }}</span>
                 </li>
               </ul>
             </template>
@@ -233,15 +231,15 @@ const updateServings = (multiplier: number) => {
           />
         </div>
         <NutritionalInformation
-          v-if="recipe.nutrition"
+          v-if="recipe.nutrition && isAboveSmall"
           :nutrition="recipe.nutrition"
           :servings="servings"
           class="mt-4"
         />
       </div>
       <div class="col-span-12 md:col-span-8">
-        <div class="flex flex-row">
-          <h2 class="text-xl mb-2 flex-grow">{{ t("recipe.directions") }}</h2>
+        <div class="flex flex-row mb-2">
+          <h2 class="text-xl flex-grow">{{ t("recipe.directions") }}</h2>
           <KeepAwake />
         </div>
         <Panel

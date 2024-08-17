@@ -39,8 +39,13 @@
     "favourite": "いいね",
     "from": "から",
     "ingredient": "{amount}{ingredient}",
+    "ingredient_note": " ({note})",
+    "ingredient_optional": "*オプション",
+    "ingredient_qualifier": "、{qualifier}",
     "ingredients": "材料",
     "ratings": "評価なし | {n}件の評価 | {n}件の評価",
+    "scale_double": "2倍",
+    "scale_halve": "半分",
     "servings": "{n}食分",
     "share": "レシピを共有する",
     "share_title": "「{name}」のレシピ",
@@ -63,9 +68,10 @@
     "select_category": "カテゴリ"
   },
   "times": {
-    "cook": "調理時間",
-    "prep": "準備時間",
-    "total": "合計時間"
+    "cookTime": "調理時間: {duration}",
+    "hms": "時間,分,秒",
+    "prepTime": "準備時間: {duration}",
+    "totalTime": "合計時間: {duration}"
   },
   "users": {
     "me": "私"

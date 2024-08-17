@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils";
-import DurationSplitter from "../DurationSplitter.vue";
+import DurationSplitter from "../RecipeDurations.vue";
 
 test("Duration Splitter should be empty without a time", async () => {
   const wrapper = mount(DurationSplitter, { props: { type: "prep" } });

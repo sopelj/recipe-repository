@@ -64,7 +64,11 @@ cp example.env .env
     ```bash
     hatch run ./manage.py createsuperuser
     ```
-3. Load default data
+3. Compile Translations
+    ```bash
+    hatch run ./manage.py compilemessages
+    ```
+4. Load default data
     ```bash
     hatch run ./manage.py loaddata admin-theme
     hatch run ./manage.py loaddata units
@@ -73,7 +77,7 @@ cp example.env .env
     hatch run ./manage.py loaddata qualifiers
     hatch run ./manage.py loaddata yield-units
     ```
-4. Run server
+5. Run server
     ```bash
     hatch run ./manage.py runserver
     ```

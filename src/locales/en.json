@@ -39,8 +39,13 @@
     "favourite": "Favourite",
     "from": "From:",
     "ingredient": "{amount} {ingredient}",
+    "ingredient_note": " ({note})",
+    "ingredient_optional": "*Optional",
+    "ingredient_qualifier": ", {qualifier}",
     "ingredients": "Ingredients",
     "ratings": "No ratings | {n} rating | {n} ratings",
+    "scale_double": "x2",
+    "scale_halve": "½",
     "servings": "{n} serving | {n} servings",
     "share": "Share recipe",
     "share_title": "Recipe for \"{name}\"",
@@ -63,9 +68,10 @@
     "select_category": "Categories"
   },
   "times": {
-    "cook": "Cook time:",
-    "prep": "Prep time:",
-    "total": "Total time:"
+    "cookTime": "Cook time: {duration}",
+    "hms": "h,m,s",
+    "prepTime": "Prep time: {duration}",
+    "totalTime": "Total time: {duration}"
   },
   "users": {
     "me": "Me"

@@ -39,8 +39,13 @@
     "favourite": "J'aime",
     "from": "De :",
     "ingredient": "{amount} {ingredient}",
+    "ingredient_note": " ({note})",
+    "ingredient_optional": "*Facultatif",
+    "ingredient_qualifier": ", {qualifier}",
     "ingredients": "Ingrédients",
     "ratings": "Pas de notes | {n} note | {n} notes",
+    "scale_double": "x2",
+    "scale_halve": "½",
     "servings": "{n} portion | {n} portions",
     "share": "Recette pour « {name} »",
     "step_title": "Étape {step}",
@@ -62,9 +67,10 @@
     "select_category": "Catégories"
   },
   "times": {
-    "cook": "Temps de cuisson :",
-    "prep": "Temps de préparation :",
-    "total": "Temps total :"
+    "cookTime": "Temps de cuisson : {duration}",
+    "hours_short": "h,m,s",
+    "prepTime": "Temps de préparation : {duration}",
+    "totalTime": "Temps total : {duration}"
   },
   "users": {
     "me": "Moi"
