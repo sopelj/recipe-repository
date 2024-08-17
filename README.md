@@ -86,6 +86,12 @@ cp example.env .env
 hatch run test:cov
 ```
 
+#### Frontend
+
+```bash
+yarn test
+```
+
 ## Linting
 
 ```shell

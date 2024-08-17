@@ -185,12 +185,7 @@ const updateServings = (multiplier: number) => {
                       >x2</Button
                     >
                   </InputGroup>
-                  <p
-                    v-if="errors?.servings?.length"
-                    class="text-xs text-red-600"
-                  >
-                    {{ errors.servings[0] }}
-                  </p>
+                  <Message v-if="errors?.servings?.length" severity="error">{{ errors.servings[0] }}</Message>
                 </div>
               </div>
             </template>
