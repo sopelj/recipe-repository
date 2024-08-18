@@ -46,6 +46,7 @@
     "ratings": "評価なし | {n}件の評価 | {n}件の評価",
     "scale_double": "2倍",
     "scale_halve": "半分",
+    "scale_outside_range": "サービング数は0.125から50の間でなければなりません。",
     "servings": "{n}食分",
     "share": "レシピを共有する",
     "share_title": "「{name}」のレシピ",

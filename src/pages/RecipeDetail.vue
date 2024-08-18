@@ -16,6 +16,7 @@ import RecipeDurations from "@/components/RecipeDurations.vue";
 import RecipeSource from "@/components/RecipeSource.vue";
 import UserAvatar from "@/components/UserAvatar.vue";
 import HeadSection from "@/layouts/HeadSection.vue";
+import ServingsForm from "@/components/ServingsForm.vue";
 
 interface FormErrors {
   servings?: string[];
@@ -43,22 +44,7 @@ const shareRecipe = async () => {
 const servingAmount = ref<number>(props.servings || 1);
 const formError = ref<string | undefined>();
 
-const updateServings = (multiplier: number) => {
-  if (!servingAmount.value) {
-    servingAmount.value = props.servings;
-    return;
-  }
-  const newValue = servingAmount.value * multiplier;
-  if (newValue > 100 || newValue < 0.125) {
-    formError.value = "Serving value must be between 0.125 and 100";
-    servingAmount.value = props.servings;
-    return;
-  }
-  // TODO: use `useForm` when django-inertia supports it.
-  router.visit(`${window.location.pathname}?servings=${newValue}`, {
-    only: ["ingredients", "servings"],
-  });
-};
+
 </script>
 
 <template>
@@ -164,36 +150,7 @@ const updateServings = (multiplier: number) => {
             <template #title>
               <div class="flex flex-row items-center">
                 <h2 class="text-xxl grow w-100 mr-2">{{ t("recipe.ingredients") }}</h2>
-                <div class="grow-0 ml-4">
-                  <InputGroup class="grow-0">
-                    <Button
-                      :disabled="!servingAmount || servingAmount / 2 <= 0.125"
-                      @click="updateServings(0.5)"
-                    >
-                      {{ t("recipe.scale_halve") }}
-                    </Button>
-                    <InputNumber
-                      v-model="servingAmount"
-                      placeholder="servings"
-                      :min="0.125"
-                      :max="100"
-                      input-class="text-center pa-0"
-                      :fluid="true"
-                      @update="updateServings(1)"
-                    />
-                    <Button
-                      :disabled="servingAmount * 2 >= 100"
-                      @click="updateServings(2)"
-                    >
-                      {{ t("recipe.scale_double") }}
-                    </button>
-                  </InputGroup>
-                  <Message
-                    v-if="errors?.servings?.length"
-                    severity="error"
-                  >{{ errors.servings[0] }}</Message
-                  >
-                </div>
+                <ServingsForm :servings="servings || 1" />
               </div>
             </template>
             <template #content>
