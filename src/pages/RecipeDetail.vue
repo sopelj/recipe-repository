@@ -12,9 +12,9 @@ import KeepAwake from "@/components/KeepAwake.vue";
 import NutritionalInformation from "@/components/NutritionalInformation.vue";
 import RecipeDurations from "@/components/RecipeDurations.vue";
 import RecipeSource from "@/components/RecipeSource.vue";
+import ServingsForm from "@/components/ServingsForm.vue";
 import UserAvatar from "@/components/UserAvatar.vue";
 import HeadSection from "@/layouts/HeadSection.vue";
-import ServingsForm from "@/components/ServingsForm.vue";
 
 interface FormErrors {
   servings?: string[];

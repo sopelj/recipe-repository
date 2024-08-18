@@ -1,23 +1,23 @@
 <script setup lang="ts">
-import type {User} from "@/types/users";
+import type { User } from "@/types/users";
 
-import {Link, router} from "@inertiajs/vue3";
-import {type ComponentInstance, computed, ref} from "vue";
-import {useI18n} from "vue-i18n";
+import { Link, router } from "@inertiajs/vue3";
+import { type ComponentInstance, computed, ref } from "vue";
+import { useI18n } from "vue-i18n";
 
 import Menu from "primevue/menu";
 import UserAvatar from "@/components/UserAvatar.vue";
 
 const props = defineProps<{ user?: User }>();
-const {t, locale} = useI18n();
+const { t, locale } = useI18n();
 const userMenu = ref<ComponentInstance<typeof Menu>>();
 const toggleMenu = (event: Event) => {
   userMenu.value?.toggle(event);
 };
 const userMenuItems = computed(() => {
-  const items = [{label: t("global.logout"), icon: "pi pi-sign-out", url: t("routes.logout")}];
+  const items = [{ label: t("global.logout"), icon: "pi pi-sign-out", url: t("routes.logout") }];
   if (props.user?.is_staff) {
-    return [{label: t("global.admin"), icon: "pi pi-pen-to-square", url: t("routes.admin")}, ...items];
+    return [{ label: t("global.admin"), icon: "pi pi-pen-to-square", url: t("routes.admin") }, ...items];
   }
   return items;
 });
@@ -103,7 +103,7 @@ const setLocale = (lang: string) => {
       </nav>
     </header>
     <article>
-      <slot/>
+      <slot />
     </article>
   </main>
 </template>
