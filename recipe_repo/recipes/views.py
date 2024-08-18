@@ -11,7 +11,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic.detail import SingleObjectMixin
 from modeltranslation.utils import get_language
 
-from ..inertia.views import InertiaFormView, InertiaView
+from ..common.views import InertiaFormView, InertiaView
 from .forms import RecipeReviewForm, ServingsForm
 from .models import Category, Ingredient, Recipe
 from .serializers import (

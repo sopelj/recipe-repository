@@ -57,7 +57,7 @@ INSTALLED_APPS = [
     "django_extensions",
     "colorfield",
     # Local apps
-    "recipe_repo.inertia",
+    "recipe_repo.common",
     "recipe_repo.food",
     "recipe_repo.recipes",
     "recipe_repo.users",
@@ -72,7 +72,7 @@ MIDDLEWARE = [
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
-    "recipe_repo.inertia.middleware.inertia_share",
+    "recipe_repo.common.middleware.inertia_share",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
@@ -143,7 +143,7 @@ LANGUAGES = (
     ("ja", _("Japanese")),
 )
 LOCALE_PATHS = [
-    str(APPS_DIR / "locales"),
+    APPS_DIR / "locales",
 ]
 MODELTRANSLATION_FALLBACK_LANGUAGES = ("en", "fr")
 MODELTRANSLATION_CUSTOM_FIELDS = ("ArrayField",)
