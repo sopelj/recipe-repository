@@ -1,22 +1,21 @@
 <script setup lang="ts">
+import type { Ingredient, Recipe } from "@/types/recipes";
 import type { User } from "@/types/users";
-import type { Recipe, Ingredient } from "@/types/recipes";
 
-import { ref } from "vue";
 import { router } from "@inertiajs/vue3";
+import { breakpointsTailwind, useBreakpoints } from "@vueuse/core";
+import { ref } from "vue";
 import { useI18n } from "vue-i18n";
+
 import { useShare } from "@/composables/share";
 
-import { breakpointsTailwind, useBreakpoints } from '@vueuse/core';
-
-
+import DescriptionItem from "@/components/DescriptionItem.vue";
+import KeepAwake from "@/components/KeepAwake.vue";
 import NutritionalInformation from "@/components/NutritionalInformation.vue";
-import HeadSection from "@/layouts/HeadSection.vue";
-import UserAvatar from "@/components/UserAvatar.vue";
 import RecipeDurations from "@/components/RecipeDurations.vue";
 import RecipeSource from "@/components/RecipeSource.vue";
-import KeepAwake from "@/components/KeepAwake.vue";
-import DescriptionItem from "@/components/DescriptionItem.vue";
+import UserAvatar from "@/components/UserAvatar.vue";
+import HeadSection from "@/layouts/HeadSection.vue";
 
 interface FormErrors {
   servings?: string[];
@@ -71,7 +70,7 @@ const updateServings = (multiplier: number) => {
   >
     <div class="grid grid-cols-12 gap-4">
       <div class="col-span-12 sm:col-span-9 md:col-span-8">
-        <div class="flex flex-wrap sm:flex-nowrap items-center mb-4 ">
+        <div class="flex flex-wrap sm:flex-nowrap items-center mb-4">
           <h1
             class="text-4xl cursive flex-grow"
             itemprop="name"
@@ -149,7 +148,11 @@ const updateServings = (multiplier: number) => {
           <Divider />
           {{ recipe.description }}
         </div>
-        <RecipeDurations :prep-time="recipe.prep_time" :cook-time="recipe.cook_time" :total-time="recipe.total_time" />
+        <RecipeDurations
+          :prep-time="recipe.prep_time"
+          :cook-time="recipe.cook_time"
+          :total-time="recipe.total_time"
+        />
         <NutritionalInformation
           v-if="recipe.nutrition && !isAboveSmall"
           :nutrition="recipe.nutrition"
@@ -157,7 +160,7 @@ const updateServings = (multiplier: number) => {
           class="mt-4"
         />
         <div class="ingredients">
-          <card>
+          <Card>
             <template #title>
               <div class="flex flex-row items-center">
                 <h2 class="text-xxl grow w-100 mr-2">{{ t("recipe.ingredients") }}</h2>
@@ -166,8 +169,9 @@ const updateServings = (multiplier: number) => {
                     <Button
                       :disabled="!servingAmount || servingAmount / 2 <= 0.125"
                       @click="updateServings(0.5)"
-                      >{{ t("recipe.scale_halve") }}</Button
                     >
+                      {{ t("recipe.scale_halve") }}
+                    </Button>
                     <InputNumber
                       v-model="servingAmount"
                       placeholder="servings"
@@ -180,10 +184,15 @@ const updateServings = (multiplier: number) => {
                     <Button
                       :disabled="servingAmount * 2 >= 100"
                       @click="updateServings(2)"
-                      >{{ t("recipe.scale_double") }}</Button
                     >
+                      {{ t("recipe.scale_double") }}
+                    </button>
                   </InputGroup>
-                  <Message v-if="errors?.servings?.length" severity="error">{{ errors.servings[0] }}</Message>
+                  <Message
+                    v-if="errors?.servings?.length"
+                    severity="error"
+                  >{{ errors.servings[0] }}</Message
+                  >
                 </div>
               </div>
             </template>
@@ -193,7 +202,7 @@ const updateServings = (multiplier: number) => {
                   v-for="ingredient in ingredients"
                   :key="ingredient.id"
                 >
-                  <i18n-t
+                  <I18nT
                     keypath="recipe.ingredient"
                     tag="span"
                   >
@@ -201,22 +210,24 @@ const updateServings = (multiplier: number) => {
                     <template #ingredient>
                       <strong>{{ ingredient.food_display }}</strong>
                     </template>
-                  </i18n-t>
+                  </I18nT>
                   <span
                     v-if="ingredient.qualifier"
                     class="qualifier"
-                    >{{ t("recipe.ingredient_qualifier", { qualifier: ingredient.qualifier}) }}</span
+                    >{{ t("recipe.ingredient_qualifier", { qualifier: ingredient.qualifier }) }}</span
                   >
                   <span
                     v-if="ingredient.optional"
                     class="optional"
                     >{{ t("recipe.ingredient_optional") }}</span
                   >
-                  <span v-if="ingredient.note">{{ t("recipe.ingredient_note", { note: ingredient.note }) }}</span>
+                  <span v-if="ingredient.note">{{
+                    t("recipe.ingredient_note", { note: ingredient.note })
+                  }}</span>
                 </li>
               </ul>
             </template>
-          </card>
+          </Card>
         </div>
       </div>
       <div class="col-span-12 sm:col-span-3 md:col-span-4">

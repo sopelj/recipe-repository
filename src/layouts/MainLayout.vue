@@ -1,23 +1,23 @@
 <script setup lang="ts">
-import type { User } from "@/types/users";
+import type {User} from "@/types/users";
 
-import { Link as ILink, router } from "@inertiajs/vue3";
+import {Link, router} from "@inertiajs/vue3";
+import {type ComponentInstance, computed, ref} from "vue";
+import {useI18n} from "vue-i18n";
+
 import Menu from "primevue/menu";
-
-import { ref, type ComponentInstance, computed } from "vue";
-import { useI18n } from "vue-i18n";
-import UserAvatar from "../components/UserAvatar.vue";
+import UserAvatar from "@/components/UserAvatar.vue";
 
 const props = defineProps<{ user?: User }>();
-const { t, locale } = useI18n();
+const {t, locale} = useI18n();
 const userMenu = ref<ComponentInstance<typeof Menu>>();
 const toggleMenu = (event: Event) => {
   userMenu.value?.toggle(event);
 };
 const userMenuItems = computed(() => {
-  const items = [{ label: t("global.logout"), icon: "pi pi-sign-out", url: t("routes.logout") }];
+  const items = [{label: t("global.logout"), icon: "pi pi-sign-out", url: t("routes.logout")}];
   if (props.user?.is_staff) {
-    return [{ label: t("global.admin"), icon: "pi pi-pen-to-square", url: t("routes.admin") }, ...items];
+    return [{label: t("global.admin"), icon: "pi pi-pen-to-square", url: t("routes.admin")}, ...items];
   }
   return items;
 });
@@ -32,7 +32,7 @@ const setLocale = (lang: string) => {
     <header class="w-100 mb-4 bg-purple-900/75 text-white sticky top-0 backdrop-blur-sm shadow-lg z-50">
       <nav class="container mx-auto flex flex-row">
         <div class="flex-grow">
-          <ILink
+          <Link
             :href="t('routes.recipe_list')"
             class="flex flex-row py-2 items-center"
           >
@@ -43,7 +43,7 @@ const setLocale = (lang: string) => {
             />
             <span class="cursive text-3xl pl-2 hidden sm:inline-block">{{ t("global.title") }}</span>
             <span class="cursive text-2xl pl-2 sm:hidden">{{ t("global.title_short") }}</span>
-          </ILink>
+          </Link>
         </div>
         <div class="flex items-center text-right gap-2">
           <div class="language-selector">
@@ -74,11 +74,12 @@ const setLocale = (lang: string) => {
               日本語
             </Button>
           </div>
-          <ILink
+          <Link
             v-if="!user"
             :href="t('routes.login')"
-            >{{ t("global.login") }}</ILink
           >
+            {{ t("global.login") }}
+          </Link>
           <div
             v-else
             class="card flex justify-center"
@@ -102,7 +103,7 @@ const setLocale = (lang: string) => {
       </nav>
     </header>
     <article>
-      <slot />
+      <slot/>
     </article>
   </main>
 </template>

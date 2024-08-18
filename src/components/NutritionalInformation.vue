@@ -1,13 +1,14 @@
 <script setup lang="ts">
-import type { NutritionInformation } from "../types/recipes";
+import type { NutritionInformation } from "@/types/recipes";
+
 import { computed } from "vue";
-import {useI18n} from "vue-i18n";
+import { useI18n } from "vue-i18n";
 
 const props = defineProps<{ nutrition: NutritionInformation }>();
 const { t } = useI18n();
 
 const snakeToCamel = (value: string) => value.replace(/(_\w)/g, (g: string) => g[1].toUpperCase());
-const getUnit = (name: string) => ["potassium", "sodium", "cholesterol"].includes(name) ? "mg" : "g";
+const getUnit = (name: string) => (["potassium", "sodium", "cholesterol"].includes(name) ? "mg" : "g");
 
 const nutrients = computed(
   (): Partial<Omit<NutritionInformation, "calories" | "serving_size">> =>
@@ -35,13 +36,13 @@ const nutrients = computed(
             colspan="2"
             class="text-xs"
           >
-            {{ t('nutritional_information.serving_size', nutrition.serving_size) }}
+            {{ t("nutritional_information.serving_size", nutrition.serving_size) }}
           </th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <th class="text-2xl">{{ t('nutritional_information.calories') }}</th>
+          <th class="text-2xl">{{ t("nutritional_information.calories") }}</th>
           <td class="text-2xl text-right font-bold">{{ nutrition.calories }}</td>
         </tr>
         <tr

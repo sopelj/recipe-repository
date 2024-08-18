@@ -1,8 +1,8 @@
-import { type ComponentInstance, type Component, createApp, h } from "vue";
 import { createInertiaApp } from "@inertiajs/vue3";
+import { type Component, type ComponentInstance, createApp, h } from "vue";
 
-import { setupPrimeVue } from "./plugins/primevue";
 import { i18n } from "./plugins/i18n";
+import { setupPrimeVue } from "./plugins/primevue";
 
 import MainLayout from "./layouts/MainLayout.vue";
 

@@ -64,7 +64,7 @@ class InertiaPageHelper:
         return cast(InertiaPageResponse, loads(self.mock_render.call_args.args[2]["page"]))
 
 
-@pytest.fixture()
+@pytest.fixture
 def inertia_client() -> Client:
     """Return a test client with the inertia headers."""
     return Client(HTTP_X_INERTIA=True)

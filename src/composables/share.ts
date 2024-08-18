@@ -1,8 +1,8 @@
 import { computed } from "vue";
-type NavShare = Navigator & { share: (data: ShareData ) => Promise<void> };
+type NavShare = Navigator & { share: (data: ShareData) => Promise<void> };
 
 export const useShare = () => {
-  const canShare = computed(() => typeof window.navigator.share !== 'undefined');
+  const canShare = computed((): boolean => typeof window.navigator.share !== "undefined");
 
   const share = async (title: string, text: string, url?: string) => {
     if (canShare.value) {

@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { RecipeItem } from "@/types/recipes";
 import type { Category } from "@/types/categories";
+import type { RecipeItem } from "@/types/recipes";
 
+import { Link } from "@inertiajs/vue3";
 import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 
-import { Link as ILink } from "@inertiajs/vue3";
 import HeadSection from "@/layouts/HeadSection.vue";
 
 const props = defineProps<{ recipes: RecipeItem[]; "category"?: Category; "categories": Category[] }>();
@@ -33,29 +33,36 @@ const title = computed(
   <div class="container mx-auto">
     <div class="flex items-center">
       <h1 class="text-4xl pt-2 pb-4 px-4 flex-grow">{{ title }}</h1>
-      <ILink v-if="category" :href="t('routes.recipe_list')" class="pr-2 text-center hover:underline">
+      <Link
+        v-if="category"
+        :href="t('routes.recipe_list')"
+        class="pr-2 text-center hover:underline"
+      >
         {{ t("recipe.all_recipes") }}
-      </ILink>
-      <ILink :href="t('routes.category_list')" class="text-center pr-2 sm:pr-0 hover:underline">
+      </Link>
+      <Link
+        :href="t('routes.category_list')"
+        class="text-center pr-2 sm:pr-0 hover:underline"
+      >
         {{ category ? t("categories.all_categories") : t("recipe.browse_categories") }}
-      </ILink>
+      </Link>
     </div>
-    <data-view
+    <DataView
       layout="grid"
       :value="filteredRecipes"
       data-key="slug"
     >
       <template #header>
         <div class="flex flex-wrap items-center justify-between">
-          <icon-field class="w-full sm:w-auto mb-3 sm:mb-0">
-            <input-icon class="pi pi-search" />
-            <input-text
+          <IconField class="w-full sm:w-auto mb-3 sm:mb-0">
+            <InputIcon class="pi pi-search" />
+            <InputText
               v-model="search"
               :placeholder="t('search.search')"
               class="w-full sm:w-auto"
             />
-          </icon-field>
-          <multi-select
+          </IconField>
+          <MultiSelect
             v-model="selectedCategories"
             :options="categoryOptions"
             :placeholder="t('search.select_category')"
@@ -68,13 +75,13 @@ const title = computed(
       </template>
       <template #grid="{ items }">
         <div class="grid grid-cols-12 gap-4 p-4">
-          <ILink
+          <Link
             v-for="recipe in items"
             :key="recipe.slug"
             :href="t('routes.recipe_details', { slug: recipe.slug })"
             class="col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-2 p-2"
           >
-            <card
+            <Card
               class="text-center overflow-clip transition-all border dark:border-slate-600 dark:hover:border-violet-700 hover:scale-105 w-100"
             >
               <template #title
@@ -95,7 +102,7 @@ const title = computed(
                     :readonly="true"
                   />
                   <div class="mt-2">
-                    <tag
+                    <Tag
                       v-for="c in recipe.categories"
                       :key="c.slug"
                       :value="c.name"
@@ -105,8 +112,8 @@ const title = computed(
                   </div>
                 </div>
               </template>
-            </card>
-          </ILink>
+            </Card>
+          </Link>
         </div>
       </template>
       <template #empty>
@@ -114,6 +121,6 @@ const title = computed(
           <div class="p-4 w-full text-center">{{ t("search.no_recipes_match") }}</div>
         </div>
       </template>
-    </data-view>
+    </DataView>
   </div>
 </template>

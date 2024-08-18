@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { Category } from "@/types/categories";
 
+import { Link } from "@inertiajs/vue3";
 import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 
-import { Link as ILink } from "@inertiajs/vue3";
 import HeadSection from "@/layouts/HeadSection.vue";
 
 const props = defineProps<{ parentCategories?: Category[]; categories: Category[] }>();
@@ -23,12 +23,12 @@ const filteredCategories = computed((): Category[] =>
   <div class="container mx-auto">
     <div class="flex items-center">
       <h1 class="text-4xl pt-2 pb-4 px-4 flex-grow">{{ t("categories.all_categories") }}</h1>
-      <ILink
+      <Link
         :href="t('routes.recipe_list')"
         class="pr-2 sm:pr-0 text-center hover:underline"
       >
         {{ t("recipe.all_recipes") }}
-      </ILink>
+      </Link>
     </div>
     <DataView
       layout="grid"
@@ -37,19 +37,19 @@ const filteredCategories = computed((): Category[] =>
     >
       <template #header>
         <div class="flex flex-wrap items-center justify-between">
-          <icon-field class="w-full sm:w-auto">
-            <input-icon class="pi pi-search" />
-            <input-text
+          <IconField class="w-full sm:w-auto">
+            <InputIcon class="pi pi-search" />
+            <InputText
               v-model="search"
               :placeholder="t('search.search')"
               class="w-full sm:w-auto"
             />
-          </icon-field>
+          </IconField>
         </div>
       </template>
       <template #grid="{ items }">
         <div class="grid grid-cols-12 gap-4">
-          <ILink
+          <Link
             v-for="category in items"
             :key="category.slug"
             :href="t('routes.recipe_category', { slug: category.slug })"
@@ -69,7 +69,7 @@ const filteredCategories = computed((): Category[] =>
                 />
               </template>
             </Card>
-          </ILink>
+          </Link>
         </div>
       </template>
       <template #empty>

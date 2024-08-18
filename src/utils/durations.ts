@@ -11,8 +11,9 @@ export const formatDuration = (duration: string): string => {
 };
 
 export const formatLocalised = (time: string): string => {
-  const [h, m, s] = i18n.global.t('times.hms').split(",");
+  const [h, m, s] = i18n.global.t("times.hms").split(",");
   return formatDuration(time).replace("h", h).replace("m", m).replace("s", s);
 };
 
-export const formatISOTime = (time: string): string => `PT${formatDuration(time).replace(" ", "").toUpperCase()}`;
+export const formatISOTime = (time: string): string =>
+  `PT${formatDuration(time).replace(" ", "").toUpperCase()}`;

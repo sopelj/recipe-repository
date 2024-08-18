@@ -1,10 +1,10 @@
 import type { App } from "vue";
 
+import { definePreset } from "@primevue/themes";
+import Aura from "@primevue/themes/aura";
+
 import PrimeVue from "primevue/config";
 import Tooltip from "primevue/tooltip";
-
-import Aura from "@primevue/themes/aura";
-import { definePreset } from "@primevue/themes";
 
 const SiteTheme = definePreset(Aura, {
   semantic: {

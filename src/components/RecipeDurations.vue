@@ -1,23 +1,23 @@
 <script setup lang="ts">
-import { useI18n } from "vue-i18n";
 import { computed } from "vue";
-import { formatLocalised, formatISOTime } from "@/utils/durations";
+import { useI18n } from "vue-i18n";
 
-const types = ["prepTime", "cookTime", "totalTime"] as const;
-type DurationType = typeof types[number];
-type Duration = { time: string, type: DurationType};
+import { formatISOTime, formatLocalised } from "@/utils/durations";
 
 const props = defineProps<{ prepTime?: string; cookTime?: string; totalTime?: string }>();
+const types = ["prepTime", "cookTime", "totalTime"] as const;
+type DurationType = (typeof types)[number];
+type Duration = { time: string; type: DurationType };
 
 const { t } = useI18n();
-const durations = computed(
-  () => types.reduce((acc: Duration[], type: DurationType) => {
+const durations = computed(() =>
+  types.reduce((acc: Duration[], type: DurationType) => {
     const time = props[type];
     if (time) {
-      acc.push({ type, time })
+      acc.push({ type, time });
     }
     return acc;
-  }, [])
+  }, []),
 );
 </script>
 
@@ -25,6 +25,7 @@ const durations = computed(
   <Splitter v-if="totalTime">
     <SplitterPanel
       v-for="duration in durations"
+      :key="duration.type"
       :data-duration-type="duration.type"
       class="flex items-center justify-center m-2"
     >
