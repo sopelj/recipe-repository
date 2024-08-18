@@ -2,9 +2,7 @@
 import type { Ingredient, Recipe } from "@/types/recipes";
 import type { User } from "@/types/users";
 
-import { router } from "@inertiajs/vue3";
 import { breakpointsTailwind, useBreakpoints } from "@vueuse/core";
-import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 
 import { useShare } from "@/composables/share";
@@ -40,11 +38,6 @@ const { share, canShare } = useShare();
 const shareRecipe = async () => {
   await share(props.recipe.name, t("recipe.share", { name: props.recipe.name }));
 };
-
-const servingAmount = ref<number>(props.servings || 1);
-const formError = ref<string | undefined>();
-
-
 </script>
 
 <template>
