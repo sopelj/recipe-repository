@@ -25,6 +25,7 @@ const durations = computed(
   <Splitter v-if="totalTime">
     <SplitterPanel
       v-for="duration in durations"
+      :data-duration-type="duration.type"
       class="flex items-center justify-center m-2"
     >
       {{ t(`times.${duration.type}`, { duration: formatLocalised(duration.time) }) }}
