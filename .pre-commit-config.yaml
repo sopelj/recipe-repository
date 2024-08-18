@@ -1,4 +1,5 @@
 ---
+exclude: ^(node_modules|static)/.+$
 repos:
   - repo: https://github.com/asottile/add-trailing-comma
     rev: v3.1.0
@@ -45,24 +46,16 @@ repos:
     hooks:
       - id: markdownlint-fix
         args: [--disable, MD013]
-  - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: 'v9.9.0'
-    hooks:
-      - id: eslint
-        args: [--fix]
-        files: \.(ts|js|vue)$
-        additional_dependencies:
-          - "eslint@^9.9.0"
-          - "@eslint/js@^9.9.0"
-          - "eslint-config-prettier@^9.1.0"
-          - "eslint-plugin-prettier@^5.2.1"
-          - "eslint-plugin-simple-import-sort@^12.1.1"
-          - "prettier@^3.3.3"
-          - "typescript-eslint@^8.0.0"
   - repo: local
     hooks:
+      - id: eslint
+        language: system
+        name: Run ESLint
+        entry: yarn eslint --fix
+        types: [file]
+        files: \.(ts|js|vue)$
       - id: mypy
         language: system
         name: Run mypy
+        types: [python]
         entry: hatch run mypy:check
-        files: \.(py)$
