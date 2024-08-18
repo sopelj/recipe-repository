@@ -121,7 +121,7 @@ msgstr "評価"
 #: recipe_repo/recipes/models.py:83
 #, python-brace-format
 msgid "User {user} rated '{recipe}' {rating}"
-msgstr "ユーザー{user}は{recipe}を{rating}で評価しました"
+msgstr "ユーザー{user}は「{recipe}」を{rating}で評価しました"
 
 #: recipe_repo/recipes/models.py:90
 msgid "User Rating"
@@ -566,9 +566,3 @@ msgstr ""
 #: recipe_repo/users/models.py:83
 msgid "Date joined"
 msgstr "参加日"
-
-#~ msgid "Failed to create a recipe from the provided URL"
-#~ msgstr "レシピの作成に失敗しました"
-
-#~ msgid "Sub-categories"
-#~ msgstr "サブカテゴリ"

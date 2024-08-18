@@ -72,7 +72,7 @@ const updateServings = (multiplier: number) => {
       <div class="col-span-12 sm:col-span-9 md:col-span-8">
         <div class="flex flex-wrap sm:flex-nowrap items-center mb-4">
           <h1
-            class="text-4xl cursive flex-grow"
+            class="text-4xl cursive flex-grow w-full sm:w-auto"
             itemprop="name"
           >
             {{ recipe.name }}
@@ -81,7 +81,6 @@ const updateServings = (multiplier: number) => {
             v-tooltip="t('recipe.ratings', recipe.num_ratings)"
             :model-value="userRating || recipe.avg_rating"
             :readonly="true"
-            class="flex-grow sm:flex-grow-0"
           />
           <Button
             v-if="canShare"
@@ -118,8 +117,9 @@ const updateServings = (multiplier: number) => {
           <span
             v-if="recipe.yield_unit"
             itemprop="recipeYield"
-            >{{ recipe.yield_amount }} {{ recipe.yield_unit }} ({{ t("recipe.servings", servings) }})</span
           >
+            {{ recipe.yield_amount }} {{ recipe.yield_unit }} ({{ t("recipe.servings", servings) }})
+          </span>
           <span v-else>{{ t("recipe.servings", servings) }}</span>
         </DescriptionItem>
         <DescriptionItem :label="t('recipe.added_by')">
@@ -127,9 +127,9 @@ const updateServings = (multiplier: number) => {
             :user="recipe.added_by"
             size="normal"
           />
-          <span class="pl-2">{{
-            recipe.added_by.id === user?.id ? t("users.me") : recipe.added_by.full_name
-          }}</span>
+          <span class="pl-2">
+            {{ recipe.added_by.id === user?.id ? t("users.me") : recipe.added_by.full_name }}
+          </span>
         </DescriptionItem>
         <DescriptionItem
           v-if="recipe.source"

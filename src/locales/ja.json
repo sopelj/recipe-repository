@@ -39,7 +39,7 @@
     "favourite": "いいね",
     "from": "から",
     "ingredient": "{amount}{ingredient}",
-    "ingredient_note": " ({note})",
+    "ingredient_note": "（{note}）",
     "ingredient_optional": "*オプション",
     "ingredient_qualifier": "、{qualifier}",
     "ingredients": "材料",
