@@ -20,6 +20,7 @@ const { t } = useI18n();
       />
       <i class="pi pi-globe"></i>&nbsp;
       <a
+        v-tooltip="t('source.visit_source_website')"
         :href="value"
         itemprop="publisher"
         target="_blank"
@@ -38,10 +39,12 @@ const { t } = useI18n();
         :content="source.value"
       />
       <a
+        v-tooltip="t('source.lookup_book_info')"
         :href="`https://isbnsearch.org/search?s=${source.value}`"
         itemprop="name"
       >
-        {{ source.name }}<span v-if="value">{{ t("source.page", { page: value }) }}</span>
+        <template v-if="value">{{ t("source.book_page", { book: source.name, page: value }) }}</template>
+        <template v-else>{{ source.name }}</template>
       </a>
     </div>
     <div v-else-if="source.type === 3">

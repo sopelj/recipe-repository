@@ -288,6 +288,9 @@ class Ingredient(models.Model):
         on_delete=models.SET_NULL,
     )
 
+    def __str__(self) -> str:
+        return f"{self.amount_display} {self.food_display}"
+
     @cached_property
     def scaled_amount(self) -> Decimal | None:
         """Amount scaled."""

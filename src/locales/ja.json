@@ -68,6 +68,11 @@
     "search": "サーチ",
     "select_category": "カテゴリ"
   },
+  "source": {
+    "book_page": "『{book}』{page}ページ。",
+    "lookup_book_info": "書籍情報の検索",
+    "visit_source_website": "ソースのウェブサイトにアクセス"
+  },
   "times": {
     "cookTime": "調理時間: {duration}",
     "hms": "時間,分,秒",

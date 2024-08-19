@@ -67,6 +67,11 @@
     "search": "Recherche",
     "select_category": "Catégories"
   },
+  "source": {
+    "book_page": "{book}, p. {page}",
+    "lookup_book_info": "Chercher les informations sur le livre",
+    "visit_source_website": "Visitez le site web d'origine"
+  },
   "times": {
     "cookTime": "Temps de cuisson : {duration}",
     "hours_short": "h,m,s",

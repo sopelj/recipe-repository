@@ -4,8 +4,10 @@ from typing import TYPE_CHECKING, Any
 
 from adminsortable2.admin import SortableAdminBase, SortableInlineAdminMixin
 from django.contrib import admin
+from django.db import models
+from django.forms import TextInput
 from django.shortcuts import redirect
-from django.urls import URLPattern, path
+from django.urls import URLPattern, path, resolve
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 from django.views.generic.edit import FormView
@@ -26,6 +28,7 @@ from .models import (
 
 if TYPE_CHECKING:
     from django.db.models import QuerySet
+    from django.db.models.fields.related import RelatedField
     from django.forms import ModelForm
     from django.http import HttpRequest, HttpResponseRedirect
     from django_stubs_ext import StrOrPromise
@@ -50,8 +53,9 @@ class CategoryAdmin(TranslationAdmin[Category]):
 
 @admin.register(Source)
 class SourceAdmin(admin.ModelAdmin[Source]):
-    list_display = ("value",)
+    list_display = ("name", "type")
     search_fields = ("name", "value")
+    list_filter = ("type",)
 
 
 @admin.register(UserRating)
@@ -119,6 +123,18 @@ class IngredientInlineAdmin(
     autocomplete_fields = ("food", "unit", "qualifier")
     fields = ("amount", "amount_max", "unit", "food", "qualifier", "optional", "note", "group")
 
+    def get_field_queryset(
+        self,
+        db: Any,
+        db_field: RelatedField[Any, Any],
+        request: HttpRequest,
+    ) -> QuerySet[Any, Any] | None:
+        """Override queryset on ingredient groups to limit to those belonging to this recipe."""
+        if db_field.name == "group":
+            resolved = resolve(request.path_info)
+            return IngredientGroup.objects.filter(recipe_id=resolved.kwargs["object_id"])
+        return super().get_field_queryset(db, db_field, request)
+
 
 class StepInlineAdmin(SortableInlineAdminMixin, TranslationTabularInline[Step, Recipe]):  # type: ignore[misc]
     model = Step
@@ -151,11 +167,15 @@ class RecipeImportView(FormView[RecipeImportForm]):
 class RecipeAdmin(SortableAdminBase, TranslationAdmin[Recipe]):  # type: ignore[misc]
     save_on_top = True
     search_fields = ("name",)
+    readonly_fields = ("added_by",)
     list_display = ("get_thumbnail", "name", "get_categories")
     list_display_links = ("get_thumbnail", "name")
     prepopulated_fields = {"slug": ("name",)}
     autocomplete_fields = ("source", "categories", "parent_recipes", "added_by", "rated_by", "favourited_by")
     inlines = [IngredientGroupInlineAdmin, IngredientInlineAdmin, StepInlineAdmin]
+    formfield_overrides = {
+        models.DurationField: {"widget": TextInput(attrs={"placeholder": "HH:MM:SS"})},
+    }
 
     def get_queryset(self, request: HttpRequest) -> QuerySet[Recipe]:
         """Avoid extra queries by pre-fetching categories."""

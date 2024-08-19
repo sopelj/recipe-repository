@@ -68,6 +68,11 @@
     "search": "Search",
     "select_category": "Categories"
   },
+  "source": {
+    "book_page": "{book}, p.{page}",
+    "lookup_book_info": "Lookup book information",
+    "visit_source_website": "Go to source website"
+  },
   "times": {
     "cookTime": "Cook time: {duration}",
     "hms": "h,m,s",
