@@ -132,7 +132,9 @@ class IngredientInlineAdmin(
         """Override queryset on ingredient groups to limit to those belonging to this recipe."""
         if db_field.name == "group":
             resolved = resolve(request.path_info)
-            return IngredientGroup.objects.filter(recipe_id=resolved.kwargs["object_id"])
+            if recipe_id := resolved.kwargs.get("object_id"):
+                return IngredientGroup.objects.filter(recipe_id=recipe_id)
+            return IngredientGroup.objects.none()
         return super().get_field_queryset(db, db_field, request)
 
 
