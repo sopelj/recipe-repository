@@ -58,9 +58,10 @@ class RecipeReviewForm(forms.Form):
                 self.user.favourite_recipes.remove(recipe)
 
         if (rating := self.cleaned_data.get("rating")) is not None:
+            recipe_id = Recipe.objects.filter(slug=self.recipe_slug).values_list("id", flat=True)[0]
             UserRating.objects.update_or_create(
                 user=self.user,
-                recipe__slug=self.recipe_slug,
+                recipe_id=recipe_id,
                 defaults={"rating": rating},
             )
 

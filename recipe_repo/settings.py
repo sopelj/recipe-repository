@@ -182,7 +182,7 @@ DJANGO_BREEZE = {
         "DEV_SERVER_HOST": "localhost",
         "DEV_SERVER_PORT": 5173,
         "WS_CLIENT_URL": "@vite/client",
-        "ASSETS_PATH": "static/dist",  # vite build asset path
+        "ASSETS_PATH": "dist",
         "STATIC_URL_PREFIX": "",
     },
 }
