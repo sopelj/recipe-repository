@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from decimal import Decimal
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 from urllib.parse import urlsplit, urlunsplit
 
 import requests
@@ -14,10 +14,11 @@ from recipe_scrapers import scrape_html
 from recipe_scrapers._exceptions import RecipeScrapersExceptions
 
 from .fields import FractionField
-from .models import Ingredient, Recipe
+from .models import Ingredient, Recipe, UserRating
 from .recipe_importing import USER_AGENT, create_recipe_from_scraper
 
 if TYPE_CHECKING:
+    from ..users.models import User
     from .recipe_importing import Scraper
 
 
@@ -32,8 +33,36 @@ class ServingsForm(forms.Form):
 
 
 class RecipeReviewForm(forms.Form):
-    favourite = forms.BooleanField(required=False)
+    favourite = forms.NullBooleanField(required=False)
     rating = forms.IntegerField(min_value=0, max_value=5, required=False)
+
+    def __init__(self, user: User, recipe_slug: str, *args: Any, **kwargs: Any) -> None:
+        """Add extra attributes to form for future validation."""
+        super().__init__(*args, **kwargs)
+        self.user = user
+        self.recipe_slug = recipe_slug
+
+    def clean(self) -> dict[str, Any] | None:
+        """Validate user is logged in if submitting form."""
+        if not self.user.is_authenticated:
+            raise forms.ValidationError("You must be logged in to update recipe.")
+        return super().clean()
+
+    def save(self) -> None:
+        """Save required information based on what was submitted."""
+        if (favourite := self.cleaned_data.get("favourite")) is not None:
+            recipe = Recipe.objects.get(slug=self.recipe_slug)
+            if favourite:
+                self.user.favourite_recipes.add(recipe)
+            else:
+                self.user.favourite_recipes.remove(recipe)
+
+        if (rating := self.cleaned_data.get("rating")) is not None:
+            UserRating.objects.update_or_create(
+                user=self.user,
+                recipe__slug=self.recipe_slug,
+                defaults={"rating": rating},
+            )
 
 
 class IngredientAdminForm(forms.ModelForm[Ingredient]):

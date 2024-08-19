@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import contextlib
 from functools import cached_property
 from typing import Any
 
@@ -8,6 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import DecimalField, Q, Value
 from django.http import Http404
 from django.shortcuts import get_object_or_404
+from django.urls.base import reverse
 from django.views.generic.detail import SingleObjectMixin
 from modeltranslation.utils import get_language
 
@@ -74,6 +74,14 @@ class RecipeDetailView(InertiaFormView, SingleObjectMixin[Recipe]):
     component = "RecipeDetail"
     form_class = RecipeReviewForm
 
+    def get_success_url(self) -> str:
+        """Resolve detail view URL."""
+        return reverse("recipes:recipe-detail", kwargs={"slug": self.kwargs.get("slug")})
+
+    def get_form_kwargs(self) -> dict[str, Any]:
+        """Add extra params to form."""
+        return super().get_form_kwargs() | {"user": self.request.user, "recipe_slug": self.kwargs.get("slug")}
+
     @cached_property
     def id_and_servings(self) -> tuple[int, int | None]:
         """Fetch PK and servings from Recipe and 404 if no match found."""
@@ -85,13 +93,15 @@ class RecipeDetailView(InertiaFormView, SingleObjectMixin[Recipe]):
         except Recipe.DoesNotExist as e:
             raise Http404("Recipe does not exist.") from e
 
-    def get_user_rating(self) -> int | None:
-        """Get the user's rating for the current recipe, if there is one."""
-        recipe_id = self.id_and_servings[0]
+    def get_user_rating_favourite(self, recipe_id: int) -> tuple[int | None, bool]:
+        """Get the user's rating and favourite state for the current recipe, if there is one."""
         if self.request.user.is_authenticated:
-            with contextlib.suppress(IndexError):
-                return self.request.user.ratings.filter(recipe_id=recipe_id).values_list("rating", flat=True)[0]
-        return None
+            try:
+                rating = self.request.user.ratings.filter(recipe_id=recipe_id).values_list("rating", flat=True)[0]
+            except IndexError:
+                rating = None
+            return rating, self.request.user.favourite_recipes.filter(id=recipe_id).exists()
+        return None, False
 
     def get_component_props(self) -> dict[str, Any]:
         """Get props for RecipeDetail component."""
@@ -106,9 +116,11 @@ class RecipeDetailView(InertiaFormView, SingleObjectMixin[Recipe]):
             .select_related("unit", "food", "qualifier", "group")
             .order_by("group__order", "order")
         )
+        user_rating, is_favourite = self.get_user_rating_favourite(recipe_id)
         return {
             "recipe": lambda: RecipeSerializer(get_full_recipe(recipe_id)).data,
             "servings": float((servings or 1) * scale),
             "ingredients": lambda: IngredientSerializer(ingredients, many=True).data,
-            "userRating": self.get_user_rating(),
+            "userRating": user_rating,
+            "userFavourite": is_favourite,
         }

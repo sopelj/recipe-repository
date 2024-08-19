@@ -8,8 +8,10 @@ import { useI18n } from "vue-i18n";
 import { useShare } from "@/composables/share";
 
 import DescriptionItem from "@/components/DescriptionItem.vue";
+import FavouriteForm from "@/components/FavouriteForm.vue";
 import KeepAwake from "@/components/KeepAwake.vue";
 import NutritionalInformation from "@/components/NutritionalInformation.vue";
+import RatingForm from "@/components/RatingForm.vue";
 import RecipeDurations from "@/components/RecipeDurations.vue";
 import RecipeSource from "@/components/RecipeSource.vue";
 import ServingsForm from "@/components/ServingsForm.vue";
@@ -27,6 +29,7 @@ const props = defineProps<{
   errors: FormErrors | null;
   user?: User;
   userRating: number | null;
+  userFavourite: boolean;
 }>();
 
 const { t } = useI18n();
@@ -56,10 +59,15 @@ const shareRecipe = async () => {
           >
             {{ recipe.name }}
           </h1>
-          <Rating
-            v-tooltip="t('recipe.ratings', recipe.num_ratings)"
-            :model-value="userRating || recipe.avg_rating"
-            :readonly="true"
+          <RatingForm
+            :average-rating="recipe.avg_rating"
+            :num-ratings="recipe.num_ratings"
+            :user-rating="userRating"
+            :disabled="!user"
+          />
+          <FavouriteForm
+            v-if="user"
+            :user-favourite="userFavourite"
           />
           <Button
             v-if="canShare"

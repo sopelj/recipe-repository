@@ -186,6 +186,8 @@ DJANGO_BREEZE = {
         "STATIC_URL_PREFIX": "",
     },
 }
+CSRF_HEADER_NAME = "HTTP_X_XSRF_TOKEN"
+CSRF_COOKIE_NAME = "XSRF-TOKEN"
 
 # Debug Queries
 if env.bool("QUERY_LOGGING_ENABLED", default=False):

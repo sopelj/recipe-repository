@@ -23,7 +23,7 @@ export default defineConfig(({ mode }) => {
           name: env.VITE_APP_TITLE || "Recipe Repository",
           short_name: env.VITE_APP_TITLE_SHORT || "Recipes",
           description: env.VITE_APP_DESCRIPTION || "A repository for your favourite recipes.",
-          theme_color: env.VITE_APP_THEME_COLOUR,
+          theme_color: env.VITE_APP_THEME_COLOUR || "#482880",
           display: "standalone",
           start_url: "/",
           icons: [
@@ -57,8 +57,7 @@ export default defineConfig(({ mode }) => {
       alias: [{ find: "@", replacement: fileURLToPath(new URL("./src", import.meta.url)) }],
     },
     build: {
-      outDir: resolve("./static/dist"),
-      assetsDir: "",
+      outDir: resolve("./dist"),
       manifest: "manifest.json",
       emptyOutDir: true,
       target: "es2022",

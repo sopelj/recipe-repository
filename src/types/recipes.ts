@@ -6,7 +6,7 @@ export interface RecipeItem {
   slug: string;
   thumbnail_url: string | null;
   num_ratings: number;
-  avg_rating?: number;
+  avg_rating: number | null;
   categories: Category[];
 }
 

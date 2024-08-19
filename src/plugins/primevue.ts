@@ -4,6 +4,7 @@ import { definePreset } from "@primevue/themes";
 import Aura from "@primevue/themes/aura";
 
 import PrimeVue from "primevue/config";
+import ToastService from "primevue/toastservice";
 import Tooltip from "primevue/tooltip";
 
 const SiteTheme = definePreset(Aura, {
@@ -39,4 +40,7 @@ export const setupPrimeVue = (app: App) => {
 
   // Directives
   app.directive("tooltip", Tooltip);
+
+  // Toasts
+  app.use(ToastService);
 };
