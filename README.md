@@ -1,12 +1,12 @@
-# Recipe Repo
+# Recipe Repository
 
-This is an attempt to rebuild my recipe site and make it open source all whilst testing out some new technologies in the process, [inertia](https://github.com/inertiajs/inertia) in this case.
+A repository for all your recipes. Put all your saved recipes in one location and share them with family and friends.
 
 > [!WARNING]
-> This is **very** WIP and is just for fun.
+> This still a WIP and is mostly just for fun.
 
 ## Features
-- Create and add recipes using the Django Admin interface
+- Add and manage recipes using the Django Admin interface
 - Import recipes automatically using [recipe-scrapers](https://github.com/hhursev/recipe-scrapers)
 - Explore/Search recipes
 - Scale and display recipes in the most appropriate units
@@ -107,7 +107,31 @@ Should be running on: <http://localhost:8000/>
 ## Deployment
 
 > [!WARNING]
-> Not ready for production use!
+> PoC. Not ready for production use.
+
+### Settings
+
+Settings can be configured via environment variables
+
+| Setting                 | Default                  | Note                                                                   |
+|-------------------------|--------------------------|------------------------------------------------------------------------|
+| `SECRET_KEY`            | `None` *Required*        | Must be set to a secure random string                                  |
+| `DEBUG`                 | `False`                  | Enable Django debug mode (Don't use in production)                     |
+| `QUERY_LOGGING_ENABLED` | `False`                  | Log all DB queries for debugging purposes                              |
+| `WERKZEUG_DEBUG_PIN`    | `None`                   | Werkzeug PIN (can be set to `off` to diable. Only do this locally! )   |
+| `SSL_ENABLED`           | `False`                  | Use HTTPS in Django. Set to True when Django is behind HTTPS proxy     |
+| `POSTGRES_DB`           | `"recipe_repo"`          | Postgres Database Table Name                                           |
+| `POSTGRES_USER`         | `"recipe_repo"`          | Postgres Database User                                                 |
+| `POSTGRES_PASSWORD`     | `"insecure-change-this"` | Postgres Database Password - Set to something secure if using Postgres |
+| `POSTGRES_HOST`         | `"db"`                   | Postgres Database Host                                                 |
+| `MEMCACHED_ENABLED`     | `False`                  | Enable Memcached                                                       |
+| `MEMCACHED_HOST`        | `None`                   | Memcached connection string. ex. "pymemcache://memcached:11211"        |
+| `AUTH_LDAP_ENABLED`     | `False`                  | Enable LDAP Authentication                                             |
+| `VITE_APP_THEME_COLOUR` | `"#482880"`              | Primary theme colour                                                   |
+| `VITE_APP_TITLE`        | `"Recipe Repository"`    | Main site title                                                        |
+| `VITE_APP_TITLE_SHORT`  | `"Recipes"`              | Short title for web app                                                |
+
+### Docker
 
 Build docker image:
 

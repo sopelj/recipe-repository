@@ -23,7 +23,7 @@ from .serializers import (
 )
 
 
-class CategoryListView(InertiaView, LoginRequiredMixin):
+class CategoryListView(LoginRequiredMixin, InertiaView):
     component = "CategoryList"
 
     def get_component_props(self) -> dict[str, Any]:
@@ -33,7 +33,7 @@ class CategoryListView(InertiaView, LoginRequiredMixin):
         }
 
 
-class RecipeListView(InertiaView, LoginRequiredMixin):
+class RecipeListView(LoginRequiredMixin, InertiaView):
     component = "RecipeList"
 
     def get_component_props(self) -> dict[str, Any]:
