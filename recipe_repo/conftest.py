@@ -18,6 +18,8 @@ if TYPE_CHECKING:
 
     from django.http import HttpResponse
 
+    from recipe_repo.users.models import User
+
 
 class InertiaPageResponse(TypedDict):
     props: dict[str, Any]
@@ -86,3 +88,16 @@ def recipe_fixture() -> Generator[Recipe, None, None]:
         recipe_instance = Recipe.objects.create(slug_en="rest-recipe", name_en="Test Recipe")
         yield recipe_instance
         recipe_instance.delete()
+
+
+@pytest.fixture(name="user")
+def user_fixture(django_user_model: type[User]) -> Generator[User, None, None]:
+    """Create a single basic recipe for the given test."""
+    with transaction.atomic():
+        user_instance = django_user_model.objects.create(
+            first_name="Test",
+            last_name="User",
+            email="test-user@example.com",
+        )
+        yield user_instance
+        user_instance.delete()
