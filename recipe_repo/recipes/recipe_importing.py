@@ -126,7 +126,7 @@ def extract_notes(text: str) -> tuple[str, str]:
         new_remainder = parts[0]
         notes += remainder.replace(new_remainder, "")
         remainder = new_remainder
-    return remainder, notes.strip()
+    return remainder, notes.strip()[:100]
 
 
 def parse_ingredient(recipe: Recipe, group: IngredientGroup | None, ingredient_text: str, order: int) -> None:

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useForm } from "@inertiajs/vue3";
 import { onMounted } from "vue";
+import { useI18n } from "vue-i18n";
 
 import { useToast } from "primevue/usetoast";
 
@@ -8,6 +9,7 @@ const props = defineProps<{ userFavourite: boolean }>();
 
 const toast = useToast();
 
+const { t } = useI18n();
 const form = useForm({ favourite: props.userFavourite });
 
 const setFavourite = (state: boolean) => {
@@ -28,6 +30,7 @@ onMounted(() => {
 
 <template>
   <Button
+    v-tooltip="userFavourite ? t('recipe.un-favourite') : t('recipe.favourite')"
     :icon="userFavourite ? 'pi pi-heart-fill' : 'pi pi-heart'"
     :disabled="form.processing"
     text

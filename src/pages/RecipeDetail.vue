@@ -2,6 +2,7 @@
 import type { Ingredient, Recipe } from "@/types/recipes";
 import type { User } from "@/types/users";
 
+import { Link } from "@inertiajs/vue3";
 import { breakpointsTailwind, useBreakpoints } from "@vueuse/core";
 import { useI18n } from "vue-i18n";
 
@@ -14,6 +15,7 @@ import NutritionalInformation from "@/components/NutritionalInformation.vue";
 import RatingForm from "@/components/RatingForm.vue";
 import RecipeDurations from "@/components/RecipeDurations.vue";
 import RecipeSource from "@/components/RecipeSource.vue";
+import RecipeYield from "@/components/RecipeYield.vue";
 import ServingsForm from "@/components/ServingsForm.vue";
 import UserAvatar from "@/components/UserAvatar.vue";
 import HeadSection from "@/layouts/HeadSection.vue";
@@ -39,7 +41,7 @@ const isAboveSmall = breakpoints.greater("sm");
 
 const { share, canShare } = useShare();
 const shareRecipe = async () => {
-  await share(props.recipe.name, t("recipe.share", { name: props.recipe.name }));
+  await share(props.recipe.name, t("recipe.share_title", { name: props.recipe.name }));
 };
 </script>
 
@@ -59,12 +61,15 @@ const shareRecipe = async () => {
           >
             {{ recipe.name }}
           </h1>
-          <RatingForm
-            :average-rating="recipe.avg_rating"
-            :num-ratings="recipe.num_ratings"
-            :user-rating="userRating"
-            :disabled="!user"
-          />
+          <div class="flex-grow sm:flex-grow-0">
+            <RatingForm
+              :average-rating="recipe.avg_rating"
+              :num-ratings="recipe.num_ratings"
+              :user-rating="userRating"
+              :disabled="!user"
+              class="w-fit"
+            />
+          </div>
           <FavouriteForm
             v-if="user"
             :user-favourite="userFavourite"
@@ -101,12 +106,13 @@ const shareRecipe = async () => {
           </Tag>
         </DescriptionItem>
         <DescriptionItem :label="t('recipe.yields')">
-          <span
-            v-if="recipe.yield_unit"
-            itemprop="recipeYield"
-          >
-            {{ recipe.yield_amount }} {{ recipe.yield_unit }} ({{ t("recipe.servings", servings) }})
-          </span>
+          <RecipeYield
+            v-if="recipe.yield_unit && recipe.yield_amount"
+            :amount="recipe.yield_amount"
+            :unit="recipe.yield_unit"
+            :servings="servings"
+            :base-servings="recipe.servings || 1"
+          />
           <span v-else>{{ t("recipe.servings", servings) }}</span>
         </DescriptionItem>
         <DescriptionItem :label="t('recipe.added_by')">
@@ -156,6 +162,16 @@ const shareRecipe = async () => {
             </template>
             <template #content>
               <ul>
+                <li
+                  v-for="r in recipe.parent_recipes || []"
+                  :key="r.slug"
+                >
+                  <Link
+                    :href="t('routes.recipe_details', { slug: r.slug })"
+                    class="underline"
+                    >{{ r.name }}</Link
+                  >
+                </li>
                 <li
                   v-for="ingredient in ingredients"
                   :key="ingredient.id"

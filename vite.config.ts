@@ -44,7 +44,7 @@ export default defineConfig(({ mode }) => {
     root: resolve("./src"),
     base: "/static/",
     server: {
-      host: "localhost",
+      host: true,
       port: 5173,
       open: false,
       watch: {

@@ -48,7 +48,7 @@
     "scale_halve": "½",
     "scale_outside_range": "Serving value must be between 0.125 and 50",
     "servings": "{n} serving | {n} servings",
-    "share": "Share recipe",
+    "share": "Share this recipe",
     "share_title": "Recipe for \"{name}\"",
     "step_title": "Step {step}",
     "un-favourite": "Un-favourite",

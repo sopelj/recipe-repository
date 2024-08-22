@@ -1,9 +1,12 @@
 import type { Category } from "./categories";
 import type { User } from "./users";
 
-export interface RecipeItem {
+export interface BaseRecipe {
   name: string;
   slug: string;
+}
+
+export interface RecipeItem extends BaseRecipe {
   thumbnail_url: string | null;
   num_ratings: number;
   avg_rating: number | null;
@@ -40,16 +43,22 @@ export interface Source {
   value?: string;
 }
 
+export interface YieldUnit {
+  name: string;
+  name_plural?: string;
+}
+
 export interface Recipe extends Omit<RecipeItem, "thumbnail_url"> {
   description: string;
   image_url: string | null;
   servings?: number;
-  yield_unit?: string;
+  yield_unit?: YieldUnit;
   yield_amount?: number;
   cook_time?: string;
   prep_time?: string;
   total_time?: string;
   source?: Source;
+  parent_recipes?: BaseRecipe[];
   source_value?: string;
   nutrition?: NutritionInformation;
   steps: string[];

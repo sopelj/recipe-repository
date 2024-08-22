@@ -48,7 +48,8 @@
     "scale_halve": "½",
     "scale_outside_range": "Nombre de portions doit être entre 0.125 et 50",
     "servings": "{n} portion | {n} portions",
-    "share": "Recette pour « {name} »",
+    "share": "Partagez cette recette",
+    "share_title": "Recette pour « {name} »",
     "step_title": "Étape {step}",
     "un-favourite": "Je n'aime pas",
     "yields": "Donne :"

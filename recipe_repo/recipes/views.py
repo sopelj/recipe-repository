@@ -64,6 +64,7 @@ def get_full_recipe(recipe_id: int) -> Recipe:
             "yield_unit",
             "added_by",
         )
+        .prefetch_related("parent_recipes", "categories")
         .with_ratings()  # type: ignore[attr-defined]
         .get(pk=recipe_id)
     )

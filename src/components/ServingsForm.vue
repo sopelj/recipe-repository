@@ -8,7 +8,6 @@ const { t } = useI18n();
 const form = useForm({ servings: props.servings });
 
 const updateServings = (multiplier: number) => {
-  console.log(form.servings);
   if (!form.servings) {
     form.servings = props.servings;
     return;
