@@ -86,19 +86,18 @@ const title = computed(
           >
             <Card
               class="text-center overflow-clip transition-all border dark:border-slate-600 dark:hover:border-violet-700 hover:scale-105 w-full"
+              :pt="{ body: 'h-full', content: 'h-full flex flex-col items-center justify-center' }"
             >
               <template #header>
                 <SquareImage :src="recipe.thumbnail_url" />
               </template>
               <template #content>
-                <div class="flex items-center flex-col h-full">
-                  <h2>{{ recipe.name }}</h2>
-                  <Rating
-                    v-model="recipe.avg_rating"
-                    v-tooltip="t('recipe.ratings', recipe.num_ratings)"
-                    :readonly="true"
-                  />
-                </div>
+                <h2 class="mb-1">{{ recipe.name }}</h2>
+                <Rating
+                  v-model="recipe.avg_rating"
+                  v-tooltip="t('recipe.ratings', recipe.num_ratings)"
+                  :readonly="true"
+                />
               </template>
             </Card>
           </Link>

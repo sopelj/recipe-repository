@@ -61,11 +61,11 @@ const filteredCategories = computed((): Category[] =>
             <Card
               class="text-center overflow-clip transition-all border dark:border-slate-600 dark:hover:border-violet-700 hover:scale-105 w-full"
             >
-              <template #title>
-                <h2>{{ category.name_plural || category.name }}</h2>
-              </template>
               <template #header>
                 <SquareImage :src="category.thumbnail_image_url" />
+              </template>
+              <template #title>
+                <h2>{{ category.name_plural || category.name }}</h2>
               </template>
             </Card>
           </Link>
