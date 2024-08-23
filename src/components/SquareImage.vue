@@ -9,7 +9,7 @@ withDefaults(defineProps<{ src: string; alt?: string }>(), { alt: "" });
       :src="src"
       :alt="alt"
       loading="lazy"
-      class="h-100 w-full object-cover"
+      class="h-full w-full object-cover"
     />
     <div
       v-else
