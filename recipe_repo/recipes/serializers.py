@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING
 from rest_framework.serializers import DurationField, IntegerField, ModelSerializer, SlugRelatedField
 
 from ..users.serializers import UserSerializer
-from .models import Category, Ingredient, NutritionInformation, Recipe, Source, YieldUnit
+from .models import Category, Ingredient, IngredientGroup, NutritionInformation, Recipe, Source, YieldUnit
 
 if TYPE_CHECKING:
     from .models import IngredientQualifier, Step
@@ -50,6 +50,12 @@ class IngredientSerializer(ModelSerializer[Ingredient]):
         fields = ("id", "amount_display", "food_display", "optional", "note", "qualifier", "group_id")
 
 
+class IngredientGroupSerializer(ModelSerializer[IngredientGroup]):
+    class Meta:
+        model = IngredientGroup
+        fields = ("id", "name")
+
+
 class RecipeListSerializer(ModelSerializer[Recipe]):
     num_ratings = IntegerField()
     avg_rating = IntegerField(allow_null=True)
@@ -71,6 +77,7 @@ class RecipeSerializer(RecipeListSerializer):
     steps: SlugRelatedField[Step] = SlugRelatedField(many=True, read_only=True, slug_field="text")
     source = SourceSerializer(read_only=True)  # type: ignore[assignment]
     parent_recipes = RelatedRecipeSerializer(many=True, read_only=True)
+    ingredient_groups = IngredientGroupSerializer(many=True, read_only=True)
     yield_unit = YieldUnitSerializer(read_only=True)
     nutrition = NutritionSerializer(read_only=True)
     added_by = UserSerializer(read_only=True)
@@ -89,6 +96,7 @@ class RecipeSerializer(RecipeListSerializer):
             "nutrition",
             "num_ratings",
             "avg_rating",
+            "ingredient_groups",
             "parent_recipes",
             "steps",
             "source",

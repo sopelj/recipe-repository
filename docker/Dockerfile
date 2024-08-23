@@ -28,6 +28,7 @@ COPY --from=build-image /opt/venv /opt/venv
 # Install Deps (translations and SSR)
 RUN apk add --no-cache bash nodejs yarn gettext libpq-dev libldap
 
+
 # Entrypoint
 COPY ./docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
@@ -37,6 +38,11 @@ COPY ./docker/run-dev-servers.sh /run-dev-servers.sh
 RUN chmod +x /run-dev-servers.sh
 
 ENV PATH=/opt/venv/bin:$PATH
+
+# Set DB variables in default shell so docker exec -it will have it
+ENV ENV=/home/django/.ashrc
+RUN echo 'export DATABASE_URL="postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_DB_HOST}/${POSTGRES_DB}"' > "$ENV"
+
 WORKDIR /app
 
 EXPOSE 8000

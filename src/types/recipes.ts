@@ -30,6 +30,7 @@ export interface NutritionInformation {
 
 export interface Ingredient {
   id: number;
+  group_id: number | null;
   amount_display?: string;
   food_display: string;
   optional: boolean;
@@ -41,6 +42,11 @@ export interface Source {
   name: string;
   type: 1 | 2 | 3 | 4;
   value?: string;
+}
+
+export interface IngredientGroup {
+  id: number;
+  name: string;
 }
 
 export interface YieldUnit {
@@ -58,6 +64,7 @@ export interface Recipe extends Omit<RecipeItem, "thumbnail_url"> {
   prep_time?: string;
   total_time?: string;
   source?: Source;
+  ingredient_groups: IngredientGroup[];
   parent_recipes?: BaseRecipe[];
   source_value?: string;
   nutrition?: NutritionInformation;

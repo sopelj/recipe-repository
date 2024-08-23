@@ -10,6 +10,7 @@ import { useShare } from "@/composables/share";
 
 import DescriptionItem from "@/components/DescriptionItem.vue";
 import FavouriteForm from "@/components/FavouriteForm.vue";
+import IngredientList from "@/components/IngredientList.vue";
 import KeepAwake from "@/components/KeepAwake.vue";
 import NutritionalInformation from "@/components/NutritionalInformation.vue";
 import RatingForm from "@/components/RatingForm.vue";
@@ -152,7 +153,7 @@ const shareRecipe = async () => {
           :servings="servings"
           class="mt-4"
         />
-        <div class="ingredients">
+        <div class="mt-4">
           <Card>
             <template #title>
               <div class="flex flex-row items-center">
@@ -161,45 +162,26 @@ const shareRecipe = async () => {
               </div>
             </template>
             <template #content>
-              <ul>
-                <li
-                  v-for="r in recipe.parent_recipes || []"
-                  :key="r.slug"
-                >
-                  <Link
-                    :href="t('routes.recipe_details', { slug: r.slug })"
-                    class="underline"
-                    >{{ r.name }}</Link
+              <div v-if="recipe.parent_recipes?.length">
+                <ul>
+                  <li
+                    v-for="r in recipe.parent_recipes"
+                    :key="r.slug"
+                    itemprop="recipeIngredient"
                   >
-                </li>
-                <li
-                  v-for="ingredient in ingredients"
-                  :key="ingredient.id"
-                >
-                  <I18nT
-                    keypath="recipe.ingredient"
-                    tag="span"
-                  >
-                    <template #amount>{{ ingredient.amount_display }}</template>
-                    <template #ingredient>
-                      <strong>{{ ingredient.food_display }}</strong>
-                    </template>
-                  </I18nT>
-                  <span
-                    v-if="ingredient.qualifier"
-                    class="qualifier"
-                    >{{ t("recipe.ingredient_qualifier", { qualifier: ingredient.qualifier }) }}</span
-                  >
-                  <span
-                    v-if="ingredient.optional"
-                    class="optional"
-                    >{{ t("recipe.ingredient_optional") }}</span
-                  >
-                  <span v-if="ingredient.note">{{
-                    t("recipe.ingredient_note", { note: ingredient.note })
-                  }}</span>
-                </li>
-              </ul>
+                    <Link
+                      :href="t('routes.recipe_details', { slug: r.slug })"
+                      class="underline"
+                    >
+                      {{ r.name }}
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+              <IngredientList
+                :ingredients="ingredients"
+                :groups="recipe.ingredient_groups"
+              />
             </template>
           </Card>
         </div>
