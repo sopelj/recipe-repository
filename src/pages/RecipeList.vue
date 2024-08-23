@@ -6,6 +6,7 @@ import { Link } from "@inertiajs/vue3";
 import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 
+import SquareImage from "@/components/SquareImage.vue";
 import HeadSection from "@/layouts/HeadSection.vue";
 
 const props = defineProps<{ recipes: RecipeItem[]; "category"?: Category; "categories": Category[] }>();
@@ -74,42 +75,31 @@ const title = computed(
         </div>
       </template>
       <template #grid="{ items }">
-        <div class="grid grid-cols-12 gap-4 p-4">
+        <div
+          class="grid auto-rows-fr grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-8 p-4"
+        >
           <Link
             v-for="recipe in items"
             :key="recipe.slug"
             :href="t('routes.recipe_details', { slug: recipe.slug })"
-            class="col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-2 p-2"
+            class="inline-grid"
           >
             <Card
-              class="text-center overflow-clip transition-all border dark:border-slate-600 dark:hover:border-violet-700 hover:scale-105 w-100"
+              class="text-center overflow-clip transition-all border dark:border-slate-600 dark:hover:border-violet-700 hover:scale-105 w-full"
             >
-              <template #title
-                ><h2>{{ recipe.name }}</h2></template
-              >
+              <template #title>
+                <h2>{{ recipe.name }}</h2>
+              </template>
               <template #header>
-                <img
-                  :src="recipe.thumbnail_url"
-                  alt=""
-                  class="object-cover object-center w-full"
-                />
+                <SquareImage :src="recipe.thumbnail_url" />
               </template>
               <template #subtitle>
-                <div class="flex items-center flex-col">
+                <div class="flex items-center flex-col h-full">
                   <Rating
                     v-model="recipe.avg_rating"
                     v-tooltip="t('recipe.ratings', recipe.num_ratings)"
                     :readonly="true"
                   />
-                  <div class="mt-2">
-                    <Tag
-                      v-for="c in recipe.categories"
-                      :key="c.slug"
-                      :value="c.name"
-                      class="m-1"
-                      severity="secondary"
-                    />
-                  </div>
                 </div>
               </template>
             </Card>

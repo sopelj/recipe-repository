@@ -5,6 +5,7 @@ import { Link } from "@inertiajs/vue3";
 import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 
+import SquareImage from "@/components/SquareImage.vue";
 import HeadSection from "@/layouts/HeadSection.vue";
 
 const props = defineProps<{ parentCategories?: Category[]; categories: Category[] }>();
@@ -48,25 +49,23 @@ const filteredCategories = computed((): Category[] =>
         </div>
       </template>
       <template #grid="{ items }">
-        <div class="grid grid-cols-12 gap-4">
+        <div
+          class="grid auto-rows-fr grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-8 p-4"
+        >
           <Link
             v-for="category in items"
             :key="category.slug"
             :href="t('routes.recipe_category', { slug: category.slug })"
-            class="col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-2 p-2"
+            class="inline-grid"
           >
             <Card
-              class="text-center overflow-clip transition-all border dark:border-slate-600 dark:hover:border-violet-700 hover:scale-105 w-100"
+              class="text-center overflow-clip transition-all border dark:border-slate-600 dark:hover:border-violet-700 hover:scale-105 w-full"
             >
               <template #title>
                 <h2>{{ category.name_plural || category.name }}</h2>
               </template>
               <template #header>
-                <img
-                  :src="category.thumbnail_image_url"
-                  alt=""
-                  class="object-cover object-center w-full"
-                />
+                <SquareImage :src="category.thumbnail_image_url" />
               </template>
             </Card>
           </Link>
