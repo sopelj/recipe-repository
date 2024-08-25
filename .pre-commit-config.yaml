@@ -46,6 +46,31 @@ repos:
     hooks:
       - id: markdownlint-fix
         args: [--disable, MD013]
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.11.1
+    hooks:
+      - id: mypy
+        additional_dependencies:
+          - "django-admin-interface"
+          - "django-admin-sortable2"
+          - "django-colorfield"
+          - "django-breeze"
+          - "django-environ"
+          - "django-extensions"
+          - "django-cachalot"
+          - "django-ltree-2"
+          - "django-modeltranslation"
+          - "djangorestframework"
+          - "easy-thumbnails"
+          - "pillow"
+          - "pint"
+          - "recipe-scrapers>=15.0.0"
+          - "django-stubs-ext"
+          - "django-stubs"
+          - "git+https://github.com/typeddjango/djangorestframework-stubs@master"
+          - "pytest"
+          - "types-requests"
+          - "types-pyyaml"
   - repo: local
     hooks:
       - id: eslint
@@ -54,8 +79,3 @@ repos:
         entry: yarn eslint --fix
         types: [file]
         files: \.(ts|js|vue)$
-      - id: mypy
-        language: system
-        name: Run mypy
-        types: [python]
-        entry: hatch run mypy:check

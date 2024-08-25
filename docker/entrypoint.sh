@@ -17,6 +17,9 @@ yarn install --frozen-lock-file --production=false
 python ./manage.py migrate --no-input
 python ./manage.py compilemessages --ignore=.venv
 
+if [ "$#" ] ; then
+  exec "$@";
+fi
 
 if [ "$DEV_MODE" = "true" ] ; then
   # Start Dev server in dev mode
@@ -25,5 +28,5 @@ else
   # Build and run production server
   yarn build
   python ./manage.py collectstatic --no-input
-  exec granian --interface "${SERVER_INTERFACE:=wsgi}" recipe_repo.${SERVER_INTERFACE:=wsgi}:application --host 0.0.0.0 --port 8000 "$@"
+  exec granian --interface "${SERVER_INTERFACE:=wsgi}" recipe_repo.${SERVER_INTERFACE:=wsgi}:application --host 0.0.0.0 --port 8000
 fi

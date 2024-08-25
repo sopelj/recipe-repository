@@ -218,7 +218,7 @@ def create_nutrition_information(recipe: Recipe, nutrition: dict[str, str]) -> N
     )
 
 
-def get_from_schema[T](method: Callable[[], T]) -> T | None:  # type: ignore[valid-type,name-defined]
+def get_from_schema[T](method: Callable[[], T]) -> T | None:
     """Try to get value from scraper, but fall back to None with logging."""
     try:
         return method()

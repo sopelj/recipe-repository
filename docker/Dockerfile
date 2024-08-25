@@ -7,7 +7,7 @@ WORKDIR /opt/
 ADD ./pyproject.toml /opt/pyproject.toml
 RUN set -ex \
     && /opt/venv/bin/pip install --no-cache-dir --upgrade pip \
-    && /opt/venv/bin/pip install --no-cache-dir -e .[ldap,production]
+    && /opt/venv/bin/pip install --no-cache-dir -e .[test,ldap,production]
 
 
 FROM python:3.12-alpine

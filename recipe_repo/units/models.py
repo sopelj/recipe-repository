@@ -26,6 +26,7 @@ logger = logging.getLogger(__name__)
 
 
 class Unit(NamedPluralModel):
+    name = models.CharField(_("Name"), max_length=150, unique=True)
     abbreviation = models.CharField(
         _("Abbreviation"),
         help_text=_("Abbreviation for unit. e.g tsp"),

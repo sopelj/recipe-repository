@@ -29,7 +29,7 @@ class CategoryListView(LoginRequiredMixin, InertiaView):
     def get_component_props(self) -> dict[str, Any]:
         """Return categories."""
         return {
-            "categories": CategoryListSerializer(Category.objects.filter(top_level=True), many=True).data,
+            "categories": CategoryListSerializer(Category.objects.filter(path__depth=1), many=True).data,
         }
 
 
@@ -44,9 +44,9 @@ class RecipeListView(LoginRequiredMixin, InertiaView):
         if category_slug:
             category = get_object_or_404(Category, slug=category_slug)
             recipe_queryset = recipe_queryset.filter(categories__in=[category])
-            categories = category.sub_categories.all()
+            categories = category.children()
         else:
-            categories = Category.objects.filter(top_level=True)
+            categories = Category.objects.filter(path__depth=1)
 
         return {
             "recipes": RecipeListSerializer(recipe_queryset, many=True).data,
@@ -71,7 +71,7 @@ def get_full_recipe(recipe_id: int) -> Recipe:
     return recipe
 
 
-class RecipeDetailView(InertiaFormView, SingleObjectMixin[Recipe]):
+class RecipeDetailView(InertiaFormView[RecipeReviewForm], SingleObjectMixin[Recipe]):
     component = "RecipeDetail"
     form_class = RecipeReviewForm
 

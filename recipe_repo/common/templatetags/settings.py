@@ -9,6 +9,6 @@ register = template.Library()
 
 
 @register.simple_tag
-def get_setting[T](name: str, fallback: T = None) -> T | None | Any:  # type: ignore[valid-type,name-defined]
+def get_setting[T](name: str, fallback: T | None = None) -> T | None | Any:
     """Get a setting by name in the template."""
     return getattr(settings, name, fallback)

@@ -12,13 +12,12 @@ from django.utils.translation import gettext_lazy as _
 from recipe_repo.common.utils import pluralize
 
 if TYPE_CHECKING:
-    from typing import TypeAlias
-
     import pint
 
-    FracTuple: TypeAlias = tuple[int, int]  # noqa UP040
-    Fractions: TypeAlias = tuple[FracTuple, ...]  # noqa UP040
-    SplitFractions: TypeAlias = tuple[Decimal, FracTuple | None, Decimal]  # noqa UP040
+    type FracTuple = tuple[int, int]
+    type Fractions = tuple[FracTuple, ...]
+    type SplitFractions = tuple[Decimal, FracTuple | None, Decimal]
+
 
 NUMERIC_STRING_REGEX = re.compile(r"(([0-9]*\s?)?(([0-9]+/[0-9]+)|([\u2150-\u215E\u00BC-\u00BE])))|([0-9]+)")
 

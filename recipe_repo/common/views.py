@@ -11,7 +11,7 @@ from inertia import render
 if TYPE_CHECKING:
     from typing import Any
 
-    from django.forms import Form
+    from django.forms import BaseForm
     from django.http import HttpRequest, HttpResponse
 
 
@@ -30,7 +30,7 @@ class InertiaView(View):
         return response
 
 
-class InertiaFormView[T](InertiaView, FormMixin[T]):  # type: ignore[valid-type,name-defined]
+class InertiaFormView[T: BaseForm](InertiaView, FormMixin[T]):
     """Form View Mixing to handle forms for Inertia."""
 
     def get_form_kwargs(self) -> dict[str, Any]:
@@ -40,12 +40,12 @@ class InertiaFormView[T](InertiaView, FormMixin[T]):  # type: ignore[valid-type,
             kwargs["data"] = json.loads(self.request.body)
         return kwargs
 
-    def form_invalid(self, form: Form) -> HttpResponseRedirect:
+    def form_invalid(self, form: T) -> HttpResponseRedirect:
         """In inertia, form errors are added to session and redirected back to the original page."""
         self.request.session["errors"] = form.errors
         return HttpResponseRedirect(self.get_success_url())
 
-    def form_valid(self, form: Form) -> HttpResponse:
+    def form_valid(self, form: T) -> HttpResponse:
         """Handle Save for Model forms or other forms that have save methods."""
         if hasattr(form, "save"):
             form.save()

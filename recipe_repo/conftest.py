@@ -76,7 +76,7 @@ def inertia_client() -> Client:
 def category_fixture() -> Generator[Category, None, None]:
     """Create a single basic category for the given test."""
     with transaction.atomic():
-        category_instance = Category.objects.create(slug_en="test-category", name_en="Test Category", top_level=True)
+        category_instance = Category.objects.create(slug_en="test-category", name_en="Test Category", path="test")
         yield category_instance
         category_instance.delete()
 

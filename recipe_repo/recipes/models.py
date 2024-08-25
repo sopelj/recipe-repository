@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import re
 from functools import cached_property
-from typing import TYPE_CHECKING, override
+from typing import TYPE_CHECKING, Never, override
 
 from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
@@ -11,6 +11,7 @@ from django.db.models.aggregates import Avg, Count
 from django.utils.html import format_html
 from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
+from django_ltree.models import TreeModel
 from easy_thumbnails.fields import ThumbnailerImageField
 from easy_thumbnails.files import get_thumbnailer
 from modeltranslation.manager import MultilingualQuerySet
@@ -25,8 +26,11 @@ if TYPE_CHECKING:
     from decimal import Decimal
     from typing import TypedDict
 
+    from django.db.models import ManyToManyField
     from django_stubs_ext import StrOrPromise, WithAnnotations
     from django_stubs_ext.db.models.manager import RelatedManager
+
+    from recipe_repo.users.models import User
 
     class RecipeRatings(TypedDict):
         avg_rating: float
@@ -43,23 +47,10 @@ RATING_CHOICES = (
 )
 
 
-class Category(NamedPluralModel):
+class Category(TreeModel, NamedPluralModel):  # type: ignore[misc,django-manager-missing]
     """Categories for organizing recipes."""
 
     slug = models.SlugField(_("Slug"), unique=True, help_text=_("Automatically generated from the name"))
-    top_level = models.BooleanField(
-        _("Top level"),
-        default=False,
-        help_text=_("This is one of the top level categories."),
-    )
-
-    parent_categories = models.ManyToManyField(
-        "self",
-        symmetrical=False,
-        blank=True,
-        related_name="sub_categories",
-        verbose_name=_("Parent-categories"),
-    )
     image = ThumbnailerImageField(_("Thumbnail"), upload_to="images/categories/", null=True, blank=True)
 
     @property
@@ -95,6 +86,8 @@ class UserRating(models.Model):
 class YieldUnit(NamedPluralModel):
     recipe_set: RelatedManager[Recipe]
 
+    name = models.CharField(_("Name"), max_length=150, unique=True)
+
     class Meta:
         verbose_name = _("Yield Unit")
         verbose_name_plural = _("Yield Units")
@@ -110,6 +103,7 @@ class SourceTypes(models.IntegerChoices):
 class Source(NamedModel):
     recipe_set: RelatedManager[Recipe]
 
+    name = models.CharField(_("Name"), max_length=150, unique=True)
     type = models.PositiveIntegerField(_("Type"), choices=SourceTypes.choices, default=SourceTypes.URL)
     value = models.CharField(_("Value"), blank=True, null=True, max_length=200)
 
@@ -152,12 +146,19 @@ class Recipe(NamedModel):
     cook_time_max = models.DurationField(_("Max cook time"), blank=True, null=True)
     servings = models.PositiveIntegerField(_("Servings"), null=True, blank=True)
     yield_amount = models.PositiveIntegerField(_("Yield"), null=True, blank=True)
-    yield_unit = models.ForeignKey(YieldUnit, on_delete=models.SET_NULL, null=True, blank=True)
-    source = models.ForeignKey(Source, verbose_name=_("Source"), blank=True, null=True, on_delete=models.SET_NULL)
+    yield_unit = models.ForeignKey(YieldUnit, on_delete=models.SET_NULL, null=True, blank=True, related_name="+")
+    source = models.ForeignKey(
+        Source,
+        verbose_name=_("Source"),
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+    )
     source_value = models.CharField(_("Source Value"), blank=True, null=True, max_length=250)
 
     categories = models.ManyToManyField(Category, verbose_name=_("Categories"), blank=True, related_name="recipes")
-    parent_recipes = models.ManyToManyField(
+    parent_recipes: ManyToManyField[Recipe, Never] = models.ManyToManyField(
         "self",
         symmetrical=False,
         blank=True,
@@ -178,7 +179,7 @@ class Recipe(NamedModel):
         through=UserRating,
         verbose_name=_("Rated by"),
     )
-    favourited_by = models.ManyToManyField(
+    favourited_by: ManyToManyField[User, Never] = models.ManyToManyField(
         "users.User",
         related_name="favourite_recipes",
         blank=True,
@@ -233,6 +234,7 @@ class IngredientGroup(NamedModel):
 
     class Meta:
         ordering = ("order",)
+        unique_together = ("name", "recipe")
         verbose_name = _("Ingredient Group")
         verbose_name_plural = _("Ingredient Groups")
 

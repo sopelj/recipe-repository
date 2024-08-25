@@ -49,7 +49,7 @@ class UserManager(BaseUserManager["User"]):
         return self._create_user(email, password, **extra_fields)
 
 
-class User(AbstractBaseUser, PermissionsMixin):
+class User(AbstractBaseUser, PermissionsMixin):  # type: ignore[django-manager-missing]
     """Custom user model to allow for extra attributes."""
 
     EMAIL_FIELD = "email"
@@ -57,6 +57,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = []
 
     my_recipes: RelatedManager[Recipe]
+    favourite_recipes: RelatedManager[Recipe]
 
     first_name = models.CharField(_("First name"), max_length=150, blank=True)
     last_name = models.CharField(_("Last name"), max_length=150, blank=True)

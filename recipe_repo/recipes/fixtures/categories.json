@@ -2,6 +2,25 @@
   {
     "fields": {
       "image": "",
+      "name": "Meal type",
+      "name_en": "Meal type",
+      "name_fr": "Type de repas",
+      "name_ja": "食事の種類",
+      "name_plural": "Main courses",
+      "name_plural_en": "Meal types",
+      "name_plural_fr": "Types de repas",
+      "name_plural_ja": "食事の種類",
+      "path": "meal",
+      "slug": "meal-types",
+      "slug_en": "meal-types",
+      "slug_fr": "type-de-repas",
+      "slug_ja": "shokuji-no-shuri"
+    },
+    "model": "recipes.category"
+  },
+  {
+    "fields": {
+      "image": "",
       "name": "Main course",
       "name_en": "Main course",
       "name_fr": "Plat principal",
@@ -10,14 +29,13 @@
       "name_plural_en": "Main courses",
       "name_plural_fr": "Plats principaux",
       "name_plural_ja": "メインディッシュ",
+      "path": "meal.main_course",
       "slug": "main-course",
       "slug_en": "main-course",
       "slug_fr": "plat-principal",
-      "slug_ja": "mein-disshu",
-      "top_level": true
+      "slug_ja": "mein-disshu"
     },
-    "model": "recipes.category",
-    "pk": 1
+    "model": "recipes.category"
   },
   {
     "fields": {
@@ -30,14 +48,13 @@
       "name_plural_en": "Desserts",
       "name_plural_fr": "Desserts",
       "name_plural_ja": "デザート",
+      "path": "meal.dessert",
       "slug": "dessert",
       "slug_en": "dessert",
       "slug_fr": "dessert",
-      "slug_ja": "dezaato",
-      "top_level": true
+      "slug_ja": "dezaato"
     },
-    "model": "recipes.category",
-    "pk": 2
+    "model": "recipes.category"
   },
   {
     "fields": {
@@ -46,96 +63,17 @@
       "name_en": "Breakfast",
       "name_fr": "Déjeuner",
       "name_ja": "朝食",
-      "name_plural": null,
-      "name_plural_en": null,
-      "name_plural_fr": null,
-      "name_plural_ja": null,
+      "name_plural": "Breakfasts",
+      "name_plural_en": "Breakfasts",
+      "name_plural_fr": "Déjeuners",
+      "name_plural_ja": "朝食",
+      "path": "meal.breakfast",
       "slug": "breakfast",
       "slug_en": "breakfast",
       "slug_fr": "dejeuner",
-      "slug_ja": "choshoku",
-      "top_level": true
+      "slug_ja": "choshoku"
     },
-    "model": "recipes.category",
-    "pk": 3
-  },
-  {
-    "fields": {
-      "image": "",
-      "name": "Soup",
-      "name_en": "Soup",
-      "name_fr": "Soupe",
-      "name_ja": "スープ",
-      "name_plural": "Soups",
-      "name_plural_en": "Soups",
-      "name_plural_fr": "Soupes",
-      "name_plural_ja": "スープ",
-      "slug": "soup",
-      "slug_en": "soup",
-      "slug_fr": "soupe",
-      "slug_ja": "suupu",
-      "top_level": true
-    },
-    "model": "recipes.category",
-    "pk": 4
-  },
-  {
-    "fields": {
-      "image": "",
-      "name": "Salad",
-      "name_en": "Salad",
-      "name_fr": "Salade",
-      "name_ja": "サラダ",
-      "name_plural": "Salads",
-      "name_plural_en": "Salads",
-      "name_plural_fr": "Salades",
-      "name_plural_ja": "サラダ",
-      "slug": "salad",
-      "slug_en": "salad",
-      "slug_fr": "salade",
-      "slug_ja": "sarada",
-      "top_level": true
-    },
-    "model": "recipes.category",
-    "pk": 5
-  },
-  {
-    "fields": {
-      "image": "",
-      "name": "Cookie",
-      "name_en": "Cookie",
-      "name_fr": "Biscuit",
-      "name_ja": "クッキー",
-      "name_plural": "Cookies",
-      "name_plural_en": "Cookies",
-      "name_plural_fr": "Bisuits",
-      "name_plural_ja": "クッキー",
-      "slug": "cookie",
-      "slug_en": "cookie",
-      "slug_fr": "biscuit",
-      "slug_ja": "kukkii"
-    },
-    "model": "recipes.category",
-    "pk": 6
-  },
-  {
-    "fields": {
-      "image": "",
-      "name": "Pasta",
-      "name_en": "Pasta",
-      "name_fr": "Pâte",
-      "name_ja": "パスタ",
-      "name_plural": "Pastas",
-      "name_plural_en": "Pastas",
-      "name_plural_fr": "Pâtes",
-      "name_plural_ja": "パスタ",
-      "slug": "pasta",
-      "slug_en": "pasta",
-      "slug_fr": "pate",
-      "slug_ja": "pasuta"
-    },
-    "model": "recipes.category",
-    "pk": 7
+    "model": "recipes.category"
   },
   {
     "fields": {
@@ -148,14 +86,13 @@
       "name_plural_en": "Snacks",
       "name_plural_fr": "Collations",
       "name_plural_ja": "軽食",
+      "path": "meal.snack",
       "slug": "snack",
       "slug_en": "snack",
       "slug_fr": "collation",
-      "slug_ja": "keishoku",
-      "top_level": true
+      "slug_ja": "keishoku"
     },
-    "model": "recipes.category",
-    "pk": 8
+    "model": "recipes.category"
   },
   {
     "fields": {
@@ -168,14 +105,108 @@
       "name_plural_en": "Side dishes",
       "name_plural_fr": "Plats d'accompagnements",
       "name_plural_ja": "副菜",
+      "path": "meal.side_dish",
       "slug": "side-dish",
       "slug_en": "side-dish",
       "slug_fr": "plat-daccompagnement",
-      "slug_ja": "fukusai",
-      "top_level": true
+      "slug_ja": "fukusai"
     },
-    "model": "recipes.category",
-    "pk": 9
+    "model": "recipes.category"
+  },
+  {
+    "fields": {
+      "image": "",
+      "name": "Recipe type",
+      "name_en": "Recipe type",
+      "name_fr": "Type de recette",
+      "name_ja": "レシピの種類",
+      "name_plural": "Recipe types",
+      "name_plural_en": "Recipe type",
+      "name_plural_fr": "Types de recettes",
+      "name_plural_ja": "レシピの種類",
+      "path": "type",
+      "slug": "recipe-types",
+      "slug_en": "recipe-types",
+      "slug_fr": "types-de-recettes",
+      "slug_ja": "reshipi-no-shurui"
+    },
+    "model": "recipes.category"
+  },
+  {
+    "fields": {
+      "image": "",
+      "name": "Soup",
+      "name_en": "Soup",
+      "name_fr": "Soupe",
+      "name_ja": "スープ",
+      "name_plural": "Soups",
+      "name_plural_en": "Soups",
+      "name_plural_fr": "Soupes",
+      "name_plural_ja": "スープ",
+      "path": "type.soup",
+      "slug": "soup",
+      "slug_en": "soup",
+      "slug_fr": "soupe",
+      "slug_ja": "suupu"
+    },
+    "model": "recipes.category"
+  },
+  {
+    "fields": {
+      "image": "",
+      "name": "Salad",
+      "name_en": "Salad",
+      "name_fr": "Salade",
+      "name_ja": "サラダ",
+      "name_plural": "Salads",
+      "name_plural_en": "Salads",
+      "name_plural_fr": "Salades",
+      "name_plural_ja": "サラダ",
+      "path": "type.salad",
+      "slug": "salad",
+      "slug_en": "salad",
+      "slug_fr": "salade",
+      "slug_ja": "sarada"
+    },
+    "model": "recipes.category"
+  },
+  {
+    "fields": {
+      "image": "",
+      "name": "Cookie",
+      "name_en": "Cookie",
+      "name_fr": "Biscuit",
+      "name_ja": "クッキー",
+      "name_plural": "Cookies",
+      "name_plural_en": "Cookies",
+      "name_plural_fr": "Bisuits",
+      "name_plural_ja": "クッキー",
+      "path": "type.cookie",
+      "slug": "cookie",
+      "slug_en": "cookie",
+      "slug_fr": "biscuit",
+      "slug_ja": "kukkii"
+    },
+    "model": "recipes.category"
+  },
+  {
+    "fields": {
+      "image": "",
+      "name": "Pasta",
+      "name_en": "Pasta",
+      "name_fr": "Pâte",
+      "name_ja": "パスタ",
+      "name_plural": "Pastas",
+      "name_plural_en": "Pastas",
+      "name_plural_fr": "Pâtes",
+      "name_plural_ja": "パスタ",
+      "path": "type.pasta",
+      "slug": "pasta",
+      "slug_en": "pasta",
+      "slug_fr": "pate",
+      "slug_ja": "pasuta"
+    },
+    "model": "recipes.category"
   },
   {
     "fields": {
@@ -188,32 +219,183 @@
       "name_plural_en": "Breads",
       "name_plural_fr": "Pains",
       "name_plural_ja": "パン",
+      "path": "type.bread",
       "slug": "bread",
       "slug_en": "bread",
       "slug_fr": "pain",
-      "slug_ja": "pan",
-      "top_level": true
+      "slug_ja": "pan"
     },
-    "model": "recipes.category",
-    "pk": 10
+    "model": "recipes.category"
   },
   {
     "fields": {
       "image": "",
-      "name": "Crockpot",
-      "name_en": "Crockpot",
-      "name_fr": "Mijoteuse",
-      "name_ja": "クロックポット",
+      "name": "Cuisine",
+      "name_en": "Cuisine",
+      "name_fr": "Cuisine",
+      "name_ja": "料理の種類",
       "name_plural": null,
       "name_plural_en": null,
       "name_plural_fr": null,
       "name_plural_ja": null,
+      "path": "cuisine",
+      "slug": "cuisine",
+      "slug_en": "cuisine",
+      "slug_fr": "cuisine",
+      "slug_ja": "ryori-no-shurui"
+    },
+    "model": "recipes.category"
+  },
+  {
+    "fields": {
+      "image": "",
+      "name": "French",
+      "name_en": "French",
+      "name_fr": "Française",
+      "name_ja": "フランス料理",
+      "name_plural": null,
+      "name_plural_en": null,
+      "name_plural_fr": null,
+      "name_plural_ja": null,
+      "path": "cuisine.french",
+      "slug": "french",
+      "slug_en": "french",
+      "slug_fr": "francais",
+      "slug_ja": "furansu-ryori"
+    },
+    "model": "recipes.category"
+  },
+  {
+    "fields": {
+      "image": "",
+      "name": "Italian",
+      "name_en": "Italian",
+      "name_fr": "Italienne",
+      "name_ja": "イタリア料理",
+      "name_plural": null,
+      "name_plural_en": null,
+      "name_plural_fr": null,
+      "name_plural_ja": null,
+      "path": "cuisine.italian",
+      "slug": "italian",
+      "slug_en": "italian",
+      "slug_fr": "italien",
+      "slug_ja": "itaria-ryori"
+    },
+    "model": "recipes.category"
+  },
+  {
+    "fields": {
+      "image": "",
+      "name": "Japanese",
+      "name_en": "Japanese",
+      "name_fr": "Japonaise",
+      "name_ja": "日本料理",
+      "name_plural": null,
+      "name_plural_en": null,
+      "name_plural_fr": null,
+      "name_plural_ja": null,
+      "path": "cuisine.japanese",
+      "slug": "japanese",
+      "slug_en": "japanese",
+      "slug_fr": "japonaise",
+      "slug_ja": "nihon-ryori"
+    },
+    "model": "recipes.category"
+  },
+  {
+    "fields": {
+      "image": "",
+      "name": "Thai",
+      "name_en": "Thai",
+      "name_fr": "Thaï",
+      "name_ja": "タイ料理",
+      "name_plural": null,
+      "name_plural_en": null,
+      "name_plural_fr": null,
+      "name_plural_ja": null,
+      "path": "cuisine.thai",
+      "slug": "thai",
+      "slug_en": "thai",
+      "slug_fr": "thai",
+      "slug_ja": "tai-ryori"
+    },
+    "model": "recipes.category"
+  },
+  {
+    "fields": {
+      "image": "",
+      "name": "Ukrainian",
+      "name_en": "Ukrainian",
+      "name_fr": "Ukrainienne",
+      "name_ja": "ウクライナ料理",
+      "name_plural": null,
+      "name_plural_en": null,
+      "name_plural_fr": null,
+      "name_plural_ja": null,
+      "path": "cuisine.ukrainian",
+      "slug": "ukrainian",
+      "slug_en": "ukrainian",
+      "slug_fr": "ukrainienne",
+      "slug_ja": "ukuraina-ryori"
+    },
+    "model": "recipes.category"
+  },
+  {
+    "fields": {
+      "image": "",
+      "name": "Cooking method",
+      "name_en": "Cooking method",
+      "name_fr": "Méthode de cuisson",
+      "name_ja": "調理方法",
+      "name_plural": "Cooking methods",
+      "name_plural_en": "Cooking methods",
+      "name_plural_fr": "Méthodes de cuissons",
+      "name_plural_ja": "調理方法",
+      "path": "method",
       "slug": "crockpot",
       "slug_en": "crockpot",
       "slug_fr": "mijoteuse",
-      "slug_ja": "kurokkupotto"
+      "slug_ja": "chori-hoho"
     },
-    "model": "recipes.category",
-    "pk": 11
+    "model": "recipes.category"
+  },
+  {
+    "fields": {
+      "image": "",
+      "name": "Slow cooker",
+      "name_en": "Slow cooker",
+      "name_fr": "Mijoteuse",
+      "name_ja": "スロークッカー",
+      "name_plural": null,
+      "name_plural_en": null,
+      "name_plural_fr": null,
+      "name_plural_ja": null,
+      "path": "method.crockpot",
+      "slug": "crockpot",
+      "slug_en": "crockpot",
+      "slug_fr": "mijoteuse",
+      "slug_ja": "surokukka"
+    },
+    "model": "recipes.category"
+  },
+  {
+    "fields": {
+      "image": "",
+      "name": "Air fryer",
+      "name_en": "Air Fryer",
+      "name_fr": "Friteuse à air",
+      "name_ja": "エアフライヤー",
+      "name_plural": null,
+      "name_plural_en": null,
+      "name_plural_fr": null,
+      "name_plural_ja": null,
+      "path": "method.air_fryer",
+      "slug": "air-fryer",
+      "slug_en": "air-fryer",
+      "slug_fr": "friteuse-a-lair",
+      "slug_ja": "eafuraiya"
+    },
+    "model": "recipes.category"
   }
 ]

@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 class NamedModel(models.Model):
-    name = models.CharField(_("Name"), max_length=150, unique=True)
+    name = models.CharField(_("Name"), max_length=150)
 
     @override
     def __str__(self) -> str:
