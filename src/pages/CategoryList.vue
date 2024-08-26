@@ -5,6 +5,7 @@ import { Link } from "@inertiajs/vue3";
 import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 
+import BreadcrumbBar from "@/components/BreadcrumbBar.vue";
 import SquareImage from "@/components/SquareImage.vue";
 import HeadSection from "@/layouts/HeadSection.vue";
 
@@ -22,21 +23,11 @@ const filteredCategories = computed((): Category[] =>
 <template>
   <HeadSection :title="t('categories.title')" />
   <div class="container mx-auto">
-    <div class="flex items-center">
-      <h1 class="text-4xl pt-2 pb-4 px-4 flex-grow">{{ categoryType.name_plural || categoryType.name }}</h1>
-      <Link
-        :href="t('routes.recipe_list')"
-        class="pr-2 text-center hover:underline"
-      >
-        {{ t("recipe.all_recipes") }}
-      </Link>
-      <Link
-        :href="t('routes.category_type_list')"
-        class="pr-2 sm:pr-0 text-center hover:underline"
-      >
-        {{ t("categories.all_category_types") }}
-      </Link>
-    </div>
+    <h1 class="text-4xl pt-2 pb-4 px-4 flex-grow">{{ categoryType.name_plural || categoryType.name }}</h1>
+    <BreadcrumbBar
+      :items="[{ url: t('routes.category_type_list'), label: t('categories.category_types') }]"
+      :current="categoryType.name_plural || categoryType.name"
+    />
     <DataView
       layout="grid"
       :value="filteredCategories"

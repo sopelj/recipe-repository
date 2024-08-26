@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from rest_framework.serializers import ModelSerializer, SlugRelatedField
+from rest_framework.serializers import ModelSerializer
 
 from .models import Category, CategoryType
 
@@ -17,7 +17,7 @@ class CategoryTypeListSerializer(ModelSerializer[CategoryType]):
         fields = ("name", "name_plural", "slug", "thumbnail_image_url")
 
 
-class CategorySerializer(ModelSerializer[Category]):
+class BaseCategorySerializer(ModelSerializer[Category]):
     class Meta:
         model = Category
         fields = ("name", "name_plural", "slug")
@@ -29,9 +29,9 @@ class CategoryListSerializer(ModelSerializer[Category]):
         fields = ("name", "name_plural", "slug", "thumbnail_image_url")
 
 
-class CategoryTagSerializer(ModelSerializer[Category]):
-    type = SlugRelatedField[CategoryType](slug_field="name", read_only=True)
+class CategorySerializer(ModelSerializer[Category]):
+    type = CategoryTypeSerializer(read_only=True)
 
     class Meta:
         model = Category
-        fields = ("name", "type")
+        fields = ("name", "name_plural", "type")

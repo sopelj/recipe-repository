@@ -2,6 +2,8 @@
   "categories": {
     "all_categories": "Toutes catégories",
     "all_category_types": "Toutes types de catégories",
+    "categories": "Catégories",
+    "category_types": "Types de catégories",
     "no_match": "Aucune catégorie ne correspond aux critères donnés",
     "title": "Catégories",
     "type_no_match": "Aucune type de catégorie ne correspond aux critères donnés"

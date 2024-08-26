@@ -2,6 +2,8 @@
   "categories": {
     "all_categories": "すべてのカテゴリ",
     "all_category_types": "すべてのカテゴリのタイプ",
+    "categories": "カテゴリ",
+    "category_types": "カテゴリのタイプ",
     "no_match": "指定された条件に一致するカテゴリはありません",
     "title": "カテゴリ",
     "type_no_match": "指定された条件に一致するカテゴリのタイプはありません"

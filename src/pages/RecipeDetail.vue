@@ -8,6 +8,7 @@ import { useI18n } from "vue-i18n";
 
 import { useShare } from "@/composables/share";
 
+import BreadcrumbBar from "@/components/BreadcrumbBar.vue";
 import DescriptionItem from "@/components/DescriptionItem.vue";
 import FavouriteForm from "@/components/FavouriteForm.vue";
 import IngredientList from "@/components/IngredientList.vue";
@@ -84,6 +85,7 @@ const shareRecipe = async () => {
             @click="shareRecipe"
           />
         </div>
+        <BreadcrumbBar :current="recipe.name" />
         <div
           v-if="recipe.image_url"
           class="overflow-clip p-card mt-4 sm:hidden"

@@ -33,8 +33,9 @@ class RecipeListView(LoginRequiredMixin, InertiaView):
         category, categories = None, None
         if category_slug := self.kwargs.get("category_slug"):
             category = get_object_or_404(Category.objects.select_related("type"), slug=category_slug)
+            recipe_queryset = recipe_queryset.filter(categories__id__exact=category.pk)
         else:
-            categories = Category.objects.select_related("type").filter(recipes__isnull=False)
+            categories = Category.objects.select_related("type").filter(recipes__isnull=False).distinct()
 
         return {
             "recipes": RecipeListSerializer(recipe_queryset, many=True).data,

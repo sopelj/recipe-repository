@@ -6,6 +6,7 @@ import { Link } from "@inertiajs/vue3";
 import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 
+import BreadcrumbBar from "@/components/BreadcrumbBar.vue";
 import SquareImage from "@/components/SquareImage.vue";
 import HeadSection from "@/layouts/HeadSection.vue";
 
@@ -31,6 +32,18 @@ const selectedCategories = ref<string[]>([]);
 const title = computed(
   (): string => props.category?.name_plural || props.category?.name || t("recipe.all_recipes"),
 );
+const breadcrumbItems = computed(() =>
+  props?.category
+    ? [
+        { label: t("categories.category_types"), url: t("routes.category_type_list") },
+        {
+          label: props.category.type.name_plural || props.category.type.name,
+          url: t("routes.category_type_detail", { slug: props.category.type.slug }),
+        },
+        { label: title.value },
+      ]
+    : [],
+);
 </script>
 
 <template>
@@ -39,19 +52,14 @@ const title = computed(
     <div class="flex items-center">
       <h1 class="text-4xl pt-2 pb-4 px-4 flex-grow">{{ title }}</h1>
       <Link
-        v-if="category"
-        :href="t('routes.recipe_list')"
-        class="pr-2 text-center hover:underline"
-      >
-        {{ t("recipe.all_recipes") }}
-      </Link>
-      <Link
+        v-if="!category"
         :href="t('routes.category_type_list')"
         class="text-center pr-2 sm:pr-0 hover:underline"
       >
-        {{ category ? t("categories.all_categories") : t("recipe.browse_categories") }}
+        {{ t("recipe.browse_categories") }}
       </Link>
     </div>
+    <BreadcrumbBar :items="breadcrumbItems" />
     <DataView
       layout="grid"
       :value="filteredRecipes"

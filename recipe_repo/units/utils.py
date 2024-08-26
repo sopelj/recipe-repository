@@ -147,7 +147,7 @@ def format_metric_amounts(amount: Decimal, max_amount: Decimal | None, unit: pin
         compact_max = (max_amount * unit).to_compact()
         return (
             gettext("{amount} to {max_amount}").format(
-                amount=compact_amount.magnitude if compact_amount.unit == compact_max.unit else compact_amount,
+                amount=compact_amount.magnitude if compact_amount.units == compact_max.units else compact_amount,
                 max_amount=compact_max,
             ),
             compact_max.magnitude,
