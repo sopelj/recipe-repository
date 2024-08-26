@@ -14,7 +14,7 @@ if TYPE_CHECKING:
 
 
 @pytest.mark.django_db
-@pytest.mark.parametrize("path", ["/en/", "/en/categories/"])
+@pytest.mark.parametrize("path", ["/en/", "/en/category-types/"])
 def test_recipe_and_category_list_not_logged_in(path: str, client: Client) -> None:
     resp = client.get(path)
     assert resp.status_code == 302
