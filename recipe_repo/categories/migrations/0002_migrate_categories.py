@@ -23,7 +23,7 @@ def migrate_recipe_categories(apps: Apps, schema_editor: BaseDatabaseSchemaEdito
             slug_en=recipe_category.slug_en,
             slug_fr=recipe_category.slug_fr,
             slug_ja=recipe_category.slug_ja,
-            thumbnail=recipe_category.thumbnail,
+            image=recipe_category.image,
         )
         for sub_category in recipe_category.children():
             Category.objects.create(
@@ -33,7 +33,7 @@ def migrate_recipe_categories(apps: Apps, schema_editor: BaseDatabaseSchemaEdito
                 slug_en=sub_category.slug_en,
                 slug_fr=sub_category.slug_fr,
                 slug_ja=sub_category.slug_ja,
-                thumbnail=sub_category.thumbnail,
+                image=sub_category.image,
                 type=category_type,
             )
 
