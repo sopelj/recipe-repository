@@ -1,8 +1,10 @@
 {
   "categories": {
     "all_categories": "すべてのカテゴリ",
+    "all_category_types": "すべてのカテゴリのタイプ",
     "no_match": "指定された条件に一致するカテゴリはありません",
-    "title": "カテゴリ"
+    "title": "カテゴリ",
+    "type_no_match": "指定された条件に一致するカテゴリのタイプはありません"
   },
   "global": {
     "admin": "管理",
@@ -56,10 +58,11 @@
   },
   "routes": {
     "admin": "/ja/admin/",
-    "category_list": "/ja/kategori/",
+    "category_detail": "/ja/kategori/{slug}/",
+    "category_type_detail": "/ja/kategori-no-taipu/{slug}/",
+    "category_type_list": "/ja/kategori-no-taipu/",
     "login": "/ja/admin/login/",
     "logout": "/ja/admin/logout/",
-    "recipe_category": "/ja/kategori/{slug}/",
     "recipe_details": "/ja/reshipi/{slug}/",
     "recipe_list": "/ja/"
   },

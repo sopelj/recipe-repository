@@ -15,14 +15,12 @@ from modeltranslation.admin import TranslationAdmin, TranslationTabularInline
 
 from .forms import IngredientAdminForm, RecipeImportForm
 from .models import (
-    Category,
     Ingredient,
     IngredientGroup,
     IngredientQualifier,
     Recipe,
     Source,
     Step,
-    UserRating,
     YieldUnit,
 )
 
@@ -34,53 +32,11 @@ if TYPE_CHECKING:
     from django_stubs_ext import StrOrPromise
 
 
-@admin.register(Category)
-class CategoryAdmin(TranslationAdmin[Category]):
-    prepopulated_fields = {"slug": ("name",)}
-    search_fields = ("name",)
-    list_display = ("get_thumbnail", "name", "path")
-    ordering = ("path", "name")
-    list_filter = ("path",)
-
-    @admin.display(description=_("Thumbnail"))
-    def get_thumbnail(self, obj: Recipe) -> StrOrPromise:
-        """Add Small thumbnail to recipe admin list view."""
-        if obj.image:
-            return format_html('<img src="{}" />', obj.image["admin"].url)
-        return _("No thumbnail")
-
-
 @admin.register(Source)
 class SourceAdmin(admin.ModelAdmin[Source]):
     list_display = ("name", "type")
     search_fields = ("name", "value")
     list_filter = ("type",)
-
-
-@admin.register(UserRating)
-class UserRatingAdmin(admin.ModelAdmin[UserRating]):
-    list_display = ("get_user_full_name", "get_recipe_name", "rating")
-    list_filter = [("user", admin.RelatedOnlyFieldListFilter), ("recipe", admin.RelatedOnlyFieldListFilter)]
-    autocomplete_fields = ("user", "recipe")
-
-    @admin.display(  # type: ignore[call-overload,misc]
-        description=_("User"),
-        ordering=("user__first_name", "user__last_name"),
-    )
-    def get_user_full_name(self, obj: UserRating) -> str:
-        """Get full name of user for list view."""
-        return obj.user.full_name or obj.user.email
-
-    @admin.display(description=_("Recipe"), ordering=("recipe__name",))  # type: ignore[call-overload,misc]
-    def get_recipe_name(self, obj: UserRating) -> str:
-        """Get the name of a recipe for list view."""
-        return obj.recipe.name
-
-    def get_queryset(self, request: HttpRequest) -> QuerySet[UserRating]:
-        """Pre-fetch some fields in list mode."""
-        if request.resolver_match and request.resolver_match.view_name == "admin:food_food_changelist":
-            return UserRating.objects.select_related("user", "recipe")
-        return UserRating.objects.filter()
 
 
 @admin.register(YieldUnit)

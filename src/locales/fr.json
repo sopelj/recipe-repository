@@ -1,8 +1,10 @@
 {
   "categories": {
     "all_categories": "Toutes catégories",
+    "all_category_types": "Toutes types de catégories",
     "no_match": "Aucune catégorie ne correspond aux critères donnés",
-    "title": "Catégories"
+    "title": "Catégories",
+    "type_no_match": "Aucune type de catégorie ne correspond aux critères donnés"
   },
   "global": {
     "admin": "Admin",
@@ -56,10 +58,11 @@
   },
   "routes": {
     "admin": "/fr/admin/",
-    "category_list": "/fr/categories/",
+    "category_detail": "/fr/categories/{slug}/",
+    "category_type_detail": "/fr/types-de-categories/{slug}/",
+    "category_type_list": "/fr/types-de-categories/",
     "login": "/fr/admin/login/",
     "logout": "/fr/admin/logout/",
-    "recipe_category": "/fr/categories/{slug}/",
     "recipe_details": "/fr/recettes/{slug}/",
     "recipe_list": "/fr/"
   },

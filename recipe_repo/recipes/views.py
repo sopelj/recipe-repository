@@ -6,52 +6,40 @@ from typing import Any
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import DecimalField, Q, Value
 from django.http import Http404
-from django.shortcuts import get_object_or_404
 from django.urls.base import reverse
 from django.views.generic.detail import SingleObjectMixin
 from modeltranslation.utils import get_language
+from rest_framework.generics import get_object_or_404
 
+from ..categories.models import Category
+from ..categories.serializers import CategorySerializer
 from ..common.views import InertiaFormView, InertiaView
 from .forms import RecipeReviewForm, ServingsForm
-from .models import Category, Ingredient, Recipe
+from .models import Ingredient, Recipe
 from .serializers import (
-    CategoryListSerializer,
-    CategorySerializer,
     IngredientSerializer,
     RecipeListSerializer,
     RecipeSerializer,
 )
 
 
-class CategoryListView(LoginRequiredMixin, InertiaView):
-    component = "CategoryList"
-
-    def get_component_props(self) -> dict[str, Any]:
-        """Return categories."""
-        return {
-            "categories": CategoryListSerializer(Category.objects.filter(path__depth=1), many=True).data,
-        }
-
-
 class RecipeListView(LoginRequiredMixin, InertiaView):
     component = "RecipeList"
 
     def get_component_props(self) -> dict[str, Any]:
-        """Get all recipes or the recipes in the specified category."""
-        category_slug = self.kwargs.get("category_slug", None)
-        category: Category | None = None
+        """Get all recipes or the recipes."""
         recipe_queryset = Recipe.objects.prefetch_related("categories").with_ratings()  # type: ignore[attr-defined]
-        if category_slug:
-            category = get_object_or_404(Category, slug=category_slug)
-            recipe_queryset = recipe_queryset.filter(categories__in=[category])
-            categories = category.children()
+
+        category, categories = None, None
+        if category_slug := self.kwargs.get("category_slug"):
+            category = get_object_or_404(Category.objects.select_related("type"), slug=category_slug)
         else:
-            categories = Category.objects.filter(path__depth=1)
+            categories = Category.objects.select_related("type").filter(recipes__isnull=False)
 
         return {
             "recipes": RecipeListSerializer(recipe_queryset, many=True).data,
             "category": CategorySerializer(category).data if category else None,
-            "categories": CategorySerializer(categories, many=True).data,
+            "categories": CategorySerializer(categories, many=True).data if categories else None,
         }
 
 

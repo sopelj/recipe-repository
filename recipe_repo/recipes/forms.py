@@ -13,8 +13,9 @@ from django.utils.translation import gettext_lazy as _
 from recipe_scrapers import scrape_html
 from recipe_scrapers._exceptions import RecipeScrapersExceptions
 
+from ..users.models import UserRating
 from .fields import FractionField
-from .models import Ingredient, Recipe, UserRating
+from .models import Ingredient, Recipe
 from .recipe_importing import USER_AGENT, create_recipe_from_scraper
 
 if TYPE_CHECKING:
@@ -35,6 +36,7 @@ class ServingsForm(forms.Form):
 class RecipeReviewForm(forms.Form):
     favourite = forms.NullBooleanField(required=False)
     rating = forms.IntegerField(min_value=0, max_value=5, required=False)
+    comment = forms.CharField(required=False, widget=forms.Textarea)
 
     def __init__(self, user: User, recipe_slug: str, *args: Any, **kwargs: Any) -> None:
         """Add extra attributes to form for future validation."""

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-17 10:37-0400\n"
+"POT-Creation-Date: 2024-08-25 21:33-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,7 +16,61 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: recipe_repo/common/models.py:10
+#: recipe_repo/categories/admin.py:25 recipe_repo/categories/admin.py:46
+#: recipe_repo/categories/models.py:18 recipe_repo/recipes/admin.py:147
+msgid "Thumbnail"
+msgstr "サムネイル"
+
+#: recipe_repo/categories/admin.py:30 recipe_repo/categories/admin.py:51
+#: recipe_repo/recipes/admin.py:152
+msgid "No thumbnail"
+msgstr "サムネイルなし"
+
+#: recipe_repo/categories/apps.py:11 recipe_repo/categories/models.py:51
+#: recipe_repo/recipes/admin.py:154 recipe_repo/recipes/models.py:112
+msgid "Categories"
+msgstr "カテゴリー"
+
+#: recipe_repo/categories/models.py:17 recipe_repo/recipes/models.py:91
+msgid "Slug"
+msgstr "スラッグ"
+
+#: recipe_repo/categories/models.py:17 recipe_repo/recipes/models.py:91
+msgid "Automatically generated from the name"
+msgstr "名前から生成"
+
+#: recipe_repo/categories/models.py:33
+msgid "Category Type"
+msgstr "カテゴリタイプ"
+
+#: recipe_repo/categories/models.py:34
+msgid "Category types"
+msgstr "カテゴリタイプ"
+
+#: recipe_repo/categories/models.py:43
+#, python-brace-format
+msgid "{tag}: {category}"
+msgstr "{tag}: {category}"
+
+#: recipe_repo/categories/models.py:50
+msgid "Category"
+msgstr "カテゴリー"
+
+#: recipe_repo/categories/urls.py:10
+msgid "category-types/"
+msgstr "kategori-no-taipu/"
+
+#: recipe_repo/categories/urls.py:11
+msgid "category-types/<slug:category_type_slug>/"
+msgstr "kategori-no-taipu/<slug:category_type_slug>/"
+
+#: recipe_repo/categories/urls.py:12
+msgid "categories/<slug:category_slug>/"
+msgstr "kategori/<slug:category_slug>/"
+
+#: recipe_repo/common/models.py:10 recipe_repo/food/models.py:11
+#: recipe_repo/recipes/models.py:39 recipe_repo/recipes/models.py:56
+#: recipe_repo/units/models.py:29
 msgid "Name"
 msgstr "名前"
 
@@ -28,339 +82,268 @@ msgstr "複数形"
 msgid "Used count"
 msgstr "使用回数"
 
-#: recipe_repo/food/apps.py:9 recipe_repo/recipes/models.py:273
+#: recipe_repo/food/apps.py:9 recipe_repo/recipes/models.py:217
 msgid "Food"
 msgstr "食べ物"
 
-#: recipe_repo/food/models.py:12
+#: recipe_repo/food/models.py:16
 msgid "Food Item"
 msgstr "食品"
 
-#: recipe_repo/food/models.py:13
+#: recipe_repo/food/models.py:17
 msgid "Food Items"
 msgstr "食品"
 
-#: recipe_repo/inertia/apps.py:10
-msgid "Inertia"
-msgstr ""
-
-#: recipe_repo/recipes/admin.py:43 recipe_repo/recipes/admin.py:170
-#: recipe_repo/recipes/models.py:63
-msgid "Thumbnail"
-msgstr "サムネイル"
-
-#: recipe_repo/recipes/admin.py:48 recipe_repo/recipes/admin.py:175
-msgid "No thumbnail"
-msgstr "サムネイルなし"
-
-#: recipe_repo/recipes/admin.py:64 recipe_repo/users/models.py:105
-msgid "User"
-msgstr "ユーザー"
-
-#: recipe_repo/recipes/admin.py:71 recipe_repo/recipes/models.py:208
-#: recipe_repo/recipes/models.py:229 recipe_repo/recipes/models.py:254
-#: recipe_repo/recipes/models.py:271 recipe_repo/recipes/models.py:332
-msgid "Recipe"
-msgstr "レシピ"
-
-#: recipe_repo/recipes/admin.py:177 recipe_repo/recipes/models.py:72
-#: recipe_repo/recipes/models.py:159
-msgid "Categories"
-msgstr "カテゴリー"
-
-#: recipe_repo/recipes/admin.py:180
+#: recipe_repo/recipes/admin.py:157
 msgid "No categories"
 msgstr "カテゴリーはありません"
 
-#: recipe_repo/recipes/apps.py:11 recipe_repo/recipes/models.py:209
+#: recipe_repo/recipes/apps.py:11 recipe_repo/recipes/models.py:152
 #: recipe_repo/recipes/templates/admin/recipe_import.html:7
 #: recipe_repo/recipes/templates/admin/recipe_import.html:8
 msgid "Recipes"
 msgstr "レシピ"
 
-#: recipe_repo/recipes/forms.py:60
+#: recipe_repo/recipes/forms.py:92
 msgid "Recipe URL"
 msgstr "レシピのURL"
 
-#: recipe_repo/recipes/forms.py:61
+#: recipe_repo/recipes/forms.py:93
 msgid "Full URL to the desired recipe"
 msgstr "レシピの完全なURL"
 
-#: recipe_repo/recipes/forms.py:81
+#: recipe_repo/recipes/forms.py:113
 msgid "Failed to import recipe"
 msgstr "レシピのインポートに失敗しました。"
 
-#: recipe_repo/recipes/models.py:49 recipe_repo/recipes/models.py:147
-msgid "Slug"
-msgstr "スラッグ"
-
-#: recipe_repo/recipes/models.py:49 recipe_repo/recipes/models.py:147
-msgid "Automatically generated from the name"
-msgstr "名前から生成"
-
-#: recipe_repo/recipes/models.py:51
-msgid "Top level"
-msgstr "メインカテゴリー"
-
-#: recipe_repo/recipes/models.py:53
-msgid "This is one of the top level categories."
-msgstr "これはメインカテゴリーです"
-
-#: recipe_repo/recipes/models.py:61
-msgid "Parent-categories"
-msgstr "親カテゴリ"
-
-#: recipe_repo/recipes/models.py:71
-msgid "Category"
-msgstr "カテゴリー"
-
-#: recipe_repo/recipes/models.py:77
-msgid "Rating"
-msgstr "評価"
-
-#: recipe_repo/recipes/models.py:83
-#, python-brace-format
-msgid "User {user} rated '{recipe}' {rating}"
-msgstr "ユーザー{user}は「{recipe}」を{rating}で評価しました"
-
-#: recipe_repo/recipes/models.py:90
-msgid "User Rating"
-msgstr "ユーザー評価"
-
-#: recipe_repo/recipes/models.py:91
-msgid "User Ratings"
-msgstr "ユーザー評価"
-
-#: recipe_repo/recipes/models.py:99
+#: recipe_repo/recipes/models.py:42
 msgid "Yield Unit"
 msgstr "利回り単位"
 
-#: recipe_repo/recipes/models.py:100
+#: recipe_repo/recipes/models.py:43
 msgid "Yield Units"
 msgstr "利回り単位"
 
-#: recipe_repo/recipes/models.py:104
+#: recipe_repo/recipes/models.py:47
 msgid "URL"
 msgstr "URL"
 
-#: recipe_repo/recipes/models.py:105
+#: recipe_repo/recipes/models.py:48
 msgid "Book"
 msgstr "本"
 
-#: recipe_repo/recipes/models.py:106
+#: recipe_repo/recipes/models.py:49
 msgid "Person"
 msgstr "人"
 
-#: recipe_repo/recipes/models.py:107 recipe_repo/units/consts.py:15
+#: recipe_repo/recipes/models.py:50 recipe_repo/units/consts.py:15
 msgid "Other"
 msgstr "他の"
 
-#: recipe_repo/recipes/models.py:113 recipe_repo/units/models.py:36
+#: recipe_repo/recipes/models.py:57 recipe_repo/units/models.py:37
 msgid "Type"
 msgstr "タイプ"
 
-#: recipe_repo/recipes/models.py:114
+#: recipe_repo/recipes/models.py:58
 msgid "Value"
 msgstr "値"
 
-#: recipe_repo/recipes/models.py:133 recipe_repo/recipes/models.py:156
+#: recipe_repo/recipes/models.py:77 recipe_repo/recipes/models.py:102
 msgid "Source"
 msgstr "ソース"
 
-#: recipe_repo/recipes/models.py:134
+#: recipe_repo/recipes/models.py:78
 msgid "Sources"
 msgstr "ソース"
 
-#: recipe_repo/recipes/models.py:148
+#: recipe_repo/recipes/models.py:92
 msgid "Image"
 msgstr "イメージ("
 
-#: recipe_repo/recipes/models.py:149
+#: recipe_repo/recipes/models.py:93
 msgid "Description"
 msgstr "説明"
 
-#: recipe_repo/recipes/models.py:150
+#: recipe_repo/recipes/models.py:94
 msgid "Prep time"
 msgstr "準備時間"
 
-#: recipe_repo/recipes/models.py:151
+#: recipe_repo/recipes/models.py:95
 msgid "Cook time"
 msgstr "調理時間"
 
-#: recipe_repo/recipes/models.py:152
+#: recipe_repo/recipes/models.py:96
 msgid "Max cook time"
 msgstr "最大調理時間"
 
-#: recipe_repo/recipes/models.py:153
+#: recipe_repo/recipes/models.py:97
 msgid "Servings"
 msgstr "サービング"
 
-#: recipe_repo/recipes/models.py:154
+#: recipe_repo/recipes/models.py:98
 msgid "Yield"
 msgstr "収穫量"
 
-#: recipe_repo/recipes/models.py:157
+#: recipe_repo/recipes/models.py:108
 msgid "Source Value"
 msgstr "ソース値"
 
-#: recipe_repo/recipes/models.py:165
+#: recipe_repo/recipes/models.py:121
 msgid "Parent recipes"
 msgstr "親レシピ"
 
-#: recipe_repo/recipes/models.py:172
+#: recipe_repo/recipes/models.py:128
 msgid "Added by"
 msgstr "によって追加"
 
-#: recipe_repo/recipes/models.py:179
-msgid "Rated by"
-msgstr "評価者"
+#: recipe_repo/recipes/models.py:151 recipe_repo/recipes/models.py:172
+#: recipe_repo/recipes/models.py:198 recipe_repo/recipes/models.py:215
+#: recipe_repo/recipes/models.py:279 recipe_repo/users/admin.py:57
+msgid "Recipe"
+msgstr "レシピ"
 
-#: recipe_repo/recipes/models.py:185
-msgid "Favourited by"
-msgstr "お気に入り"
-
-#: recipe_repo/recipes/models.py:214
+#: recipe_repo/recipes/models.py:157
 msgid "Title"
 msgstr "タイトル"
 
-#: recipe_repo/recipes/models.py:221
+#: recipe_repo/recipes/models.py:164
 msgid "Ingredient Qualifier"
 msgstr "材料の修飾語"
 
-#: recipe_repo/recipes/models.py:222
+#: recipe_repo/recipes/models.py:165
 msgid "Ingredient Qualifiers"
 msgstr "材料の修飾語"
 
-#: recipe_repo/recipes/models.py:226 recipe_repo/recipes/models.py:265
-#: recipe_repo/recipes/models.py:331
+#: recipe_repo/recipes/models.py:169 recipe_repo/recipes/models.py:209
+#: recipe_repo/recipes/models.py:278
 msgid "Order"
 msgstr "順番"
 
-#: recipe_repo/recipes/models.py:236
+#: recipe_repo/recipes/models.py:180
 msgid "Ingredient Group"
 msgstr "成分群"
 
-#: recipe_repo/recipes/models.py:237
+#: recipe_repo/recipes/models.py:181
 msgid "Ingredient Groups"
 msgstr "成分群"
 
-#: recipe_repo/recipes/models.py:241
+#: recipe_repo/recipes/models.py:185
 msgid "Calories"
 msgstr "カロリー"
 
-#: recipe_repo/recipes/models.py:241
+#: recipe_repo/recipes/models.py:185
 msgid "in kilo-calories"
 msgstr "キロカロリーで"
 
-#: recipe_repo/recipes/models.py:242
+#: recipe_repo/recipes/models.py:186
 msgid "Serving Size"
 msgstr "サービングのサイズ"
 
-#: recipe_repo/recipes/models.py:242
+#: recipe_repo/recipes/models.py:186
 msgid "number of servings this corresponds to"
 msgstr "これらの値に対するサービング数"
 
-#: recipe_repo/recipes/models.py:243
+#: recipe_repo/recipes/models.py:187
 msgid "Fat"
 msgstr "脂肪"
 
-#: recipe_repo/recipes/models.py:243 recipe_repo/recipes/models.py:244
-#: recipe_repo/recipes/models.py:245 recipe_repo/recipes/models.py:246
-#: recipe_repo/recipes/models.py:250 recipe_repo/recipes/models.py:251
-#: recipe_repo/recipes/models.py:252 recipe_repo/recipes/models.py:253
+#: recipe_repo/recipes/models.py:187 recipe_repo/recipes/models.py:188
+#: recipe_repo/recipes/models.py:189 recipe_repo/recipes/models.py:190
+#: recipe_repo/recipes/models.py:194 recipe_repo/recipes/models.py:195
+#: recipe_repo/recipes/models.py:196 recipe_repo/recipes/models.py:197
 msgid "in grams"
 msgstr "グラムで"
 
-#: recipe_repo/recipes/models.py:244
+#: recipe_repo/recipes/models.py:188
 msgid "Saturated Fat"
 msgstr "飽和脂肪"
 
-#: recipe_repo/recipes/models.py:245
+#: recipe_repo/recipes/models.py:189
 msgid "Trans Fat"
 msgstr "トランス脂肪"
 
-#: recipe_repo/recipes/models.py:246
+#: recipe_repo/recipes/models.py:190
 msgid "Unsaturated Fat"
 msgstr "不飽和脂肪"
 
-#: recipe_repo/recipes/models.py:247
+#: recipe_repo/recipes/models.py:191
 msgid "Cholesterol"
 msgstr "コレステロール"
 
-#: recipe_repo/recipes/models.py:247 recipe_repo/recipes/models.py:248
-#: recipe_repo/recipes/models.py:249
+#: recipe_repo/recipes/models.py:191 recipe_repo/recipes/models.py:192
+#: recipe_repo/recipes/models.py:193
 msgid "in milligrams"
 msgstr "ミリグラムで"
 
-#: recipe_repo/recipes/models.py:248
+#: recipe_repo/recipes/models.py:192
 msgid "Sodium"
 msgstr "ナトリウ"
 
-#: recipe_repo/recipes/models.py:249
+#: recipe_repo/recipes/models.py:193
 msgid "Potassium"
 msgstr "カリウム"
 
-#: recipe_repo/recipes/models.py:250
+#: recipe_repo/recipes/models.py:194
 msgid "Carbohydrates"
 msgstr "炭水化物"
 
-#: recipe_repo/recipes/models.py:251
+#: recipe_repo/recipes/models.py:195
 msgid "Fiber"
 msgstr "ファイバ"
 
-#: recipe_repo/recipes/models.py:252
+#: recipe_repo/recipes/models.py:196
 msgid "Sugar"
 msgstr "砂糖"
 
-#: recipe_repo/recipes/models.py:253
+#: recipe_repo/recipes/models.py:197
 msgid "Protein"
 msgstr "タンパク質"
 
-#: recipe_repo/recipes/models.py:257 recipe_repo/recipes/models.py:258
+#: recipe_repo/recipes/models.py:201 recipe_repo/recipes/models.py:202
 msgid "Nutritional Information"
 msgstr "栄養成分表示"
 
-#: recipe_repo/recipes/models.py:266
+#: recipe_repo/recipes/models.py:210
 msgid "Amount"
 msgstr "量"
 
-#: recipe_repo/recipes/models.py:267
+#: recipe_repo/recipes/models.py:211
 msgid "Max Amount"
 msgstr "最大量"
 
-#: recipe_repo/recipes/models.py:268
+#: recipe_repo/recipes/models.py:212
 msgid "Note"
 msgstr "ノート"
 
-#: recipe_repo/recipes/models.py:269
+#: recipe_repo/recipes/models.py:213
 msgid "Optional"
 msgstr "オプション"
 
-#: recipe_repo/recipes/models.py:276
+#: recipe_repo/recipes/models.py:220
 msgid "Qualifier"
 msgstr "修飾語"
 
-#: recipe_repo/recipes/models.py:284
+#: recipe_repo/recipes/models.py:228
 msgid "Group"
 msgstr "グループ"
 
-#: recipe_repo/recipes/models.py:325
+#: recipe_repo/recipes/models.py:272
 msgid "Ingredient"
 msgstr "材料"
 
-#: recipe_repo/recipes/models.py:326
+#: recipe_repo/recipes/models.py:273
 msgid "Ingredients"
 msgstr "材料"
 
-#: recipe_repo/recipes/models.py:333
+#: recipe_repo/recipes/models.py:280 recipe_repo/users/models.py:152
 msgid "Text"
 msgstr "テキスト"
 
-#: recipe_repo/recipes/models.py:341
+#: recipe_repo/recipes/models.py:288
 msgid "Step"
 msgstr "手順"
 
-#: recipe_repo/recipes/models.py:342
+#: recipe_repo/recipes/models.py:289
 msgid "Steps"
 msgstr "手順"
 
@@ -380,27 +363,19 @@ msgstr "レシピをインポートします"
 msgid "recipes/<slug:slug>/"
 msgstr "reshipi/<slug:slug>/"
 
-#: recipe_repo/recipes/urls.py:11
-msgid "categories/"
-msgstr "kategori/"
-
-#: recipe_repo/recipes/urls.py:12
-msgid "categories/<slug:category_slug>/"
-msgstr "kategori/<slug:category_slug>/"
-
-#: recipe_repo/settings.py:141
+#: recipe_repo/settings.py:143
 msgid "English"
 msgstr "英語"
 
-#: recipe_repo/settings.py:142
+#: recipe_repo/settings.py:144
 msgid "French"
 msgstr "フランス語"
 
-#: recipe_repo/settings.py:143
+#: recipe_repo/settings.py:145
 msgid "Japanese"
 msgstr "日本語"
 
-#: recipe_repo/units/apps.py:9 recipe_repo/units/models.py:67
+#: recipe_repo/units/apps.py:9 recipe_repo/units/models.py:68
 msgid "Units"
 msgstr "測定単位"
 
@@ -420,108 +395,112 @@ msgstr "量"
 msgid "Weight"
 msgstr "重さ"
 
-#: recipe_repo/units/models.py:30
+#: recipe_repo/units/models.py:31
 msgid "Abbreviation"
 msgstr "略語"
 
-#: recipe_repo/units/models.py:31
+#: recipe_repo/units/models.py:32
 msgid "Abbreviation for unit. e.g tsp"
 msgstr "単位の略語。例：小さじ"
 
-#: recipe_repo/units/models.py:37
+#: recipe_repo/units/models.py:38
 msgid "System"
 msgstr "法"
 
-#: recipe_repo/units/models.py:58 recipe_repo/units/utils.py:164
+#: recipe_repo/units/models.py:59 recipe_repo/units/utils.py:163
 #, python-brace-format
 msgid "{amount} {unit}"
 msgstr "{amount}{unit}"
 
-#: recipe_repo/units/models.py:66
+#: recipe_repo/units/models.py:67
 msgid "Unit"
 msgstr "測定単位"
 
-#: recipe_repo/units/utils.py:39
+#: recipe_repo/units/utils.py:38
 msgid "tsp"
 msgstr "小さじ"
 
-#: recipe_repo/units/utils.py:40
+#: recipe_repo/units/utils.py:39
 msgid "tbsp"
 msgstr "大さじ"
 
-#: recipe_repo/units/utils.py:41
+#: recipe_repo/units/utils.py:40
 msgid "cup"
 msgstr "カップ"
 
-#: recipe_repo/units/utils.py:41
+#: recipe_repo/units/utils.py:40
 msgid "cups"
 msgstr "カップ"
 
-#: recipe_repo/units/utils.py:42
+#: recipe_repo/units/utils.py:41
 msgid "pint"
 msgstr "パイント"
 
-#: recipe_repo/units/utils.py:42
+#: recipe_repo/units/utils.py:41
 msgid "pints"
 msgstr "パイント"
 
-#: recipe_repo/units/utils.py:43
+#: recipe_repo/units/utils.py:42
 msgid "quart"
 msgstr "クォート"
 
-#: recipe_repo/units/utils.py:43
+#: recipe_repo/units/utils.py:42
 msgid "quarts"
 msgstr "クォート"
 
-#: recipe_repo/units/utils.py:44
+#: recipe_repo/units/utils.py:43
 msgid "oz"
 msgstr "オンス"
 
-#: recipe_repo/units/utils.py:45
+#: recipe_repo/units/utils.py:44
 msgid "fl oz"
 msgstr "液量オンス"
 
-#: recipe_repo/units/utils.py:46
+#: recipe_repo/units/utils.py:45
 msgid "lb"
 msgstr "ポンド"
 
-#: recipe_repo/units/utils.py:76
+#: recipe_repo/units/utils.py:75
 #, python-brace-format
 msgid "{whole} {numerator}⁄{denominator}"
 msgstr "{whole}と{denominator}分の{numerator}分"
 
-#: recipe_repo/units/utils.py:81
+#: recipe_repo/units/utils.py:80
 #, python-brace-format
 msgid "{numerator}⁄{denominator}"
 msgstr "{denominator}分の{numerator}分"
 
-#: recipe_repo/units/utils.py:133 recipe_repo/units/utils.py:150
-#: recipe_repo/units/utils.py:178
+#: recipe_repo/units/utils.py:132 recipe_repo/units/utils.py:149
+#: recipe_repo/units/utils.py:177
 #, python-brace-format
 msgid "{amount} to {max_amount}"
 msgstr "{amount}～{max_amount}"
 
-#: recipe_repo/units/utils.py:146
+#: recipe_repo/units/utils.py:145
 msgid "a pinch"
 msgstr "ひとつまみ"
 
-#: recipe_repo/urls.py:25
+#: recipe_repo/urls.py:26
 msgid "admin/"
 msgstr "admin/"
 
-#: recipe_repo/users/admin.py:25
+#: recipe_repo/users/admin.py:31
 msgid "Personal info"
 msgstr "個人情報"
 
-#: recipe_repo/users/admin.py:27
+#: recipe_repo/users/admin.py:33
 msgid "Permissions"
 msgstr "権限"
 
-#: recipe_repo/users/admin.py:32
+#: recipe_repo/users/admin.py:38
 msgid "Important dates"
 msgstr "重要な日付"
 
-#: recipe_repo/users/apps.py:11 recipe_repo/users/models.py:106
+#: recipe_repo/users/admin.py:50 recipe_repo/users/models.py:117
+msgid "User"
+msgstr "ユーザー"
+
+#: recipe_repo/users/apps.py:11 recipe_repo/users/models.py:118
 msgid "Users"
 msgstr "ユーザー"
 
@@ -566,3 +545,40 @@ msgstr ""
 #: recipe_repo/users/models.py:83
 msgid "Date joined"
 msgstr "参加日"
+
+#: recipe_repo/users/models.py:88
+msgid "Favourite Recipes"
+msgstr "お気に入りのレシピ"
+
+#: recipe_repo/users/models.py:94
+msgid "Rated recipes"
+msgstr "評価されたレシピ"
+
+#: recipe_repo/users/models.py:131
+msgid "Rating"
+msgstr "評価"
+
+#: recipe_repo/users/models.py:137
+#, python-brace-format
+msgid "User {user} rated '{recipe}' {rating}"
+msgstr "ユーザー{user}は「{recipe}」を{rating}で評価しました"
+
+#: recipe_repo/users/models.py:144
+msgid "User Rating"
+msgstr "ユーザー評価"
+
+#: recipe_repo/users/models.py:145
+msgid "User Ratings"
+msgstr "ユーザー評価"
+
+#: recipe_repo/users/models.py:153
+msgid "Created"
+msgstr "作成"
+
+#: recipe_repo/users/models.py:160
+msgid "Comment"
+msgstr "コメント"
+
+#: recipe_repo/users/models.py:161
+msgid "Comments"
+msgstr "コメント"

@@ -9,9 +9,7 @@ from django.core.validators import URLValidator
 from django.db import models
 from django.db.models.aggregates import Avg, Count
 from django.utils.html import format_html
-from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
-from django_ltree.models import TreeModel
 from easy_thumbnails.fields import ThumbnailerImageField
 from easy_thumbnails.files import get_thumbnailer
 from modeltranslation.manager import MultilingualQuerySet
@@ -30,57 +28,9 @@ if TYPE_CHECKING:
     from django_stubs_ext import StrOrPromise, WithAnnotations
     from django_stubs_ext.db.models.manager import RelatedManager
 
-    from recipe_repo.users.models import User
-
     class RecipeRatings(TypedDict):
         avg_rating: float
         num_ratings: int | None
-
-
-RATING_CHOICES = (
-    (0, "☆☆☆☆☆"),
-    (1, "★☆☆☆☆"),
-    (2, "★★☆☆☆"),
-    (3, "★★★☆☆"),
-    (4, "★★★★☆"),
-    (5, "★★★★★"),
-)
-
-
-class Category(TreeModel, NamedPluralModel):  # type: ignore[misc,django-manager-missing]
-    """Categories for organizing recipes."""
-
-    slug = models.SlugField(_("Slug"), unique=True, help_text=_("Automatically generated from the name"))
-    image = ThumbnailerImageField(_("Thumbnail"), upload_to="images/categories/", null=True, blank=True)
-
-    @property
-    def thumbnail_image_url(self) -> str | None:
-        """Resolve URL of the user's profile image."""
-        return get_thumbnailer(self.image)["thumbnail"].url if self.image else None
-
-    class Meta:
-        verbose_name = _("Category")
-        verbose_name_plural = _("Categories")
-        ordering = ("name",)
-
-
-class UserRating(models.Model):
-    rating = models.PositiveIntegerField(_("Rating"), choices=RATING_CHOICES)
-    recipe = models.ForeignKey("Recipe", related_name="ratings", on_delete=models.CASCADE)
-    user = models.ForeignKey("users.User", related_name="ratings", on_delete=models.CASCADE)
-
-    @override
-    def __str__(self) -> str:
-        return gettext("User {user} rated '{recipe}' {rating}").format(
-            user=self.user.full_name or self.user.email,
-            recipe=self.recipe.name,
-            rating=self.get_rating_display(),
-        )
-
-    class Meta:
-        verbose_name = _("User Rating")
-        verbose_name_plural = _("User Ratings")
-        unique_together = ("user", "recipe")
 
 
 class YieldUnit(NamedPluralModel):
@@ -157,7 +107,12 @@ class Recipe(NamedModel):
     )
     source_value = models.CharField(_("Source Value"), blank=True, null=True, max_length=250)
 
-    categories = models.ManyToManyField(Category, verbose_name=_("Categories"), blank=True, related_name="recipes")
+    categories = models.ManyToManyField(
+        "categories.Category",
+        verbose_name=_("Categories"),
+        blank=True,
+        related_name="recipes",
+    )
     parent_recipes: ManyToManyField[Recipe, Never] = models.ManyToManyField(
         "self",
         symmetrical=False,
@@ -171,19 +126,6 @@ class Recipe(NamedModel):
         null=True,
         on_delete=models.SET_NULL,
         verbose_name=_("Added by"),
-    )
-    rated_by = models.ManyToManyField(
-        "users.User",
-        related_name="rated_recipes",
-        blank=True,
-        through=UserRating,
-        verbose_name=_("Rated by"),
-    )
-    favourited_by: ManyToManyField[User, Never] = models.ManyToManyField(
-        "users.User",
-        related_name="favourite_recipes",
-        blank=True,
-        verbose_name=_("Favourited by"),
     )
 
     objects: models.Manager[Recipe] = RecipeQuerySet.as_manager()

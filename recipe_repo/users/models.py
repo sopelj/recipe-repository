@@ -1,18 +1,20 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, override
 
 from django.conf import settings
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
 from django.utils import timezone
+from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
+from django_extensions.db.models import CreationDateTimeField
 from easy_thumbnails.fields import ThumbnailerImageField
 from easy_thumbnails.files import get_thumbnailer
 
 if TYPE_CHECKING:
-    from django_stubs_ext.db.models.manager import RelatedManager
+    from django.db.models import ManyToManyField
 
     from recipe_repo.recipes.models import Recipe
 
@@ -56,9 +58,6 @@ class User(AbstractBaseUser, PermissionsMixin):  # type: ignore[django-manager-m
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
-    my_recipes: RelatedManager[Recipe]
-    favourite_recipes: RelatedManager[Recipe]
-
     first_name = models.CharField(_("First name"), max_length=150, blank=True)
     last_name = models.CharField(_("Last name"), max_length=150, blank=True)
     email = models.EmailField(_("Email address"), blank=False, unique=True)
@@ -83,6 +82,18 @@ class User(AbstractBaseUser, PermissionsMixin):  # type: ignore[django-manager-m
     )
     date_joined = models.DateTimeField(_("Date joined"), default=timezone.now)
 
+    favourite_recipes = models.ManyToManyField(
+        "recipes.Recipe",
+        related_name="favourited_by",
+        verbose_name=_("Favourite Recipes"),
+    )
+    rated_recipes: ManyToManyField[Recipe, UserRating] = models.ManyToManyField(
+        "recipes.Recipe",
+        through="UserRating",
+        related_name="rated_by",
+        verbose_name=_("Rated recipes"),
+    )
+
     objects = UserManager()
 
     @property
@@ -105,3 +116,46 @@ class User(AbstractBaseUser, PermissionsMixin):  # type: ignore[django-manager-m
     class Meta:
         verbose_name = _("User")
         verbose_name_plural = _("Users")
+
+
+class UserRating(models.Model):
+    RATING_CHOICES = (
+        (0, "☆☆☆☆☆"),
+        (1, "★☆☆☆☆"),
+        (2, "★★☆☆☆"),
+        (3, "★★★☆☆"),
+        (4, "★★★★☆"),
+        (5, "★★★★★"),
+    )
+
+    rating = models.PositiveIntegerField(_("Rating"), choices=RATING_CHOICES)
+    recipe = models.ForeignKey("recipes.Recipe", related_name="ratings", on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name="ratings", on_delete=models.CASCADE)
+
+    @override
+    def __str__(self) -> str:
+        return gettext("User {user} rated '{recipe}' {rating}").format(
+            user=self.user.full_name or self.user.email,
+            recipe=self.recipe.name,
+            rating=self.get_rating_display(),
+        )
+
+    class Meta:
+        verbose_name = _("User Rating")
+        verbose_name_plural = _("User Ratings")
+        unique_together = ("user", "recipe")
+
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")
+    recipe = models.ForeignKey("recipes.Recipe", on_delete=models.CASCADE, related_name="comments")
+    text = models.TextField(_("Text"))
+    created = CreationDateTimeField(verbose_name=_("Created"))
+
+    @override
+    def __str__(self) -> str:
+        return self.text[:40]
+
+    class Meta:
+        verbose_name = _("Comment")
+        verbose_name_plural = _("Comments")

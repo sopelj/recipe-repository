@@ -22,6 +22,7 @@ if settings.DEBUG:
 
 urlpatterns += i18n_patterns(
     path("", include("recipe_repo.recipes.urls")),
+    path("", include("recipe_repo.categories.urls")),
     path(_("admin/"), admin.site.urls),
     prefix_default_language=True,
 )

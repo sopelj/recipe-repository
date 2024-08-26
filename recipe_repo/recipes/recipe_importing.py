@@ -19,13 +19,13 @@ from pint.errors import UndefinedUnitError
 from recipe_scrapers._exceptions import SchemaOrgException
 from slugify import slugify
 
+from ..categories.models import Category
 from ..common.utils import to_snake_case
 from ..food.models import Food
 from ..units import unit_registry
 from ..units.models import Unit
 from ..units.utils import parse_numeric_string
 from .models import (
-    Category,
     Ingredient,
     IngredientGroup,
     IngredientQualifier,

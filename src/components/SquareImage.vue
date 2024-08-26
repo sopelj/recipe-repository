@@ -1,5 +1,5 @@
 <script setup lang="ts">
-withDefaults(defineProps<{ src: string; alt?: string }>(), { alt: "" });
+withDefaults(defineProps<{ src: string | null; alt?: string }>(), { alt: "" });
 </script>
 
 <template>

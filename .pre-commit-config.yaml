@@ -50,6 +50,7 @@ repos:
     rev: v1.11.1
     hooks:
       - id: mypy
+        exclude: "migrations"
         additional_dependencies:
           - "django-admin-interface"
           - "django-admin-sortable2"

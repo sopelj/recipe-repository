@@ -4,23 +4,12 @@ from typing import TYPE_CHECKING
 
 from rest_framework.serializers import DurationField, IntegerField, ModelSerializer, SlugRelatedField
 
-from ..users.serializers import UserSerializer
-from .models import Category, Ingredient, IngredientGroup, NutritionInformation, Recipe, Source, YieldUnit
+from ..categories.serializers import CategorySerializer
+from ..users.serializers import CommentSerializer, UserSerializer
+from .models import Ingredient, IngredientGroup, NutritionInformation, Recipe, Source, YieldUnit
 
 if TYPE_CHECKING:
     from .models import IngredientQualifier, Step
-
-
-class CategorySerializer(ModelSerializer[Category]):
-    class Meta:
-        model = Category
-        fields = ("name", "name_plural", "slug")
-
-
-class CategoryListSerializer(ModelSerializer[Category]):
-    class Meta:
-        model = Category
-        fields = ("name", "name_plural", "slug", "thumbnail_image_url")
 
 
 class NutritionSerializer(ModelSerializer[NutritionInformation]):
@@ -81,6 +70,7 @@ class RecipeSerializer(RecipeListSerializer):
     yield_unit = YieldUnitSerializer(read_only=True)
     nutrition = NutritionSerializer(read_only=True)
     added_by = UserSerializer(read_only=True)
+    comments = CommentSerializer(many=True, read_only=True)
 
     class Meta:
         model = Recipe
@@ -105,4 +95,5 @@ class RecipeSerializer(RecipeListSerializer):
             "yield_unit",
             "yield_amount",
             "added_by",
+            "comments",
         )

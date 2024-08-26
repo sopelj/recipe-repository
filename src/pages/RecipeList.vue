@@ -9,7 +9,11 @@ import { useI18n } from "vue-i18n";
 import SquareImage from "@/components/SquareImage.vue";
 import HeadSection from "@/layouts/HeadSection.vue";
 
-const props = defineProps<{ recipes: RecipeItem[]; "category"?: Category; "categories": Category[] }>();
+const props = defineProps<{
+  recipes: RecipeItem[];
+  "category": Category | null;
+  "categories": Category[] | null;
+}>();
 const { t } = useI18n();
 const search = ref<string>("");
 const filteredRecipes = computed((): RecipeItem[] =>
@@ -21,7 +25,7 @@ const filteredRecipes = computed((): RecipeItem[] =>
   ),
 );
 const categoryOptions = computed(() =>
-  props.categories.map((c) => ({ label: c.name_plural || c.name, value: c.slug })),
+  props.categories?.map((c) => ({ label: c.name_plural || c.name, value: c.slug })),
 );
 const selectedCategories = ref<string[]>([]);
 const title = computed(
@@ -42,7 +46,7 @@ const title = computed(
         {{ t("recipe.all_recipes") }}
       </Link>
       <Link
-        :href="t('routes.category_list')"
+        :href="t('routes.category_type_list')"
         class="text-center pr-2 sm:pr-0 hover:underline"
       >
         {{ category ? t("categories.all_categories") : t("recipe.browse_categories") }}
@@ -64,6 +68,7 @@ const title = computed(
             />
           </IconField>
           <MultiSelect
+            v-if="categories"
             v-model="selectedCategories"
             :options="categoryOptions"
             :placeholder="t('search.select_category')"

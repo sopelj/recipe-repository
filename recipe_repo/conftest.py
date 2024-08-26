@@ -10,7 +10,8 @@ from django.db import transaction
 from django.shortcuts import render
 from django.test import Client
 
-from .recipes.models import Category, Recipe
+from .categories.models import Category, CategoryType
+from .recipes.models import Recipe
 
 if TYPE_CHECKING:
     from collections.abc import Generator
@@ -76,7 +77,12 @@ def inertia_client() -> Client:
 def category_fixture() -> Generator[Category, None, None]:
     """Create a single basic category for the given test."""
     with transaction.atomic():
-        category_instance = Category.objects.create(slug_en="test-category", name_en="Test Category", path="test")
+        category_type = CategoryType.objects.create(slug_en="test-category-type", name_en="test-category-type")
+        category_instance = Category.objects.create(
+            slug_en="test-category",
+            name_en="Test Category",
+            type=category_type,
+        )
         yield category_instance
         category_instance.delete()
 

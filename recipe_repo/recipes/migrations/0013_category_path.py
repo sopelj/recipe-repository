@@ -36,6 +36,7 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.RunSQL("CREATE EXTENSION ltree", migrations.RunSQL.noop),
         migrations.AddField(
             model_name="category",
             name="path",

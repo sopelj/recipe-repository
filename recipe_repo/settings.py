@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     "django_ltree",
     "colorfield",
     # Local apps
+    "recipe_repo.categories",
     "recipe_repo.common",
     "recipe_repo.food",
     "recipe_repo.recipes",
