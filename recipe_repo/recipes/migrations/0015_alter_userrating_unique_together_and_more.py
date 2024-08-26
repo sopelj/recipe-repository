@@ -32,7 +32,17 @@ class Migration(migrations.Migration):
             model_name="recipe",
             name="rated_by",
         ),
-        migrations.AlterField(
+        migrations.RemoveField(
+            model_name="recipe",
+            name="categories",
+            field=models.ManyToManyField(
+                blank=True,
+                related_name="recipes",
+                to="categories.category",
+                verbose_name="Categories",
+            ),
+        ),
+        migrations.AddField(
             model_name="recipe",
             name="categories",
             field=models.ManyToManyField(
