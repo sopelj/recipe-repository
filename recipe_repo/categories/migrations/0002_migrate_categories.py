@@ -17,9 +17,11 @@ def migrate_recipe_categories(apps: Apps, schema_editor: BaseDatabaseSchemaEdito
 
     for recipe_category in RecipeCategory.objects.filter(path__depth=1):
         category_type = CategoryType.objects.create(
+            name=recipe_category.name,
             name_en=recipe_category.name_en,
             name_fr=recipe_category.name_fr,
             name_ja=recipe_category.name_ja,
+            slug=recipe_category.slug,
             slug_en=recipe_category.slug_en,
             slug_fr=recipe_category.slug_fr,
             slug_ja=recipe_category.slug_ja,
@@ -27,9 +29,11 @@ def migrate_recipe_categories(apps: Apps, schema_editor: BaseDatabaseSchemaEdito
         )
         for sub_category in RecipeCategory.objects.filter(path__descendants=recipe_category.path, path__depth=2):
             Category.objects.create(
+                name=sub_category.name,
                 name_en=sub_category.name_en,
                 name_fr=sub_category.name_fr,
                 name_ja=sub_category.name_ja,
+                slug=sub_category.slug,
                 slug_en=sub_category.slug_en,
                 slug_fr=sub_category.slug_fr,
                 slug_ja=sub_category.slug_ja,
