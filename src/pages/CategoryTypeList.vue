@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import type { CategoryType } from "@/types/categories";
 
-import { Link } from "@inertiajs/vue3";
 import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 
 import BreadcrumbBar from "@/components/BreadcrumbBar.vue";
-import SquareImage from "@/components/SquareImage.vue";
+import SearchableLinkCards from "@/components/SearchableLinkCards.vue";
 import HeadSection from "@/layouts/HeadSection.vue";
 
 const props = defineProps<{ categoryTypes: CategoryType[] }>();
@@ -25,51 +24,11 @@ const filteredCategoryTypes = computed((): CategoryType[] =>
   <div class="container mx-auto">
     <h1 class="text-4xl pt-2 pb-4 px-4 flex-grow">{{ t("categories.all_category_types") }}</h1>
     <BreadcrumbBar :current="t('categories.all_category_types')" />
-    <DataView
-      layout="grid"
-      :value="filteredCategoryTypes"
-      data-key="slug"
-    >
-      <template #header>
-        <div class="flex flex-wrap items-center justify-between">
-          <IconField class="w-full sm:w-auto">
-            <InputIcon class="pi pi-search" />
-            <InputText
-              v-model="search"
-              :placeholder="t('search.search')"
-              class="w-full sm:w-auto"
-            />
-          </IconField>
-        </div>
-      </template>
-      <template #grid="{ items }">
-        <div
-          class="grid auto-rows-fr grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-8 p-4"
-        >
-          <Link
-            v-for="categoryType in items"
-            :key="categoryType.slug"
-            :href="t('routes.category_type_detail', { slug: categoryType.slug })"
-            class="inline-grid"
-          >
-            <Card
-              class="text-center overflow-clip transition-all border dark:border-slate-600 dark:hover:border-violet-700 hover:scale-105 w-full"
-            >
-              <template #header>
-                <SquareImage :src="categoryType.thumbnail_image_url" />
-              </template>
-              <template #title>
-                <h2>{{ categoryType.name_plural || categoryType.name }}</h2>
-              </template>
-            </Card>
-          </Link>
-        </div>
-      </template>
-      <template #empty>
-        <div class="flex items-center">
-          <div class="p-4 w-full text-center">{{ t("categories.type_no_match") }}</div>
-        </div>
-      </template>
-    </DataView>
+    <SearchableLinkCards
+      v-model:search="search"
+      :grid-items="filteredCategoryTypes"
+      :no-results-message="t('categories.type_no_match')"
+      route-name="category_type_detail"
+    />
   </div>
 </template>

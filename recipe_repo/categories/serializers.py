@@ -14,7 +14,7 @@ class CategoryTypeSerializer(ModelSerializer[CategoryType]):
 class CategoryTypeListSerializer(ModelSerializer[CategoryType]):
     class Meta:
         model = CategoryType
-        fields = ("name", "name_plural", "slug", "thumbnail_image_url")
+        fields = ("name", "name_plural", "slug", "thumbnail_url")
 
 
 class BaseCategorySerializer(ModelSerializer[Category]):
@@ -26,7 +26,7 @@ class BaseCategorySerializer(ModelSerializer[Category]):
 class CategoryListSerializer(ModelSerializer[Category]):
     class Meta:
         model = Category
-        fields = ("name", "name_plural", "slug", "thumbnail_image_url")
+        fields = ("name", "name_plural", "slug", "thumbnail_url")
 
 
 class CategorySerializer(ModelSerializer[Category]):
@@ -34,4 +34,4 @@ class CategorySerializer(ModelSerializer[Category]):
 
     class Meta:
         model = Category
-        fields = ("name", "name_plural", "type")
+        fields = ("name", "name_plural", "slug", "type")

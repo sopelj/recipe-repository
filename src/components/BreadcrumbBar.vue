@@ -19,6 +19,7 @@ const crumbs = computed(() => [...props.items, ...(props.current ? [{ label: pro
   <Breadcrumb
     :home="home"
     :model="crumbs"
+    :pt="{ list: 'flex-wrap' }"
   >
     <template #item="{ item }">
       <Link
@@ -33,6 +34,6 @@ const crumbs = computed(() => [...props.items, ...(props.current ? [{ label: pro
         <span class="font-semibold text-slate-400">{{ item.label }}</span>
       </span>
     </template>
-    <template #separator> / </template>
+    <template #separator>/</template>
   </Breadcrumb>
 </template>

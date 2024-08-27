@@ -19,7 +19,7 @@ class BaseCategory(NamedPluralModel):
     image = ThumbnailerImageField(_("Thumbnail"), upload_to="images/categories/", null=True, blank=True)
 
     @property
-    def thumbnail_image_url(self) -> str | None:
+    def thumbnail_url(self) -> str | None:
         """Resolve URL of the user's profile image."""
         return get_thumbnailer(self.image)["thumbnail"].url if self.image else None
 
@@ -30,6 +30,7 @@ class BaseCategory(NamedPluralModel):
 
 class CategoryType(BaseCategory):
     class Meta:
+        ordering = ("name",)
         verbose_name = _("Category Type")
         verbose_name_plural = _("Category types")
 
@@ -47,5 +48,6 @@ class Category(BaseCategory):
         return self.tag
 
     class Meta:
+        ordering = ("name",)
         verbose_name = _("Category")
         verbose_name_plural = _("Categories")

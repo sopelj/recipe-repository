@@ -65,7 +65,7 @@
     "category_type_list": "/ja/kategori-no-taipu/",
     "login": "/ja/admin/login/",
     "logout": "/ja/admin/logout/",
-    "recipe_details": "/ja/reshipi/{slug}/",
+    "recipe_detail": "/ja/reshipi/{slug}/",
     "recipe_list": "/ja/"
   },
   "search": {

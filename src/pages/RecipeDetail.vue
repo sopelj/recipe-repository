@@ -56,7 +56,7 @@ const shareRecipe = async () => {
   >
     <div class="grid grid-cols-12 gap-4">
       <div class="col-span-12 sm:col-span-9 md:col-span-8">
-        <div class="flex flex-wrap sm:flex-nowrap items-center mb-4">
+        <div class="flex flex-wrap sm:flex-nowrap items-center mb-2 md:mb-4">
           <h1
             class="text-4xl cursive flex-grow w-full sm:w-auto"
             itemprop="name"
@@ -85,7 +85,10 @@ const shareRecipe = async () => {
             @click="shareRecipe"
           />
         </div>
-        <BreadcrumbBar :current="recipe.name" />
+        <BreadcrumbBar
+          :current="recipe.name"
+          class="p-0"
+        />
         <div
           v-if="recipe.image_url"
           class="overflow-clip p-card mt-4 sm:hidden"
@@ -172,7 +175,7 @@ const shareRecipe = async () => {
                     itemprop="recipeIngredient"
                   >
                     <Link
-                      :href="t('routes.recipe_details', { slug: r.slug })"
+                      :href="t('routes.recipe_detail', { slug: r.slug })"
                       class="underline"
                     >
                       {{ r.name }}

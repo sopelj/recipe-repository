@@ -55,7 +55,7 @@
     "share": "Share this recipe",
     "share_title": "Recipe for \"{name}\"",
     "step_title": "Step {step}",
-    "un-favourite": "Un-favourite",
+    "un-favourite": "Unfavourite",
     "yields": "Yields:"
   },
   "routes": {
@@ -65,7 +65,7 @@
     "category_type_list": "/en/category-types/",
     "login": "/en/admin/login/",
     "logout": "/en/admin/logout/",
-    "recipe_details": "/en/recipes/{slug}/",
+    "recipe_detail": "/en/recipes/{slug}/",
     "recipe_list": "/en/"
   },
   "search": {

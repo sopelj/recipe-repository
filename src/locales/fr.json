@@ -65,7 +65,7 @@
     "category_type_list": "/fr/types-de-categories/",
     "login": "/fr/admin/login/",
     "logout": "/fr/admin/logout/",
-    "recipe_details": "/fr/recettes/{slug}/",
+    "recipe_detail": "/fr/recettes/{slug}/",
     "recipe_list": "/fr/"
   },
   "search": {
