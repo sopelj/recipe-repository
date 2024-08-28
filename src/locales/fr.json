@@ -8,6 +8,11 @@
     "title": "Catégories",
     "type_no_match": "Aucune type de catégorie ne correspond aux critères donnés"
   },
+  "comments": {
+    "new_comment": "Nouveau commentaire",
+    "post": "Poster",
+    "title": "Commentaires"
+  },
   "global": {
     "admin": "Admin",
     "keep_screen_on": "Gardez l'écran éveillé",

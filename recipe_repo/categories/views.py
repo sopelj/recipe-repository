@@ -15,8 +15,9 @@ class CategoryTypeListView(LoginRequiredMixin, InertiaView):
 
     def get_component_props(self) -> dict[str, Any]:
         """Return categories."""
+        categories = CategoryType.objects.filter(categories__recipes__isnull=False).distinct()
         return {
-            "categoryTypes": CategoryTypeListSerializer(CategoryType.objects.all(), many=True).data,
+            "categoryTypes": CategoryTypeListSerializer(categories, many=True).data,
         }
 
 
@@ -31,5 +32,8 @@ class CategoryListView(LoginRequiredMixin, InertiaView):
         )
         return {
             "categoryType": CategoryTypeSerializer(category_type).data,
-            "categories": CategoryListSerializer(category_type.categories.all(), many=True).data,
+            "categories": CategoryListSerializer(
+                category_type.categories.filter(recipes__isnull=False).distinct(),
+                many=True,
+            ).data,
         }

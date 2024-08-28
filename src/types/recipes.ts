@@ -54,6 +54,12 @@ export interface YieldUnit {
   name_plural?: string;
 }
 
+export interface Comment {
+  user: User;
+  text: string;
+  created: string;
+}
+
 export interface Recipe extends Omit<RecipeItem, "thumbnail_url"> {
   description: string;
   image_url: string | null;
@@ -70,4 +76,5 @@ export interface Recipe extends Omit<RecipeItem, "thumbnail_url"> {
   nutrition?: NutritionInformation;
   steps: string[];
   added_by: User;
+  comments: Comment[];
 }

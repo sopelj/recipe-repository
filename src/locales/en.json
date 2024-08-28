@@ -8,6 +8,11 @@
     "title": "Categories",
     "type_no_match": "No category types match the given criteria"
   },
+  "comments": {
+    "new_comment": "New comment",
+    "post": "Post",
+    "title": "Comments"
+  },
   "global": {
     "admin": "Admin",
     "keep_screen_on": "Keep screen on",

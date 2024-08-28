@@ -63,7 +63,7 @@ const breadcrumbItems = computed(() =>
     <SearchableLinkCards
       v-model:search="search"
       :grid-items="filteredRecipes"
-      :no-results-message="t('categories.no_recipes_match')"
+      :no-results-message="t('search.no_recipes_match')"
       route-name="recipe_detail"
     >
       <template #extra-header>

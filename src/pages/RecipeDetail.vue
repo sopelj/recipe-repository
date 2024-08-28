@@ -15,6 +15,7 @@ import IngredientList from "@/components/IngredientList.vue";
 import KeepAwake from "@/components/KeepAwake.vue";
 import NutritionalInformation from "@/components/NutritionalInformation.vue";
 import RatingForm from "@/components/RatingForm.vue";
+import RecipeComments from "@/components/RecipeComments.vue";
 import RecipeDurations from "@/components/RecipeDurations.vue";
 import RecipeSource from "@/components/RecipeSource.vue";
 import RecipeYield from "@/components/RecipeYield.vue";
@@ -224,6 +225,12 @@ const shareRecipe = async () => {
         >
           {{ step }}
         </Panel>
+      </div>
+      <div
+        v-if="user"
+        class="col-span-12 md:col-span-4"
+      >
+        <RecipeComments :comments="recipe.comments" />
       </div>
     </div>
   </div>

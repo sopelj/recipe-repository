@@ -8,6 +8,11 @@
     "title": "カテゴリ",
     "type_no_match": "指定された条件に一致するカテゴリのタイプはありません"
   },
+  "comments": {
+    "new_comment": "新しいコメント",
+    "post": "コメントを投稿",
+    "title": "コメント"
+  },
   "global": {
     "admin": "管理",
     "keep_screen_on": "画面をオンにしたままにする",
