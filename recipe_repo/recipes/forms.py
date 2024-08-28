@@ -7,13 +7,14 @@ from urllib.parse import urlsplit, urlunsplit
 import requests
 from django import forms
 from django.conf import settings
+from django.db import IntegrityError
 from django.utils import translation
 from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
 from recipe_scrapers import scrape_html
 from recipe_scrapers._exceptions import RecipeScrapersExceptions
 
-from ..users.models import UserRating
+from ..users.models import Comment, UserRating
 from .fields import FractionField
 from .models import Ingredient, Recipe
 from .recipe_importing import USER_AGENT, create_recipe_from_scraper
@@ -66,6 +67,13 @@ class RecipeReviewForm(forms.Form):
                 recipe_id=recipe_id,
                 defaults={"rating": rating},
             )
+
+        if (comment := self.cleaned_data.get("comment")) is not None:
+            recipe_id = Recipe.objects.filter(slug=self.recipe_slug).values_list("id", flat=True)[0]
+            try:
+                Comment.objects.create(user=self.user, recipe_id=recipe_id, text=comment)
+            except IntegrityError as e:
+                raise forms.ValidationError("Unable to save comment") from e
 
 
 class IngredientAdminForm(forms.ModelForm[Ingredient]):
