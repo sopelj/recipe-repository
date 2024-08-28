@@ -12,7 +12,7 @@ from modeltranslation.utils import get_language
 from rest_framework.generics import get_object_or_404
 
 from ..categories.models import Category
-from ..categories.serializers import CategorySerializer
+from ..categories.serializers import BaseCategorySerializer, CategorySerializer
 from ..common.views import InertiaFormView, InertiaView
 from .forms import RecipeReviewForm, ServingsForm
 from .models import Ingredient, Recipe
@@ -28,7 +28,7 @@ class RecipeListView(LoginRequiredMixin, InertiaView):
 
     def get_component_props(self) -> dict[str, Any]:
         """Get all recipes or the recipes."""
-        recipe_queryset = Recipe.objects.prefetch_related("categories").with_ratings()  # type: ignore[attr-defined]
+        recipe_queryset = Recipe.objects.prefetch_related("categories", "categories__type").with_ratings()  # type: ignore[attr-defined]
 
         category, categories = None, None
         if category_slug := self.kwargs.get("category_slug"):
@@ -40,7 +40,7 @@ class RecipeListView(LoginRequiredMixin, InertiaView):
         return {
             "recipes": RecipeListSerializer(recipe_queryset, many=True).data,
             "category": CategorySerializer(category).data if category else None,
-            "categories": CategorySerializer(categories, many=True).data if categories else None,
+            "categories": BaseCategorySerializer(categories, many=True).data if categories else None,
         }
 
 
@@ -53,7 +53,7 @@ def get_full_recipe(recipe_id: int) -> Recipe:
             "yield_unit",
             "added_by",
         )
-        .prefetch_related("parent_recipes", "categories")
+        .prefetch_related("parent_recipes", "categories", "categories__type", "comments", "steps", "ingredient_groups")
         .with_ratings()  # type: ignore[attr-defined]
         .get(pk=recipe_id)
     )

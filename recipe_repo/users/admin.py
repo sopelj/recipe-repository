@@ -68,8 +68,16 @@ class UserRatingAdmin(admin.ModelAdmin[UserRating]):
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin[Comment]):
-    list_filter = (("user", admin.RelatedOnlyFieldListFilter),)
+    list_filter = (
+        ("user", admin.RelatedOnlyFieldListFilter),
+        ("recipe", admin.RelatedOnlyFieldListFilter),
+    )
+    list_display = ("__str__", "user", "recipe", "created")
     autocomplete_fields = ("user", "recipe")
+
+    def get_queryset(self, request: HttpRequest) -> QuerySet[Comment]:
+        """Include related fields to avoid extra queries."""
+        return Comment.objects.select_related("user", "recipe")
 
     def has_change_permission(self, request: HttpRequest, obj: Comment | None = None) -> bool:
         """Allow users to edit their own comments."""

@@ -154,8 +154,9 @@ class Comment(models.Model):
 
     @override
     def __str__(self) -> str:
-        return self.text[:40]
+        return f"{self.text[:40]}..." if len(self.text) > 40 else self.text
 
     class Meta:
+        ordering = ("-created",)
         verbose_name = _("Comment")
         verbose_name_plural = _("Comments")
