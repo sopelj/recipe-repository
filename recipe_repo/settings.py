@@ -104,7 +104,7 @@ ASGI_APPLICATION = "recipe_repo.asgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-if not (default_db := env.str("DATABASE_URL", default=None)):
+if not (default_db := env.db_url("DATABASE_URL", default=None)):
     default_db = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": env("POSTGRES_DB", default="recipe_repo"),
