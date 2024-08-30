@@ -4,11 +4,13 @@ import type { Comment } from "@/types/recipes";
 import { useForm } from "@inertiajs/vue3";
 import { useI18n } from "vue-i18n";
 
+import { formatTimeSince } from "@/utils/durations";
+
 import UserAvatar from "@/components/UserAvatar.vue";
 
 defineProps<{ comments: Comment[]; collapse?: boolean }>();
 
-const { t, d } = useI18n();
+const { t } = useI18n();
 
 const form = useForm({ comment: "" });
 
@@ -30,33 +32,31 @@ const postComment = async () => {
       <h3>{{ t("comments.title") }}</h3>
     </template>
     <template #icons>
-      <Badge>{{ comments.length }}</Badge>
+      <Badge v-if="comments.length">{{ comments.length }}</Badge>
     </template>
     <div
       v-for="comment in comments"
       :key="comment.created"
-      class="mb-4"
+      class="my-2 flex"
     >
-      <div class="flex items-center gap-2">
-        <UserAvatar
-          :user="comment.user"
-          size="normal"
-        />
-        <span class="font-bold">{{ comment.user.full_name }}</span>
+      <UserAvatar
+        v-tooltip="comment.user.full_name"
+        :user="comment.user"
+        size="large"
+      />
+      <div class="flex-grow">
+        <blockquote style="white-space: pre">{{ comment.text }}</blockquote>
+        <span class="text-xs text-slate-500">{{ formatTimeSince(comment.created) }}</span>
+        <Divider />
       </div>
-      <blockquote>{{ comment.text }}</blockquote>
-      <span class="text-xs text-slate-500">{{ d(comment.created, "long") }}</span>
-      <Divider />
     </div>
-    <form class="mt-8">
-      <FloatLabel>
-        <label for="post-comment">{{ t("comments.new_comment") }}</label>
-        <Textarea
-          id="post-comment"
-          v-model="form.comment"
-          class="w-full"
-        />
-      </FloatLabel>
+    <form class="mt-2">
+      <label for="post-comment">{{ t("comments.new_comment") }}</label>
+      <Textarea
+        id="post-comment"
+        v-model="form.comment"
+        class="w-full"
+      />
       <Button
         class="w-full mt-2"
         :disabled="!form.comment.trim()"

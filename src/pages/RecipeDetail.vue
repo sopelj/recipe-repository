@@ -202,9 +202,10 @@ const shareRecipe = async () => {
           v-if="recipe.image_url"
           class="overflow-clip p-card hidden sm:flex"
         >
-          <img
+          <Image
             :src="recipe.image_url"
             :alt="recipe.name"
+            preview
             class="w-full"
           />
         </div>
@@ -212,10 +213,11 @@ const shareRecipe = async () => {
           v-if="recipe.nutrition && isAboveMedium"
           :nutrition="recipe.nutrition"
           :servings="servings"
-          class="my-4"
+          class="mt-4"
         />
         <RecipeComments
           v-if="isAboveMedium"
+          class="mt-4"
           :comments="recipe.comments"
         />
       </div>

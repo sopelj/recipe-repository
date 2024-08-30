@@ -22,13 +22,15 @@ const nutrients = computed(
 
 <template>
   <Panel
-    :header="t('nutritional_information.title')"
     toggleable
     :collapsed="true"
     itemprop="nutrition"
     itemscope
     itemtype="https://schema.org/NutritionInformation"
   >
+    <template #header>
+      <h3>{{ t("nutritional_information.title") }}</h3>
+    </template>
     <table class="w-full text-left">
       <thead>
         <tr>
