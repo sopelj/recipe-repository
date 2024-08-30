@@ -4,7 +4,7 @@ from functools import cached_property
 from typing import Any
 
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import DecimalField, Q, Value
+from django.db.models import DecimalField, Prefetch, Q, Value
 from django.http import Http404
 from django.urls.base import reverse
 from django.views.generic.detail import SingleObjectMixin
@@ -53,7 +53,13 @@ def get_full_recipe(recipe_id: int) -> Recipe:
             "yield_unit",
             "added_by",
         )
-        .prefetch_related("parent_recipes", "categories", "categories__type", "comments", "steps", "ingredient_groups")
+        .prefetch_related(
+            Prefetch("categories", queryset=Category.objects.select_related("type").order_by("name")),
+            "comments",
+            "steps",
+            "parent_recipes",
+            "ingredient_groups",
+        )
         .with_ratings()  # type: ignore[attr-defined]
         .get(pk=recipe_id)
     )

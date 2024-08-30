@@ -40,7 +40,7 @@ const props = defineProps<{
 const { t } = useI18n();
 
 const breakpoints = useBreakpoints(breakpointsTailwind);
-const isAboveSmall = breakpoints.greater("sm");
+const isAboveMedium = breakpoints.greater("md");
 
 const { share, canShare } = useShare();
 const shareRecipe = async () => {
@@ -56,7 +56,7 @@ const shareRecipe = async () => {
     itemtype="https://schema.org/Recipe"
   >
     <div class="grid grid-cols-12 gap-4">
-      <div class="col-span-12 sm:col-span-9 md:col-span-8">
+      <div class="col-span-12 md:col-span-8">
         <div class="flex flex-wrap sm:flex-nowrap items-center mb-2 md:mb-4">
           <h1
             class="text-4xl cursive flex-grow w-full sm:w-auto"
@@ -109,7 +109,7 @@ const shareRecipe = async () => {
             class="mx-1"
             severity="secondary"
           >
-            {{ c.name }}
+            {{ c.type.name }}: {{ c.name }}
           </Tag>
         </DescriptionItem>
         <DescriptionItem :label="t('recipe.yields')">
@@ -154,10 +154,15 @@ const shareRecipe = async () => {
           :total-time="recipe.total_time"
         />
         <NutritionalInformation
-          v-if="recipe.nutrition && !isAboveSmall"
+          v-if="recipe.nutrition && !isAboveMedium"
           :nutrition="recipe.nutrition"
           :servings="servings"
-          class="mt-4"
+          class="my-4"
+        />
+        <RecipeComments
+          v-if="!isAboveMedium"
+          :comments="recipe.comments"
+          :collapse="true"
         />
         <div class="mt-4">
           <Card>
@@ -192,7 +197,7 @@ const shareRecipe = async () => {
           </Card>
         </div>
       </div>
-      <div class="col-span-12 sm:col-span-3 md:col-span-4">
+      <div class="col-span-12 md:col-span-4 row-span-2">
         <div
           v-if="recipe.image_url"
           class="overflow-clip p-card hidden sm:flex"
@@ -204,10 +209,14 @@ const shareRecipe = async () => {
           />
         </div>
         <NutritionalInformation
-          v-if="recipe.nutrition && isAboveSmall"
+          v-if="recipe.nutrition && isAboveMedium"
           :nutrition="recipe.nutrition"
           :servings="servings"
-          class="mt-4"
+          class="my-4"
+        />
+        <RecipeComments
+          v-if="isAboveMedium"
+          :comments="recipe.comments"
         />
       </div>
       <div class="col-span-12 md:col-span-8">
@@ -225,12 +234,6 @@ const shareRecipe = async () => {
         >
           {{ step }}
         </Panel>
-      </div>
-      <div
-        v-if="user"
-        class="col-span-12 md:col-span-4"
-      >
-        <RecipeComments :comments="recipe.comments" />
       </div>
     </div>
   </div>

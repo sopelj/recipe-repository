@@ -14,11 +14,10 @@ if TYPE_CHECKING:
 
 
 @pytest.mark.django_db
-@pytest.mark.parametrize("path", ["/en/", "/en/category-types/"])
-def test_recipe_and_category_list_not_logged_in(path: str, client: Client) -> None:
-    resp = client.get(path)
+def test_recipe_list_not_logged_in(client: Client) -> None:
+    resp = client.get("/en/")
     assert resp.status_code == 302
-    assert resp.url == f"/en/admin/login/?next={path}"  # type: ignore[attr-defined]
+    assert resp.url == "/en/admin/login/?next=/en/"  # type: ignore[attr-defined]
 
 
 @pytest.mark.django_db

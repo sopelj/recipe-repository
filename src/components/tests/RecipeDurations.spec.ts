@@ -19,5 +19,5 @@ test("Duration Splitter should display time", async () => {
   expect(totalMeta.attributes("itemprop")).toBe("prepTime");
   expect(totalMeta.attributes("content")).toBe("PT2M1S");
 
-  expect(wrapper.text()).toBe("times.prepTime times.cookTime times.totalTime");
+  expect(wrapper.text()).toBe("Prep time: 2m1s Cook time: 5m1s Total time: 7m2s");
 });

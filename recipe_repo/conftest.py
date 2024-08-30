@@ -73,11 +73,19 @@ def inertia_client() -> Client:
     return Client(HTTP_X_INERTIA=True)
 
 
-@pytest.fixture(name="category")
-def category_fixture() -> Generator[Category, None, None]:
+@pytest.fixture(name="category_type")
+def category_type_fixture() -> Generator[CategoryType, None, None]:
     """Create a single basic category for the given test."""
     with transaction.atomic():
-        category_type = CategoryType.objects.create(slug_en="test-category-type", name_en="test-category-type")
+        category_type_instance = CategoryType.objects.create(slug_en="test-category-type", name_en="test-category-type")
+        yield category_type_instance
+        category_type_instance.delete()
+
+
+@pytest.fixture(name="category")
+def category_fixture(category_type: CategoryType) -> Generator[Category, None, None]:
+    """Create a single basic category for the given test."""
+    with transaction.atomic():
         category_instance = Category.objects.create(
             slug_en="test-category",
             name_en="Test Category",

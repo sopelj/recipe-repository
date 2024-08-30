@@ -68,7 +68,7 @@ class RecipeReviewForm(forms.Form):
                 defaults={"rating": rating},
             )
 
-        if (comment := self.cleaned_data.get("comment")) is not None:
+        if comment := (self.cleaned_data.get("comment") or "").strip():
             recipe_id = Recipe.objects.filter(slug=self.recipe_slug).values_list("id", flat=True)[0]
             try:
                 Comment.objects.create(user=self.user, recipe_id=recipe_id, text=comment)

@@ -15,6 +15,9 @@ def migrate_recipe_categories(apps: Apps, schema_editor: BaseDatabaseSchemaEdito
     CategoryType = apps.get_model("categories", "CategoryType")
     Category = apps.get_model("categories", "Category")
 
+    if not RecipeCategory.objects.exists():
+        return
+
     for recipe_category in RecipeCategory.objects.filter(path__depth=1):
         category_type = CategoryType.objects.create(
             name=recipe_category.name,
