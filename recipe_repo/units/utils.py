@@ -69,6 +69,11 @@ def soft_round(value: Decimal) -> Decimal:
     return value.quantize(Decimal("1.00000")).normalize()
 
 
+def normalize_decimal(value: Decimal) -> Decimal:
+    """Normalize decimals to remove trailing zeros."""
+    return integral if value == (integral := value.to_integral()) else value.normalize()
+
+
 def format_fraction(whole: Decimal | int, frac: Fraction) -> str:
     """Format a fraction localised for display."""
     if whole:
@@ -147,8 +152,10 @@ def format_metric_amounts(amount: Decimal, max_amount: Decimal | None, unit: pin
         compact_max = (max_amount * unit).to_compact()
         return (
             gettext("{amount} to {max_amount}").format(
-                amount=compact_amount.magnitude if compact_amount.units == compact_max.units else compact_amount,
-                max_amount=compact_max,
+                amount=normalize_decimal(
+                    compact_amount.magnitude if compact_amount.units == compact_max.units else compact_amount,
+                ),
+                max_amount=normalize_decimal(compact_max),
             ),
             compact_max.magnitude,
         )

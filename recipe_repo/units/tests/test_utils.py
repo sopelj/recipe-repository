@@ -16,6 +16,7 @@ from ..utils import (
     format_fraction,
     format_imperial_amounts,
     is_nice_fraction,
+    normalize_decimal,
     parse_numeric_string,
 )
 
@@ -38,6 +39,18 @@ if TYPE_CHECKING:
 )
 def test_parse_numeric_string(numeric: str, number: float) -> None:
     assert pytest.approx(parse_numeric_string(numeric), rel=Decimal("1e-3")) == Decimal(number)
+
+
+@pytest.mark.parametrize(
+    ("numeric", "number"),
+    [
+        ("1.000", "1"),
+        ("1.05", "1.05"),
+        ("1.050", "1.05"),
+    ],
+)
+def test_normalize_decimal(numeric: str, number: str) -> None:
+    assert normalize_decimal(Decimal(numeric)) == Decimal(number)
 
 
 @pytest.mark.parametrize(
