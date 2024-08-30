@@ -11,16 +11,38 @@ name: Tests and Linters
 jobs:
   tests:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: 3.12
 
-      - name: Set Node.js 16.x
+      - name: Set Node.js 22.x
         uses: actions/setup-node@v4
         with:
           node-version: 22.x
+
+      - name: Setup Locales
+        run: |
+          sudo apt-get install -y locales gettext
+          echo "en_US.UTF-8 UTF-8" | sudo tee -a /etc/locale.gen
+          echo "fr_FR.UTF-8 UTF-8" | sudo tee -a /etc/locale.gen
+          echo "ja_JP.UTF-8 UTF-8" | sudo tee -a /etc/locale.gen
+          sudo locale-gen
+          sudo locale -a
+          localectl status
 
       - name: Add gettext for compilemessages
         run: sudo apt-get install -y gettext
@@ -34,15 +56,17 @@ jobs:
         run: yarn install
 
       - name: Setup Env Variables
-        run: sed s/SECRET_KEY=/SECRET_KEY=fake-key/ example.env > .env
+        run: |
+          sed s/SECRET_KEY=/SECRET_KEY=fake-key/ example.env > .env
+          sed s/insecure-change-this=/postgres/ -i .env
 
       - name: Run pre-commit
         run: pre-commit run --all-files
 
-      - name: Run Python Tests in Docker
+      - name: Run Tests
         run: |
-            hatch run ./manage.py compilemessages
-            docker compose run django pytest
+          hatch run ./manage.py compilemessages
+          hatch run test:cov
 
       - name: Run Frontend Tests
         run: yarn test

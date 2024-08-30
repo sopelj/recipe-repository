@@ -22,7 +22,6 @@ services:
         depends_on:
             db:
                 condition: service_healthy
-        restart: unless-stopped
     db:
         container_name: recipe-db
         image: postgres:16-alpine
@@ -35,7 +34,8 @@ services:
             interval: 10s
             retries: 5
             timeout: 5s
-        restart: unless-stopped
+        ports:
+            - "5432:5432"
         volumes:
             - postgres-data:/var/lib/postgresql/data/
         env_file:

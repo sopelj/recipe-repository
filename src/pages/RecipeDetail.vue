@@ -157,12 +157,13 @@ const shareRecipe = async () => {
           v-if="recipe.nutrition && !isAboveMedium"
           :nutrition="recipe.nutrition"
           :servings="servings"
-          class="my-4"
+          class="mt-4"
         />
         <RecipeComments
           v-if="!isAboveMedium"
           :comments="recipe.comments"
           :collapse="true"
+          class="mt-4"
         />
         <div class="mt-4">
           <Card>

@@ -34,6 +34,7 @@ dependencies = [
     "recipe-scrapers>=15.0.0",
     "werkzeug",
     "django-stubs-ext",
+    "psycopg[c]>=3.1.8",
 ]
 
 [project.optional-dependencies]
@@ -48,7 +49,6 @@ ldap = [
 ]
 production = [
     "granian",
-    "psycopg[c]>=3.1.8",
     "pymemcache"
 ]
 

@@ -104,7 +104,16 @@ ASGI_APPLICATION = "recipe_repo.asgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-DATABASES = {"default": env.db_url("DATABASE_URL", default="sqlite:///db.sqlite3")}
+if not (default_db := env.str("DATABASE_URL", default=None)):
+    default_db = {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": env("POSTGRES_DB", default="recipe_repo"),
+        "USER": env("POSTGRES_USER", default="recipe_repo"),
+        "PASSWORD": env("POSTGRES_PASSWORD"),
+        "HOST": env("POSTGRES_DB_HOST", default="localhost"),
+        "PORT": "5432",
+    }
+DATABASES = {"default": default_db}
 
 AUTH_USER_MODEL = "users.User"
 LOGIN_URL = reverse_lazy("admin:login")
