@@ -359,7 +359,7 @@ class Migration(migrations.Migration):
             name="IngredientGroup",
             fields=[
                 ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
-                ("name", models.CharField(max_length=150, unique=True, verbose_name="Name")),
+                ("name", models.CharField(max_length=150, verbose_name="Name")),
                 ("name_en", models.CharField(max_length=150, null=True, verbose_name="Name")),
                 ("name_fr", models.CharField(max_length=150, null=True, verbose_name="Name")),
                 ("name_ja", models.CharField(max_length=150, null=True, verbose_name="Name")),

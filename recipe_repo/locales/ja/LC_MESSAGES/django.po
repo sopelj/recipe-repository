@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-25 21:33-0400\n"
+"POT-Creation-Date: 2024-08-29 22:01-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,43 +16,43 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: recipe_repo/categories/admin.py:25 recipe_repo/categories/admin.py:46
-#: recipe_repo/categories/models.py:18 recipe_repo/recipes/admin.py:147
+#: recipe_repo/categories/admin.py:25 recipe_repo/categories/admin.py:45
+#: recipe_repo/categories/models.py:19 recipe_repo/recipes/admin.py:147
 msgid "Thumbnail"
 msgstr "サムネイル"
 
-#: recipe_repo/categories/admin.py:30 recipe_repo/categories/admin.py:51
+#: recipe_repo/categories/admin.py:30 recipe_repo/categories/admin.py:50
 #: recipe_repo/recipes/admin.py:152
 msgid "No thumbnail"
 msgstr "サムネイルなし"
 
-#: recipe_repo/categories/apps.py:11 recipe_repo/categories/models.py:51
+#: recipe_repo/categories/apps.py:11 recipe_repo/categories/models.py:53
 #: recipe_repo/recipes/admin.py:154 recipe_repo/recipes/models.py:112
 msgid "Categories"
 msgstr "カテゴリー"
 
-#: recipe_repo/categories/models.py:17 recipe_repo/recipes/models.py:91
+#: recipe_repo/categories/models.py:18 recipe_repo/recipes/models.py:91
 msgid "Slug"
 msgstr "スラッグ"
 
-#: recipe_repo/categories/models.py:17 recipe_repo/recipes/models.py:91
+#: recipe_repo/categories/models.py:18 recipe_repo/recipes/models.py:91
 msgid "Automatically generated from the name"
 msgstr "名前から生成"
 
-#: recipe_repo/categories/models.py:33
+#: recipe_repo/categories/models.py:34
 msgid "Category Type"
 msgstr "カテゴリタイプ"
 
-#: recipe_repo/categories/models.py:34
+#: recipe_repo/categories/models.py:35
 msgid "Category types"
 msgstr "カテゴリタイプ"
 
-#: recipe_repo/categories/models.py:43
+#: recipe_repo/categories/models.py:44
 #, python-brace-format
 msgid "{tag}: {category}"
 msgstr "{tag}: {category}"
 
-#: recipe_repo/categories/models.py:50
+#: recipe_repo/categories/models.py:52
 msgid "Category"
 msgstr "カテゴリー"
 
@@ -104,15 +104,15 @@ msgstr "カテゴリーはありません"
 msgid "Recipes"
 msgstr "レシピ"
 
-#: recipe_repo/recipes/forms.py:92
+#: recipe_repo/recipes/forms.py:100
 msgid "Recipe URL"
 msgstr "レシピのURL"
 
-#: recipe_repo/recipes/forms.py:93
+#: recipe_repo/recipes/forms.py:101
 msgid "Full URL to the desired recipe"
 msgstr "レシピの完全なURL"
 
-#: recipe_repo/recipes/forms.py:113
+#: recipe_repo/recipes/forms.py:121
 msgid "Failed to import recipe"
 msgstr "レシピのインポートに失敗しました。"
 
@@ -363,15 +363,15 @@ msgstr "レシピをインポートします"
 msgid "recipes/<slug:slug>/"
 msgstr "reshipi/<slug:slug>/"
 
-#: recipe_repo/settings.py:143
+#: recipe_repo/settings.py:142
 msgid "English"
 msgstr "英語"
 
-#: recipe_repo/settings.py:144
+#: recipe_repo/settings.py:143
 msgid "French"
 msgstr "フランス語"
 
-#: recipe_repo/settings.py:145
+#: recipe_repo/settings.py:144
 msgid "Japanese"
 msgstr "日本語"
 
@@ -575,10 +575,10 @@ msgstr "ユーザー評価"
 msgid "Created"
 msgstr "作成"
 
-#: recipe_repo/users/models.py:160
+#: recipe_repo/users/models.py:161
 msgid "Comment"
 msgstr "コメント"
 
-#: recipe_repo/users/models.py:161
+#: recipe_repo/users/models.py:162
 msgid "Comments"
 msgstr "コメント"

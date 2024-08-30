@@ -8,7 +8,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ("categories", "0002_migrate_categories"),
-        ("recipes", "0014_alter_category_name_alter_category_name_en_and_more"),
+        ("recipes", "0001_squashed_0014_alter_category_name_alter_category_name_en_and_more"),
     ]
 
     operations = [

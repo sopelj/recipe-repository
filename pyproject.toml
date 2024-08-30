@@ -24,7 +24,6 @@ dependencies = [
     "django-environ",
     "django-extensions",
     "django-cachalot",
-    "django-ltree-2",
     "django-modeltranslation",
     "django-query-inspector",
     "djangorestframework",
