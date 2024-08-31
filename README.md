@@ -33,7 +33,7 @@ I wasn't able to find one project that did all of that currently, but, really, m
 ### Env
 
 Copy example env file and make changes as required.
-Notably, change the `DJANGO_SECRET`.
+Notably, change the `DJANGO_SECRET` and `POSTGRES_PASSWORD`.
 
 ```shell
 cp example.env .env
@@ -56,19 +56,23 @@ cp example.env .env
 > These examples all use [`hatch`](https://hatch.pypa.io/latest/),
 > but you can also create your on venv, install dependencies, and run ./manage.py directly
 
-1. Run migrations
+1. Start Database. For example with docker:
+    ```bash
+    docker compose up -d db
+    ```
+2. Run migrations
     ```bash
     hatch run ./manage.py migrate
     ```
-2. Create a superuser
+3. Create a superuser
     ```bash
     hatch run ./manage.py createsuperuser
     ```
-3. Compile Translations
+4. Compile Translations
     ```bash
     hatch run ./manage.py compilemessages
     ```
-4. Load default data
+5. Load default data
     ```bash
     hatch run ./manage.py loaddata admin-theme
     hatch run ./manage.py loaddata units
@@ -77,7 +81,7 @@ cp example.env .env
     hatch run ./manage.py loaddata qualifiers
     hatch run ./manage.py loaddata yield-units
     ```
-5. Run server
+6. Run server
     ```bash
     hatch run ./manage.py runserver
     ```
@@ -105,9 +109,6 @@ pre-commit run --all-files
 Should be running on: <http://localhost:8000/>
 
 ## Deployment
-
-> [!WARNING]
-> PoC. Not ready for production use.
 
 ### Settings
 
