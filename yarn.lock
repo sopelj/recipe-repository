@@ -1384,10 +1384,10 @@
   resolved "https://registry.yarnpkg.com/@primevue/metadata/-/metadata-4.0.5.tgz#c2f53de557528efb7b6f29b29607b72ed04358e3"
   integrity sha512-IydjQ4K1k4eJppBCmup/YPTpHWqJt05yuSIxLoCtk6h0ivljEIJ/TGScEciRjF5u4mIIhltyjdHCpexVnoCaIQ==
 
-"@primevue/themes@^4.0.2":
-  version "4.0.5"
-  resolved "https://registry.yarnpkg.com/@primevue/themes/-/themes-4.0.5.tgz#a5a51bf2dbb387b3d435b79a24ae0fe3695ab7aa"
-  integrity sha512-cRrAhOapOT8eFCTDwNdB/acg2ZEEkn7y6h6p188PYSjJsWnYK+D8eI1Js1ZB5HwWo4sWs3oR3Sy8bPwejnGbAw==
+"@primevue/themes@^4.0.7":
+  version "4.0.7"
+  resolved "https://registry.yarnpkg.com/@primevue/themes/-/themes-4.0.7.tgz#6811e0196c02e8217492713ed5365021cd931dc5"
+  integrity sha512-ZbDUrpBmtuqdeegNwUaJTubaLDBBJWOc4Z6UoQM3DG2c7EAE19wQbuh+cG9zqA7sT/Xsp+ACC/Z9e4FnfqB55g==
   dependencies:
     "@primeuix/styled" "^0.0.5"
 
