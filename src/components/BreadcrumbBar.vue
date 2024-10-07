@@ -20,6 +20,7 @@ const crumbs = computed(() => [...props.items, ...(props.current ? [{ label: pro
     :home="home"
     :model="crumbs"
     :pt="{ list: 'flex-wrap' }"
+    class="bg-transparent"
   >
     <template #item="{ item }">
       <Link
