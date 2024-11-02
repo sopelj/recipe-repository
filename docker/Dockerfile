@@ -1,6 +1,6 @@
 FROM python:3.12-alpine AS build-image
 
-RUN apk add postgresql-dev build-base python3-dev jpeg-dev zlib-dev openldap-dev
+RUN apk add postgresql-dev build-base git python3-dev jpeg-dev zlib-dev openldap-dev
 RUN python -m venv /opt/venv
 
 WORKDIR /opt/

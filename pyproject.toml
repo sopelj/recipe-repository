@@ -16,11 +16,11 @@ classifiers=[
     "Programming Language :: Python :: 3.12",
 ]
 dependencies = [
-    "django>=4.2",
+    "django>=5.0",
     "django-admin-interface",
     "django-admin-sortable2",
     "django-colorfield",
-    "django-breeze",
+    "django-breeze@git+https://github.com/Louxsdon/django-breeze@master",
     "django-environ",
     "django-extensions",
     "django-cachalot",
@@ -33,7 +33,7 @@ dependencies = [
     "pint",
     "recipe-scrapers>=15.0.0",
     "werkzeug",
-    "django-stubs-ext",
+    "django-stubs-ext[compatible-mypy]>=5.1.0",
     "psycopg[c]>=3.1.8",
 ]
 
@@ -57,6 +57,9 @@ production = [
 "Bug Tracker" = "https://github.com/sopelj/recipe-repository/issues"
 
 [tool.hatch]
+
+[tool.hatch.metadata]
+allow-direct-references = true
 
 [tool.hatch.envs.default]
 python = "3.12"
