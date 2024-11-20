@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
-    "@intlify/unplugin-vue-i18n": "^5.2.0",
+    "@intlify/unplugin-vue-i18n": "^6.0.0",
     "@primevue/auto-import-resolver": "^4.0.1",
     "@types/jest": "^29.5.13",
     "@types/node": "^22.9.0",
