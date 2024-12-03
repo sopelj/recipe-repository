@@ -20,7 +20,7 @@ const search = ref<string>("");
 const filteredRecipes = computed((): RecipeItem[] =>
   props.recipes.filter(
     (r: RecipeItem) =>
-      (!search.value || !r.name.toLocaleLowerCase().search(search.value.toLocaleLowerCase())) &&
+      (!search.value || r.name.toLocaleLowerCase().search(search.value.toLocaleLowerCase())) !== -1 &&
       (!selectedCategories.value?.length ||
         r.categories?.some((c: Category) => selectedCategories.value.includes(c.slug))),
   ),

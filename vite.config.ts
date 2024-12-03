@@ -43,7 +43,6 @@ export default defineConfig(({ mode }) => {
       }),
       visualizer(),
     ],
-    css: { preprocessorOptions: { scss: { api: "modern" } } },
     root: resolve("./src"),
     base: "/static/",
     server: {
