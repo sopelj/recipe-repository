@@ -1484,21 +1484,21 @@
   dependencies:
     "@primevue/metadata" "4.2.4"
 
-"@primevue/core@4.2.4":
-  version "4.2.4"
-  resolved "https://registry.yarnpkg.com/@primevue/core/-/core-4.2.4.tgz#2954f5121b888f4d09598b67ef95503d47a18afe"
-  integrity sha512-QFvPcGSvyIhZPLdnjJnYrwbDtwbA1/FyGLI7VYDgYv4twsgtLw0kgKDyWB1uwM0xdJhv8CCmu7hfxcsPaLuIFg==
+"@primevue/core@4.2.5":
+  version "4.2.5"
+  resolved "https://registry.yarnpkg.com/@primevue/core/-/core-4.2.5.tgz#18a20e0b7c968da1bed1bb9d11aca3b116b34457"
+  integrity sha512-+oWBIQs5dLd2Ini4KEVOlvPILk989EHAskiFS3R/dz3jeOllJDMZFcSp8V9ddV0R3yDaPdLVkfHm2Q5t42kU2Q==
   dependencies:
     "@primeuix/styled" "^0.3.2"
     "@primeuix/utils" "^0.3.2"
 
-"@primevue/icons@4.2.4":
-  version "4.2.4"
-  resolved "https://registry.yarnpkg.com/@primevue/icons/-/icons-4.2.4.tgz#54db5d3acf066c75d6ce39ddcd850ca355a78dad"
-  integrity sha512-vteUFM7qvWiDJWxhBbDRgc2VY6kQQyJ91yOukqfWHy4gAgfTz1jiUXMAzc7j269oh4CNFpTNhCe9riS7402HGg==
+"@primevue/icons@4.2.5":
+  version "4.2.5"
+  resolved "https://registry.yarnpkg.com/@primevue/icons/-/icons-4.2.5.tgz#d39827908d80b8a2ef08d9d02e936ed7498f7264"
+  integrity sha512-WFbUMZhQkXf/KmwcytkjGVeJ9aGEDXjP3uweOjQZMmRdEIxFnqYYpd90wE90JE1teZn3+TVnT4ZT7ejGyEXnFQ==
   dependencies:
     "@primeuix/utils" "^0.3.2"
-    "@primevue/core" "4.2.4"
+    "@primevue/core" "4.2.5"
 
 "@primevue/metadata@4.2.4":
   version "4.2.4"
@@ -4659,15 +4659,15 @@ primeicons@^7.0.0:
   resolved "https://registry.yarnpkg.com/primeicons/-/primeicons-7.0.0.tgz#6b25c3fdcb29bb745a3035bdc1ed5902f4a419cf"
   integrity sha512-jK3Et9UzwzTsd6tzl2RmwrVY/b8raJ3QZLzoDACj+oTJ0oX7L9Hy+XnVwgo4QVKlKpnP/Ur13SXV/pVh4LzaDw==
 
-primevue@^4.0.2:
-  version "4.2.4"
-  resolved "https://registry.yarnpkg.com/primevue/-/primevue-4.2.4.tgz#7ac7957734e2f4f7f92ceb91e03207ad13efd2ac"
-  integrity sha512-aMQymoO489isReSF/bScypswOnLBU29qkeTulGj3Wntb9plvzTIWjA4+iyDOsyxGmV5GVIvD+DuTw5FNCDWgSw==
+primevue@^4.2.5:
+  version "4.2.5"
+  resolved "https://registry.yarnpkg.com/primevue/-/primevue-4.2.5.tgz#6229e4a9be4e3ae9de83c2b1fc4360011b9bf9de"
+  integrity sha512-7UMOIJvdFz4jQyhC76yhNdSlHtXvVpmE2JSo2ndUTBWjWJOkYyT562rQ4ayO+bMdJLtzBGqgY64I9ZfEvNd7vQ==
   dependencies:
     "@primeuix/styled" "^0.3.2"
     "@primeuix/utils" "^0.3.2"
-    "@primevue/core" "4.2.4"
-    "@primevue/icons" "4.2.4"
+    "@primevue/core" "4.2.5"
+    "@primevue/icons" "4.2.5"
 
 proto-list@~1.2.1:
   version "1.2.4"
