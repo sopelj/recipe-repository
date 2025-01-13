@@ -1085,10 +1085,15 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
-"@eslint/js@9.17.0", "@eslint/js@^9.17.0":
+"@eslint/js@9.17.0":
   version "9.17.0"
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-9.17.0.tgz#1523e586791f80376a6f8398a3964455ecc651ec"
   integrity sha512-Sxc4hqcs1kTu0iID3kcZDW3JHq2a77HO9P8CP6YEA/FpH3Ll8UXE2r/86Rz9YJLKme39S9vU5OWNjC6Xl0Cr3w==
+
+"@eslint/js@^9.18.0":
+  version "9.18.0"
+  resolved "https://registry.yarnpkg.com/@eslint/js/-/js-9.18.0.tgz#3356f85d18ed3627ab107790b53caf7e1e3d1e84"
+  integrity sha512-fK6L7rxcq6/z+AaQMtiFTkvbHkBLNlwyRxHpKawP0x3u9+NC6MQTnFW+AdpwC6gfHTW0051cokQgtTN2FqlxQA==
 
 "@eslint/object-schema@^2.1.5":
   version "2.1.5"
@@ -3438,12 +3443,11 @@ graphemer@^1.4.0:
   resolved "https://registry.yarnpkg.com/graphemer/-/graphemer-1.4.0.tgz#fb2f1d55e0e3a1849aeffc90c4fa0dd53a0e66c6"
   integrity sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==
 
-happy-dom@^15.11.7:
-  version "15.11.7"
-  resolved "https://registry.yarnpkg.com/happy-dom/-/happy-dom-15.11.7.tgz#db9854f11e5dd3fd4ab20cbbcfdf7bd9e17cd971"
-  integrity sha512-KyrFvnl+J9US63TEzwoiJOQzZBJY7KgBushJA8X61DMbNsH+2ONkDuLDnCnwUiPTF42tLoEmrPyoqbenVA5zrg==
+happy-dom@^16.3.0:
+  version "16.5.3"
+  resolved "https://registry.yarnpkg.com/happy-dom/-/happy-dom-16.5.3.tgz#c2a46ffaafc378b243f08d30b47fd8799e4bb4bf"
+  integrity sha512-7zGnyROZuntn+5X84MQ535qiQ3ccm45uHl+Q7EFAcPP0NhkbrfPitqprz0GgszX91/QqsZKQ7nTYkyObCTDUjg==
   dependencies:
-    entities "^4.5.0"
     webidl-conversions "^7.0.0"
     whatwg-mimetype "^3.0.0"
 
