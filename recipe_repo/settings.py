@@ -36,7 +36,6 @@ CSRF_TRUSTED_ORIGINS = env.list("CSRF_TRUSTED_ORIGINS", default=[])
 X_FRAME_OPTIONS = "SAMEORIGIN"
 SILENCED_SYSTEM_CHECKS = ["security.W019"]
 
-
 # Application definition
 INSTALLED_APPS = [
     # Must be before admin inclusion
@@ -53,7 +52,8 @@ INSTALLED_APPS = [
     "adminsortable2",
     "cachalot",
     "easy_thumbnails",
-    "django_breeze",
+    "inertia",
+    "django_vite",
     "django_extensions",
     "colorfield",
     # Local apps
@@ -73,6 +73,7 @@ MIDDLEWARE = [
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
+    "inertia.middleware.InertiaMiddleware",
     "recipe_repo.common.middleware.inertia_share",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
@@ -85,7 +86,7 @@ ROOT_URLCONF = "recipe_repo.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "src"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -100,7 +101,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "recipe_repo.wsgi.application"
 ASGI_APPLICATION = "recipe_repo.asgi.application"
-
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -180,24 +180,30 @@ APP_TITLE = env("VITE_APP_TITLE", default="Recipe Repository")
 APP_TITLE_SHORT = env("VITE_APP_TITLE_SHORT", default="Recipes")
 APP_THEME_COLOUR = env("VITE_APP_THEME_COLOUR", default="#482880")
 
-DJANGO_BREEZE = {
-    "INERTIA": {
-        "LAYOUT": "index.html",
-        "SSR_URL": "http://localhost:13714",
-        "SSR_ENABLED": False,
-    },
-    "DJANGO_VITE": {
-        "DEV_MODE": DEBUG,
-        "SERVER_PROTOCOL": "http",
-        "DEV_SERVER_HOST": "localhost",
-        "DEV_SERVER_PORT": 5173,
-        "WS_CLIENT_URL": "@vite/client",
-        "ASSETS_PATH": "dist",
-        "STATIC_URL_PREFIX": "",
-    },
-}
+# Inertia
+INERTIA_VERSION = "2.0"
+INERTIA_LAYOUT = "index.html"
+INERTIA_SSR_URL = "http://localhost:13714"
+INERTIA_SSR_ENABLED = False
+INERTIA_ENCRYPT_HISTORY = False
+
 CSRF_HEADER_NAME = "HTTP_X_XSRF_TOKEN"
 CSRF_COOKIE_NAME = "XSRF-TOKEN"
+
+# Frontend Assets in Dev
+DJANGO_VITE = {
+    "default": {
+        "dev_mode": DEBUG,
+        "dev_server_host": "localhost",
+        "dev_server_port": 5173,
+        "static_url_prefix": "/static/",
+    },
+}
+
+STATICFILES_DIRS = [
+    BASE_DIR / "dist",
+    BASE_DIR / "src" / "assets",
+]
 
 # Debug Queries
 if env.bool("QUERY_LOGGING_ENABLED", default=False):
