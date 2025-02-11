@@ -7,8 +7,8 @@ from unittest.mock import patch
 
 import pytest
 from django.db import transaction
-from django.shortcuts import render
 from django.test import Client
+from inertia.http import render_to_string as base_render_to_string
 
 from .categories.models import Category, CategoryType
 from .recipes.models import Recipe
@@ -39,7 +39,7 @@ class InertiaPageHelper:
         self._method = method
         self._url = url
         self.client = client if client else Client()
-        with patch("inertia.http.base_render", wraps=render) as mock_render:
+        with patch("inertia.http.render_to_string", wraps=base_render_to_string) as mock_render:
             self.response = getattr(self.client, method)(url, json=data)
             self.mock_render = mock_render
 
@@ -64,7 +64,7 @@ class InertiaPageHelper:
     @cached_property
     def page(self) -> InertiaPageResponse:
         """Extract the page information from the mocked request."""
-        return cast(InertiaPageResponse, loads(self.mock_render.call_args.args[2]["page"]))
+        return cast(InertiaPageResponse, loads(self.mock_render.call_args[0][1]["page"]))
 
 
 @pytest.fixture
