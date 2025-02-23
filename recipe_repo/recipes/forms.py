@@ -27,7 +27,7 @@ if TYPE_CHECKING:
 class ServingsForm(forms.Form):
     servings = forms.DecimalField(
         decimal_places=10,
-        min_value=Decimal(0.125),
+        min_value=Decimal("0.125"),
         max_value=Decimal(100),
         required=False,
         initial=Decimal(1),

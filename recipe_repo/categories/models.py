@@ -29,6 +29,10 @@ class BaseCategory(NamedPluralModel):
 
 
 class CategoryType(BaseCategory):
+    def get_absolute_url(self) -> str:
+        """Resolve category type URL in current language."""
+        return gettext("/en/category-types/{slug}/").format(slug=self.slug)
+
     class Meta:
         ordering = ("name",)
         verbose_name = _("Category Type")
@@ -46,6 +50,10 @@ class Category(BaseCategory):
     @override
     def __str__(self) -> str:
         return self.tag
+
+    def get_absolute_url(self) -> str:
+        """Resolve category URL in current language."""
+        return gettext("/en/categories/{slug}/").format(slug=self.slug)
 
     class Meta:
         ordering = ("name",)

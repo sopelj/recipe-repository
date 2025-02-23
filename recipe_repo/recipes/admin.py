@@ -1,10 +1,11 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING
 
 from adminsortable2.admin import SortableAdminBase, SortableInlineAdminMixin
 from django.contrib import admin
 from django.db import models
+from django.db.models import Q
 from django.forms import TextInput
 from django.shortcuts import redirect
 from django.urls import URLPattern, path, resolve
@@ -25,6 +26,9 @@ from .models import (
 )
 
 if TYPE_CHECKING:
+    from collections.abc import Iterable
+    from typing import Any
+
     from django.db.models import QuerySet
     from django.db.models.fields.related import RelatedField
     from django.forms import ModelForm
@@ -120,6 +124,27 @@ class RecipeImportView(FormView[RecipeImportForm]):
         return context
 
 
+class UntranslatedRecipeListFilter(admin.SimpleListFilter):
+    title = _("Translation state")
+    parameter_name = "translation-state"
+
+    def lookups(
+        self,
+        request: HttpRequest,
+        model_admin: admin.ModelAdmin[Recipe],
+    ) -> Iterable[tuple[str, StrOrPromise]]:
+        """Define filter options."""
+        return (("untranslated", _("Untranslated")),)
+
+    def queryset(self, request: HttpRequest, queryset: QuerySet[Recipe]) -> QuerySet[Recipe]:
+        """Filter queries if needed."""
+        if self.value() == "untranslated":
+            return Recipe.objects.filter(
+                Q(steps__text_fr__isnull=True) | Q(steps__text_ja__isnull=True),
+            ).distinct()
+        return Recipe.objects.all()
+
+
 @admin.register(Recipe)
 class RecipeAdmin(SortableAdminBase, TranslationAdmin[Recipe]):  # type: ignore[misc]
     save_on_top = True
@@ -133,6 +158,10 @@ class RecipeAdmin(SortableAdminBase, TranslationAdmin[Recipe]):  # type: ignore[
     formfield_overrides = {
         models.DurationField: {"widget": TextInput(attrs={"placeholder": "HH:MM:SS"})},
     }
+    list_filter = (
+        ("added_by", admin.RelatedOnlyFieldListFilter),
+        UntranslatedRecipeListFilter,
+    )
 
     def get_queryset(self, request: HttpRequest) -> QuerySet[Recipe]:
         """Avoid extra queries by pre-fetching categories."""

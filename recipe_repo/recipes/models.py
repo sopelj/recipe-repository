@@ -9,6 +9,7 @@ from django.core.validators import URLValidator
 from django.db import models
 from django.db.models.aggregates import Avg, Count
 from django.utils.html import format_html
+from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
 from easy_thumbnails.fields import ThumbnailerImageField
 from easy_thumbnails.files import get_thumbnailer
@@ -146,6 +147,10 @@ class Recipe(NamedModel):
     def image_url(self) -> str | None:
         """Resolve URL of recipe thumbnail image."""
         return get_thumbnailer(self.image)["image"].url if self.image else None
+
+    def get_absolute_url(self) -> str:
+        """Resolve recipe URL in current language."""
+        return gettext("/en/recipes/{slug}/").format(slug=self.slug)
 
     class Meta:
         verbose_name = _("Recipe")

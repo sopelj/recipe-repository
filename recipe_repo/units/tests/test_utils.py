@@ -72,12 +72,12 @@ def test_format_fraction(language: str, whole: int, fraction: str, expected: str
 @pytest.mark.parametrize(
     ("language", "amount", "expected"),
     [
-        ("en", Decimal(0.5), "1\u20442"),
+        ("en", Decimal("0.5"), "1\u20442"),
         ("en", Decimal("1.33333333"), "1\u00a01\u20443"),
-        ("en", Decimal(2.5), "2\u00a01\u20442"),
-        ("ja", Decimal(0.5), "2分の1分"),
+        ("en", Decimal("2.5"), "2\u00a01\u20442"),
+        ("ja", Decimal("0.5"), "2分の1分"),
         ("ja", Decimal("1.33333333"), "1と3分の1分"),
-        ("ja", Decimal(2.5), "2と2分の1分"),
+        ("ja", Decimal("2.5"), "2と2分の1分"),
     ],
 )
 def test_format_decimal_as_fraction(language: str, amount: Decimal, expected: str) -> None:
