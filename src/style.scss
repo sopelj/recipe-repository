@@ -1,18 +1,8 @@
+@use "tailwind.css";
+
 @import url("https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Klee+One&display=swap");
 @import "https://cdn.jsdelivr.net/npm/primeicons@7.0.0/primeicons.min.css";
-
-
-@layer tailwind-base, primevue, tailwind-utilities;
-
-@layer tailwind-base {
-  @tailwind base;
-}
-
-@layer tailwind-utilities {
-  @tailwind components;
-  @tailwind utilities;
-}
 
 h1, h2, h3, .cursive {
   font-family: "Cedarville Cursive", cursive;

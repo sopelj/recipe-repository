@@ -3,6 +3,7 @@ import eslint from "@eslint/js";
 import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 import pluginVue from "eslint-plugin-vue";
+import globals from "globals";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
@@ -44,6 +45,7 @@ export default tseslint.config(
       "typescript-eslint": tseslint.plugin,
     },
     languageOptions: {
+      globals: { ...globals.browser },
       parserOptions: {
         parser: tseslint.parser,
         project: "./tsconfig.json",

@@ -31,8 +31,7 @@ export const setupPrimeVue = (app: App) => {
       preset: SiteTheme,
       options: {
         cssLayer: {
-          name: "primevue",
-          order: "tailwind-base, primevue, tailwind-utilities",
+          name: "components",
         },
       },
     },

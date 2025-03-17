@@ -64,7 +64,7 @@ class InertiaPageHelper:
     @cached_property
     def page(self) -> InertiaPageResponse:
         """Extract the page information from the mocked request."""
-        return cast(InertiaPageResponse, loads(self.mock_render.call_args[0][1]["page"]))
+        return cast("InertiaPageResponse", loads(self.mock_render.call_args[0][1]["page"]))
 
 
 @pytest.fixture

@@ -29,7 +29,7 @@ const setLocale = (lang: string) => {
 
 <template>
   <main :lang="locale">
-    <header class="w-100 mb-4 bg-purple-900/75 text-white sticky top-0 backdrop-blur-sm shadow-lg z-50">
+    <header class="w-full mb-4 bg-purple-900/75 text-white sticky top-0 backdrop-blur-sm shadow-lg z-50">
       <nav class="container mx-auto flex flex-row">
         <div class="flex-grow">
           <Link
