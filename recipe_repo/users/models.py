@@ -9,7 +9,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
-from django_extensions.db.models import CreationDateTimeField
+from django_extensions.db.models import CreationDateTimeField  # type: ignore[attr-defined]
 from easy_thumbnails.fields import ThumbnailerImageField
 from easy_thumbnails.files import get_thumbnailer
 
@@ -150,7 +150,7 @@ class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="+")
     recipe = models.ForeignKey("recipes.Recipe", on_delete=models.CASCADE, related_name="comments")
     text = models.TextField(_("Text"))
-    created = CreationDateTimeField(verbose_name=_("Created"))
+    created = CreationDateTimeField(verbose_name=_("Created"))  # type: ignore[no-untyped-call]
 
     @override
     def __str__(self) -> str:

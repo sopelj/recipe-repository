@@ -30,6 +30,7 @@ CSRF_TRUSTED_ORIGINS = env.list("CSRF_TRUSTED_ORIGINS", default=[])
 
 X_FRAME_OPTIONS = "SAMEORIGIN"
 SILENCED_SYSTEM_CHECKS = ["security.W019"]
+FORMS_URLFIELD_ASSUME_HTTPS = True
 
 # Application definition
 INSTALLED_APPS = [
@@ -192,7 +193,6 @@ DJANGO_VITE = {
         "dev_server_host": "localhost",
         "dev_server_port": 5173,
         "manifest_path": str(BASE_DIR / "dist" / "manifest.json"),
-        "static_url_prefix": "/static/",
     },
 }
 
