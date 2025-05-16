@@ -14,7 +14,7 @@ if TYPE_CHECKING:
     from django.http import HttpRequest
 
 
-class UserAddForm(BaseUserCreationForm[User]):
+class UserAddForm(BaseUserCreationForm[User]):  # type: ignore[type-var]
     class Meta:
         model = User
         fields = ("email",)
