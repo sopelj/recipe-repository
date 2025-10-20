@@ -107,7 +107,7 @@ class RecipeDetailView(InertiaFormView[RecipeReviewForm], SingleObjectMixin[Reci
         form.is_valid()
         scale = (form.cleaned_data.get("servings") or servings or 1) / (servings or 1)
         ingredients = (
-            Ingredient.objects.filter(recipe_id=recipe_id)
+            Ingredient.objects.filter(recipe_id=recipe_id)  # type: ignore[no-redef]
             .annotate(scale=Value(scale or 1, output_field=DecimalField()))
             .select_related("unit", "food", "qualifier", "group")
             .order_by("group__order", "order")

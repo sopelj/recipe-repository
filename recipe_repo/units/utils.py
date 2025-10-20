@@ -122,10 +122,10 @@ def find_imperial_unit(quantity: pint.Quantity) -> tuple[Decimal, str]:
     for new_unit in units:
         new_unit_quantity = quantity.to(new_unit)
         if is_nice_fraction(new_unit_quantity.magnitude, FRACTIONS_PER_IMPERIAL_UNIT.get(new_unit, ())):
-            quantity = new_unit_quantity  # type: ignore[assignment]
+            quantity = new_unit_quantity
             break
         if not decimal_to_fraction(new_unit_quantity.magnitude)[1]:
-            quantity = new_unit_quantity  # type: ignore[assignment]
+            quantity = new_unit_quantity
             break
     return soft_round(quantity.magnitude), str(quantity.units)
 

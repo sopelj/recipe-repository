@@ -176,6 +176,10 @@ APP_TITLE = env("VITE_APP_TITLE", default="Recipe Repository")
 APP_TITLE_SHORT = env("VITE_APP_TITLE_SHORT", default="Recipes")
 APP_THEME_COLOUR = env("VITE_APP_THEME_COLOUR", default="#482880")
 
+# Umami
+UMAMI_SITE_ID = env("UMAMI_SITE_ID", default=None)
+UMAMI_URL = env("UMAMI_URL", default=None)
+
 # Inertia
 INERTIA_VERSION = "2.0"
 INERTIA_LAYOUT = "index.html"
