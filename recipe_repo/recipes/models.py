@@ -89,7 +89,12 @@ class RecipeQuerySet(MultilingualQuerySet["Recipe"]):
 
 
 class Recipe(NamedModel):
-    slug = models.SlugField(_("Slug"), unique=True, help_text=_("Automatically generated from the name"))
+    slug = models.SlugField(
+        _("Slug"),
+        unique=True,
+        allow_unicode=True,
+        help_text=_("Automatically generated from the name"),
+    )
     image = ThumbnailerImageField(_("Image"), upload_to="images/recipes/", null=True, blank=True)
     description = models.TextField(_("Description"), blank=True)
     prep_time = models.DurationField(_("Prep time"), blank=True, null=True)

@@ -1,7 +1,7 @@
 import type { App } from "vue";
 
+import Aura from "@primeuix/themes/aura";
 import { definePreset } from "@primevue/themes";
-import Aura from "@primevue/themes/aura";
 
 import PrimeVue from "primevue/config";
 import ToastService from "primevue/toastservice";
@@ -31,7 +31,8 @@ export const setupPrimeVue = (app: App) => {
       preset: SiteTheme,
       options: {
         cssLayer: {
-          name: "components",
+          name: "primevue",
+          order: "theme, base, primevue",
         },
       },
     },

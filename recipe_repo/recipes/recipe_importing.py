@@ -16,7 +16,7 @@ from django.core.files import File
 from django.db import IntegrityError
 from django.db.models import Q
 from pint.errors import UndefinedUnitError
-from recipe_scrapers._exceptions import SchemaOrgException
+from recipe_scrapers._exceptions import SchemaOrgException, StaticValueException
 from slugify import slugify
 
 from ..categories.models import Category
@@ -230,14 +230,17 @@ def get_from_schema[T](method: Callable[[], T]) -> T | None:
 def create_recipe_from_scraper(scraper: Scraper, url: str) -> Recipe | None:
     """Take a scraper and try to create a recipe from it."""
     title = scraper.title()
-    host: str = scraper.host() or urlsplit(url).hostname or url
+    host = site_name = scraper.host() or urlsplit(url).hostname or url
+    with contextlib.suppress(StaticValueException):
+        site_name = scraper.site_name()
+
     recipe = Recipe(
         name=title,
-        slug=slugify(title),
+        slug=slugify(title, allow_unicode=True),
         source_value=url,
         cook_time=timedelta(minutes=cook_time) if (cook_time := get_from_schema(scraper.cook_time)) else None,
         prep_time=timedelta(minutes=pre_time) if (pre_time := get_from_schema(scraper.prep_time)) else None,
-        source=get_or_create_source(host, scraper.site_name()),
+        source=get_or_create_source(host, site_name),
         description=scraper.description() or "",
     )
     try:

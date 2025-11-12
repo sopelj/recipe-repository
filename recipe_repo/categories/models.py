@@ -15,7 +15,12 @@ from recipe_repo.common.models import NamedPluralModel
 class BaseCategory(NamedPluralModel):
     """Categories for organizing recipes."""
 
-    slug = models.SlugField(_("Slug"), unique=True, help_text=_("Automatically generated from the name"))
+    slug = models.SlugField(
+        _("Slug"),
+        unique=True,
+        allow_unicode=True,
+        help_text=_("Automatically generated from the name"),
+    )
     image = ThumbnailerImageField(_("Thumbnail"), upload_to="images/categories/", null=True, blank=True)
 
     @property
