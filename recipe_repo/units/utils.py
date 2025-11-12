@@ -110,7 +110,7 @@ def is_nice_fraction(amount: Decimal, allowed_fractions: Fractions) -> bool:
     return not fraction or fraction.as_integer_ratio() in allowed_fractions
 
 
-def find_imperial_unit(quantity: pint.Quantity) -> tuple[Decimal, str]:
+def find_imperial_unit(quantity: pint.Quantity[Decimal]) -> tuple[Decimal, str]:
     """Find the best imperial unit for displaying this quantity."""
     units: tuple[str, ...] = IMPERIAL_UNITS_VOLUME
     if not quantity.units.is_compatible_with("cup"):

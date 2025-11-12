@@ -64,7 +64,7 @@ repos:
           - "djangorestframework"
           - "easy-thumbnails"
           - "pillow"
-          - "pint"
+          - "pint>=0.25.2"
           - "psycopg2-binary"
           - "recipe-scrapers>=15.0.0"
           - "django-stubs"

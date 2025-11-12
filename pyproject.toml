@@ -30,7 +30,7 @@ dependencies = [
     "inertia-django>=1.1.0",
     "ipython",
     "pillow",
-    "pint",
+    "pint>=0.25.2",
     "recipe-scrapers>=15.0.0",
     "werkzeug",
     "django-stubs-ext[compatible-mypy]>=5.1.0",

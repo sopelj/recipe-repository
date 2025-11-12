@@ -110,7 +110,7 @@ def test_is_nice_fraction(amount: Decimal, allowed: Fractions, expected: bool) -
         (Decimal("0.25") * ureg.cups, (Decimal("0.25"), "cup")),
     ],
 )
-def test_find_imperial_unit(quantity: pint.Quantity, expected: tuple[Decimal, str]) -> None:
+def test_find_imperial_unit(quantity: pint.Quantity[Decimal], expected: tuple[Decimal, str]) -> None:
     assert find_imperial_unit(quantity) == expected
 
 

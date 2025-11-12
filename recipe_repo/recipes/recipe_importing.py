@@ -39,6 +39,7 @@ from .models import (
 
 if TYPE_CHECKING:
     from collections.abc import Callable
+    from decimal import Decimal
 
     from recipe_scrapers import AbstractScraper
     from recipe_scrapers._grouping_utils import IngredientGroup as ScraperIngredientGroup
@@ -190,13 +191,12 @@ def parse_ingredient(recipe: Recipe, group: IngredientGroup | None, ingredient_t
     )
 
 
-def get_nutrition_unit_value(name: str, value: str) -> float | None:
+def get_nutrition_unit_value(name: str, value: str) -> Decimal | None:
     """Get recommended unit based on value."""
     mg_values = ("potassiumContent", "sodiumContent", "cholesterolContent")
     unit = "mg" if name in mg_values else "g"
     try:
-        magnitude: float = unit_registry(value).to(unit).magnitude
-        return magnitude
+        return unit_registry(value).to(unit).magnitude
     except UndefinedUnitError as e:
         logger.warning("Failed to parse value '%s' for nutrition '%s'. Error: %s", value, name, e)
         return None
