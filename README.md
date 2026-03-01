@@ -5,6 +5,19 @@ A repository for all your recipes. Put all your saved recipes in one location an
 > [!WARNING]
 > This still a WIP and is mostly just for fun.
 
+## Desktop (Web)
+
+![Desktop Screentshot](./examples/desktop.png)
+
+## Mobile (Web/PWA)
+<details>
+  <summary>Show/hide</summary>
+    <div style="display:flex;">
+        <img src="./examples/mobile-list.png" alt="Alt Text" style="width:50%; height:auto; padding-left: 2px;">
+        <img src="./examples/mobile-detail.png" alt="Alt Text" style="width:50%; height:auto;">
+    </div>
+</details>
+
 ## Features
 - Add and manage recipes using the Django Admin interface
 - Import recipes automatically using [recipe-scrapers](https://github.com/hhursev/recipe-scrapers)
