@@ -26,9 +26,6 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Run prek (pre-commit alternative)
-        uses: j178/prek-action@v1
-
       - uses: actions/setup-python@v6
         with:
           python-version: |
@@ -65,6 +62,9 @@ jobs:
         run: |
           sed s/SECRET_KEY=/SECRET_KEY=fake-key/ example.env > .env
           sed s/insecure-change-this/postgres/ -i .env
+
+      - name: Run prek (pre-commit alternative)
+        uses: j178/prek-action@v1
 
       - name: Run Tests
         run: |
