@@ -103,7 +103,7 @@ yarn test
 ## Linting
 
 ```shell
-pre-commit run --all-files
+prek run --all-files
 ```
 
 Should be running on: <http://localhost:8000/>

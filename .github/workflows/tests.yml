@@ -24,10 +24,16 @@ jobs:
         ports:
           - 5432:5432
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v6
+
+      - name: Run prek (pre-commit alternative)
+        uses: j178/prek-action@v1
+
+      - uses: actions/setup-python@v6
         with:
-          python-version: 3.13
+          python-version: |
+            3.13
+            3.14
 
       - name: Set Node.js 22.x
         uses: actions/setup-node@v4
@@ -49,8 +55,8 @@ jobs:
 
       - name: Install Python Dependencies
         run: |
-          python3.12 -m pip install --upgrade pip
-          python3.12 -m pip install hatch hatchling pre-commit
+          python3.14 -m pip install --upgrade pip
+          python3.14 -m pip install hatch hatchling
 
       - name: Install Frontend Dependencies
         run: yarn install
@@ -59,9 +65,6 @@ jobs:
         run: |
           sed s/SECRET_KEY=/SECRET_KEY=fake-key/ example.env > .env
           sed s/insecure-change-this/postgres/ -i .env
-
-      - name: Run pre-commit
-        run: pre-commit run --all-files
 
       - name: Run Tests
         run: |

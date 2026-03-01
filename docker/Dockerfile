@@ -1,4 +1,4 @@
-FROM python:3.12-alpine AS build-image
+FROM python:3.14-alpine AS build-image
 
 RUN apk add postgresql-dev build-base git python3-dev jpeg-dev zlib-dev openldap-dev
 RUN python -m venv /opt/venv
@@ -10,7 +10,7 @@ RUN set -ex \
     && /opt/venv/bin/pip install --no-cache-dir -e .[test,ldap,production]
 
 
-FROM python:3.12-alpine
+FROM python:3.14-alpine
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
