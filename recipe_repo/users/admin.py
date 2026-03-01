@@ -46,7 +46,7 @@ class UserRatingAdmin(admin.ModelAdmin[UserRating]):
     list_filter = [("user", admin.RelatedOnlyFieldListFilter), ("recipe", admin.RelatedOnlyFieldListFilter)]
     autocomplete_fields = ("user", "recipe")
 
-    @admin.display(  # type: ignore[call-overload,misc]
+    @admin.display(  # type: ignore[call-overload,untyped-decorator]
         description=_("User"),
         ordering=("user__first_name", "user__last_name"),
     )
@@ -54,7 +54,7 @@ class UserRatingAdmin(admin.ModelAdmin[UserRating]):
         """Get full name of user for list view."""
         return obj.user.full_name or obj.user.email
 
-    @admin.display(description=_("Recipe"), ordering=("recipe__name",))  # type: ignore[call-overload,misc]
+    @admin.display(description=_("Recipe"), ordering=("recipe__name",))  # type: ignore[call-overload,untyped-decorator]
     def get_recipe_name(self, obj: UserRating) -> str:
         """Get the name of a recipe for list view."""
         return obj.recipe.name
