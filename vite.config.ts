@@ -28,9 +28,16 @@ export default defineConfig(({ mode }) => {
           start_url: "/",
           icons: [
             {
+              src: "monochrome-192x192.png",
+              sizes: "192x192",
+              type: "image/png",
+              purpose: "monochrome",
+            },
+            {
               src: "pwa-192x192.png",
               sizes: "192x192",
               type: "image/png",
+              purpose: "any maskable",
             },
             {
               src: "pwa-512x512.png",

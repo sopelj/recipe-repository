@@ -7,14 +7,14 @@
         <meta name="robots" content="noindex, nofollow, noarchive">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <meta name="apple-mobile-web-app-title" content="Recipe Repo">
+        <meta name="apple-mobile-web-app-title" content="{% trans 'Recipe Repo' %}">
         <meta name="theme-color" content="{{ THEME_COLOUR }}">
         <meta name="msapplication-TileImage" content="/static/msapplication-icon-144x144.png">
         <meta name="msapplication-TileColor" content="{{ THEME_COLOUR }}">
         <link rel="manifest" href="/static/manifest.webmanifest">
-        <link rel="icon" href="/static/favicon.ico">
+        <link rel="icon" href="/favicon.ico">
         <link rel="apple-touch-icon" href="/static/apple-touch-icon.png" sizes="180x180">
-        <link rel="mask-icon" href="/static/mask-icon.svg" color="{{ THEME_COLOUR }}">
+        <link rel="mask-icon" href="/static//mask-icon.svg" color="{{ THEME_COLOUR }}">
         {% include_umami_script %}
         {% vite_hmr_client %}{% vite_asset 'main.ts' %}
     </head>
