@@ -44,10 +44,9 @@ const { t } = useI18n();
           :href="t(`routes.${routeName}`, { slug: gridItem.slug })"
           class="inline-grid rounded-md"
           :style="`view-transition-name: ${type}-${gridItem.slug}-name`"
+          view-transition
         >
-          <div
-            class="card rounded-md text-center overflow-clip transition-all border dark:border-slate-600 dark:hover:border-violet-700 hover:scale-105 w-full"
-          >
+          <div class="card text-center overflow-clip transition-all hover:scale-105 w-full">
             <div class="card-header">
               <square-image
                 :src="gridItem.thumbnail_url"

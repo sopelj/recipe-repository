@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import type { User } from "@/types/users";
 
-import type { User } from "../types/users";
+import { computed } from "vue";
 
 const props = withDefaults(defineProps<{ user: User; size?: keyof typeof sizes }>(), { size: "md" });
 
@@ -22,7 +22,7 @@ const sizeClass = computed(() => {
     :title="user.full_name"
   >
     <div
-      class="flex items-center justify-center rounded-full border"
+      class="flex items-center justify-center rounded-full border overflow-hidden"
       :class="sizeClass"
     >
       <img

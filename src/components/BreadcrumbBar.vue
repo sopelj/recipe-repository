@@ -34,6 +34,7 @@ const crumbs = computed((): MenuItem[] => [
         <Link
           v-if="crumb.url"
           :href="crumb.url"
+          view-transition
         >
           <span :class="[crumb?.icon || '', 'text-color']" />
           <span class="text-primary font-semibold">{{ crumb.label }}</span>

@@ -32,6 +32,7 @@ const filteredCategories = computed((): Category[] =>
       :items="[{ url: t('routes.category_type_list'), label: t('categories.category_types') }]"
       :current="categoryType.name_plural || categoryType.name"
       class="mx-4"
+      view-transition
     />
     <searchable-link-cards
       v-model:search="search"

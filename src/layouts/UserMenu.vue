@@ -29,11 +29,12 @@ const { t } = useI18n();
       aria-haspopup="menu"
       aria-expanded="false"
       aria-label="Dropdown"
+      size="lg"
       @click="isOpen = !isOpen"
     />
     <ul
       v-if="isOpen"
-      class="absolute w-auto z-50 bg-base-100 border border-base-content/20 rounded-md shadow-lg max-h-60 overflow-y-auto"
+      class="absolute right-0 w-auto z-50 bg-base-100 border border-base-content/20 rounded-md shadow-lg max-h-60 overflow-y-auto"
       role="menu"
     >
       <li>

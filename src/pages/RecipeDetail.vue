@@ -93,7 +93,7 @@ const shareRecipe = async () => {
         />
         <div
           v-if="recipe.image_url"
-          class="overflow-clip p-card mt-4 sm:hidden"
+          class="overflow-clip card mt-4 sm:hidden"
         >
           <img
             :src="recipe.image_url"
@@ -164,8 +164,8 @@ const shareRecipe = async () => {
           class="mt-4"
         />
         <div class="mt-4">
-          <div class="card">
-            <div class="card-title">
+          <div class="card p-4">
+            <div class="card-title pb-2">
               <div class="flex flex-row items-center">
                 <h2 class="text-xxl grow w-100 mr-2">{{ t("recipe.ingredients") }}</h2>
                 <servings-form :servings="servings || 1" />
@@ -199,12 +199,13 @@ const shareRecipe = async () => {
       <div class="col-span-12 md:col-span-4 row-span-2">
         <div
           v-if="recipe.image_url"
-          class="overflow-clip p-card hidden sm:flex"
+          class="overflow-clip card hidden sm:flex"
         >
           <img
             :src="recipe.image_url"
             :alt="recipe.name"
             class="w-full"
+            :style="`view-transition-name: recipe-${recipe.slug}-image`"
           />
         </div>
         <nutritional-information
@@ -227,11 +228,11 @@ const shareRecipe = async () => {
         <div
           v-for="(step, i) in recipe.steps"
           :key="i"
-          class="mb-2 mt-1 border border-b-gray-400 rounded-sm p-2"
+          class="mb-2 mt-1 card p-2"
           itemprop="recipeInstructions"
         >
-          <h3>{{ t("recipe.step_title", { step: i + 1 }) }}</h3>
-          <p>{{ step }}</p>
+          <h3 class="card-title pb-2">{{ t("recipe.step_title", { step: i + 1 }) }}</h3>
+          <p class="card-body">{{ step }}</p>
         </div>
       </div>
     </div>
