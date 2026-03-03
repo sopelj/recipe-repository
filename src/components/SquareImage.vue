@@ -15,7 +15,7 @@ withDefaults(defineProps<{ src: string | null; alt?: string }>(), { alt: "" });
       v-else
       class="w-full h-full bg-slate-100 text-slate-400 dark:bg-gray-700 dark:text-gray-500 flex justify-center items-center"
     >
-      <i class="pi pi-image text-2xl" />
+      <i class="icon-[mdi-light--image] text-2xl" />
     </div>
   </div>
 </template>

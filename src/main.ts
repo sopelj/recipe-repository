@@ -1,12 +1,13 @@
 import { createInertiaApp } from "@inertiajs/vue3";
 import { type Component, type ComponentInstance, createApp, h } from "vue";
+import Toast from "vue-toastification";
 
 import { i18n } from "./plugins/i18n";
-import { setupPrimeVue } from "./plugins/primevue";
 
 import MainLayout from "./layouts/MainLayout.vue";
 
-import "./style.scss";
+import "./style.css";
+import "vue-toastification/dist/index.css";
 
 await createInertiaApp({
   resolve: (name) => {
@@ -19,7 +20,7 @@ await createInertiaApp({
     const app = createApp({ render: () => h(App, props) });
     app.use(i18n);
     app.use(plugin);
-    setupPrimeVue(app);
+    app.use(Toast);
     app.mount(el);
   },
 });

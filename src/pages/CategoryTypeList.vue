@@ -20,15 +20,19 @@ const filteredCategoryTypes = computed((): CategoryType[] =>
 </script>
 
 <template>
-  <HeadSection :title="t('categories.title')" />
+  <head-section :title="t('categories.title')" />
   <div class="container mx-auto">
-    <h1 class="text-4xl pt-2 pb-4 px-4 flex-grow">{{ t("categories.all_category_types") }}</h1>
-    <BreadcrumbBar :current="t('categories.all_category_types')" />
-    <SearchableLinkCards
+    <h1 class="text-2xl pt-2 pb-4 px-4 grow">{{ t("categories.all_category_types") }}</h1>
+    <breadcrumb-bar
+      :current="t('categories.all_category_types')"
+      class="mx-4"
+    />
+    <searchable-link-cards
       v-model:search="search"
       :grid-items="filteredCategoryTypes"
       :no-results-message="t('categories.type_no_match')"
       route-name="category_type_detail"
+      type="category-type"
     />
   </div>
 </template>

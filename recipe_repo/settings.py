@@ -240,8 +240,17 @@ if env.bool("SSL_ENABLED", False):
     CSRF_COOKIE_SECURE = True
     SECURE_HSTS_SECONDS = 31536000
 
-# LDAP Auth
-if env.bool("AUTH_LDAP_ENABLED", False):
+# Optionally use Allauth
+if env.bool("ALLAUTH_ENABLED", default=False):
+    SOCIALACCOUNT_PROVIDERS = env.json("ALLAUTH_PROVIDERS", default={})
+    for provider in SOCIALACCOUNT_PROVIDERS.values():
+        INSTALLED_APPS.insert(0, f"allauth.socialaccount.providers.{provider}")
+
+    INSTALLED_APPS = ["allauth", "allauth.account", "allauth.socialaccount", *INSTALLED_APPS]
+    MIDDLEWARE.append("allauth.account.middleware.AccountMiddleware")
+
+# Or use LDAP
+elif env.bool("AUTH_LDAP_ENABLED", False):
     AUTH_LDAP_SERVER_URI = env("AUTH_LDAP_SERVER_URI")
     AUTH_LDAP_START_TLS = env.bool("AUTH_LDAP_START_TLS", default=False)
     AUTH_LDAP_BASE_DN = env("AUTH_LDAP_BASE_DN")

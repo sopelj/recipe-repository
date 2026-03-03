@@ -22,8 +22,11 @@ const durations = computed(() =>
 </script>
 
 <template>
-  <Splitter v-if="totalTime">
-    <SplitterPanel
+  <div
+    v-if="totalTime"
+    class="join w-full -ml-2"
+  >
+    <div
       v-for="duration in durations"
       :key="duration.type"
       :data-duration-type="duration.type"
@@ -34,6 +37,6 @@ const durations = computed(() =>
         :itemprop="duration.type"
         :content="formatISOTime(duration.time)"
       />
-    </SplitterPanel>
-  </Splitter>
+    </div>
+  </div>
 </template>

@@ -25,37 +25,46 @@ const updateServings = (multiplier: number) => {
 
 <template>
   <div class="grow-0 ml-4">
-    <InputGroup class="grow-0">
-      <Button
-        :disabled="form.servings / 2 <= 0.125"
-        :loading="form.processing"
+    <div class="grow-0 join">
+      <button
+        :disabled="form.servings / 2 <= 0.125 || form.processing"
+        class="btn join-item"
+        type="button"
         @click="updateServings(0.5)"
       >
         {{ t("recipe.scale_halve") }}
-      </Button>
-      <InputNumber
+        <span
+          v-if="form.processing"
+          class="icon-[codex--loader]"
+        ></span>
+      </button>
+      <input
         v-model="form.servings"
         placeholder="servings"
         :min="0.125"
         :max="100"
-        input-class="text-center pa-0"
-        :fluid="true"
+        class="text-center pa-0 join-item"
         :disabled="form.processing"
         @update:model-value="updateServings(1)"
       />
-      <Button
-        :disabled="form.servings * 2 >= 50"
-        :loading="form.processing"
+      <button
+        :disabled="form.servings * 2 >= 50 || form.processing"
+        class="btn join-item"
+        type="button"
         @click="updateServings(2)"
       >
         {{ t("recipe.scale_double") }}
-      </Button>
-    </InputGroup>
-    <Message
+        <span
+          v-if="form.processing"
+          class="icon-[codex--loader]"
+        ></span>
+      </button>
+    </div>
+    <div
       v-if="form.errors?.servings"
-      severity="error"
+      class="text-red-500"
     >
       {{ form.errors?.servings }}
-    </Message>
+    </div>
   </div>
 </template>

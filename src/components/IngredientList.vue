@@ -39,7 +39,7 @@ const groupedIngredients = computed(() =>
         :key="ingredient.id"
         itemprop="recipeIngredient"
       >
-        <I18nT
+        <i18n-t
           keypath="recipe.ingredient"
           tag="span"
         >
@@ -47,7 +47,7 @@ const groupedIngredients = computed(() =>
           <template #ingredient>
             <strong>{{ ingredient.food_display }}</strong>
           </template>
-        </I18nT>
+        </i18n-t>
         <span
           v-if="ingredient.qualifier"
           class="qualifier"

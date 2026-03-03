@@ -24,13 +24,20 @@ const toggleWakeLock = async () => {
 </script>
 
 <template>
-  <label class="flex items-center">
-    {{ t("global.keep_screen_on") }}
-    <ToggleSwitch
-      :model-value="!!wakeLock"
+  <div class="flex items-center gap-1">
+    <input
+      id="screen-wake-switch"
       :disabled="!supported"
-      class="ml-1"
+      :value="!!wakeLock"
+      type="checkbox"
+      class="switch switch-outline switch-primary"
       @change="toggleWakeLock"
     />
-  </label>
+    <label
+      class="label-text text-base"
+      for="screen-wake-switch"
+    >
+      {{ t("global.keep_screen_on") }}
+    </label>
+  </div>
 </template>

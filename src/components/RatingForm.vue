@@ -2,14 +2,14 @@
 import { useForm } from "@inertiajs/vue3";
 import { onMounted } from "vue";
 import { useI18n } from "vue-i18n";
+import { useToast } from "vue-toastification";
 
-import { useToast } from "primevue/usetoast";
+import Rating from "@/components/RatingInput.vue";
 
 const props = defineProps<{ numRatings: number; userRating: number | null; averageRating: number | null }>();
 
-const toast = useToast();
-
 const { t } = useI18n();
+const toast = useToast();
 
 const form = useForm({ rating: props.userRating || props.averageRating || undefined });
 
@@ -22,24 +22,18 @@ const changeRating = () => {
 
 onMounted(() => {
   if (form.errors?.rating) {
-    toast.add({ severity: "error", detail: form.errors.rating });
+    toast.error(form.errors.rating);
     form.clearErrors("rating");
   }
 });
 </script>
 
 <template>
-  <Rating
+  <rating
     v-model="form.rating"
-    v-tooltip="t('recipe.ratings', numRatings)"
+    :title="t('recipe.ratings', numRatings)"
     :class="!!userRating ? 'user-rating' : ''"
     :disabled="form.processing"
     @update:model-value="changeRating"
   />
 </template>
-
-<style scoped>
-.user-rating :deep(.p-rating-on-icon) {
-  color: var(--p-primary-600) !important;
-}
-</style>

@@ -78,6 +78,10 @@
     "search": "サーチ",
     "select_category": "カテゴリ"
   },
+  "select": {
+    "no_options_available": "オプションなし",
+    "options": "オプションを選択"
+  },
   "source": {
     "book_page": "『{book}』{page}ページ。",
     "lookup_book_info": "書籍情報の検索",

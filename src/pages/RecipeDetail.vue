@@ -49,7 +49,7 @@ const shareRecipe = async () => {
 </script>
 
 <template>
-  <HeadSection :title="recipe.name" />
+  <head-section :title="recipe.name" />
   <div
     class="container mx-auto px-4"
     itemscope
@@ -59,13 +59,14 @@ const shareRecipe = async () => {
       <div class="col-span-12 md:col-span-8">
         <div class="flex flex-wrap sm:flex-nowrap items-center mb-2 md:mb-4">
           <h1
-            class="text-4xl cursive flex-grow w-full sm:w-auto"
+            class="text-2xl pt-2 grow w-full sm:w-auto"
             itemprop="name"
+            :style="`view-transition-name: recipe-${recipe.slug}-name`"
           >
             {{ recipe.name }}
           </h1>
-          <div class="flex-grow sm:flex-grow-0">
-            <RatingForm
+          <div class="grow sm:grow-0">
+            <rating-form
               :average-rating="recipe.avg_rating"
               :num-ratings="recipe.num_ratings"
               :user-rating="userRating"
@@ -73,20 +74,20 @@ const shareRecipe = async () => {
               class="w-fit"
             />
           </div>
-          <FavouriteForm
+          <favourite-form
             v-if="user"
             :user-favourite="userFavourite"
           />
-          <Button
+          <button
             v-if="canShare"
-            v-tooltip="t('recipe.share')"
-            icon="pi pi-share-alt"
-            class="ml-1"
-            text
+            title="t('recipe.share')"
+            class="ml-1 btn-text"
             @click="shareRecipe"
-          />
+          >
+            <span class="icon-[ooui--share]"></span>
+          </button>
         </div>
-        <BreadcrumbBar
+        <breadcrumb-bar
           :current="recipe.name"
           class="p-0"
         />
@@ -97,23 +98,23 @@ const shareRecipe = async () => {
           <img
             :src="recipe.image_url"
             :alt="recipe.name"
+            :style="`view-transition-name: recipe-${recipe.slug}-image`"
           />
         </div>
-        <DescriptionItem
+        <description-item
           v-if="recipe.categories"
           :label="t('recipe.categories')"
         >
-          <Tag
+          <span
             v-for="c in recipe.categories"
             :key="c.slug"
-            class="mx-1"
-            severity="secondary"
+            class="mx-1 border rounded-md px-2 py-1"
           >
             {{ c.type.name }}: {{ c.name }}
-          </Tag>
-        </DescriptionItem>
-        <DescriptionItem :label="t('recipe.yields')">
-          <RecipeYield
+          </span>
+        </description-item>
+        <description-item :label="t('recipe.yields')">
+          <recipe-yield
             v-if="recipe.yield_unit && recipe.yield_amount"
             :amount="recipe.yield_amount"
             :unit="recipe.yield_unit"
@@ -121,59 +122,56 @@ const shareRecipe = async () => {
             :base-servings="recipe.servings || 1"
           />
           <span v-else>{{ t("recipe.servings", servings) }}</span>
-        </DescriptionItem>
-        <DescriptionItem :label="t('recipe.added_by')">
-          <UserAvatar
-            :user="recipe.added_by"
-            size="normal"
-          />
+        </description-item>
+        <description-item :label="t('recipe.added_by')">
+          <user-avatar :user="recipe.added_by" />
           <span class="pl-2">
             {{ recipe.added_by.id === user?.id ? t("users.me") : recipe.added_by.full_name }}
           </span>
-        </DescriptionItem>
-        <DescriptionItem
+        </description-item>
+        <description-item
           v-if="recipe.source"
           :label="t('recipe.from')"
         >
-          <RecipeSource
+          <recipe-source
             :source="recipe.source"
             :value="recipe.source_value"
           />
-        </DescriptionItem>
+        </description-item>
         <div
           v-if="recipe.description"
           class="mt-2 pb-5"
           itemprop="description"
         >
-          <Divider />
+          <div class="divider"></div>
           {{ recipe.description }}
         </div>
-        <RecipeDurations
+        <recipe-durations
           :prep-time="recipe.prep_time"
           :cook-time="recipe.cook_time"
           :total-time="recipe.total_time"
         />
-        <NutritionalInformation
+        <nutritional-information
           v-if="recipe.nutrition && !isAboveMedium"
           :nutrition="recipe.nutrition"
           :servings="servings"
           class="mt-4"
         />
-        <RecipeComments
+        <recipe-comments
           v-if="!isAboveMedium"
           :comments="recipe.comments"
           :collapse="true"
           class="mt-4"
         />
         <div class="mt-4">
-          <Card>
-            <template #title>
+          <div class="card">
+            <div class="card-title">
               <div class="flex flex-row items-center">
                 <h2 class="text-xxl grow w-100 mr-2">{{ t("recipe.ingredients") }}</h2>
-                <ServingsForm :servings="servings || 1" />
+                <servings-form :servings="servings || 1" />
               </div>
-            </template>
-            <template #content>
+            </div>
+            <div class="card-body">
               <div v-if="recipe.parent_recipes?.length">
                 <ul>
                   <li
@@ -190,12 +188,12 @@ const shareRecipe = async () => {
                   </li>
                 </ul>
               </div>
-              <IngredientList
+              <ingredient-list
                 :ingredients="ingredients"
                 :groups="recipe.ingredient_groups"
               />
-            </template>
-          </Card>
+            </div>
+          </div>
         </div>
       </div>
       <div class="col-span-12 md:col-span-4 row-span-2">
@@ -203,20 +201,19 @@ const shareRecipe = async () => {
           v-if="recipe.image_url"
           class="overflow-clip p-card hidden sm:flex"
         >
-          <Image
+          <img
             :src="recipe.image_url"
             :alt="recipe.name"
-            preview
             class="w-full"
           />
         </div>
-        <NutritionalInformation
+        <nutritional-information
           v-if="recipe.nutrition && isAboveMedium"
           :nutrition="recipe.nutrition"
           :servings="servings"
           class="mt-4"
         />
-        <RecipeComments
+        <recipe-comments
           v-if="isAboveMedium"
           class="mt-4"
           :comments="recipe.comments"
@@ -224,19 +221,18 @@ const shareRecipe = async () => {
       </div>
       <div class="col-span-12 md:col-span-8">
         <div class="flex flex-row mb-2">
-          <h2 class="text-xl flex-grow">{{ t("recipe.directions") }}</h2>
-          <KeepAwake />
+          <h2 class="text-xl grow">{{ t("recipe.directions") }}</h2>
+          <keep-awake />
         </div>
-        <Panel
+        <div
           v-for="(step, i) in recipe.steps"
           :key="i"
-          toggleable
-          class="mb-2"
-          :header="t('recipe.step_title', { step: i + 1 })"
+          class="mb-2 mt-1 border border-b-gray-400 rounded-sm p-2"
           itemprop="recipeInstructions"
         >
-          {{ step }}
-        </Panel>
+          <h3>{{ t("recipe.step_title", { step: i + 1 }) }}</h3>
+          <p>{{ step }}</p>
+        </div>
       </div>
     </div>
   </div>

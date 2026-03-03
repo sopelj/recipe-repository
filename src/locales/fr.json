@@ -78,6 +78,10 @@
     "search": "Recherche",
     "select_category": "Catégories"
   },
+  "select": {
+    "no_options_available": "Aucune option",
+    "options": "Choisissez une option"
+  },
   "source": {
     "book_page": "{book}, p. {page}",
     "lookup_book_info": "Chercher les informations sur le livre",

@@ -24,46 +24,49 @@ const postComment = async () => {
 </script>
 
 <template>
-  <Panel
-    :collapsed="collapse"
-    :toggleable="collapse"
-  >
-    <template #header>
-      <h3>{{ t("comments.title") }}</h3>
-    </template>
-    <template #icons>
-      <Badge v-if="comments.length">{{ comments.length }}</Badge>
-    </template>
+  <div class="card">
+    <div class="card-title">
+      <h3>
+        {{ t("comments.title") }}
+        <span
+          v-if="comments.length"
+          class="badge badge-primary"
+        >
+          {{ comments.length }}
+        </span>
+      </h3>
+    </div>
     <div
       v-for="comment in comments"
       :key="comment.created"
-      class="my-2 flex"
+      class="my-2 flex body-content"
     >
-      <UserAvatar
-        v-tooltip="comment.user.full_name"
-        :user="comment.user"
-        size="large"
-      />
-      <div class="flex-grow">
+      <div class="mr-1">
+        <user-avatar
+          :user="comment.user"
+          size="sm"
+        />
+      </div>
+      <div class="grow">
         <blockquote style="white-space: pre">{{ comment.text }}</blockquote>
         <span class="text-xs text-slate-500">{{ formatTimeSince(comment.created) }}</span>
-        <Divider />
+        <div class="divider"></div>
       </div>
     </div>
-    <form class="mt-2">
+    <form class="mt-2 card border rounded-sm p-2">
       <label for="post-comment">{{ t("comments.new_comment") }}</label>
-      <Textarea
+      <textarea
         id="post-comment"
         v-model="form.comment"
-        class="w-full"
+        class="w-full mt-1"
       />
-      <Button
-        class="w-full mt-2"
+      <button
+        class="w-full mt-2 btn"
         :disabled="!form.comment.trim()"
         @click="postComment"
       >
         {{ t("comments.post") }}
-      </Button>
+      </button>
     </form>
-  </Panel>
+  </div>
 </template>

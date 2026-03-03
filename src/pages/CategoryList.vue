@@ -20,18 +20,25 @@ const filteredCategories = computed((): Category[] =>
 </script>
 
 <template>
-  <HeadSection :title="t('categories.title')" />
+  <head-section :title="t('categories.title')" />
   <div class="container mx-auto">
-    <h1 class="text-4xl pt-2 pb-4 px-4 flex-grow">{{ categoryType.name_plural || categoryType.name }}</h1>
-    <BreadcrumbBar
+    <h1
+      class="text-2xl pt-2 pb-4 px-4 grow"
+      :style="`view-transition-name: category-type-${categoryType.slug}-name`"
+    >
+      {{ categoryType.name_plural || categoryType.name }}
+    </h1>
+    <breadcrumb-bar
       :items="[{ url: t('routes.category_type_list'), label: t('categories.category_types') }]"
       :current="categoryType.name_plural || categoryType.name"
+      class="mx-4"
     />
-    <SearchableLinkCards
+    <searchable-link-cards
       v-model:search="search"
       :grid-items="filteredCategories"
       :no-results-message="t('categories.no_match')"
       route-name="category_detail"
+      type="category"
     />
   </div>
 </template>

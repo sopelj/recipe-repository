@@ -7,6 +7,8 @@ import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 
 import BreadcrumbBar from "@/components/BreadcrumbBar.vue";
+import MultiSelect from "@/components/MultiSelect.vue";
+import RatingInput from "@/components/RatingInput.vue";
 import SearchableLinkCards from "@/components/SearchableLinkCards.vue";
 import HeadSection from "@/layouts/HeadSection.vue";
 
@@ -47,44 +49,52 @@ const breadcrumbItems = computed(() =>
 </script>
 
 <template>
-  <HeadSection :title="title" />
+  <head-section :title="title" />
   <div class="container mx-auto">
     <div class="flex items-center">
-      <h1 class="text-4xl pt-2 pb-4 px-4 flex-grow">{{ title }}</h1>
+      <h1
+        class="text-2xl pt-2 pb-4 px-4 grow"
+        :style="category ? `view-transition-name: category-${category.slug}-name` : ''"
+      >
+        {{ title }}
+      </h1>
       <Link
         v-if="!category"
         :href="t('routes.category_type_list')"
-        class="text-center pr-2 sm:pr-0 hover:underline"
+        class="btn btn-outline"
       >
         {{ t("recipe.browse_categories") }}
       </Link>
     </div>
-    <BreadcrumbBar :items="breadcrumbItems" />
-    <SearchableLinkCards
+    <breadcrumb-bar
+      :items="breadcrumbItems"
+      class="px-4"
+    />
+    <searchable-link-cards
       v-model:search="search"
       :grid-items="filteredRecipes"
       :no-results-message="t('search.no_recipes_match')"
       route-name="recipe_detail"
+      type="recipe"
     >
-      <template #extra-header>
-        <MultiSelect
+      <template #extra-inputs>
+        <multi-select
           v-if="categories"
           v-model="selectedCategories"
           :options="categoryOptions"
           :placeholder="t('search.select_category')"
-          option-value="value"
-          option-label="label"
-          display="chip"
-          class="w-full sm:w-auto"
+          class="join-item"
         />
       </template>
       <template #extra-card-content="{ item }">
-        <Rating
+        <rating-input
           v-model="item.avg_rating"
-          v-tooltip="t('recipe.ratings', item.num_ratings)"
+          :title="t('recipe.ratings', item.num_ratings)"
           :readonly="true"
+          :size="4"
+          class="mt-1"
         />
       </template>
-    </SearchableLinkCards>
+    </searchable-link-cards>
   </div>
 </template>

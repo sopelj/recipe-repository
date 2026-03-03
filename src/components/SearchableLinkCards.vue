@@ -8,62 +8,67 @@ import SquareImage from "@/components/SquareImage.vue";
 
 const search = defineModel<string>("search");
 
-defineProps<{ gridItems: T[]; routeName: string; noResultsMessage: string }>();
+defineProps<{ gridItems: T[]; routeName: string; type: string; noResultsMessage: string }>();
 
 const { t } = useI18n();
 </script>
 
 <template>
-  <DataView
-    layout="grid"
-    :value="gridItems"
-    data-key="slug"
-  >
-    <template #header>
-      <div class="flex flex-wrap items-center justify-between">
-        <IconField class="w-full sm:w-auto mb-3 sm:mb-0">
-          <InputIcon class="pi pi-search" />
-          <InputText
-            v-model="search"
-            :placeholder="t('search.search')"
-            class="w-full sm:w-auto"
-          />
-        </IconField>
-        <slot name="extra-header" />
-      </div>
-    </template>
-    <template #grid="{ items }">
+  <div class="relative">
+    <div class="mx-2 pl-2 border rounded-md join h-10">
+      <span
+        class="icon-[heroicons--magnifying-glass] text-base-content/80 my-auto me-3 size-5 shrink-0 join-item"
+      ></span>
+      <label
+        class="sr-only"
+        for="search-input"
+      >
+        {{ t("search.search") }}
+      </label>
+      <input
+        id="search-input"
+        v-model="search"
+        type="text"
+        class="join-item"
+        :placeholder="t('search.search')"
+      />
+      <slot name="extra-inputs" />
+    </div>
+    <template v-if="gridItems.length > 0">
       <div
         class="grid auto-rows-fr grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-8 p-4"
       >
         <Link
-          v-for="gridItem in items"
+          v-for="gridItem in gridItems"
           :key="gridItem.slug"
           :href="t(`routes.${routeName}`, { slug: gridItem.slug })"
-          class="inline-grid"
+          class="inline-grid rounded-md"
+          :style="`view-transition-name: ${type}-${gridItem.slug}-name`"
         >
-          <Card
-            class="text-center overflow-clip transition-all border dark:border-slate-600 dark:hover:border-violet-700 hover:scale-105 w-full"
-            :pt="{ body: 'h-full', content: 'h-full flex flex-col items-center justify-center' }"
+          <div
+            class="card rounded-md text-center overflow-clip transition-all border dark:border-slate-600 dark:hover:border-violet-700 hover:scale-105 w-full"
           >
-            <template #header>
-              <SquareImage :src="gridItem.thumbnail_url" />
-            </template>
-            <template #content>
+            <div class="card-header">
+              <square-image
+                :src="gridItem.thumbnail_url"
+                :style="`view-transition-name: ${type}-${gridItem.slug}-image`"
+              />
+            </div>
+            <div class="card-body p-2 flex-row justify-center">
               <h2>{{ gridItem?.name_plural || gridItem.name }}</h2>
               <slot
                 name="extra-card-content"
                 :item="gridItem"
               />
-            </template>
-          </Card>
+            </div>
+          </div>
         </Link>
       </div>
     </template>
-    <template #empty>
+    <template v-else>
       <div class="flex items-center">
         <div class="p-4 w-full text-center">{{ noResultsMessage }}</div>
       </div>
     </template>
-  </DataView>
+  </div>
 </template>

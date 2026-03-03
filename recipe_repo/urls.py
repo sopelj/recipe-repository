@@ -20,6 +20,9 @@ if settings.DEBUG:
         document_root=settings.STATIC_ROOT,
     ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+if "allauth" in settings.INSTALLED_APPS:
+    urlpatterns += [path("accounts/", include("allauth.urls"))]
+
 urlpatterns += i18n_patterns(
     path("", include("recipe_repo.recipes.urls")),
     path("", include("recipe_repo.categories.urls")),

@@ -1,9 +1,8 @@
 import VueI18nPlugin from "@intlify/unplugin-vue-i18n/vite";
-import { PrimeVueResolver } from "@primevue/auto-import-resolver";
+import tailwindcss from "@tailwindcss/vite";
 import VuePlugin from "@vitejs/plugin-vue";
 import { fileURLToPath } from "node:url";
 import { resolve } from "path";
-import Components from "unplugin-vue-components/vite";
 import { defineConfig, loadEnv } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
 
@@ -12,8 +11,8 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
   return {
     plugins: [
+      tailwindcss(),
       VuePlugin(),
-      Components({ resolvers: [PrimeVueResolver()] }),
       VueI18nPlugin({ include: [resolve(__dirname, "./src/locales/**")] }),
       VitePWA({
         registerType: "autoUpdate",

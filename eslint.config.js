@@ -67,15 +67,13 @@ export default tseslint.config(
       ],
       "vue/html-self-closing": ["error", { "html": { "void": "always" } }],
       "vue/singleline-html-element-content-newline": "off",
-      // PascalCase is only used because PrimeVue and Inertia like use standard component names which conflict with real elements
-      // And using PascalCase is essential to ensure these are correctly loaded.
       "vue/component-name-in-template-casing": [
         "error",
-        "PascalCase",
+        "kebab-case",
         {
           "registeredComponentsOnly": false,
-          globals: ["Button", "Image", "Menu", "Link"],
-          ignores: ["Link"],
+          globals: ["Link", "Head"],
+          ignores: ["Link", "Head"],
         },
       ],
     },
