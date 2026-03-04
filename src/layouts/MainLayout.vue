@@ -31,6 +31,7 @@ const setLocale = (lang: string) => {
               src="/assets/recipe-logo.svg"
               alt=""
               class="w-14 sm:w-10"
+              loading="lazy"
             />
             <span class="cursive text-2xl pl-2 hidden sm:inline-block">{{ t("global.title") }}</span>
             <span class="cursive text-xl pl-2 sm:hidden">{{ t("global.title_short") }}</span>
@@ -82,7 +83,7 @@ const setLocale = (lang: string) => {
   </main>
 </template>
 
-<style>
+<style scoped>
 .language-selector button:not(:last-child)::after {
   content: "/";
 }

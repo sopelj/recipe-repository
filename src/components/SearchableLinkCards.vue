@@ -43,6 +43,7 @@ const { t } = useI18n();
           class="inline-grid rounded-md"
           :style="`view-transition-name: ${type}-${gridItem.slug}-name`"
           view-transition
+          prefetch
         >
           <div class="card text-center overflow-clip transition-all hover:scale-105 w-full">
             <div class="card-header">

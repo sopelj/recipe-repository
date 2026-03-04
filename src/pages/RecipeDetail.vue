@@ -99,6 +99,7 @@ const shareRecipe = async () => {
             :src="recipe.image_url"
             :alt="recipe.name"
             :style="`view-transition-name: recipe-${recipe.slug}-image`"
+            loading="lazy"
           />
         </div>
         <description-item
@@ -205,6 +206,7 @@ const shareRecipe = async () => {
             :src="recipe.image_url"
             :alt="recipe.name"
             class="w-full"
+            loading="lazy"
             :style="`view-transition-name: recipe-${recipe.slug}-image`"
           />
         </div>

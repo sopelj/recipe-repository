@@ -23,6 +23,8 @@ export default defineConfig(({ mode }) => {
           short_name: env.VITE_APP_TITLE_SHORT || "Recipes",
           description: env.VITE_APP_DESCRIPTION || "A repository for your favourite recipes.",
           theme_color: env.VITE_APP_THEME_COLOUR || "#482880",
+          background_color: env.VITE_APP_THEME_COLOUR || "#a289c2",
+          categories: ["food"],
           display: "standalone",
           start_url: "/",
           icons: [
@@ -48,13 +50,18 @@ export default defineConfig(({ mode }) => {
               src: "pwa-192x192.png",
               sizes: "192x192",
               type: "image/png",
+              purpose: "any",
             },
             {
               src: "pwa-512x512.png",
               sizes: "512x512",
               type: "image/png",
+              purpose: "any",
             },
           ],
+          workbox: {
+            globPatterns: ["**/*.{js,css,html,ico,png,svg,jpg}"],
+          },
         },
       }),
     ],
@@ -68,6 +75,9 @@ export default defineConfig(({ mode }) => {
         usePolling: true,
         disableGlobbing: false,
       },
+    },
+    css: {
+      transformer: "lightningcss",
     },
     resolve: {
       extensions: [".vue", ".ts", ".js", ".json"],

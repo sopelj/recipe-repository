@@ -29,6 +29,7 @@ const sizeClass = computed(() => {
         v-if="user.profile_image_url"
         :src="user.profile_image_url"
         alt="avatar"
+        loading="lazy"
       />
       <div
         v-else
