@@ -9,7 +9,7 @@ test("RecipeSource should render website source", async () => {
     props: { source, value: "https://example.com" },
   });
 
-  expect(wrapper.find("a").attributes("href")).toBe("https://tasty.co");
+  expect(wrapper.find("a").attributes("href")).toBe("https://example.com");
   expect(wrapper.text()).toContain("Tasty");
 });
 

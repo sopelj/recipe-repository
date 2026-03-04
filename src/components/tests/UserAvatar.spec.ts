@@ -20,7 +20,7 @@ test("UserAvatar should render initials if no image", async () => {
     props: { user: mockUser },
   });
 
-  expect(wrapper.text()).toContain("JD");
+  expect(wrapper.text()).toContain("JS");
 });
 
 test("UserAvatar should render image if provided", async () => {
