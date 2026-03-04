@@ -25,14 +25,14 @@ const postComment = async () => {
 </script>
 
 <template>
-  <collapsible-item>
+  <collapsible-item
+    v-if="comments?.length"
+    class="mt-2"
+  >
     <template #title>
-      <h3>
+      <h3 class="flex align-middle">
         {{ t("comments.title") }}
-        <span
-          v-if="comments.length"
-          class="badge badge-primary"
-        >
+        <span class="ml-2 badge badge-primary">
           {{ comments.length }}
         </span>
       </h3>
@@ -55,21 +55,21 @@ const postComment = async () => {
           <div class="divider"></div>
         </div>
       </div>
-      <form class="mt-2 card border rounded-sm p-2">
-        <label for="post-comment">{{ t("comments.new_comment") }}</label>
-        <textarea
-          id="post-comment"
-          v-model="form.comment"
-          class="w-full mt-1"
-        />
-        <button
-          class="w-full mt-2 btn"
-          :disabled="!form.comment.trim()"
-          @click="postComment"
-        >
-          {{ t("comments.post") }}
-        </button>
-      </form>
     </template>
   </collapsible-item>
+  <form class="mt-2 card border rounded-sm p-2">
+    <label for="post-comment">{{ t("comments.new_comment") }}</label>
+    <textarea
+      id="post-comment"
+      v-model="form.comment"
+      class="w-full mt-1"
+    />
+    <button
+      class="w-full mt-2 btn"
+      :disabled="!form.comment.trim()"
+      @click="postComment"
+    >
+      {{ t("comments.post") }}
+    </button>
+  </form>
 </template>

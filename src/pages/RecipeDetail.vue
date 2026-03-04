@@ -81,7 +81,7 @@ const shareRecipe = async () => {
           <button
             v-if="canShare"
             title="t('recipe.share')"
-            class="ml-1 btn-text"
+            class="ml-1 btn-text text-3xl"
             @click="shareRecipe"
           >
             <span class="icon-[ooui--share]"></span>
@@ -110,7 +110,7 @@ const shareRecipe = async () => {
             :key="c.slug"
             class="mx-1 border rounded-md px-2 py-1"
           >
-            {{ c.type.name }}: {{ c.name }}
+            {{ c.name }}
           </span>
         </description-item>
         <description-item :label="t('recipe.yields')">

@@ -30,7 +30,7 @@ const toggleWakeLock = async () => {
       :disabled="!supported"
       :value="!!wakeLock"
       type="checkbox"
-      class="switch switch-outline switch-primary"
+      class="switch border-purple-700 bg-purple-500/20 switch-primary"
       @change="toggleWakeLock"
     />
     <label

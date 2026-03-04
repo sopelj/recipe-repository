@@ -36,7 +36,7 @@ const toggleOption = (value: string) => {
 <template>
   <div
     ref="elRef"
-    class="multi-select"
+    class="multi-select relative"
   >
     <span
       class="flex flex-row items-center select"
@@ -51,7 +51,7 @@ const toggleOption = (value: string) => {
     </span>
     <div
       v-show="isOpen"
-      class="absolute w-auto z-50 bg-base-100 border border-base-content/20 rounded-md shadow-lg max-h-60 overflow-y-auto"
+      class="absolute w-auto z-50 bg-base-100 border border-base-content/20 rounded-md shadow-lg max-h-60 overflow-y-auto right-0"
     >
       <ul class="p-2">
         <li
