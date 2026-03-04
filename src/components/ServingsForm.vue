@@ -43,7 +43,7 @@ const updateServings = (multiplier: number) => {
         placeholder="servings"
         :min="0.125"
         :max="100"
-        class="text-center pa-0 join-item"
+        class="text-center pa-0 join-item max-w-10 border"
         :disabled="form.processing"
         @update:model-value="updateServings(1)"
       />

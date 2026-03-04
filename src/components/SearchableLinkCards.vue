@@ -15,7 +15,7 @@ const { t } = useI18n();
 
 <template>
   <div class="relative">
-    <div class="mx-2 pl-2 border rounded-md join h-10">
+    <div class="mx-4 pl-2 border rounded-md join h-10">
       <span
         class="icon-[heroicons--magnifying-glass] text-base-content/80 my-auto me-3 size-5 shrink-0 join-item"
       ></span>
@@ -53,8 +53,8 @@ const { t } = useI18n();
                 :style="`view-transition-name: ${type}-${gridItem.slug}-image`"
               />
             </div>
-            <div class="card-body p-2 flex-row justify-center">
-              <h2>{{ gridItem?.name_plural || gridItem.name }}</h2>
+            <div class="card-body p-2 h-1/2 flex flex-wrap justify-center">
+              <h2 class="grow">{{ gridItem?.name_plural || gridItem.name }}</h2>
               <slot
                 name="extra-card-content"
                 :item="gridItem"

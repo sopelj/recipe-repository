@@ -61,7 +61,7 @@ const breadcrumbItems = computed(() =>
       <Link
         v-if="!category"
         :href="t('routes.category_type_list')"
-        class="btn btn-outline"
+        class="btn btn-outline mr-2 lg:mr-0"
       >
         {{ t("recipe.browse_categories") }}
       </Link>
