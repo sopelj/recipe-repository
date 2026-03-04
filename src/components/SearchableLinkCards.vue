@@ -52,7 +52,7 @@ const { t } = useI18n();
               />
             </div>
             <div class="card-body p-2 flex grow flex-wrap justify-center">
-              <h2 class="grow text-sm">{{ gridItem?.name_plural || gridItem.name }}</h2>
+              <h2 class="grow text-sm w-full">{{ gridItem?.name_plural || gridItem.name }}</h2>
               <slot
                 name="extra-card-content"
                 :item="gridItem"
