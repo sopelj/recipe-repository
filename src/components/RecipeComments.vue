@@ -32,7 +32,7 @@ const postComment = async () => {
     <template #title>
       <h3 class="flex align-middle">
         {{ t("comments.title") }}
-        <span class="ml-2 badge badge-primary">
+        <span class="ml-2 px-1 badge badge-primary text-sm">
           {{ comments.length }}
         </span>
       </h3>

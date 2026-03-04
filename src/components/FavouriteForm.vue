@@ -30,7 +30,7 @@ onMounted(() => {
   <button
     :title="userFavourite ? t('recipe.un-favourite') : t('recipe.favourite')"
     :disabled="form.processing"
-    class="btn-text text-3xl hover:text-purple-400 transition-colors"
+    class="btn-text text-3xl hover:text-purple-400 transition-colors cursor-pointer"
     @click="setFavourite(!userFavourite)"
   >
     <span

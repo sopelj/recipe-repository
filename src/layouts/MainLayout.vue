@@ -4,7 +4,7 @@ import type { User } from "@/types/users";
 import { Link, router } from "@inertiajs/vue3";
 import { useI18n } from "vue-i18n";
 
-import UserMenu from "@/layouts/UserMenu.vue";
+import UserMenu from "@/components/UserMenu.vue";
 
 defineProps<{ user?: User }>();
 const { t, locale } = useI18n();
@@ -17,11 +17,15 @@ const setLocale = (lang: string) => {
 <template>
   <main :lang="locale">
     <header class="w-full mb-4 bg-purple-900/75 text-white sticky top-0 backdrop-blur-sm shadow-lg z-50">
-      <nav class="px-2 lg:px-0 container mx-auto flex flex-row">
+      <nav
+        class="px-2 lg:px-0 container mx-auto flex flex-row"
+        style="view-transition-name: header"
+      >
         <div class="grow">
           <Link
             :href="t('routes.recipe_list')"
             class="flex flex-row py-2 items-center"
+            view-transition
           >
             <img
               src="/assets/recipe-logo.svg"

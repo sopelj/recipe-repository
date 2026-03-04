@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { User } from "@/types/users";
+import type { User } from "@/types/users.ts";
 
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 
-import { useClickOutside } from "@/composables/click-outside";
+import { useClickOutside } from "@/composables/click-outside.ts";
 
 import UserAvatar from "@/components/UserAvatar.vue";
 
@@ -34,7 +34,7 @@ const { t } = useI18n();
     />
     <ul
       v-if="isOpen"
-      class="absolute right-0 w-auto z-50 bg-base-100 border border-base-content/20 rounded-md shadow-lg max-h-60 overflow-y-auto"
+      class="absolute right-0 z-50 bg-base-100 border border-base-content/20 rounded-md shadow-lg max-h-60 overflow-y-auto w-fit max-w-fit"
       role="menu"
     >
       <li>
