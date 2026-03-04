@@ -13,9 +13,9 @@ const toggle = (): void => {
 </script>
 
 <template>
-  <div class="card">
+  <div class="card p-2">
     <div
-      class="card-title p-2 cursor-pointer flex flex-row items-center"
+      class="card-title select-none cursor-pointer flex flex-row items-center"
       @click="toggle"
     >
       <div class="grow">
@@ -27,10 +27,12 @@ const toggle = (): void => {
       ></span>
     </div>
     <div
-      v-if="isOpen"
-      class="card-body p-2 overflow-hidden transition-[height] duration-300"
+      class="card-body overflow-hidden transition-[max-height] duration-300"
+      :class="isOpen ? 'max-h-200' : 'max-h-0'"
     >
-      <slot name="content" />
+      <div class="pt-2">
+        <slot name="content" />
+      </div>
     </div>
   </div>
 </template>

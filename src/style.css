@@ -29,7 +29,7 @@
 }
 
 @layer components {
-  .card {
+  .card, .border {
     border: 1px solid --alpha(var(--color-gray-500) / 80%);
     border-radius: var(--radius-md);
 
