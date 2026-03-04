@@ -40,13 +40,16 @@
     "value_mg": "{value} mg"
   },
   "recipe": {
+    "add": "Add new recipe",
     "added_by": "Added by:",
     "all_recipes": "All recipes",
     "browse_categories": "Browse categories",
     "categories": "Categories:",
     "directions": "Directions",
+    "edit": "Edit recipe",
     "favourite": "Favourite",
     "from": "From:",
+    "import": "Import a recipe",
     "ingredient": "{amount} {ingredient}",
     "ingredient_note": " ({note})",
     "ingredient_optional": "*Optional",
@@ -70,7 +73,9 @@
     "category_type_list": "/en/category-types/",
     "login": "/en/admin/login/",
     "logout": "/en/admin/logout/",
+    "recipe_add": "/en/recipes/add",
     "recipe_detail": "/en/recipes/{slug}/",
+    "recipe_edit": "/en/recipes/{slug}/edit",
     "recipe_list": "/en/"
   },
   "search": {

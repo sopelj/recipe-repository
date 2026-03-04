@@ -18,6 +18,9 @@ export default defineConfig(({ mode }) => {
         registerType: "autoUpdate",
         injectRegister: "auto",
         includeAssets: ["favicon.ico", "apple-touch-icon.png", "mask-icon.svg"],
+        workbox: {
+          globPatterns: ["**/*.{js,css,html,ico,png,svg,jpg}"],
+        },
         manifest: {
           name: env.VITE_APP_TITLE || "Recipe Repository",
           short_name: env.VITE_APP_TITLE_SHORT || "Recipes",
@@ -59,9 +62,6 @@ export default defineConfig(({ mode }) => {
               purpose: "any",
             },
           ],
-          workbox: {
-            globPatterns: ["**/*.{js,css,html,ico,png,svg,jpg}"],
-          },
         },
       }),
     ],

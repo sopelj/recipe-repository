@@ -217,7 +217,7 @@ msgstr "によって追加"
 #: recipe_repo/recipes/models.py:153
 #, python-brace-format
 msgid "/en/recipes/{slug}/"
-msgstr "/ja/reshipi/{slug}/"
+msgstr "/ja/レシピ/{slug}/"
 
 #: recipe_repo/recipes/models.py:156 recipe_repo/recipes/models.py:177
 #: recipe_repo/recipes/models.py:203 recipe_repo/recipes/models.py:220
@@ -384,7 +384,7 @@ msgstr "レシピをインポートします"
 
 #: recipe_repo/recipes/urls.py:10
 msgid "recipes/<slug:slug>/"
-msgstr "reshipi/<slug:slug>/"
+msgstr "レシピ/<slug:slug>/"
 
 #: recipe_repo/settings.py:151
 msgid "English"

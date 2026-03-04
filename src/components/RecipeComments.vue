@@ -19,6 +19,7 @@ const postComment = async () => {
   form.post(`${window.location.pathname}${window.location.search}`, {
     only: ["recipe"],
     preserveScroll: true,
+    viewTransition: false,
   });
   form.reset();
 };

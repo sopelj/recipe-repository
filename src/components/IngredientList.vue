@@ -42,6 +42,7 @@ const groupedIngredients = computed(() =>
         <i18n-t
           keypath="recipe.ingredient"
           tag="span"
+          scope="global"
         >
           <template #amount>{{ ingredient.amount_display }}</template>
           <template #ingredient>

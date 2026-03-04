@@ -40,13 +40,16 @@
     "value_mg": "{value} mg"
   },
   "recipe": {
+    "add": "Ajouter une nouvelle recette",
     "added_by": "Ajouté par :",
     "all_recipes": "Toutes les recettes",
     "browse_categories": "Voir les catégories",
     "categories": "Categories :",
     "directions": "Instructions",
+    "edit": "Modifier la recette",
     "favourite": "J'aime",
     "from": "De :",
+    "import": "Importer une recette",
     "ingredient": "{amount} {ingredient}",
     "ingredient_note": " ({note})",
     "ingredient_optional": "*Facultatif",
@@ -70,7 +73,9 @@
     "category_type_list": "/fr/types-de-categories/",
     "login": "/fr/admin/login/",
     "logout": "/fr/admin/logout/",
+    "recipe_add": "/fr/recettes/ajouter",
     "recipe_detail": "/fr/recettes/{slug}/",
+    "recipe_edit": "/fr/recettes/{slug}/modifier",
     "recipe_list": "/fr/"
   },
   "search": {
@@ -89,7 +94,7 @@
   },
   "times": {
     "cookTime": "Temps de cuisson : {duration}",
-    "hours_short": "h,m,s",
+    "hms": "h,m,s",
     "prepTime": "Temps de préparation : {duration}",
     "totalTime": "Temps total : {duration}"
   },

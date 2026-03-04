@@ -15,6 +15,7 @@ const setFavourite = (state: boolean) => {
   form.post(`${window.location.pathname}${window.location.search}`, {
     only: ["userFavourite"],
     preserveScroll: true,
+    viewTransition: false,
   });
 };
 

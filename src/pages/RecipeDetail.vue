@@ -162,7 +162,6 @@ const shareRecipe = async () => {
           v-if="!isAboveMedium"
           :comments="recipe.comments"
           :collapse="true"
-          class="mt-4"
         />
         <div class="mt-4">
           <div class="card p-4">
@@ -218,7 +217,6 @@ const shareRecipe = async () => {
         />
         <recipe-comments
           v-if="isAboveMedium"
-          class="mt-4"
           :comments="recipe.comments"
         />
       </div>

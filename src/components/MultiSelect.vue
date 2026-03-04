@@ -9,6 +9,7 @@ const model = defineModel<string[]>({ default: () => [] });
 defineProps<{
   options?: { label: string; value: string }[];
   placeholder?: string;
+  selectClass?: string;
 }>();
 
 const { t } = useI18n();
@@ -40,6 +41,7 @@ const toggleOption = (value: string) => {
   >
     <span
       class="flex flex-row items-center select"
+      :class="selectClass || ''"
       @click="toggleDropdown"
     >
       {{ placeholder || t("select.options") }}

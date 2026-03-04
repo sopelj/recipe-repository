@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Category } from "@/types/categories";
 import type { RecipeItem } from "@/types/recipes";
+import type { User } from "@/types/users";
 
 import { Link } from "@inertiajs/vue3";
 import { computed, ref } from "vue";
@@ -13,9 +14,10 @@ import SearchableLinkCards from "@/components/SearchableLinkCards.vue";
 import HeadSection from "@/layouts/HeadSection.vue";
 
 const props = defineProps<{
+  user: User;
   recipes: RecipeItem[];
-  "category": Category | null;
-  "categories": Category[] | null;
+  category: Category | null;
+  categories: Category[] | null;
 }>();
 const { t } = useI18n();
 const search = ref<string>("");
@@ -59,6 +61,20 @@ const breadcrumbItems = computed(() =>
         {{ title }}
       </h1>
       <Link
+        v-if="user"
+        class="btn btn-outline mr-2 px-2"
+        :title="t('recipe.add')"
+      >
+        <span class="icon-[ic--baseline-plus]"></span>
+      </Link>
+      <button
+        v-if="user"
+        class="btn btn-outline mr-2 px-2"
+        :title="t('recipe.import')"
+      >
+        <span class="icon-[iconoir--import]"></span>
+      </button>
+      <Link
         v-if="!category"
         :href="t('routes.category_type_list')"
         class="btn btn-outline mr-2 lg:mr-0"
@@ -84,6 +100,7 @@ const breadcrumbItems = computed(() =>
           :options="categoryOptions"
           :placeholder="t('search.select_category')"
           class="join-item"
+          select-class="rounded-l-none"
         />
       </template>
       <template #extra-card-content="{ item }">

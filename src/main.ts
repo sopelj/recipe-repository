@@ -16,6 +16,9 @@ await createInertiaApp({
     page.default.layout = page.default.layout || MainLayout;
     return page;
   },
+  defaults: {
+    visitOptions: () => ({ viewTransition: true }),
+  },
   setup({ el, App, props, plugin }) {
     const app = createApp({ render: () => h(App, props) });
     app.use(i18n);

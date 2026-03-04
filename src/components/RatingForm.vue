@@ -17,6 +17,7 @@ const changeRating = () => {
   form.post(`${window.location.pathname}${window.location.search}`, {
     only: ["userRating", "recipe"],
     preserveScroll: true,
+    viewTransition: false,
   });
 };
 

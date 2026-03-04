@@ -40,13 +40,16 @@
     "value_mg": "{value}ミリグラム"
   },
   "recipe": {
+    "add": "新しいレシピを追加",
     "added_by": "によって追加",
     "all_recipes": "すべてのレシピ",
     "browse_categories": "カテゴリを閲覧する",
     "categories": "カテゴリ",
     "directions": "手順",
+    "edit": "レシピを編集",
     "favourite": "いいね",
     "from": "から",
+    "import": "レシピをインポートする",
     "ingredient": "{amount}{ingredient}",
     "ingredient_note": "（{note}）",
     "ingredient_optional": "*オプション",
@@ -70,7 +73,9 @@
     "category_type_list": "/ja/kategori-no-taipu/",
     "login": "/ja/admin/login/",
     "logout": "/ja/admin/logout/",
-    "recipe_detail": "/ja/reshipi/{slug}/",
+    "recipe_add": "/ja/レシピ/追加/",
+    "recipe_detail": "/ja/レシピ/{slug}/",
+    "recipe_edit": "/ja/レシピ/{slug}/編集/",
     "recipe_list": "/ja/"
   },
   "search": {
