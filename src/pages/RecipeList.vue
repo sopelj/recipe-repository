@@ -8,6 +8,7 @@ import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 
 import BreadcrumbBar from "@/components/BreadcrumbBar.vue";
+import ImportModal from "@/components/ImportModal.vue";
 import MultiSelect from "@/components/MultiSelect.vue";
 import RatingInput from "@/components/RatingInput.vue";
 import SearchableLinkCards from "@/components/SearchableLinkCards.vue";
@@ -48,39 +49,43 @@ const breadcrumbItems = computed(() =>
       ]
     : [],
 );
+const modalOpen = ref(false);
 </script>
 
 <template>
   <head-section :title="title" />
   <div class="container mx-auto">
-    <div class="flex items-center">
+    <div class="flex flex-wrap items-center">
       <h1
-        class="text-2xl pt-2 pb-4 px-4 grow"
+        class="text-2xl pt-2 pb-4 px-4 grow w-full sm:w-auto"
         :style="category ? `view-transition-name: category-${category.slug}-name` : ''"
       >
         {{ title }}
       </h1>
-      <Link
-        v-if="user"
-        class="btn btn-outline mr-2 px-2"
-        :title="t('recipe.add')"
-      >
-        <span class="icon-[ic--baseline-plus]"></span>
-      </Link>
-      <button
-        v-if="user"
-        class="btn btn-outline mr-2 px-2"
-        :title="t('recipe.import')"
-      >
-        <span class="icon-[iconoir--import]"></span>
-      </button>
-      <Link
-        v-if="!category"
-        :href="t('routes.category_type_list')"
-        class="btn btn-outline mr-2 lg:mr-0"
-      >
-        {{ t("recipe.browse_categories") }}
-      </Link>
+      <div class="ml-4 sm:ml-0">
+        <Link
+          v-if="user"
+          class="btn btn-outline mr-2 px-2"
+          :title="t('recipe.add')"
+        >
+          <span class="icon-[ic--baseline-plus]"></span>
+        </Link>
+        <button
+          v-if="user"
+          class="btn btn-outline mr-2 px-2"
+          :title="t('recipe.import')"
+          @click="modalOpen = true"
+        >
+          <span class="icon-[iconoir--import]"></span>
+        </button>
+        <Link
+          v-if="!category"
+          :href="t('routes.category_type_list')"
+          class="btn btn-outline mr-2 lg:mr-0"
+        >
+          {{ t("recipe.browse_categories") }}
+        </Link>
+      </div>
     </div>
     <breadcrumb-bar
       :items="breadcrumbItems"
@@ -114,4 +119,5 @@ const breadcrumbItems = computed(() =>
       </template>
     </searchable-link-cards>
   </div>
+  <import-modal v-model="modalOpen" />
 </template>

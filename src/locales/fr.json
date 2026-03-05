@@ -76,6 +76,7 @@
     "recipe_add": "/fr/recettes/ajouter",
     "recipe_detail": "/fr/recettes/{slug}/",
     "recipe_edit": "/fr/recettes/{slug}/modifier",
+    "recipe_import": "/fr/recettes/importer/",
     "recipe_list": "/fr/"
   },
   "search": {

@@ -196,8 +196,9 @@ def get_nutrition_unit_value(name: str, value: str) -> Decimal | None:
     mg_values = ("potassiumContent", "sodiumContent", "cholesterolContent")
     unit = "mg" if name in mg_values else "g"
     try:
+        # TODO: Debug types
         return unit_registry(value).to(unit).magnitude
-    except UndefinedUnitError as e:
+    except (UndefinedUnitError, AttributeError) as e:
         logger.warning("Failed to parse value '%s' for nutrition '%s'. Error: %s", value, name, e)
         return None
 

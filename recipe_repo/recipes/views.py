@@ -1,26 +1,32 @@
 from __future__ import annotations
 
+import logging
 from functools import cached_property
 from typing import Any
 
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db import DatabaseError, transaction
 from django.db.models import DecimalField, Prefetch, Q, Value
-from django.http import Http404
+from django.http import Http404, HttpRequest, HttpResponse, HttpResponseRedirect
 from django.urls.base import reverse
+from django.utils.translation import gettext
 from django.views.generic.detail import SingleObjectMixin
 from modeltranslation.utils import get_language
+from recipe_scrapers._exceptions import FillPluginException, RecipeScrapersExceptions
 from rest_framework.generics import get_object_or_404
 
 from ..categories.models import Category
 from ..categories.serializers import BaseCategorySerializer, CategorySerializer
 from ..common.views import InertiaFormView, InertiaView
-from .forms import RecipeReviewForm, ServingsForm
+from .forms import RecipeImportForm, RecipeReviewForm, ServingsForm
 from .models import Ingredient, Recipe
 from .serializers import (
     IngredientSerializer,
     RecipeListSerializer,
     RecipeSerializer,
 )
+
+logger = logging.getLogger(__name__)
 
 
 class RecipeListView(LoginRequiredMixin, InertiaView):
@@ -120,3 +126,33 @@ class RecipeDetailView(InertiaFormView[RecipeReviewForm], SingleObjectMixin[Reci
             "userRating": user_rating,
             "userFavourite": is_favourite,
         }
+
+
+class RecipeImportView(LoginRequiredMixin, InertiaFormView[RecipeImportForm]):
+    """A user facing view for importing recipes."""
+
+    form_class = RecipeImportForm
+    object: Recipe
+
+    def get_success_url(self) -> str:
+        """Resolve detail view URL for newly created recipe."""
+        if hasattr(self, "object"):
+            return reverse("recipes:recipe-detail", kwargs={"slug": self.object.slug})
+        return reverse("recipes:recipe-list")
+
+    def post(self, request: HttpRequest, **kwargs: Any) -> HttpResponse:
+        """Handle special form cases for inertia."""
+        form = self.get_form(self.get_form_class())
+        if not form.is_valid():
+            return self.form_invalid(form)
+
+        try:
+            with transaction.atomic():
+                recipe = form.save()
+                recipe.added_by = self.request.user  # type: ignore[assignment]
+                recipe.save()
+                self.object = recipe
+        except (DatabaseError, RecipeScrapersExceptions, FillPluginException):
+            logger.exception("Failed to import recipe")
+            self.request.session["errors"] = {"url": gettext("Error saving recipe")}
+        return HttpResponseRedirect(self.get_success_url())

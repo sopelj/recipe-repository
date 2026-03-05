@@ -76,6 +76,7 @@
     "recipe_add": "/ja/レシピ/追加/",
     "recipe_detail": "/ja/レシピ/{slug}/",
     "recipe_edit": "/ja/レシピ/{slug}/編集/",
+    "recipe_import": "/ja/レシピ/インポート/",
     "recipe_list": "/ja/"
   },
   "search": {
