@@ -62,11 +62,12 @@ const modalOpen = ref(false);
       >
         {{ title }}
       </h1>
-      <div class="ml-4 sm:ml-0">
+      <div class="mx-4 w-full flex mb-2 grow sm:grow-0 sm:w-auto sm:mx-0 sm:mb-0">
         <Link
           v-if="user"
           class="btn btn-outline mr-2 px-2"
           :title="t('recipe.add')"
+          disabled
         >
           <span class="icon-[ic--baseline-plus]"></span>
         </Link>
@@ -78,10 +79,11 @@ const modalOpen = ref(false);
         >
           <span class="icon-[iconoir--import]"></span>
         </button>
+        <span class="grow sm:grow-0"></span>
         <Link
           v-if="!category"
           :href="t('routes.category_type_list')"
-          class="btn btn-outline mr-2 lg:mr-0"
+          class="btn btn-outline md:mr-4 lg:mr-0"
         >
           {{ t("recipe.browse_categories") }}
         </Link>
