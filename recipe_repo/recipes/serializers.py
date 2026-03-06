@@ -146,6 +146,8 @@ class RecipeUpdateSerializer(ModelSerializer[Recipe]):
             "description",
             "cook_time",
             "prep_time",
+            "yield_amount",
+            "servings",
             "ingredient_groups",
             "steps",
             "ingredients",

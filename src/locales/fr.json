@@ -14,10 +14,27 @@
     "title": "Commentaires"
   },
   "edit": {
+    "add_group": "Ajouter un groupe d'ingrédients",
+    "add_ingredient": "Ajouter un ingrédient",
+    "add_step": "Ajouter une étape",
+    "amount": "Montant",
+    "amount_max": "Montant Max",
     "description": "Description",
+    "food": "Nourriture",
+    "ingredientGroups": "Groupes d'ingrédients",
     "name": "Nom",
+    "no_ingredient_groups": "Aucun groupe d'ingrédients en ce moment.",
+    "no_ingredients": "Aucun ingrédient en ce moment.",
+    "no_steps": "Aucune étape en ce moment.",
+    "notes": "Notes",
+    "optional": "Optionel",
+    "order": "Ordre",
+    "qualifier": "Qualificatif",
     "save": "Sauvegarder",
-    "title": "Modifier {name}"
+    "servings": "Portions",
+    "title": "Modifier {name}",
+    "unit": "Unité",
+    "yield": "Rendement"
   },
   "global": {
     "admin": "Admin",

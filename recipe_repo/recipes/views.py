@@ -215,7 +215,7 @@ class RecipeEditView(LoginRequiredMixin, InertiaView):
             return reverse("recipes:recipe-edit", kwargs={"slug": obj.slug})
         return reverse("recipes:recipe-add")
 
-    def post(self, request: HttpRequest, **kwargs: Any) -> HttpResponse:
+    def post(self, request: HttpRequest, **kwargs: Any) -> HttpResponseRedirect:
         """Handle special form cases for inertia."""
         serializer_kwargs = {"data": json.loads(self.request.body)}
         if obj := self.get_object():

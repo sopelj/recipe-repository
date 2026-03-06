@@ -14,11 +14,27 @@
     "title": "コメント"
   },
   "edit": {
+    "add_group": "材料のグループを追加する",
+    "add_ingredient": "材料を追加する",
+    "add_step": "ステップを追加する",
+    "amount": "量",
+    "amount_max": "最大量",
     "description": "説明",
+    "food": "食べ物",
+    "ingredientGroups": "材料のグループ",
     "name": "名",
+    "no_ingredient_groups": "材料グループはまだありません。",
+    "no_ingredients": "材料はまだありません。",
+    "no_steps": "まだステップはありません。",
     "notes": "",
+    "optional": "Optional",
+    "order": "並べ替え",
+    "qualifier": "予選",
     "save": "保存",
-    "title": "{name}を編集"
+    "servings": "サービング",
+    "title": "{name}を編集",
+    "unit": "単位",
+    "yield": "収率"
   },
   "global": {
     "admin": "管理",

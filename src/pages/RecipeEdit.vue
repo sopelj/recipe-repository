@@ -37,11 +37,15 @@ const props = defineProps<{
   foods?: Food[];
   units?: Unit[];
   user: User;
+  locale: string;
 }>();
 
 const recipeForm = useForm({
   name: props.recipe?.name || "",
   description: props.recipe?.description || "",
+  prep_time: props.recipe?.prep_time || "",
+  cook_time: props.recipe?.cook_time || "",
+  yield_amount: props.recipe?.yield_amount || "",
   servings: props.recipe?.servings || "",
   ingredients: props.ingredients || [],
   ingredient_groups: props.ingredientGroups || [],
@@ -110,10 +114,28 @@ const submitRecipeForm = () => {
             class="input"
           />
         </description-item>
+        <description-item :label="t('edit.yield')">
+          <input
+            v-model="recipeForm.yield_amount"
+            class="input w-20"
+          />
+        </description-item>
         <description-item :label="t('edit.servings')">
           <input
             v-model="recipeForm.servings"
-            class="input"
+            class="input w-20"
+          />
+        </description-item>
+        <description-item :label="t('edit.cook_time')">
+          <input
+            v-model="recipeForm.cook_time"
+            class="input w-50"
+          />
+        </description-item>
+        <description-item :label="t('edit.prep_time')">
+          <input
+            v-model="recipeForm.prep_time"
+            class="input w-50"
           />
         </description-item>
         <description-item :label="t('edit.description')">
@@ -131,6 +153,9 @@ const submitRecipeForm = () => {
               </div>
             </div>
             <div class="card-body">
+              <div v-if="!recipeForm.ingredient_groups.length">
+                {{ t("edit.no_ingredient_groups") }}
+              </div>
               <sortable-list v-model="recipeForm.ingredient_groups">
                 <template #default="{ item: group }">
                   <div class="flex items-center gap-2">
@@ -158,18 +183,22 @@ const submitRecipeForm = () => {
               </div>
             </div>
             <div class="card-body">
-              <div class="flex gap-2 items-center">
-                <div>{{ t("edit.order") }}</div>
-                <div>{{ t("edit.amount") }}</div>
-                <div>{{ t("edit.food") }}</div>
-                <div>{{ t("edit.unit") }}</div>
-                <div>{{ t("edit.qualifier") }}</div>
-                <div>{{ t("edit.notes") }}</div>
+              <div class="flex items-center justify-between gap-2 w-full">
+                <div class="w-10">{{ t("edit.order") }}</div>
+                <div class="">{{ t("edit.amount") }}</div>
+                <div class="">{{ t("edit.food") }}</div>
+                <div class="">{{ t("edit.unit") }}</div>
+                <div class="">{{ t("edit.qualifier") }}</div>
+                <div class="w-12">{{ t("edit.optional") }}</div>
+                <div class="">{{ t("edit.notes") }}</div>
+              </div>
+              <div v-if="!recipeForm.ingredients.length">
+                {{ t("edit.no_ingredients") }}
               </div>
               <sortable-list v-model="recipeForm.ingredients">
                 <template #default="{ item: ingredient, index: i }">
-                  <div class="flex gap-2 items-center">
-                    <div class="flex items-center gap-2 cursor-move userselect-none">
+                  <div class="flex items-center gap-2 w-full">
+                    <div class="flex items-center w-10 cursor-move userselect-none">
                       <span class="icon-[tabler--grip-vertical]"></span>
                     </div>
                     <div class="join">
@@ -255,6 +284,9 @@ const submitRecipeForm = () => {
         </div>
       </div>
       <div class="col-span-12">
+        <div v-if="!recipeForm.steps.length">
+          {{ t("edit.no_steps") }}
+        </div>
         <sortable-list v-model="recipeForm.steps">
           <template #default="{ item: step }">
             <div class="card mb-2 flex flex-row items-center cursor-move">

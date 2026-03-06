@@ -23,6 +23,9 @@
     "food": "Food",
     "ingredientGroups": "Ingredient groups",
     "name": "Name",
+    "no_ingredient_groups": "No ingredient groups yet.",
+    "no_ingredients": "No ingredients yet.",
+    "no_steps": "No steps yet.",
     "notes": "Notes",
     "optional": "Optional",
     "order": "Order",
@@ -30,7 +33,8 @@
     "save": "Save",
     "servings": "Servings",
     "title": "Edit {name}",
-    "unit": "Unit"
+    "unit": "Unit",
+    "yield": "Yield"
   },
   "global": {
     "admin": "Admin",
