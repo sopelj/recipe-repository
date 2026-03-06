@@ -67,7 +67,7 @@ const modalOpen = ref(false);
           v-if="user"
           class="btn btn-outline mr-2 px-2"
           :title="t('recipe.add')"
-          disabled
+          :href="t('routes.recipe_add')"
         >
           <span class="icon-[ic--baseline-plus]"></span>
         </Link>

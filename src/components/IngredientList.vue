@@ -10,7 +10,7 @@ const { t } = useI18n();
 
 const groupMapping = computed(() =>
   props.groups.reduce((acc: Record<string, string>, group: IngredientGroup) => {
-    acc[group.id.toString()] = group.name;
+    acc[group.id?.toString() || "other"] = group.name;
     return acc;
   }, {}),
 );

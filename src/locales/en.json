@@ -13,6 +13,25 @@
     "post": "Post",
     "title": "Comments"
   },
+  "edit": {
+    "add_group": "Add ingredient group",
+    "add_ingredient": "Add ingredient",
+    "add_step": "Add step",
+    "amount": "Amount",
+    "amount_max": "Amount Max",
+    "description": "Description",
+    "food": "Food",
+    "ingredientGroups": "Ingredient groups",
+    "name": "Name",
+    "notes": "Notes",
+    "optional": "Optional",
+    "order": "Order",
+    "qualifier": "Qualifier",
+    "save": "Save",
+    "servings": "Servings",
+    "title": "Edit {name}",
+    "unit": "Unit"
+  },
   "global": {
     "admin": "Admin",
     "keep_screen_on": "Keep screen on",
@@ -40,7 +59,7 @@
     "value_mg": "{value} mg"
   },
   "recipe": {
-    "add": "Add new recipe",
+    "add_new": "Add new recipe",
     "added_by": "Added by:",
     "all_recipes": "All recipes",
     "browse_categories": "Browse categories",
@@ -75,7 +94,7 @@
     "logout": "/en/admin/logout/",
     "recipe_add": "/en/recipes/add",
     "recipe_detail": "/en/recipes/{slug}/",
-    "recipe_edit": "/en/recipes/{slug}/edit",
+    "recipe_edit": "/en/recipes/{slug}/edit/",
     "recipe_import": "/en/recipes/import/",
     "recipe_list": "/en/"
   },

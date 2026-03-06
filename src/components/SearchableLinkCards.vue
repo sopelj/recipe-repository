@@ -29,7 +29,7 @@ const { t } = useI18n();
         id="search-input"
         v-model="search"
         type="text"
-        class="join-item grow"
+        class="join-item"
         :placeholder="t('search.search')"
       />
       <slot name="extra-inputs" />

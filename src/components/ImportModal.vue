@@ -37,13 +37,13 @@ onBeforeUnmount(() => {
 <template>
   <div
     v-if="isOpen"
-    class="fixed top-0 left-0 w-full h-full bg-base-300/60 z-50"
+    class="fixed top-0 left-0 w-screen h-screen bg-base-300/60 z-50"
     role="dialog"
     tabindex="-1"
     :class="isOpen ? 'open opened' : 'hidden'"
   >
     <div
-      class="modal-dialog fixed grid h-screen place-items-center"
+      class="modal-dialog fixed grid w-screen h-screen min-w-full place-items-center"
       @click.self="closeModal"
     >
       <div class="modal-content">

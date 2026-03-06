@@ -86,6 +86,14 @@ const shareRecipe = async () => {
           >
             <span class="icon-[ooui--share]"></span>
           </button>
+          <Link
+            v-if="user?.id == recipe.added_by.id"
+            class="btn-text mr-2 px-2 text-3xl hover:text-purple-400 transition-colors cursor-pointer"
+            :title="t('recipe.edit')"
+            :href="t('routes.recipe_edit', { slug: recipe.slug })"
+          >
+            <span class="icon-[uil--edit]"></span>
+          </Link>
         </div>
         <breadcrumb-bar
           :current="recipe.name"

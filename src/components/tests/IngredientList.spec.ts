@@ -38,7 +38,7 @@ test("IngredientList should display grouped ingredients", async () => {
       qualifier: "",
     },
   ];
-  const groups: IngredientGroup[] = [{ id: 1, name: "Main" }];
+  const groups: IngredientGroup[] = [{ id: 1, name: "Main", order: 0 }];
   const wrapper = mount(IngredientList, {
     props: { ingredients, groups },
   });

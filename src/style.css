@@ -5,7 +5,7 @@
 
 @plugin "flyonui" {
     themes: light --default, dark --prefersdark, pastel;
-    include: navbar, dropdown, button, input, menu, select, join, collapse, switches, badge, label, divider, modal;
+    include: navbar, dropdown, button, input, menu, select, join, collapse, switches, badge, label, divider, modal, textarea, checkbox;
 }
 
 

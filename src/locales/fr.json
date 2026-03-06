@@ -13,6 +13,12 @@
     "post": "Poster",
     "title": "Commentaires"
   },
+  "edit": {
+    "description": "Description",
+    "name": "Nom",
+    "save": "Sauvegarder",
+    "title": "Modifier {name}"
+  },
   "global": {
     "admin": "Admin",
     "keep_screen_on": "Gardez l'écran éveillé",

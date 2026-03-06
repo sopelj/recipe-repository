@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-03-04 21:48-0500\n"
+"POT-Creation-Date: 2026-03-05 09:52-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -387,10 +387,18 @@ msgid "recipes/import/"
 msgstr "recipes/importer/"
 
 #: recipe_repo/recipes/urls.py:11
+msgid "recipes/add/"
+msgstr "recipes/ajouter/"
+
+#: recipe_repo/recipes/urls.py:12
 msgid "recipes/<slug:slug>/"
 msgstr "recettes/<slug:slug>/"
 
-#: recipe_repo/recipes/views.py:156
+#: recipe_repo/recipes/urls.py:13
+msgid "recipes/<slug:slug>/edit/"
+msgstr "recettes/<slug:slug>/editer/"
+
+#: recipe_repo/recipes/views.py:157 recipe_repo/recipes/views.py:192
 msgid "Error saving recipe"
 msgstr "Erreur lors de la sauvegarde"
 

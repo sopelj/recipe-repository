@@ -13,6 +13,13 @@
     "post": "コメントを投稿",
     "title": "コメント"
   },
+  "edit": {
+    "description": "説明",
+    "name": "名",
+    "notes": "",
+    "save": "保存",
+    "title": "{name}を編集"
+  },
   "global": {
     "admin": "管理",
     "keep_screen_on": "画面をオンにしたままにする",
