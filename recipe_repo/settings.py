@@ -30,7 +30,6 @@ CSRF_TRUSTED_ORIGINS = env.list("CSRF_TRUSTED_ORIGINS", default=[])
 
 X_FRAME_OPTIONS = "SAMEORIGIN"
 SILENCED_SYSTEM_CHECKS = ["security.W019"]
-FORMS_URLFIELD_ASSUME_HTTPS = True
 
 # Application definition
 INSTALLED_APPS = [
@@ -159,7 +158,6 @@ TIME_ZONE = env("TZ", default="America/Montreal")
 USE_TZ = True
 
 # Default primary key field type
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Thumbnail Generation
 THUMBNAIL_HIGH_RESOLUTION = True

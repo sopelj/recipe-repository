@@ -55,7 +55,7 @@ class Source(NamedModel):
     recipe_set: RelatedManager[Recipe]
 
     name = models.CharField(_("Name"), max_length=150, unique=True)
-    type = models.PositiveIntegerField(_("Type"), choices=SourceTypes.choices, default=SourceTypes.URL)
+    type = models.PositiveIntegerField(_("Type"), choices=SourceTypes, default=SourceTypes.URL)
     value = models.CharField(_("Value"), blank=True, null=True, max_length=200)
 
     @staticmethod
