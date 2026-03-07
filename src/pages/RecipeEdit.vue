@@ -10,6 +10,7 @@ import BreadcrumbBar from "@/components/BreadcrumbBar.vue";
 import DescriptionItem from "@/components/DescriptionItem.vue";
 import InputField from "@/components/forms/inputs/InputField.vue";
 import SelectInput from "@/components/forms/inputs/SelectInput.vue";
+import SlugField from "@/components/forms/inputs/SlugField.vue";
 import TextInput from "@/components/forms/inputs/TextInput.vue";
 import SortableList from "@/components/SortableList.vue";
 import HeadSection from "@/layouts/HeadSection.vue";
@@ -105,7 +106,6 @@ const hasErrors = computed((): boolean =>
 <template>
   <head-section :title="pageTitle" />
   <div class="container mx-auto px-4">
-    {{ recipeForm.errors }}
     <form
       class="grid grid-cols-12 gap-4 border-b border-t border-red-500/0"
       :class="hasErrors ? 'border-red-500/100' : ''"
@@ -130,6 +130,13 @@ const hasErrors = computed((): boolean =>
             id="name-field"
             v-model="recipeForm.name"
             :errors="recipeForm.errors?.name"
+          />
+          <slug-field
+            id="slug-field"
+            v-model="recipeForm.slug"
+            :errors="recipeForm.errors?.slug"
+            :source-value="recipeForm.name"
+            class="ml-4"
           />
         </description-item>
         <description-item :label="t('edit.yield')">

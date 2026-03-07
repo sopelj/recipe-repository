@@ -51,10 +51,15 @@ const { t } = useI18n();
       </option>
     </select>
     <ul
-      v-if="errors?.length"
+      v-if="errors"
       class="text-red-500 text-sm"
     >
-      <li v-for="error in errors">{{ error }}</li>
+      <li
+        v-for="(error, i) in errors"
+        :key="i"
+      >
+        {{ error }}
+      </li>
     </ul>
   </div>
 </template>

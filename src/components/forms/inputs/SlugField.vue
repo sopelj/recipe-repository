@@ -1,11 +1,13 @@
-<script setup lang="ts" generic="T">
-const model = defineModel<T>();
+<script setup lang="ts">
+import { watch } from "vue";
 
-withDefaults(
+const model = defineModel<string>();
+
+const props = withDefaults(
   defineProps<{
     id: string;
+    sourceValue: string;
     label?: string;
-    placeholder?: string;
     errors?: string[];
     inputClass?: string;
   }>(),
@@ -13,7 +15,15 @@ withDefaults(
     label: undefined,
     placeholder: undefined,
     inputClass: "",
+    type: "text",
     errors: () => [],
+  },
+);
+
+watch(
+  () => props.sourceValue,
+  () => {
+    model.value = props.sourceValue.replaceAll(" ", "-").toLocaleLowerCase();
   },
 );
 </script>
@@ -27,11 +37,13 @@ withDefaults(
     >
       {{ label }}
     </label>
-    <textarea
+    <input
       :id="id"
       v-model="model"
-      :placeholder="placeholder"
-      class="textarea"
+      type="text"
+      readonly
+      tabindex="-1"
+      class="input"
       :class="inputClass + (errors?.length ? ' is-invalid' : '')"
     />
     <ul

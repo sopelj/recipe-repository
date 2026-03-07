@@ -42,9 +42,10 @@ def to_snake_case(camel: str) -> str:
     return re.sub(r"(?<!^)(?=[A-Z])", "_", camel).lower()
 
 
-def get_image_thumbnail_url(image_field: ThumbnailerImageField, profile: str) -> str:
+def get_image_thumbnail_url(image_field: ThumbnailerImageField, profile: str) -> str | None:
     """Get the full URL for an image."""
     try:
         return get_thumbnailer(image_field)[profile].url if image_field else None
     except InvalidImageFormatError:
         _LOGGER.exception("Failed to get image thumbnail for %s", image_field.model)
+    return None

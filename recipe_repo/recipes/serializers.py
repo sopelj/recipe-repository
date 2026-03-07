@@ -1,7 +1,8 @@
 from __future__ import annotations
 
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
+from rest_framework.fields import SlugField
 from rest_framework.relations import PrimaryKeyRelatedField
 from rest_framework.serializers import DurationField, IntegerField, ModelSerializer, SlugRelatedField
 
@@ -20,12 +21,16 @@ from .models import (
     YieldUnit,
 )
 
+if TYPE_CHECKING:
+    RelatedSerializers = type["IngredientGroupSerializer" | "StepUpdateSerializer" | "IngredientUpdateSerializer"]
+
 
 class NewIdField(IntegerField):
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         """Ensure field is writable."""
-        kwargs["read_only"] = False
+        kwargs |= {"required": False, "allow_null": True}
         super().__init__(**kwargs)
+
 
 class NutritionSerializer(ModelSerializer[NutritionInformation]):
     class Meta:
@@ -101,6 +106,7 @@ class StepUpdateSerializer(ModelSerializer[Step]):
 
 class RecipeUpdateSerializer(ModelSerializer[Recipe]):
     id = NewIdField()
+    slug = SlugField()
     ingredient_groups = IngredientGroupSerializer(many=True)
     ingredients = IngredientUpdateSerializer(many=True)
     steps = StepUpdateSerializer(many=True)
@@ -110,7 +116,7 @@ class RecipeUpdateSerializer(ModelSerializer[Recipe]):
     def save(self, **kwargs: Any) -> Recipe:
         """Save recipe and nested serializers."""
         # TODO: find a way to identify related fields
-        related_fields = {
+        related_fields: dict[str, RelatedSerializers] = {
             "ingredient_groups": IngredientGroupSerializer,
             "ingredients": IngredientUpdateSerializer,
             "steps": StepUpdateSerializer,
@@ -141,7 +147,7 @@ class RecipeUpdateSerializer(ModelSerializer[Recipe]):
 
         for item_data in data:
             instance = existing_objects.get(item_data.get("id", None))
-            serializer = serializer_class(instance, data=item_data)
+            serializer = serializer_class(instance=instance, data=item_data, partial=True)
             if serializer.is_valid():
                 obj = serializer.save(recipe=recipe)
                 new_objects_pks.append(obj.pk)
@@ -153,14 +159,12 @@ class RecipeUpdateSerializer(ModelSerializer[Recipe]):
         if has_errors:
             self._errors[field_name] = errors
 
-        # Delete objects not in the new data
-        getattr(recipe, field_name).exclude(pk__in=new_objects_pks).delete()
-
     class Meta:
         model = Recipe
         fields = (
             "id",
             "name",
+            "slug",
             "description",
             "cook_time",
             "prep_time",

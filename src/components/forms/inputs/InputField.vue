@@ -11,6 +11,8 @@ withDefaults(
     inputClass?: string;
   }>(),
   {
+    label: undefined,
+    placeholder: undefined,
     inputClass: "",
     type: "text",
     errors: () => [],
@@ -39,7 +41,12 @@ withDefaults(
       v-if="errors"
       class="text-red-500 text-sm"
     >
-      <li v-for="error in errors">{{ error }}</li>
+      <li
+        v-for="(error, i) in errors"
+        :key="i"
+      >
+        {{ error }}
+      </li>
     </ul>
   </div>
 </template>
