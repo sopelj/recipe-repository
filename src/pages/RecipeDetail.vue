@@ -87,7 +87,7 @@ const shareRecipe = async () => {
             <span class="icon-[ooui--share]"></span>
           </button>
           <Link
-            v-if="user?.id == recipe.added_by.id"
+            v-if="user?.id && user?.id == recipe.added_by?.id"
             class="btn-text mr-2 px-2 text-3xl hover:text-purple-400 transition-colors cursor-pointer"
             :title="t('recipe.edit')"
             :href="t('routes.recipe_edit', { slug: recipe.slug })"
@@ -132,10 +132,13 @@ const shareRecipe = async () => {
           />
           <span v-else>{{ t("recipe.servings", servings) }}</span>
         </description-item>
-        <description-item :label="t('recipe.added_by')">
+        <description-item
+          v-if="recipe?.added_by"
+          :label="t('recipe.added_by')"
+        >
           <user-avatar :user="recipe.added_by" />
           <span class="pl-2">
-            {{ recipe.added_by.id === user?.id ? t("users.me") : recipe.added_by.full_name }}
+            {{ recipe.added_by?.id === user?.id ? t("users.me") : recipe.added_by.full_name }}
           </span>
         </description-item>
         <description-item
