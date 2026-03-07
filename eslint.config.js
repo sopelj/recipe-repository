@@ -72,8 +72,8 @@ export default tseslint.config(
         "kebab-case",
         {
           "registeredComponentsOnly": false,
-          globals: ["Link", "Head"],
-          ignores: ["Link", "Head"],
+          globals: ["Link", "Head", "Form"],
+          ignores: ["Link", "Head", "Form"],
         },
       ],
     },

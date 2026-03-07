@@ -115,17 +115,19 @@ export interface Recipe extends Omit<RecipeItem, "thumbnail_url"> {
   comments: Comment[];
 }
 
-export interface EditableRecipe extends Omit<RecipeItem, "thumbnail_url"> {
+export interface EditableRecipe {
   id: number | null;
+  name: string;
+  slug: string;
   description: string;
-  yield_amount: number;
+  yield_amount: number | null;
   cook_time: string;
+  cook_time_max: string;
   prep_time: string;
-  total_tim: string;
+  source?: Source;
   source_value?: string;
   servings: number;
   ingredients: EditableIngredient[];
   ingredient_groups: IngredientGroup[];
-  source?: Source;
   steps: Step[];
 }

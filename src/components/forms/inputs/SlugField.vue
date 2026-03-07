@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { watch } from "vue";
+import { computed, watch } from "vue";
 
 const model = defineModel<string>();
 
@@ -8,7 +8,7 @@ const props = withDefaults(
     id: string;
     sourceValue: string;
     label?: string;
-    errors?: string[];
+    errors?: string[] | string;
     inputClass?: string;
   }>(),
   {
@@ -20,6 +20,7 @@ const props = withDefaults(
   },
 );
 
+const errorList = computed((): string[] => (Array.isArray(props.errors) ? props.errors : [props.errors]));
 watch(
   () => props.sourceValue,
   () => {
@@ -44,14 +45,14 @@ watch(
       readonly
       tabindex="-1"
       class="input"
-      :class="inputClass + (errors?.length ? ' is-invalid' : '')"
+      :class="inputClass + (errorList?.length ? ' is-invalid' : '')"
     />
     <ul
-      v-if="errors"
+      v-if="errorList"
       class="text-red-500 text-sm"
     >
       <li
-        v-for="(error, i) in errors"
+        v-for="(error, i) in errorList"
         :key="i"
       >
         {{ error }}

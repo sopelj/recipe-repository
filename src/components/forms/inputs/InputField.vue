@@ -1,12 +1,14 @@
 <script setup lang="ts" generic="T">
+import { computed } from "vue";
+
 const model = defineModel<T>();
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     id: string;
     label?: string;
     placeholder?: string;
-    errors?: string[];
+    errors?: string[] | string;
     type?: string;
     inputClass?: string;
   }>(),
@@ -18,6 +20,8 @@ withDefaults(
     errors: () => [],
   },
 );
+
+const errorList = computed((): string[] => (Array.isArray(props.errors) ? props.errors : [props.errors]));
 </script>
 
 <template>
@@ -35,14 +39,14 @@ withDefaults(
       :type="type"
       :placeholder="placeholder"
       class="input"
-      :class="inputClass + (errors?.length ? ' is-invalid' : '')"
+      :class="inputClass + (errorList?.length ? ' is-invalid' : '')"
     />
     <ul
-      v-if="errors"
+      v-if="errorList?.length"
       class="text-red-500 text-sm"
     >
       <li
-        v-for="(error, i) in errors"
+        v-for="(error, i) in errorList"
         :key="i"
       >
         {{ error }}

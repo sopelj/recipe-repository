@@ -1,4 +1,5 @@
 <script setup lang="ts" generic="T extends { id: number | null }">
+import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 
 interface Props {
@@ -6,17 +7,18 @@ interface Props {
   id: string;
   options: T[];
   labelKey?: keyof T;
-  errors?: string[];
+  errors?: string[] | string;
 }
 
 const model = defineModel<number | null>();
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   label: "",
   labelKey: "label" as keyof T,
   errors: () => [],
 });
 
 const { t } = useI18n();
+const errorList = computed((): string[] => (Array.isArray(props.errors) ? props.errors : [props.errors]));
 </script>
 
 <template>
@@ -51,11 +53,11 @@ const { t } = useI18n();
       </option>
     </select>
     <ul
-      v-if="errors"
+      v-if="errorList"
       class="text-red-500 text-sm"
     >
       <li
-        v-for="(error, i) in errors"
+        v-for="(error, i) in errorList"
         :key="i"
       >
         {{ error }}

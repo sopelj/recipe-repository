@@ -1,12 +1,12 @@
-<script setup lang="ts" generic="T">
-const model = defineModel<T>();
+<script setup lang="ts">
+const model = defineModel<string>();
 
 withDefaults(
   defineProps<{
     id: string;
     label?: string;
     placeholder?: string;
-    errors?: string[];
+    errors?: string[] | string;
     inputClass?: string;
   }>(),
   {

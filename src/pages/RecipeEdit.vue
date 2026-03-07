@@ -2,7 +2,7 @@
 import type { EditableRecipe, Food, Qualifier, Unit } from "@/types/recipes";
 import type { User } from "@/types/users";
 
-import { Deferred, useForm } from "@inertiajs/vue3";
+import { Deferred, Form, useForm } from "@inertiajs/vue3";
 import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 
@@ -15,36 +15,8 @@ import TextInput from "@/components/forms/inputs/TextInput.vue";
 import SortableList from "@/components/SortableList.vue";
 import HeadSection from "@/layouts/HeadSection.vue";
 
-interface IngredientErrors {
-  amount?: string[];
-  amount_max?: string[];
-  food?: string[];
-  unit?: string[];
-  qualifier?: string[];
-  optional?: string[];
-  note?: string[];
-}
-
-interface StepErrors {
-  text?: string[];
-}
-
-interface IngredientGroupErrors {
-  name?: string[];
-}
-
-interface FormErrors {
-  name?: string[];
-  description?: string[];
-  servings?: string[];
-  ingredients?: IngredientErrors[];
-  ingredientGroups?: IngredientGroupErrors[];
-  steps?: StepErrors[];
-}
-
 const props = defineProps<{
   recipe?: EditableRecipe | null;
-  errors: FormErrors | null;
   qualifiers?: Qualifier[];
   foods?: Food[];
   units?: Unit[];
@@ -52,14 +24,16 @@ const props = defineProps<{
   locale: string;
 }>();
 
-const recipeForm = useForm({
+const recipeForm = useForm<EditableRecipe>({
   id: props.recipe?.id || null,
   name: props.recipe?.name || "",
+  slug: props.recipe?.slug || "",
   description: props.recipe?.description || "",
   prep_time: props.recipe?.prep_time || "",
   cook_time: props.recipe?.cook_time || "",
-  yield_amount: props.recipe?.yield_amount || "",
-  servings: props.recipe?.servings || "",
+  cook_time_max: props.recipe?.cook_time_max || "",
+  yield_amount: props.recipe?.yield_amount || null,
+  servings: props.recipe?.servings || 1,
   ingredients: props.recipe?.ingredients || [],
   ingredient_groups: props.recipe?.ingredient_groups || [],
   steps: props.recipe?.steps || [],
@@ -106,7 +80,8 @@ const hasErrors = computed((): boolean =>
 <template>
   <head-section :title="pageTitle" />
   <div class="container mx-auto px-4">
-    <form
+    <Form
+      v-slot="{ errors }"
       class="grid grid-cols-12 gap-4 border-b border-t border-red-500/0"
       :class="hasErrors ? 'border-red-500/100' : ''"
       @submit.prevent="submitRecipeForm"
@@ -129,12 +104,12 @@ const hasErrors = computed((): boolean =>
           <input-field
             id="name-field"
             v-model="recipeForm.name"
-            :errors="recipeForm.errors?.name"
+            :errors="errors?.name"
           />
           <slug-field
             id="slug-field"
             v-model="recipeForm.slug"
-            :errors="recipeForm.errors?.slug"
+            :errors="errors?.slug"
             :source-value="recipeForm.name"
             class="ml-4"
           />
@@ -143,7 +118,7 @@ const hasErrors = computed((): boolean =>
           <input-field
             id="yield-field"
             v-model="recipeForm.yield_amount"
-            :errors="recipeForm.errors?.yield_amount"
+            :errors="errors?.yield_amount"
             input-class="w-20"
             placeholder="1"
           />
@@ -152,7 +127,7 @@ const hasErrors = computed((): boolean =>
           <input-field
             id="servings-field"
             v-model="recipeForm.servings"
-            :errors="recipeForm.errors?.servings"
+            :errors="errors?.servings"
             input-class="w-20"
             placeholder="1"
           />
@@ -162,7 +137,7 @@ const hasErrors = computed((): boolean =>
             id="cook-time-field"
             v-model="recipeForm.cook_time"
             placeholder="00:00:00"
-            :errors="recipeForm.errors?.cook_time"
+            :errors="errors?.cook_time"
             input-class="w-50"
           />
         </description-item>
@@ -171,7 +146,7 @@ const hasErrors = computed((): boolean =>
             id="prep-time-field"
             v-model="recipeForm.prep_time"
             placeholder="00:00:00"
-            :errors="recipeForm.errors?.prep_time"
+            :errors="errors?.prep_time"
             input-class="w-50"
           />
         </description-item>
@@ -180,7 +155,7 @@ const hasErrors = computed((): boolean =>
             id="description-field"
             v-model="recipeForm.description"
             class="max-w-full"
-            :errors="recipeForm.errors?.description"
+            :errors="errors?.description"
             :placeholder="t('edit.description')"
           />
         </description-item>
@@ -234,8 +209,8 @@ const hasErrors = computed((): boolean =>
               <div v-if="!recipeForm.ingredients.length">
                 {{ t("edit.no_ingredients") }}
               </div>
-              <div v-if="recipeForm.errors?.ingredients">
-                {{ recipeForm.errors?.ingredients }}
+              <div v-if="errors?.ingredients">
+                {{ errors?.ingredients }}
               </div>
               <sortable-list v-model="recipeForm.ingredients">
                 <template #default="{ item: ingredient, index: i }">
@@ -247,13 +222,13 @@ const hasErrors = computed((): boolean =>
                       <input-field
                         :id="`ingredient-${i}-amount`"
                         v-model="ingredient.amount"
-                        :errors="recipeForm.errors?.ingredients?.[i]?.amount"
+                        :errors="errors?.[`ingredients?.[${i}].amount`]"
                         class="join-item"
                       />
                       <input-field
                         :id="`ingredient-${i}-amount`"
                         v-model="ingredient.amount_max"
-                        :errors="recipeForm.errors?.ingredients?.[i]?.amount_max"
+                        :errors="errors?.[`ingredients?.[${i}].amount_max`]"
                         class="join-item"
                       />
                     </div>
@@ -265,7 +240,7 @@ const hasErrors = computed((): boolean =>
                         v-if="foods"
                         :id="`ingredient-${i}-food`"
                         v-model="ingredient.food"
-                        :errors="recipeForm.errors?.ingredients?.[i]?.food"
+                        :errors="errors?.[`ingredients?.[${i}].food`]"
                         :options="foods"
                         label-key="name"
                       />
@@ -278,7 +253,7 @@ const hasErrors = computed((): boolean =>
                         v-if="units"
                         :id="`ingredient-${i}-unit`"
                         v-model="ingredient.unit"
-                        :errors="recipeForm.errors?.ingredients?.[i]?.unit"
+                        :errors="errors?.[`ingredients?.[${i}].unit`]"
                         :options="units"
                         label-key="name"
                       >
@@ -296,7 +271,7 @@ const hasErrors = computed((): boolean =>
                         v-if="qualifiers"
                         :id="`ingredient-${i}-qualifier`"
                         v-model="ingredient.qualifier"
-                        :errors="recipeForm.errors?.ingredients?.[i]?.qualifier"
+                        :errors="errors?.[`ingredients?.[${i}].qualifier`]"
                         :options="qualifiers"
                         label-key="title"
                       />
@@ -318,7 +293,7 @@ const hasErrors = computed((): boolean =>
                     <input-field
                       :id="`ingredient-${i}-note`"
                       v-model="ingredient.note"
-                      :errors="recipeForm.errors?.ingredients?.[i]?.note"
+                      :errors="errors?.[`ingredients?.[${i}].note`]"
                     />
                   </div>
                 </template>
@@ -339,7 +314,7 @@ const hasErrors = computed((): boolean =>
           {{ t("edit.no_steps") }}
         </div>
         <sortable-list v-model="recipeForm.steps">
-          <template #default="{ item: step }">
+          <template #default="{ item: step, index: i }">
             <div class="card mb-2 flex flex-row items-center cursor-move">
               <span class="ml-4 icon-[tabler--grip-vertical]"></span>
               <h3 class="card-title p-4">{{ t("recipe.step_title", { step: step.order }) }}</h3>
@@ -347,7 +322,7 @@ const hasErrors = computed((): boolean =>
                 <text-input
                   :id="`step-${step.order}-text`"
                   v-model="step.text"
-                  :errors="recipeForm.errors?.steps?.[i]?.text"
+                  :errors="errors?.[`steps?.[${i}].text`]"
                 ></text-input>
               </div>
             </div>
@@ -369,6 +344,6 @@ const hasErrors = computed((): boolean =>
           </button>
         </div>
       </div>
-    </form>
+    </Form>
   </div>
 </template>
