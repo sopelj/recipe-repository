@@ -12,11 +12,10 @@ from django.utils.html import format_html
 from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
 from easy_thumbnails.fields import ThumbnailerImageField
-from easy_thumbnails.files import get_thumbnailer
 from modeltranslation.manager import MultilingualQuerySet
 
 from ..common.models import NamedModel, NamedPluralModel
-from ..common.utils import pluralize
+from ..common.utils import get_image_thumbnail_url, pluralize
 from ..units.consts import UnitType
 from ..units.utils import format_fraction_amounts
 
@@ -146,12 +145,12 @@ class Recipe(NamedModel):
     @property
     def thumbnail_url(self) -> str | None:
         """Resolve URL of recipe thumbnail image."""
-        return get_thumbnailer(self.image)["thumbnail"].url if self.image else None
+        return get_image_thumbnail_url(self.image, "thumbnail")
 
     @property
     def image_url(self) -> str | None:
         """Resolve URL of recipe thumbnail image."""
-        return get_thumbnailer(self.image)["image"].url if self.image else None
+        return get_image_thumbnail_url(self.image, "image")
 
     def get_absolute_url(self) -> str:
         """Resolve recipe URL in current language."""

@@ -26,7 +26,6 @@ from .forms import RecipeImportForm, RecipeReviewForm, ServingsForm
 from .models import Ingredient, IngredientQualifier, Recipe
 from .serializers import (
     IngredientSerializer,
-    IngredientUpdateSerializer,
     RecipeListSerializer,
     RecipeSerializer,
     RecipeUpdateSerializer,
@@ -186,6 +185,7 @@ class RecipeEditView(LoginRequiredMixin, InertiaView):
                 Recipe.objects.select_related("source").prefetch_related(
                     "steps",
                     "ingredient_groups",
+                    "ingredients",
                 ).filter(
                     Q(slug=recipe_slug) | Q(**{f"slug_{get_language()}": recipe_slug}),
                     added_by=self.request.user,  # type: ignore[misc]
@@ -201,12 +201,7 @@ class RecipeEditView(LoginRequiredMixin, InertiaView):
             "qualifiers": defer(lambda: IngredientQualifier.objects.all().values("title", "id")),
         }
         if recipe := self.get_object():
-            props |= {
-                "recipe": lambda: RecipeUpdateSerializer(recipe).data,
-                "ingredients": lambda: IngredientUpdateSerializer(
-                    get_recipe_ingredients(recipe.pk), many=True,
-                ).data,
-            }
+            props |= {"recipe": lambda: RecipeUpdateSerializer(recipe).data}
         return props
 
     def get_success_url(self) -> str:

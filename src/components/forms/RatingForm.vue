@@ -4,7 +4,7 @@ import { onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 import { useToast } from "vue-toastification";
 
-import Rating from "@/components/RatingInput.vue";
+import Rating from "@/components/forms/inputs/RatingInput.vue";
 
 const props = defineProps<{ numRatings: number; userRating: number | null; averageRating: number | null }>();
 

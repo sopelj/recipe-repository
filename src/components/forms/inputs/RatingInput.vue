@@ -7,7 +7,7 @@ const props = withDefaults(
     readonly?: boolean;
     size?: number;
   }>(),
-  { size: 6 },
+  { size: 6, disabled: false, readonly: false, title: undefined },
 );
 
 const setRating = (val: number) => {

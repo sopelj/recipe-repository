@@ -40,12 +40,12 @@ export interface Ingredient {
 export interface EditableIngredient {
   id: number | null;
   order: number;
-  group_id: number | null;
+  group: number | null;
   amount: number | null;
   amount_max: number | null;
-  food_id: number | null;
-  unit_id: number | null;
-  qualifier_id: number | null;
+  food: number | null;
+  unit: number | null;
+  qualifier: number | null;
   optional: boolean;
   note: string;
 }
@@ -116,6 +116,7 @@ export interface Recipe extends Omit<RecipeItem, "thumbnail_url"> {
 }
 
 export interface EditableRecipe extends Omit<RecipeItem, "thumbnail_url"> {
+  id: number | null;
   description: string;
   yield_amount: number;
   cook_time: string;

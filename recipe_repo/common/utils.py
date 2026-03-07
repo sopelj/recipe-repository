@@ -1,14 +1,20 @@
 from __future__ import annotations
 
+import logging
 import re
 from typing import TYPE_CHECKING
 
 from django.utils.translation import get_language
+from easy_thumbnails.exceptions import InvalidImageFormatError
+from easy_thumbnails.files import get_thumbnailer
 
 if TYPE_CHECKING:
     from decimal import Decimal
 
     from django_stubs_ext import StrOrPromise
+    from easy_thumbnails.fields import ThumbnailerImageField
+
+_LOGGER = logging.getLogger(__name__)
 
 
 def pluralize(singular: StrOrPromise, plural: StrOrPromise | None, count: Decimal | float) -> StrOrPromise:
@@ -34,3 +40,11 @@ def to_camel_case(snake: str) -> str:
 def to_snake_case(camel: str) -> str:
     """Convert camelCase to snake_case."""
     return re.sub(r"(?<!^)(?=[A-Z])", "_", camel).lower()
+
+
+def get_image_thumbnail_url(image_field: ThumbnailerImageField, profile: str) -> str:
+    """Get the full URL for an image."""
+    try:
+        return get_thumbnailer(image_field)[profile].url if image_field else None
+    except InvalidImageFormatError:
+        _LOGGER.exception("Failed to get image thumbnail for %s", image_field.model)

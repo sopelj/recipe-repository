@@ -10,16 +10,16 @@ import { useShare } from "@/composables/share";
 
 import BreadcrumbBar from "@/components/BreadcrumbBar.vue";
 import DescriptionItem from "@/components/DescriptionItem.vue";
-import FavouriteForm from "@/components/FavouriteForm.vue";
+import FavouriteForm from "@/components/forms/FavouriteForm.vue";
+import RatingForm from "@/components/forms/RatingForm.vue";
+import ServingsForm from "@/components/forms/ServingsForm.vue";
 import IngredientList from "@/components/IngredientList.vue";
 import KeepAwake from "@/components/KeepAwake.vue";
 import NutritionalInformation from "@/components/NutritionalInformation.vue";
-import RatingForm from "@/components/RatingForm.vue";
 import RecipeComments from "@/components/RecipeComments.vue";
 import RecipeDurations from "@/components/RecipeDurations.vue";
 import RecipeSource from "@/components/RecipeSource.vue";
 import RecipeYield from "@/components/RecipeYield.vue";
-import ServingsForm from "@/components/ServingsForm.vue";
 import UserAvatar from "@/components/UserAvatar.vue";
 import HeadSection from "@/layouts/HeadSection.vue";
 

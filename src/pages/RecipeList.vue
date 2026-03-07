@@ -8,9 +8,9 @@ import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 
 import BreadcrumbBar from "@/components/BreadcrumbBar.vue";
+import MultiSelect from "@/components/forms/inputs/MultiSelect.vue";
+import RatingInput from "@/components/forms/inputs/RatingInput.vue";
 import ImportModal from "@/components/ImportModal.vue";
-import MultiSelect from "@/components/MultiSelect.vue";
-import RatingInput from "@/components/RatingInput.vue";
 import SearchableLinkCards from "@/components/SearchableLinkCards.vue";
 import HeadSection from "@/layouts/HeadSection.vue";
 

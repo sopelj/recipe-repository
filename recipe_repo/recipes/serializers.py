@@ -21,6 +21,12 @@ from .models import (
 )
 
 
+class NewIdField(IntegerField):
+    def __init__(self, **kwargs):
+        """Ensure field is writable."""
+        kwargs["read_only"] = False
+        super().__init__(**kwargs)
+
 class NutritionSerializer(ModelSerializer[NutritionInformation]):
     class Meta:
         model = NutritionInformation
@@ -49,20 +55,24 @@ class IngredientSerializer(ModelSerializer[Ingredient]):
 
 
 class IngredientUpdateSerializer(ModelSerializer[Ingredient]):
-    food_id = PrimaryKeyRelatedField(queryset=Food.objects.all())
-    unit_id = PrimaryKeyRelatedField(queryset=Unit.objects.all())
-    qualifier_id = PrimaryKeyRelatedField(queryset=IngredientQualifier.objects.all())
-    group_id  = PrimaryKeyRelatedField(queryset=IngredientGroup.objects.all())
+    id = NewIdField()
+
+    food = PrimaryKeyRelatedField(queryset=Food.objects.all())
+    unit = PrimaryKeyRelatedField(queryset=Unit.objects.all(), required=False, allow_null=True)
+    qualifier = PrimaryKeyRelatedField(queryset=IngredientQualifier.objects.all(), required=False, allow_null=True)
+    group  = PrimaryKeyRelatedField(queryset=IngredientGroup.objects.all(), required=False, allow_null=True)
 
     class Meta:
         model = Ingredient
-        fields = ("id", "amount", "amount_max", "food_id", "unit_id", "qualifier_id", "group_id", "optional", "note")
+        fields = ("id", "order", "amount", "amount_max", "food", "unit", "qualifier", "group", "optional", "note")
 
 
 class IngredientGroupSerializer(ModelSerializer[IngredientGroup]):
+    id = NewIdField()
+
     class Meta:
         model = IngredientGroup
-        fields = ("id", "name")
+        fields = ("id", "order", "name")
 
 
 class RecipeListSerializer(ModelSerializer[Recipe]):
@@ -82,29 +92,37 @@ class RelatedRecipeSerializer(ModelSerializer[Recipe]):
 
 
 class StepUpdateSerializer(ModelSerializer[Step]):
+    id = NewIdField()
+
     class Meta:
         model = Step
         fields = ("id", "text", "order")
 
 
 class RecipeUpdateSerializer(ModelSerializer[Recipe]):
+    id = NewIdField()
     ingredient_groups = IngredientGroupSerializer(many=True)
+    ingredients = IngredientUpdateSerializer(many=True)
     steps = StepUpdateSerializer(many=True)
-    ingredients = IngredientUpdateSerializer(many=True, write_only=True)
 
     _errors: dict[str, Any]
 
     def save(self, **kwargs: Any) -> Recipe:
         """Save recipe and nested serializers."""
-        ingredient_groups_data = self.validated_data.pop("ingredient_groups", [])
-        steps_data = self.validated_data.pop("steps", [])
-        ingredients_data = self.validated_data.pop("ingredients", [])
+        # TODO: find a way to identify related fields
+        related_fields = {
+            "ingredient_groups": IngredientGroupSerializer,
+            "ingredients": IngredientUpdateSerializer,
+            "steps": StepUpdateSerializer,
+        }
+        nested_serializer_data = {}
+        for field_name in related_fields:
+            nested_serializer_data[field_name] = self.validated_data.pop(field_name, [])
 
         recipe = super().save(**kwargs)
 
-        self._save_nested(recipe, "ingredient_groups", IngredientGroupSerializer, ingredient_groups_data)
-        self._save_nested(recipe, "steps", StepUpdateSerializer, steps_data)
-        self._save_nested(recipe, "ingredients", IngredientUpdateSerializer, ingredients_data)
+        for field_name, serializer_class in related_fields.items():
+            self._save_nested(recipe, field_name, serializer_class, nested_serializer_data.get(field_name, []))
 
         return recipe
 
@@ -112,7 +130,7 @@ class RecipeUpdateSerializer(ModelSerializer[Recipe]):
         self,
         recipe: Recipe,
         field_name: str,
-        serializer_class: type[IngredientGroupSerializer | StepUpdateSerializer |IngredientUpdateSerializer],
+        serializer_class: type[IngredientGroupSerializer | StepUpdateSerializer | IngredientUpdateSerializer],
         data: list[dict[str, Any]],
     ) -> None:
         """Save nested data and handle errors."""
@@ -122,9 +140,8 @@ class RecipeUpdateSerializer(ModelSerializer[Recipe]):
         has_errors = False
 
         for item_data in data:
-            pk = item_data.get("id")
-            instance = existing_objects.get(pk)
-            serializer = serializer_class(instance, data=item_data, partial=True)
+            instance = existing_objects.get(item_data.get("id", None))
+            serializer = serializer_class(instance, data=item_data)
             if serializer.is_valid():
                 obj = serializer.save(recipe=recipe)
                 new_objects_pks.append(obj.pk)
@@ -142,6 +159,7 @@ class RecipeUpdateSerializer(ModelSerializer[Recipe]):
     class Meta:
         model = Recipe
         fields = (
+            "id",
             "name",
             "description",
             "cook_time",

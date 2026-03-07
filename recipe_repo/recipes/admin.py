@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import logging
 from typing import TYPE_CHECKING
 
 from adminsortable2.admin import SortableAdminBase, SortableInlineAdminMixin
@@ -12,6 +13,7 @@ from django.urls import URLPattern, path, resolve
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 from django.views.generic.edit import FormView
+from easy_thumbnails.exceptions import InvalidImageFormatError
 from modeltranslation.admin import TranslationAdmin, TranslationTabularInline
 
 from .forms import IngredientAdminForm, RecipeImportForm
@@ -34,6 +36,9 @@ if TYPE_CHECKING:
     from django.forms import ModelForm
     from django.http import HttpRequest, HttpResponseRedirect
     from django_stubs_ext import StrOrPromise
+
+
+_LOGGER = logging.getLogger(__name__)
 
 
 @admin.register(Source)
@@ -177,7 +182,10 @@ class RecipeAdmin(SortableAdminBase, TranslationAdmin[Recipe]):  # type: ignore[
     def get_thumbnail(self, obj: Recipe) -> StrOrPromise:
         """Add Small thumbnail to recipe admin list view."""
         if obj.image:
-            return format_html('<img src="{}" />', obj.image["admin"].url)
+            try:
+                return format_html('<img src="{}" />', obj.image["admin"].url)
+            except InvalidImageFormatError:
+                _LOGGER.exception("Failed to parse image for %s", obj.name)
         return _("No thumbnail")
 
     @admin.display(description=_("Categories"))
