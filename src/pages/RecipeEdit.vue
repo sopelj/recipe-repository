@@ -51,6 +51,13 @@ const addIngredientGroup = () => {
     name: "",
   });
 };
+const addStep = () => {
+  recipeForm.steps.push({
+    id: null,
+    order: recipeForm.steps.length + 1,
+    text: "",
+  });
+};
 const addIngredient = () => {
   recipeForm.ingredients.push({
     id: null,
@@ -331,6 +338,7 @@ const hasErrors = computed((): boolean =>
         <button
           type="button"
           class="btn btn-secondary mt-4"
+          @click="addStep"
         >
           {{ t("edit.add_step") }}
         </button>
