@@ -1,3 +1,4 @@
+import { OrderableItem } from "@/types/common.ts";
 import type { Category } from "./categories";
 import type { User } from "./users";
 
@@ -37,9 +38,7 @@ export interface Ingredient {
   qualifier: string;
   note: string;
 }
-export interface EditableIngredient {
-  id: number | null;
-  order: number;
+export interface EditableIngredient extends OrderableItem {
   group: number | null;
   amount: number | null;
   amount_max: number | null;
@@ -56,9 +55,7 @@ export interface Source {
   value?: string;
 }
 
-export interface IngredientGroup {
-  id: number | null;
-  order: number;
+export interface IngredientGroup extends OrderableItem {
   name: string;
 }
 
@@ -79,9 +76,7 @@ export interface Unit {
   abbreviation: string;
 }
 
-export interface Step {
-  id: number | null;
-  order: number;
+export interface Step extends OrderableItem {
   text: string;
 }
 

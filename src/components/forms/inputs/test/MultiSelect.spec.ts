@@ -25,12 +25,11 @@ test("MultiSelect should toggle options", async () => {
     props: {
       options,
       modelValue: [],
-      "onUpdate:modelValue": (val: string[]) => wrapper.setProps({ modelValue: val }),
+      "update:modelValue": (val: string[]) => wrapper.setProps({ modelValue: val }),
     },
   });
 
   await wrapper.find(".select").trigger("click");
   await wrapper.find("li").trigger("click");
-
-  expect(wrapper.vm.modelValue).toContain("1");
+  expect(wrapper.emitted()["update:modelValue"][0]).toEqual([["1"]]);
 });

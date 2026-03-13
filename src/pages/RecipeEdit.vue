@@ -2,17 +2,18 @@
 import type { EditableRecipe, Food, Qualifier, Unit } from "@/types/recipes";
 import type { User } from "@/types/users";
 
-import { Deferred, Form, useForm } from "@inertiajs/vue3";
+import { Form, useForm } from "@inertiajs/vue3";
 import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 
 import BreadcrumbBar from "@/components/BreadcrumbBar.vue";
 import DescriptionItem from "@/components/DescriptionItem.vue";
+import IngredientEditor from "@/components/forms/IngredientEditor.vue";
+import IngredientGroupEditor from "@/components/forms/IngredientGroupEditor.vue";
 import InputField from "@/components/forms/inputs/InputField.vue";
-import SelectInput from "@/components/forms/inputs/SelectInput.vue";
 import SlugField from "@/components/forms/inputs/SlugField.vue";
 import TextInput from "@/components/forms/inputs/TextInput.vue";
-import SortableList from "@/components/SortableList.vue";
+import StepEditor from "@/components/forms/StepEditor.vue";
 import HeadSection from "@/layouts/HeadSection.vue";
 
 const props = defineProps<{
@@ -44,34 +45,6 @@ const pageTitle = computed(() =>
   props.recipe ? t("edit.title", { name: props.recipe.name }) : t("recipe.add_new"),
 );
 
-const addIngredientGroup = () => {
-  recipeForm.ingredient_groups.push({
-    id: null,
-    order: recipeForm.ingredient_groups.length + 1,
-    name: "",
-  });
-};
-const addStep = () => {
-  recipeForm.steps.push({
-    id: null,
-    order: recipeForm.steps.length + 1,
-    text: "",
-  });
-};
-const addIngredient = () => {
-  recipeForm.ingredients.push({
-    id: null,
-    order: recipeForm.ingredients.length + 1,
-    amount: null,
-    amount_max: null,
-    food: null,
-    unit: null,
-    group: null,
-    qualifier: null,
-    optional: false,
-    note: "",
-  });
-};
 const submitRecipeForm = () => {
   recipeForm.post(`${window.location.pathname}${window.location.search}`, {
     only: ["recipe", "ingredients", "ingredientGroups"],
@@ -90,7 +63,7 @@ const hasErrors = computed((): boolean =>
     <Form
       v-slot="{ errors }"
       class="grid grid-cols-12 gap-4 border-b border-t border-red-500/0"
-      :class="hasErrors ? 'border-red-500/100' : ''"
+      :class="hasErrors ? 'border-red-500' : ''"
       @submit.prevent="submitRecipeForm"
     >
       <div class="col-span-12">
@@ -167,36 +140,10 @@ const hasErrors = computed((): boolean =>
           />
         </description-item>
         <div class="mt-4">
-          <div class="card p-4">
-            <div class="card-title pb-2">
-              <div class="flex flex-row items-center">
-                <h2 class="text-xxl grow w-100 mr-2">{{ t("edit.ingredientGroups") }}</h2>
-              </div>
-            </div>
-            <div class="card-body">
-              <div v-if="!recipeForm.ingredient_groups.length">
-                {{ t("edit.no_ingredient_groups") }}
-              </div>
-              <sortable-list v-model="recipeForm.ingredient_groups">
-                <template #default="{ item: group }">
-                  <div class="flex items-center gap-2">
-                    <span class="icon-[tabler--grip-vertical] cursor-move"></span>
-                    <input
-                      v-model="group.name"
-                      class="input grow"
-                    />
-                  </div>
-                </template>
-              </sortable-list>
-              <button
-                type="button"
-                class="btn btn-secondary mt-4"
-                @click="addIngredientGroup"
-              >
-                {{ t("edit.add_group") }}
-              </button>
-            </div>
-          </div>
+          <ingredient-group-editor
+            v-model="recipeForm.ingredient_groups"
+            class="mb-4"
+          />
           <div class="card p-4">
             <div class="card-title pb-2">
               <div class="flex flex-row items-center">
@@ -204,144 +151,22 @@ const hasErrors = computed((): boolean =>
               </div>
             </div>
             <div class="card-body">
-              <div class="flex items-center justify-between gap-2 w-full">
-                <div class="w-10">{{ t("edit.order") }}</div>
-                <div class="">{{ t("edit.amount") }}</div>
-                <div class="">{{ t("edit.food") }}</div>
-                <div class="">{{ t("edit.unit") }}</div>
-                <div class="">{{ t("edit.qualifier") }}</div>
-                <div class="w-12">{{ t("edit.optional") }}</div>
-                <div class="">{{ t("edit.notes") }}</div>
-              </div>
-              <div v-if="!recipeForm.ingredients.length">
-                {{ t("edit.no_ingredients") }}
-              </div>
-              <div v-if="errors?.ingredients">
-                {{ errors?.ingredients }}
-              </div>
-              <sortable-list v-model="recipeForm.ingredients">
-                <template #default="{ item: ingredient, index: i }">
-                  <div class="flex items-center gap-2 w-full">
-                    <div class="flex items-center w-10 cursor-move userselect-none">
-                      <span class="icon-[tabler--grip-vertical]"></span>
-                    </div>
-                    <div class="join">
-                      <input-field
-                        :id="`ingredient-${i}-amount`"
-                        v-model="ingredient.amount"
-                        :errors="errors?.[`ingredients?.[${i}].amount`]"
-                        class="join-item"
-                      />
-                      <input-field
-                        :id="`ingredient-${i}-amount`"
-                        v-model="ingredient.amount_max"
-                        :errors="errors?.[`ingredients?.[${i}].amount_max`]"
-                        class="join-item"
-                      />
-                    </div>
-                    <deferred data="foods">
-                      <template #fallback>
-                        <div>Loading...</div>
-                      </template>
-                      <select-input
-                        v-if="foods"
-                        :id="`ingredient-${i}-food`"
-                        v-model="ingredient.food"
-                        :errors="errors?.[`ingredients?.[${i}].food`]"
-                        :options="foods"
-                        label-key="name"
-                      />
-                    </deferred>
-                    <deferred data="units">
-                      <template #fallback>
-                        <div>Loading...</div>
-                      </template>
-                      <select-input
-                        v-if="units"
-                        :id="`ingredient-${i}-unit`"
-                        v-model="ingredient.unit"
-                        :errors="errors?.[`ingredients?.[${i}].unit`]"
-                        :options="units"
-                        label-key="name"
-                      >
-                        <template #option="{ option }">
-                          {{ option.name }}
-                          <template v-if="option.abbreviation"> ({{ option.abbreviation }})</template>
-                        </template>
-                      </select-input>
-                    </deferred>
-                    <deferred data="qualifiers">
-                      <template #fallback>
-                        <div>Loading...</div>
-                      </template>
-                      <select-input
-                        v-if="qualifiers"
-                        :id="`ingredient-${i}-qualifier`"
-                        v-model="ingredient.qualifier"
-                        :errors="errors?.[`ingredients?.[${i}].qualifier`]"
-                        :options="qualifiers"
-                        label-key="title"
-                      />
-                    </deferred>
-                    <div class="flex items-center gap-1">
-                      <input
-                        :id="`optional-${i}`"
-                        v-model="ingredient.optional"
-                        type="checkbox"
-                        class="checkbox"
-                      />
-                      <label
-                        class="sr-only"
-                        :for="`optional-${i}`"
-                      >
-                        {{ t("edit.optional") }}
-                      </label>
-                    </div>
-                    <input-field
-                      :id="`ingredient-${i}-note`"
-                      v-model="ingredient.note"
-                      :errors="errors?.[`ingredients?.[${i}].note`]"
-                    />
-                  </div>
-                </template>
-              </sortable-list>
-              <button
-                type="button"
-                class="btn btn-secondary mt-4"
-                @click="addIngredient"
-              >
-                {{ t("edit.add_ingredient") }}
-              </button>
+              <ingredient-editor
+                v-model="recipeForm.ingredients"
+                :errors="recipeForm.errors"
+                :units="units"
+                :foods="foods"
+                :qualifiers="qualifiers"
+              />
             </div>
           </div>
         </div>
       </div>
       <div class="col-span-12">
-        <div v-if="!recipeForm.steps.length">
-          {{ t("edit.no_steps") }}
-        </div>
-        <sortable-list v-model="recipeForm.steps">
-          <template #default="{ item: step, index: i }">
-            <div class="card mb-2 flex flex-row items-center cursor-move">
-              <span class="ml-4 icon-[tabler--grip-vertical]"></span>
-              <h3 class="card-title p-4">{{ t("recipe.step_title", { step: step.order }) }}</h3>
-              <div class="card-body p-4 grow">
-                <text-input
-                  :id="`step-${step.order}-text`"
-                  v-model="step.text"
-                  :errors="errors?.[`steps?.[${i}].text`]"
-                ></text-input>
-              </div>
-            </div>
-          </template>
-        </sortable-list>
-        <button
-          type="button"
-          class="btn btn-secondary mt-4"
-          @click="addStep"
-        >
-          {{ t("edit.add_step") }}
-        </button>
+        <step-editor
+          v-model:steps="recipeForm.steps"
+          :errors="errors"
+        />
         <div class="flex justify-end">
           <button
             type="submit"

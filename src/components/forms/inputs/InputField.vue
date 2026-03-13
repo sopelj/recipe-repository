@@ -25,7 +25,7 @@ const errorList = computed((): string[] => (Array.isArray(props.errors) ? props.
 </script>
 
 <template>
-  <div class="w-full">
+  <div class="w-full input">
     <label
       v-if="label"
       class="label-text"
@@ -38,7 +38,6 @@ const errorList = computed((): string[] => (Array.isArray(props.errors) ? props.
       v-model="model"
       :type="type"
       :placeholder="placeholder"
-      class="input"
       :class="inputClass + (errorList?.length ? ' is-invalid' : '')"
     />
     <ul

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any
 
-from rest_framework.fields import SlugField
+from rest_framework.fields import BooleanField, SlugField
 from rest_framework.relations import PrimaryKeyRelatedField
 from rest_framework.serializers import DurationField, IntegerField, ModelSerializer, SlugRelatedField
 
@@ -61,6 +61,7 @@ class IngredientSerializer(ModelSerializer[Ingredient]):
 
 class IngredientUpdateSerializer(ModelSerializer[Ingredient]):
     id = NewIdField()
+    deleted = BooleanField(default=False, write_only=True, required=False)
 
     food = PrimaryKeyRelatedField(queryset=Food.objects.all())
     unit = PrimaryKeyRelatedField(queryset=Unit.objects.all(), required=False, allow_null=True)
@@ -69,7 +70,19 @@ class IngredientUpdateSerializer(ModelSerializer[Ingredient]):
 
     class Meta:
         model = Ingredient
-        fields = ("id", "order", "amount", "amount_max", "food", "unit", "qualifier", "group", "optional", "note")
+        fields = (
+            "id",
+            "order",
+            "amount",
+            "amount_max",
+            "food",
+            "unit",
+            "qualifier",
+            "group",
+            "optional",
+            "note",
+            "deleted",
+        )
 
 
 class IngredientGroupSerializer(ModelSerializer[IngredientGroup]):
@@ -77,7 +90,15 @@ class IngredientGroupSerializer(ModelSerializer[IngredientGroup]):
 
     class Meta:
         model = IngredientGroup
-        fields = ("id", "order", "name")
+        fields: tuple[str, ...] = ("id", "order", "name")
+
+
+class IngredientGroupUpdateSerializer(IngredientGroupSerializer):
+    id = NewIdField()
+    deleted = BooleanField(default=False, write_only=True, required=False)
+
+    class Meta(IngredientGroupSerializer.Meta):
+        fields = ("id", "order", "name", "deleted")
 
 
 class RecipeListSerializer(ModelSerializer[Recipe]):
@@ -98,10 +119,11 @@ class RelatedRecipeSerializer(ModelSerializer[Recipe]):
 
 class StepUpdateSerializer(ModelSerializer[Step]):
     id = NewIdField()
+    deleted = BooleanField(default=False, write_only=True, required=False)
 
     class Meta:
         model = Step
-        fields = ("id", "text", "order")
+        fields = ("id", "text", "order", "deleted")
 
 
 class RecipeUpdateSerializer(ModelSerializer[Recipe]):
@@ -143,10 +165,16 @@ class RecipeUpdateSerializer(ModelSerializer[Recipe]):
         existing_objects = {obj.pk: obj for obj in getattr(recipe, field_name).all()}
         new_objects_pks: list[int] = []
         errors: list[dict[str, Any]] = []
+        deleted_pks: list[int] = []
         has_errors = False
 
         for item_data in data:
-            instance = existing_objects.get(item_data.get("id", None))
+            item_pk = item_data.get("id", None)
+            if item_pk and item_data.get("deleted", False):
+                deleted_pks.append(item_pk)
+                continue
+
+            instance = existing_objects.get(item_pk)
             serializer = serializer_class(instance=instance, data=item_data, partial=True)
             if serializer.is_valid():
                 obj = serializer.save(recipe=recipe)
@@ -158,6 +186,10 @@ class RecipeUpdateSerializer(ModelSerializer[Recipe]):
 
         if has_errors:
             self._errors[field_name] = errors
+
+        if deleted_pks:
+            # Delete objects not in the new data
+            getattr(recipe, field_name).filter(pk__in=deleted_pks).delete()
 
     class Meta:
         model = Recipe

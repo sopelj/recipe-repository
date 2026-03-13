@@ -1,9 +1,12 @@
-<script setup lang="ts" generic="T extends { order: number }">
-import { ref } from "vue";
+<script setup lang="ts" generic="T extends OrderableItem">
+import type { OrderableItem } from "@/types/common";
 
-const props = defineProps<{ modelValue: T[] }>();
+import { computed, ref } from "vue";
 
-const emit = defineEmits<{ (e: "update:modelValue", value: T[]): void }>();
+import { reorderItems } from "@/composables/orderable-items";
+
+const items = defineModel<T[]>({ required: true });
+const props = withDefaults(defineProps<{ rowClass?: string }>(), { rowClass: "" });
 
 const dragSourceIndex = ref<number | null>(null);
 const dragTargetIndex = ref<number | null>(null);
@@ -46,46 +49,54 @@ const onDrop = (event: DragEvent, toIndex: number) => {
   dragTargetIndex.value = null;
 
   if (fromIndex !== -1 && fromIndex !== toIndex) {
-    const items = [...props.modelValue];
-    const [movedItem] = items.splice(fromIndex, 1);
-    items.splice(toIndex, 0, movedItem);
-
-    // Update order property
-    const updatedItems = items.map((item, index) => ({
-      ...item,
-      order: index + 1,
-    }));
-
-    emit("update:modelValue", updatedItems);
+    const tempItems = [...items.value];
+    const [movedItem] = tempItems.splice(fromIndex, 1);
+    tempItems.splice(toIndex, 0, movedItem);
+    items.value = reorderItems<T>(tempItems);
   }
 };
+
+const rowClasses = computed(() =>
+  props.rowClass.split(" ").reduce((acc, part) => (part ? { ...acc, [part]: true } : acc), {}),
+);
 </script>
 
 <template>
-  <div class="flex flex-col gap-2">
+  <div class="grid grid-flow-row gap-2">
     <div
-      v-for="(item, index) in modelValue"
-      :key="index"
-      draggable="true"
-      class="transition-all duration-200"
-      :class="{
-        'border-t-2 border-primary pt-2':
-          dragTargetIndex === index && dragTargetIndex <= (dragSourceIndex || 0),
-        'border-b-2 border-primary pb-2':
-          dragTargetIndex === index && dragTargetIndex > (dragSourceIndex || 0),
-        'opacity-50': dragSourceIndex === index,
-      }"
-      @dragstart="onDragStart($event, index)"
-      @dragover="onDragOver($event)"
-      @dragenter="onDragEnter(index)"
-      @dragleave="onDragLeave(index)"
-      @dragend="onDragEnd"
-      @drop="onDrop($event, index)"
+      v-if="$slots.header"
+      :class="rowClasses"
     >
-      <slot
-        :item="item"
-        :index="index"
-      />
+      <slot name="header"></slot>
     </div>
+    <template
+      v-for="(item, index) in items"
+      :key="index"
+    >
+      <div
+        v-if="item?.deleted !== true"
+        draggable="true"
+        class="transition-all duration-200"
+        :class="{
+          'border-t-2 border-primary pt-2':
+            dragTargetIndex === index && dragTargetIndex <= (dragSourceIndex || 0),
+          'border-b-2 border-primary pb-2':
+            dragTargetIndex === index && dragTargetIndex > (dragSourceIndex || 0),
+          'opacity-50': dragSourceIndex === index,
+          ...rowClasses,
+        }"
+        @dragstart="onDragStart($event, index)"
+        @dragover="onDragOver($event)"
+        @dragenter="onDragEnter(index)"
+        @dragleave="onDragLeave(index)"
+        @dragend="onDragEnd"
+        @drop="onDrop($event, index)"
+      >
+        <slot
+          :item="item"
+          :index="index"
+        />
+      </div>
+    </template>
   </div>
 </template>
