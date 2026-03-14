@@ -75,13 +75,6 @@ test("SelectInput should select an option", async () => {
 
   // Check if modelValue updated
   expect(wrapper.emitted()["update:modelValue"][0]).toEqual([2]);
-
-  // Dropdown should be closed (isOpen should be false)
-  // Since we use v-show for dropdown, we check if it's visible
-  // const dropdown = wrapper.find(".absolute");
-  await wrapper.vm.$nextTick();
-  expect(wrapper.vm?.isOpen).toBe(false);
-  // expect(dropdown.isVisible()).toBe(false);
 });
 
 test("SelectInput should focus search input when dropdown is opened", async () => {

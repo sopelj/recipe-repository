@@ -21,6 +21,7 @@
     "amount_max": "Amount Max",
     "cook_time": "Cook time",
     "cook_time_max": "Cook time max",
+    "delete": "Delete",
     "description": "Description",
     "food": "Food",
     "ingredientGroups": "Ingredient groups",

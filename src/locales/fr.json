@@ -21,6 +21,7 @@
     "amount_max": "Montant Max",
     "cook_time": "Temps de cuisson",
     "cook_time_max": "Temps de cuisson max",
+    "delete": "Supprimer",
     "description": "Description",
     "food": "Nourriture",
     "ingredientGroups": "Groupes d'ingrédients",
@@ -36,6 +37,7 @@
     "save": "Sauvegarder",
     "servings": "Portions",
     "title": "Modifier {name}",
+    "to": "à",
     "unit": "Unité",
     "yield": "Rendement"
   },

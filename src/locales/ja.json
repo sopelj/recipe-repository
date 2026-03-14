@@ -21,6 +21,7 @@
     "amount_max": "最大量",
     "cook_time": "調理時間",
     "cook_time_max": "調理時間最大",
+    "delete": "デリート",
     "description": "説明",
     "food": "食べ物",
     "ingredientGroups": "材料のグループ",
@@ -36,6 +37,7 @@
     "save": "保存",
     "servings": "サービング",
     "title": "{name}を編集",
+    "to": "～",
     "unit": "単位",
     "yield": "収率"
   },

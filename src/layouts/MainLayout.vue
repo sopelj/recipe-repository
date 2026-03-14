@@ -42,6 +42,7 @@ const setLocale = (lang: string) => {
             <button
               v-if="locale !== 'en'"
               class="btn-text text-white p-0 cursor-pointer"
+              lang="en"
               @click="setLocale('en')"
             >
               <span class="sm:hidden">EN</span>
@@ -50,6 +51,7 @@ const setLocale = (lang: string) => {
             <button
               v-if="locale !== 'fr'"
               class="btn-text text-white p-0 cursor-pointer"
+              lang="fr"
               @click="setLocale('fr')"
             >
               <span class="sm:hidden">FR</span>
@@ -58,6 +60,7 @@ const setLocale = (lang: string) => {
             <button
               v-if="locale !== 'ja'"
               class="btn-text text-white p-0 cursor-pointer"
+              lang="ja"
               @click="setLocale('ja')"
             >
               日本語
