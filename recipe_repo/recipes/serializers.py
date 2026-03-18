@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any
 
+from drf_extra_fields.fields import Base64ImageField
 from rest_framework.fields import BooleanField, SlugField
 from rest_framework.relations import PrimaryKeyRelatedField
 from rest_framework.serializers import DurationField, IntegerField, ModelSerializer, SlugRelatedField
@@ -129,6 +130,7 @@ class StepUpdateSerializer(ModelSerializer[Step]):
 class RecipeUpdateSerializer(ModelSerializer[Recipe]):
     id = NewIdField()
     slug = SlugField()
+    image = Base64ImageField()
     ingredient_groups = IngredientGroupSerializer(many=True)
     ingredients = IngredientUpdateSerializer(many=True)
     steps = StepUpdateSerializer(many=True)
@@ -196,6 +198,7 @@ class RecipeUpdateSerializer(ModelSerializer[Recipe]):
         fields = (
             "id",
             "name",
+            "image",
             "slug",
             "description",
             "cook_time",

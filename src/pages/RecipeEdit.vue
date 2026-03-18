@@ -10,6 +10,7 @@ import BreadcrumbBar from "@/components/BreadcrumbBar.vue";
 import DescriptionItem from "@/components/DescriptionItem.vue";
 import IngredientEditor from "@/components/forms/IngredientEditor.vue";
 import IngredientGroupEditor from "@/components/forms/IngredientGroupEditor.vue";
+import ImageInput from "@/components/forms/inputs/ImageInput.vue";
 import InputField from "@/components/forms/inputs/InputField.vue";
 import SlugField from "@/components/forms/inputs/SlugField.vue";
 import TextInput from "@/components/forms/inputs/TextInput.vue";
@@ -28,6 +29,7 @@ const props = defineProps<{
 const recipeForm = useForm<EditableRecipe>({
   id: props.recipe?.id || null,
   name: props.recipe?.name || "",
+  image: props.recipe?.image || null,
   slug: props.recipe?.slug || "",
   description: props.recipe?.description || "",
   prep_time: props.recipe?.prep_time || "",
@@ -59,27 +61,27 @@ const hasErrors = computed((): boolean =>
 
 <template>
   <head-section :title="pageTitle" />
-  <div class="container mx-auto px-4">
+  <div class="container mx-auto px-4 overflow-hidden max-w-svw">
     <Form
       v-slot="{ errors }"
       class="grid grid-cols-12 gap-4 border-b border-t border-red-500/0"
       :class="hasErrors ? 'border-red-500' : ''"
       @submit.prevent="submitRecipeForm"
     >
-      <div class="col-span-12">
-        <div class="flex flex-wrap sm:flex-nowrap items-center mb-2 md:mb-4">
-          <h1
-            class="text-2xl pt-2 grow w-full sm:w-auto"
-            itemprop="name"
-            :style="recipe ? `view-transition-name: recipe-${recipe.slug}-name` : ''"
-          >
-            {{ pageTitle }}
-          </h1>
-        </div>
+      <div class="order-1 col-span-12 md:col-span-8">
+        <h1
+          class="text-2xl pt-2 grow w-full sm:w-auto"
+          itemprop="name"
+          :style="recipe ? `view-transition-name: recipe-${recipe.slug}-name` : ''"
+        >
+          {{ pageTitle }}
+        </h1>
         <breadcrumb-bar
           :current="pageTitle"
-          class="p-0"
+          class="p-0 mt-2 md:mt-4"
         />
+      </div>
+      <div class="order-2 col-span-12 md:col-span-8">
         <description-item :label="t('edit.name')">
           <input-field
             id="name-field"
@@ -139,30 +141,38 @@ const hasErrors = computed((): boolean =>
             :placeholder="t('edit.description')"
           />
         </description-item>
-        <div class="mt-4">
-          <ingredient-group-editor
-            v-model="recipeForm.ingredient_groups"
-            class="mb-4"
-          />
-          <div class="card p-4">
-            <div class="card-title pb-2">
-              <div class="flex flex-row items-center">
-                <h2 class="text-xxl grow w-100 mr-2">{{ t("recipe.ingredients") }}</h2>
-              </div>
+      </div>
+      <div class="order-3 col-span-12 mt-4">
+        <ingredient-group-editor
+          v-model="recipeForm.ingredient_groups"
+          class="mb-4"
+        />
+        <div class="card p-4 overflow-auto">
+          <div class="card-title pb-2">
+            <div class="flex flex-row items-center">
+              <h2 class="text-xxl grow w-100 mr-2">{{ t("recipe.ingredients") }}</h2>
             </div>
-            <div class="card-body">
-              <ingredient-editor
-                v-model="recipeForm.ingredients"
-                :errors="recipeForm.errors"
-                :units="units"
-                :foods="foods"
-                :qualifiers="qualifiers"
-              />
-            </div>
+          </div>
+          <div class="card-body overflow-x-scroll overflow-y-auto">
+            <ingredient-editor
+              v-model="recipeForm.ingredients"
+              :errors="recipeForm.errors"
+              :units="units"
+              :foods="foods"
+              :qualifiers="qualifiers"
+              class="min-w-300"
+            />
           </div>
         </div>
       </div>
-      <div class="col-span-12">
+      <div class="order-1 col-span-12 md:col-span-4 row-span-2">
+        <image-input
+          id="recipe-image"
+          v-model="recipeForm.image"
+          class="w-full"
+        />
+      </div>
+      <div class="order-4 col-span-12">
         <step-editor
           v-model:steps="recipeForm.steps"
           :errors="errors"

@@ -26,6 +26,7 @@
     "food": "食べ物",
     "ingredientGroups": "材料のグループ",
     "name": "名",
+    "no_image_selected": "画像が選択されていません",
     "no_ingredient_groups": "材料グループはまだありません。",
     "no_ingredients": "材料はまだありません。",
     "no_steps": "まだステップはありません。",

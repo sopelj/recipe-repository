@@ -26,6 +26,7 @@
     "food": "Food",
     "ingredientGroups": "Ingredient groups",
     "name": "Name",
+    "no_image_selected": "No image selected",
     "no_ingredient_groups": "No ingredient groups yet.",
     "no_ingredients": "No ingredients yet.",
     "no_steps": "No steps yet.",

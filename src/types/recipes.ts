@@ -114,6 +114,7 @@ export interface EditableRecipe {
   id: number | null;
   name: string;
   slug: string;
+  image: string | null;
   description: string;
   yield_amount: number | null;
   cook_time: string;

@@ -98,5 +98,11 @@ const rowClasses = computed(() =>
         />
       </div>
     </template>
+    <div
+      v-if="$slots.footer"
+      :class="rowClasses"
+    >
+      <slot name="footer"></slot>
+    </div>
   </div>
 </template>

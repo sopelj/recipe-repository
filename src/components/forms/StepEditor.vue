@@ -28,8 +28,8 @@ const { t } = useI18n();
       <template #default="{ item: step, index: i }">
         <div class="card mb-2 flex flex-row items-center cursor-move">
           <span class="ml-4 icon-[tabler--grip-vertical]"></span>
-          <h3 class="card-title p-4">{{ t("recipe.step_title", { step: step.order }) }}</h3>
-          <div class="card-body p-4 grow">
+          <h3 class="card-title py-4 pr-4">{{ t("recipe.step_title", { step: step.order }) }}</h3>
+          <div class="card-body py-4 grow">
             <text-input
               :id="`step-${step.order}-text`"
               v-model="step.text"
@@ -38,7 +38,7 @@ const { t } = useI18n();
           </div>
           <button
             type="button"
-            class="btn-outline cursor-pointer mr-4 px-1"
+            class="btn-outline cursor-pointer mr-4 px-2"
             @click="deleteItem(step)"
           >
             <span class="icon-[ic--outline-delete-outline] text-3xl"></span>

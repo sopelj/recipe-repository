@@ -34,6 +34,7 @@ dependencies = [
     "pint>=0.25.2",
     "recipe-scrapers>=15.0.0",
     "werkzeug",
+    "drf-extra-fields",
     "django-stubs-ext[compatible-mypy]>=5.1.0",
     "psycopg[c]>=3.1.8",
 ]

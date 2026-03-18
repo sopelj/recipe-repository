@@ -37,6 +37,7 @@ const { t } = useI18n();
   <sortable-list
     v-model="ingredients"
     row-class="grid grid-flow-col grid-cols-16 gap-2"
+    v-bind="$attrs"
   >
     <template #header>
       <div class="">{{ t("edit.order") }}</div>
@@ -143,12 +144,16 @@ const { t } = useI18n();
         </button>
       </div>
     </template>
+    <template #footer>
+      <div class="mt-2 col-span-full">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          @click="addItem"
+        >
+          {{ t("edit.add_ingredient") }}
+        </button>
+      </div>
+    </template>
   </sortable-list>
-  <button
-    type="button"
-    class="btn btn-secondary mt-4"
-    @click="addItem"
-  >
-    {{ t("edit.add_ingredient") }}
-  </button>
 </template>
