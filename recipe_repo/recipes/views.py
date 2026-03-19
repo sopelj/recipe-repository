@@ -5,13 +5,14 @@ import logging
 from functools import cached_property
 from typing import TYPE_CHECKING, Any
 
+from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import DatabaseError, transaction
 from django.db.models import DecimalField, Prefetch, Q, Value
 from django.http import Http404, HttpRequest, HttpResponse, HttpResponseRedirect
-from django.urls.base import reverse
+from django.shortcuts import redirect
+from django.urls import reverse
 from django.utils.translation import gettext
-from django.views.generic.detail import SingleObjectMixin
 from inertia import defer
 from modeltranslation.utils import get_language
 from recipe_scrapers._exceptions import FillPluginException, RecipeScrapersExceptions
@@ -90,9 +91,16 @@ def get_recipe_ingredients(recipe_id: int, scale: float | bool = False) -> Query
     return ingredients.order_by("group__order", "order")
 
 
-class RecipeDetailView(InertiaFormView[RecipeReviewForm], SingleObjectMixin[Recipe]):
+class RecipeDetailView(InertiaFormView[RecipeReviewForm]):
     component = "RecipeDetail"
     form_class = RecipeReviewForm
+    object: Recipe | None
+
+    def get(self, request: HttpRequest, **kwargs: Any) -> HttpResponse:
+        """Redirect to proper slug if It's for a different language."""
+        if self.base_recipe.slug != self.kwargs.get("slug"):
+            return redirect(self.base_recipe.get_absolute_url())
+        return super().get(request, **kwargs)
 
     def get_success_url(self) -> str:
         """Resolve detail view URL."""
@@ -103,13 +111,14 @@ class RecipeDetailView(InertiaFormView[RecipeReviewForm], SingleObjectMixin[Reci
         return super().get_form_kwargs() | {"user": self.request.user, "recipe_slug": self.kwargs.get("slug")}
 
     @cached_property
-    def id_and_servings(self) -> tuple[int, int | None]:
+    def base_recipe(self) -> Recipe:
         """Fetch PK and servings from Recipe and 404 if no match found."""
         try:
             slug = self.kwargs["slug"]
-            return Recipe.objects.values_list("pk", "servings").get(
-                Q(**{f"slug_{get_language()}": slug}) | Q(slug_en=slug),
-            )
+            qs = Q()
+            for lang, _ in settings.LANGUAGES:
+                qs = qs | Q(**{f"slug_{lang}": slug})
+            return Recipe.objects.only("pk", "servings", *[f"slug_{lang}" for lang, _ in settings.LANGUAGES]).get(qs)
         except Recipe.DoesNotExist as e:
             raise Http404("Recipe does not exist.") from e
 
@@ -125,7 +134,7 @@ class RecipeDetailView(InertiaFormView[RecipeReviewForm], SingleObjectMixin[Reci
 
     def get_component_props(self) -> dict[str, Any]:
         """Get props for RecipeDetail component."""
-        recipe_id, servings = self.id_and_servings
+        recipe_id, servings = self.base_recipe.pk, self.base_recipe.servings
 
         form = ServingsForm(self.request.GET, initial={"servings": servings})
         form.is_valid()
