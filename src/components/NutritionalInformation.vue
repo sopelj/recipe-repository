@@ -12,13 +12,12 @@ const { t } = useI18n();
 const snakeToCamel = (value: string) => value.replace(/(_\w)/g, (g: string) => g[1].toUpperCase());
 const getUnit = (name: string) => (["potassium", "sodium", "cholesterol"].includes(name) ? "mg" : "g");
 
-const nutrients = computed(
-  (): Partial<Omit<NutritionInformation, "calories" | "serving_size">> =>
-    Object.fromEntries(
-      Object.entries(props.nutrition).filter(
-        ([key, value]) => !["calories", "serving_size"].includes(key) && typeof value === "number",
-      ),
+const nutrients = computed((): Partial<Omit<NutritionInformation, "calories" | "serving_size">> =>
+  Object.fromEntries(
+    Object.entries(props.nutrition).filter(
+      ([key, value]) => !["calories", "serving_size"].includes(key) && typeof value === "number",
     ),
+  ),
 );
 </script>
 

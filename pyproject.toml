@@ -29,20 +29,21 @@ dependencies = [
     "djangorestframework",
     "easy-thumbnails",
     "inertia-django>=1.1.0",
-    "ipython",
-    "pillow",
+    "ipython>=9.15.0",
+    "pillow>=12.2.0",
     "pint>=0.25.2",
     "recipe-scrapers>=15.0.0",
-    "werkzeug",
+    "werkzeug>=3.1.4",
     "drf-extra-fields",
-    "django-stubs-ext[compatible-mypy]>=5.1.0",
+    "django-stubs-ext>=6.0.6",
     "psycopg[c]>=3.1.8",
+    "urllib3>=2.7.0"
 ]
 
 [project.optional-dependencies]
-test = ["pytest>=7.2.1", "pytest-cov", "pytest-asyncio", "pytest-django"]
-ldap = ["django-auth-ldap"]
-production = ["granian", "pymemcache"]
+test = ["pytest>=9.0.3", "pytest-cov", "pytest-asyncio", "pytest-django"]
+ldap = ["django-auth-ldap", "python-ldap>=3.4.5"]
+production = ["granian>=2.7.4", "pymemcache"]
 
 [project.urls]
 "Source code" = "https://github.com/sopelj/recipe-repository/"

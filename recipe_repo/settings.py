@@ -200,7 +200,6 @@ DJANGO_VITE = {
 }
 
 STATICFILES_DIRS = [
-    BASE_DIR / "dist",
     BASE_DIR / "src" / "assets",
     BASE_DIR / "src" / "public",
 ]

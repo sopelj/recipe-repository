@@ -1,3 +1,4 @@
+import inertia from "@inertiajs/vite";
 import VueI18nPlugin from "@intlify/unplugin-vue-i18n/vite";
 import tailwindcss from "@tailwindcss/vite";
 import VuePlugin from "@vitejs/plugin-vue";
@@ -13,6 +14,7 @@ export default defineConfig(({ mode }) => {
     plugins: [
       tailwindcss(),
       VuePlugin(),
+      inertia({ ssr: false }),
       VueI18nPlugin({ include: [resolve(__dirname, "./src/locales/**")] }),
       VitePWA({
         registerType: "autoUpdate",
@@ -38,16 +40,16 @@ export default defineConfig(({ mode }) => {
               purpose: "monochrome",
             },
             {
-              src: "pwa-192x192-maskable.png",
-              sizes: "192x192",
-              type: "image/png",
-              purpose: "maskable",
+              "purpose": "maskable",
+              "sizes": "192x192",
+              "src": "pwa-192x192-maskable.png",
+              "type": "image/png",
             },
             {
-              src: "pwa-512x512-maskable.png",
-              sizes: "512x512",
-              type: "image/png",
-              purpose: "maskable",
+              "purpose": "maskable",
+              "sizes": "512x512",
+              "src": "pwa-512x512-maskable.png",
+              "type": "image/png",
             },
             {
               src: "pwa-192x192.png",
@@ -84,7 +86,7 @@ export default defineConfig(({ mode }) => {
       alias: [{ find: "@", replacement: fileURLToPath(new URL("./src", import.meta.url)) }],
     },
     build: {
-      outDir: resolve("./dist"),
+      outDir: resolve("./static"),
       manifest: "manifest.json",
       emptyOutDir: true,
       target: "es2022",
