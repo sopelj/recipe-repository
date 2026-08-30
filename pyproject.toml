@@ -15,7 +15,7 @@ classifiers = [
     "Programming Language :: Python :: 3.14",
 ]
 dependencies = [
-    "django>=6.0,<6.1",
+    "django>=6.0.8,<6.1",
     "django-admin-interface",
     "django-admin-sortable2>=2.2.8",
     "django-allauth[socialaccount]",
@@ -28,7 +28,7 @@ dependencies = [
     "django-query-inspector",
     "djangorestframework",
     "easy-thumbnails",
-    "inertia-django>=1.1.0",
+    "inertia-django>=2.0",
     "ipython>=9.15.0",
     "pillow>=12.2.0",
     "pint>=0.25.2",

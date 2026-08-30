@@ -19,6 +19,10 @@ await createInertiaApp({
   defaults: {
     visitOptions: () => ({ viewTransition: true }),
   },
+  http: {
+    xsrfCookieName: "csrftoken",
+    xsrfHeaderName: "X-CSRFToken",
+  },
   setup({ el, App, props, plugin }) {
     const app = createApp({ render: () => h(App, props) });
     app.use(i18n);

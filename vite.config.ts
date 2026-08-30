@@ -15,7 +15,7 @@ export default defineConfig(({ mode }) => {
       tailwindcss(),
       VuePlugin(),
       inertia({ ssr: false }),
-      VueI18nPlugin({ include: [resolve(__dirname, "./src/locales/**")] }),
+      VueI18nPlugin({ include: [resolve(import.meta.dirname, "./src/locales/**")] }),
       VitePWA({
         registerType: "autoUpdate",
         injectRegister: "auto",
