@@ -77,6 +77,9 @@ export default defineConfig(({ mode }) => {
         usePolling: true,
         disableGlobbing: false,
       },
+      proxy: {
+        "/uploads": "http://localhost:8000",
+      },
     },
     css: {
       transformer: "lightningcss",
@@ -90,6 +93,7 @@ export default defineConfig(({ mode }) => {
       manifest: "manifest.json",
       emptyOutDir: true,
       target: "es2022",
+      minify: "terser",
       rollupOptions: {
         input: {
           main: resolve("./src/main.ts"),

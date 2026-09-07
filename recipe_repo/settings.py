@@ -180,7 +180,7 @@ UMAMI_SITE_ID = env("UMAMI_SITE_ID", default=None)
 UMAMI_URL = env("UMAMI_URL", default=None)
 
 # Inertia
-INERTIA_VERSION = "2.0"
+INERTIA_VERSION = "3.0"
 INERTIA_LAYOUT = "index.html"
 INERTIA_SSR_URL = "http://localhost:13714"
 INERTIA_SSR_ENABLED = False
