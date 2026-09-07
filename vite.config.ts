@@ -93,6 +93,7 @@ export default defineConfig(({ mode }) => {
       manifest: "manifest.json",
       emptyOutDir: true,
       target: "es2022",
+      cssMinify: true,
       minify: "terser",
       rollupOptions: {
         input: {

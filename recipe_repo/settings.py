@@ -195,7 +195,7 @@ DJANGO_VITE = {
         "dev_mode": DEBUG,
         "dev_server_host": "localhost",
         "dev_server_port": 5173,
-        "manifest_path": str(BASE_DIR / "dist" / "manifest.json"),
+        "manifest_path": str(BASE_DIR / "static" / "manifest.json"),
     },
 }
 
