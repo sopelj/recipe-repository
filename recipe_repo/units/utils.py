@@ -69,9 +69,10 @@ def soft_round(value: Decimal) -> Decimal:
     return value.quantize(Decimal("1.00000")).normalize()
 
 
-def normalize_decimal(value: Decimal) -> Decimal:
-    """Normalize decimals to remove trailing zeros."""
-    return integral if value == (integral := value.to_integral()) else value.normalize()
+def normalize_decimal(value: float| Decimal) -> Decimal:
+    """Normalise decimals to remove trailing zeros."""
+    d_value = value if isinstance(value, Decimal) else Decimal(value)
+    return integral if value == (integral := d_value.to_integral()) else d_value.normalize()
 
 
 def format_fraction(whole: Decimal | int, frac: Fraction) -> str:
@@ -153,13 +154,13 @@ def format_metric_amounts(amount: Decimal, max_amount: Decimal | None, unit: pin
         return (
             gettext("{amount} to {max_amount}").format(
                 amount=normalize_decimal(
-                    compact_amount.magnitude if compact_amount.units == compact_max.units else compact_amount,
+                    compact_amount.magnitude if compact_amount.units == compact_max.units else compact_amount,  # type: ignore[arg-type]
                 ),
-                max_amount=normalize_decimal(compact_max),
+                max_amount=normalize_decimal(compact_max),  # type: ignore[arg-type]
             ),
-            compact_max.magnitude,
+            Decimal(compact_max.magnitude),
         )
-    return f"{compact_amount:~P}", compact_amount.magnitude
+    return f"{compact_amount:~P}", Decimal(compact_amount.magnitude)
 
 
 def format_imperial_amount(amount: Decimal, unit: str | None) -> str:
@@ -177,9 +178,9 @@ def format_imperial_amounts(
     unit: pint.Unit,
 ) -> tuple[str, Decimal]:
     """Format amounts for imperial units."""
-    new_amount, new_unit = find_imperial_unit(amount * unit)
+    new_amount, new_unit = find_imperial_unit(amount * unit)  # type: ignore[arg-type]
     if max_amount:
-        new_amount_max, new_amount_max_unit = find_imperial_unit(max_amount * unit)
+        new_amount_max, new_amount_max_unit = find_imperial_unit(max_amount * unit)  # type: ignore[arg-type]
         return (
             gettext("{amount} to {max_amount}").format(
                 amount=format_imperial_amount(amount, new_unit if new_unit != new_amount_max_unit else None),
