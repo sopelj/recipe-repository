@@ -12,7 +12,7 @@ from django.utils import translation
 from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
 from recipe_scrapers import scrape_html
-from recipe_scrapers._exceptions import FillPluginException, RecipeScrapersExceptions
+from recipe_scrapers._exceptions import FillPluginException, RecipeSchemaNotFound, RecipeScrapersExceptions
 
 from ..users.models import Comment, UserRating
 from .fields import FractionField
@@ -108,7 +108,8 @@ class RecipeImportForm(forms.ModelForm[Recipe]):
         recipe_html = requests.get(url, headers={"User-Agent": USER_AGENT}, timeout=30).text
         try:
             self.scraper = scrape_html(recipe_html, org_url=url)  # type: ignore[assignment]
-        except (RecipeScrapersExceptions, FillPluginException) as e:
+            self.scraper.title()  # Attempt to read value from schema
+        except (RecipeScrapersExceptions, FillPluginException, RecipeSchemaNotFound) as e:
             self.add_error("url", str(e))
         return self.cleaned_data
 
